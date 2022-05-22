@@ -1,4 +1,4 @@
-const MAX_TALENT_POINTS = 61
+const MAX_TALENT_POINTS = 71
 
 const BM_TREE = [
   [
@@ -48,10 +48,9 @@ const BM_TREE = [
       per_point: 4 / 100
     },
     {
-      name: 'Bestial Swiftness',
-      abrv: 'bestial_swift',
+      name: 'Aspect Mastery',
+      abrv: 'aspect_mast',
       max: 1,
-      per_point: 30 / 100
     },
     {
       name: 'Unleashed Fury',
@@ -99,6 +98,7 @@ const BM_TREE = [
       name: 'Animal Handler',
       abrv: 'animal_handler',
       max: 2,
+      is_modifier: true,
       per_point: 2
     },
     {
@@ -128,6 +128,12 @@ const BM_TREE = [
   ],
   [
     {
+      name: "Invigoration",
+      abrv: 'invigoration',
+      max: 2,
+      per_point: 50 / 100
+    },
+    {
       name: "Serpent's Swiftness",
       abrv: 'serp_swift',
       max: 5,
@@ -137,9 +143,36 @@ const BM_TREE = [
   ],
   [
     {
+      name: "Longevity",
+      abrv: 'longevity',
+      max: 3,
+    },
+    {
       name: 'The Beast Within',
       abrv: 'beast_within',
       max: 1,
+    },
+    {
+      name: "Cobra Strikes",
+      abrv: 'cobra_strike',
+      max: 3,
+      per_point: 20
+    }
+  ],
+  [
+    {
+      name: "Kindred Spirits",
+      abrv: 'kindred_spirit',
+      max: 5,
+      is_modifier: true,
+      per_point: 4 / 100
+    }
+  ],
+  [
+    {
+      name: "Beast Mastery",
+      abrv: 'beast_mast',
+      max: 1
     }
   ]
 ]
@@ -149,7 +182,12 @@ const MM_TREE = [
     {
       name: 'Improved Concussive Shot',
       abrv: 'imp_conc_shot',
-      max: 5,
+      max: 2,
+    },
+    {
+      name: 'Focused Aim',
+      abrv: 'focus_aim',
+      max: 3,
     },
     {
       name: 'Lethal Shots',
@@ -159,31 +197,39 @@ const MM_TREE = [
   ],
   [
     {
-      name: "Improved Hunter's Mark",
-      abrv: 'imp_hunter_mark',
-      max: 5,
-      per_point: 20 / 100
+      name: 'Careful Aim',
+      abrv: 'careful_aim',
+      max: 3,
+      per_point: 33 / 100
     },
     {
-      name: 'Efficiency',
-      abrv: 'efficiency',
+      name: "Improved Hunter's Mark",
+      abrv: 'imp_hunter_mark',
+      max: 3,
+      is_modifier: true,
+      per_point: 10 / 100
+    },
+    {
+      name: 'Mortal Shots',
+      abrv: 'mortal_shots',
       max: 5,
       is_modifier: true,
-      per_point: -2 / 100
+      per_point: 6 / 100
     }
   ],
   [
     {
       name: 'Go for the Throat',
       abrv: 'GftT',
-      max: 5,
+      max: 2,
       per_point: 25
     },
     {
       name: 'Improved Arcane Shot',
       abrv: 'imp_arc_shot',
-      max: 5,
-      per_point: 0.2
+      max: 3,
+      is_modifier: true,
+      per_point: 5 / 100
     },
     {
       name: 'Aimed Shot',
@@ -200,28 +246,28 @@ const MM_TREE = [
     {
       name: 'Improved Stings',
       abrv: 'imp_stings',
-      max: 5,
+      max: 3,
       is_modifier: true,
-      per_point: 6 / 100
+      per_point: 10 / 100
     },
     {
-      name: 'Mortal Shots',
-      abrv: 'mortal_shots',
+      name: 'Efficiency',
+      abrv: 'efficiency',
       max: 5,
       is_modifier: true,
-      per_point: 6 / 100
+      per_point: 3 / 100
     }
   ],
   [
     {
       name: 'Concussive Barrage',
       abrv: 'conc_barrage',
-      max: 3,
+      max: 2,
     },
     {
-      name: 'Scatter Shot',
-      abrv: 'scatter_shot',
-      max: 1,
+      name: 'Readiness',
+      abrv: 'readiness',
+      max: 1
     },
     {
       name: 'Barrage',
@@ -240,22 +286,24 @@ const MM_TREE = [
     {
       name: 'Ranged Weapon Specialization',
       abrv: 'ranged_weap_spec',
-      max: 5,
+      max: 3,
       is_modifier: true,
       per_point: 1 / 100
     }
   ],
   [
     {
-      name: 'Careful Aim',
-      abrv: 'careful_aim',
+      name: "Piercing Shots",
+      abrv: 'pierce_shot',
       max: 3,
-      per_point: 15 / 100
+      per_point: 10 / 100
     },
     {
       name: 'Trueshot Aura',
       abrv: 'trueshot_aura',
-      max: 1
+      max: 1,
+      is_modifier: true,
+      per_point: 10 / 100
     },
     {
       name: 'Improved Barrage',
@@ -269,32 +317,57 @@ const MM_TREE = [
       name: 'Master Marksman',
       abrv: 'master_marksman',
       max: 5,
-      is_modifier: true,
-      per_point: 2 / 100
+      per_point: 1 / 100
+    },
+    {
+      name: 'Rapid Recuperation',
+      abrv: 'rapid_recup',
+      max: 5,
     }
   ],
   [
     {
+      name: 'Wild Quiver',
+      abrv: 'wild_quiver',
+      max: 3,
+      per_point: 4 / 100
+    },
+    {
       name: 'Silencing Shot',
       abrv: 'silencing_shot',
       max: 1
+    }, 
+    {
+      name: 'Improved Steady Shot',
+      abrv: 'imp_steady_shot',
+      max: 3,
+      per_point: 5 / 100
     }
+  ],
+  [
+    {
+      name: 'Marked for Death',
+      abrv: 'mark_death',
+      max: 5,
+      is_modifier: true,
+      per_point: 1 / 100
+    },
+  ],
+  [
+    {
+      name: 'Chimera Shot',
+      abrv: 'chimera_shot',
+      max: 1
+    },
   ]
 ]
 
 const SV_TREE = [
   [
     {
-      name: 'Monster Slaying',
-      abrv: 'monster_slaying',
-      max: 3,
-      is_modifier: true,
-      per_point: 1 / 100
-    },
-    {
-      name: 'Humanoid Slaying',
-      abrv: 'humanoid_slaying',
-      max: 3,
+      name: 'Improved Tracking',
+      abrv: 'imp_tracking',
+      max: 5,
       is_modifier: true,
       per_point: 1 / 100
     },
@@ -313,29 +386,29 @@ const SV_TREE = [
   ],
   [
     {
+      name: 'Surefooted',
+      abrv: 'surefooted',
+      max: 3,
+    },
+    {
       name: 'Entrapment',
       abrv: 'entrapment',
       max: 3
     },
     {
-      name: 'Deflection',
-      abrv: 'deflection',
-      max: 5,
+      name: 'Trap Mastery',
+      abrv: 'trap_mastery',
+      max: 3,
+      per_point: 10 / 100
     },
     {
-      name: 'Improved Wing Clip',
-      abrv: 'imp_wing_clip',
-      max: 3,
-    }
+      name: 'Survival Instincts',
+      abrv: 'surv_instincts',
+      max: 2,
+      per_point: 2 / 100
+    },
   ],
   [
-    {
-      name: 'Clever Traps',
-      abrv: 'clever_traps',
-      max: 2,
-      is_modifier: true,
-      per_point: 15 / 100
-    },
     {
       name: 'Survivalist',
       abrv: 'survivalist',
@@ -344,38 +417,43 @@ const SV_TREE = [
       per_point: 2 / 100
     },
     {
-      name: 'Deterrence',
-      abrv: 'deterrence',
-      max: 1
-    }
-  ],
-  [
-    {
-      name: 'Trap Mastery',
-      abrv: 'trap_mastery',
-      max: 2,
-      per_point: 5 / 100
+      name: 'Scatter Shot',
+      abrv: 'scatter_shot',
+      max: 1,
     },
     {
-      name: 'Surefooted',
-      abrv: 'surefooted',
+      name: 'Deflection',
+      abrv: 'deflection',
       max: 3,
-      per_point: 1
     },
     {
-      name: 'Improved Feign Death',
-      abrv: 'imp_fd',
+      name: 'Survival Tactics',
+      abrv: 'surv_tactics',
       max: 2,
       per_point: 2 / 100
     }
   ],
   [
     {
-      name: 'Survival Instincts',
-      abrv: 'surv_instincts',
-      max: 2,
+      name: 'T.N.T.',
+      abrv: 't_n_t',
+      max: 3,
       is_modifier: true,
       per_point: 2 / 100
+    },
+    {
+      name: 'Lock and Load',
+      abrv: 'lock_load',
+      max: 3,
+      per_point: 2 / 100
+    }
+  ],
+  [
+    {
+      name: 'Hunter vs. Wild',
+      abrv: 'hunt_vs_wild',
+      max: 3,
+      per_point: 10 / 100
     },
     {
       name: 'Killer Instinct',
@@ -391,32 +469,32 @@ const SV_TREE = [
   ],
   [
     {
-      name: 'Resourcefulness',
-      abrv: 'resourcefulness',
-      max: 3
-    },
-    {
       name: 'Lightning Reflexes',
       abrv: 'light_reflexes',
       max: 5,
       is_modifier: true,
       per_point: 3 / 100
+    },
+    {
+      name: 'Resourcefulness',
+      abrv: 'resourcefulness',
+      max: 3,
+      per_point: 20 / 100
     }
   ],
   [
     {
-      name: 'Thrill of the Hunt',
-      abrv: 'TotH',
-      max: 3,
+      name: 'Expose Weakness',
+      abrv: 'exp_weakness',
+      max: 3
     },
     {
       name: 'Wyvern Sting',
       abrv: 'wyvern_sting',
       max: 1
-    },
-    {
-      name: 'Expose Weakness',
-      abrv: 'exp_weakness',
+    },{
+      name: 'Thrill of the Hunt',
+      abrv: 'TotH',
       max: 3,
     }
   ],
@@ -425,12 +503,44 @@ const SV_TREE = [
       name: 'Master Tactician',
       abrv: 'master_tac',
       max: 5
+    },
+    {
+      name: 'Noxious Stings',
+      abrv: 'nox_stings',
+      max: 3,
     }
   ],
   [
     {
-      name: 'Readiness',
-      abrv: 'readiness',
+      name: 'Point of No Escape',
+      abrv: 'no_escape',
+      max: 2,
+    },
+    {
+      name: 'Black Arrow',
+      abrv: 'exp_weakness',
+      max: 1,
+    },
+    {
+      name: 'Sniper Training',
+      abrv: 'sniper_training',
+      max: 3,
+      per_point: 5 / 100
+    }
+  ],
+  [
+    {
+      name: 'Hunting Party',
+      abrv: 'hunt_party',
+      max: 3,
+      is_modifier: true,
+      per_point: 1 / 100
+    }
+  ],
+  [
+    {
+      name: 'Explosive Shot',
+      abrv: 'exp_shot',
       max: 1
     }
   ]
@@ -471,9 +581,10 @@ function parseTalents(talentString) {
   return talents
 }
 
-const T_41_20_0 = parseTalents('512002005250122431051-0505201205')
-const T_0_20_41 = parseTalents('-0550201205-33320002200322300520351')
-const T_7_20_34 = parseTalents('502-0550201205-333200022003223005103')
-const T_5_20_36 = parseTalents('5-0550201205-333200022003223005303')
-const T_0_27_34 = parseTalents('-055220120500302-333200022003223005103')
-const T_17_44_0 = parseTalents('51200200502-0551201205013253135');
+const T_53_16_2 = parseTalents('51200201515012243100531351-035005201-2')
+//const T_0_20_41 = parseTalents('-0550201205-33320002200322300520351')
+//const T_7_20_34 = parseTalents('502-0550201205-333200022003223005103')
+//const T_5_20_36 = parseTalents('5-0550201205-333200022003223005303')
+//const T_0_27_34 = parseTalents('-055220120500302-333200022003223005103')
+//const T_17_44_0 = parseTalents('51200200502-0551201205013253135');
+console.log(T_53_16_2)

@@ -10,6 +10,8 @@ var SPELLS = {
 
 };
 
+var Used_Spells = {};
+
 // for referencing spell names in combatlog
 SPELL_MAPPER = {
     autoshot: "Auto Shot",
@@ -18,7 +20,20 @@ SPELL_MAPPER = {
     arcaneshot: 'Arcane Shot',
     aimedshot: 'Aimed Shot',
     raptorstrike: 'Raptor Strike',
-    melee: 'Melee'
+    melee: 'Melee',
+    mongoose: 'Mongoose Bite',
+    blackarrow: 'Black Arrow',
+    chimerashot: 'Chimera Shot',
+    explosiveshot: 'Explosive Shot',
+    serpentsting: 'Serpent Sting',
+    explosivetrap: 'Explosive Trap',
+    immolatetrap: 'Immolation Trap',
+    frosttrap: 'Frost Trap',
+    snaketrap: 'Snake Trap',
+    volley: 'Volley',
+    killshot: 'Killshot',
+    silencingshot: 'Silencing Shot',
+    scattershot: 'Scatter Shot'
 }
 
 const PET_SPELLS = [
@@ -153,7 +168,7 @@ function steadyShotCalc(range_wep, combatRAP) {
 
     let dmg = (useAverages) ? (range_wep.mindmg + range_wep.maxdmg) * 0.5 : rng(range_wep.mindmg,range_wep.maxdmg);
     let gronnstalkermod = currentgear.special.gronnstalker_4p_steady_shot_dmg_ratio;
-    let shotDmg = (combatRAP * 0.2 + dmg * 2.8 / range_wep.speed + SPELLS.steadyshot.rankdmg) * range_wep.basedmgmod * gronnstalkermod * combatdmgmod * physdmgmod;
+    let shotDmg = (combatRAP * 0.2 + range_wep.ammodps * range_wep.speed + dmg * 2.8 / range_wep.speed + SPELLS.steadyshot.rankdmg) * range_wep.basedmgmod * gronnstalkermod * combatdmgmod * physdmgmod;
     return shotDmg;
 }
 
@@ -191,17 +206,86 @@ function meleeStrikeCalc(mainhand_wep, combatMAP) {
     let outDmg = (combatMAP * mainhand_wep.speed / 14 + dmg + mainhand_wep.flatdmg) * mainhand_wep.basedmgmod * combatdmgmod * physdmgmod;
     return outDmg;
 }
+    // Mongoose Bite
+function mongooseBiteCalc(combatMAP) {
+
+    let outDmg = (combatMAP * 0.2 + SPELLS.mongoose.rankdmg) * mainhand_wep.basedmgmod * combatdmgmod * physdmgmod;
+    return outDmg;
+}
+    // Black Arrow
+function blackArrowCalc(combatRAP) {
+
+    let shotDmg = (combatRAP * 0.1 + SPELLS.blackarrow.rankdmg) * range_wep.basedmgmod * combatdmgmod * physdmgmod;
+    return shotDmg;
+}
+    // Chimera Shot
+function chimeraShotCalc(range_wep, combatRAP) {
+
+    let dmg = (useAverages) ? (range_wep.mindmg + range_wep.maxdmg) * 0.5 : rng(range_wep.mindmg,range_wep.maxdmg);
+    let shotDmg = (range_wep.ammodps * range_wep.speed + combatRAP * range_wep.speed / 14 + dmg + range_wep.flatdmg) * 1.25 * range_wep.basedmgmod * combatdmgmod * physdmgmod;
+    return shotDmg;
+}
+    // Explosive Shot
+function explosiveShotCalc(combatRAP) {
+
+    let dmg = (useAverages) ? (SPELLS.explosiveshot.mindmg + SPELLS.explosiveshot.maxdmg) * 0.5 : rng(SPELLS.explosiveshot.mindmg,SPELLS.explosiveshot.maxdmg);
+    let shotDmg = (combatRAP * 0.14 + dmg) * range_wep.basedmgmod * combatdmgmod * physdmgmod;
+    return shotDmg;
+}
+    // Serpent Sting
+function serpentStingCalc(combatRAP) {
+    let shotDmg = (combatRAP * 0.2 + SPELLS.serpentsting.rankdmg * 5) * range_wep.basedmgmod * combatdmgmod * naturedmgmod * magdmgmod;
+    return shotDmg;
+}
+    // Explosive Trap
+function explosiveTrapCalc(combatRAP, dotcheck) {
+
+    let dot = dotcheck;
+    let dmg = 0;
+    let dotDmg = 0;
+    let trapDmg = 0;
+    if(!!dot) {
+        dotDmg = SPELLS.explosivetrap.tickdmg * 10 + combatRAP;
+        return dotDmg;
+    } else {
+        dmg = (useAverages) ? (SPELLS.explosivetrap.mindmg + SPELLS.explosivetrap.maxdmg) * 0.5 : rng(SPELLS.explosivetrap.mindmg,SPELLS.explosivetrap.maxdmg);
+        trapDmg = (combatRAP * 0.10 + dmg) * combatdmgmod * firedmgmod * magdmgmod;
+        return trapDmg;
+    }
+}
+    // Immolation Trap
+function immolateTrapCalc(combatRAP) {
+    let dmg = (combatRAP * 0.02 + SPELLS.immolatetrap.rankdmg * 5) * combatdmgmod * firedmgmod * magdmgmod;
+    return dmg;
+}
+    // Volley
+function volleyCalc(combatRAP) {
+
+    let shotDmg = (combatRAP * 0.0837 + SPELLS.volley.rankdmg) * combatdmgmod * arcanedmgmod * magdmgmod;
+    return shotDmg;
+}
+
+    // Killshot
+function killShotCalc(range_wep, combatRAP) {
+
+    let dmg = (useAverages) ? (range_wep.mindmg + range_wep.maxdmg) * 0.5 : rng(range_wep.mindmg,range_wep.maxdmg);
+    let bonusDmg = (combatRAP * 0.4 + SPELLS.killshot.rankdmg * 2);
+    let wepDmg = (range_wep.ammodps * range_wep.speed + combatRAP * range_wep.speed / 14 + dmg + range_wep.flatdmg) * 2
+    let shotDmg = (bonusDmg + wepDmg) * range_wep.basedmgmod * combatdmgmod * physdmgmod;
+    return shotDmg;
+}
+    // Silencing Shot, Scatter Shot
+function ScatterSilenceShotCalc(range_wep, combatRAP) {
+
+    let dmg = (useAverages) ? (range_wep.mindmg + range_wep.maxdmg) * 0.5 : rng(range_wep.mindmg,range_wep.maxdmg);
+    let shotDmg = (range_wep.ammodps * range_wep.speed + combatRAP * range_wep.speed / 14 + dmg + range_wep.flatdmg) * 0.5 * range_wep.basedmgmod * combatdmgmod * physdmgmod;
+    return shotDmg;
+}
 
 function petAutoCalc(){
     let dmg = (useAverages) ? (PetMinDmg + PetMaxDmg) * 0.5 : rng(PetMinDmg,PetMaxDmg);
     let autoDmg = (dmg + pet.combatap * 2 / 14) * pet.dmgmod * pet.combatdmgmod * CobraReflexesPenalty;
     return autoDmg;
-}
-
-function petKillCommCalc(){
-    let dmg = (useAverages) ? (PetMinDmg + PetMaxDmg) * 0.5 : rng(PetMinDmg,PetMaxDmg);
-    let kcDmg = (dmg + pet.combatap * 2 / 14 + 127) * pet.dmgmod * pet.combatdmgmod;
-    return kcDmg;
 }
 
 function spellPetCalc(spellindex){
