@@ -39,7 +39,8 @@ var auras = {
     mangle: {uptime_g:98, timer:0, duration:60, dmgbonus:1.3, uptime:0}
  }
 
- var buff_uptimes = {
+ const buff_uptimes = {
+    drums: 0,
     potion: 0,
     lust: 0,
     rapid: 0,
@@ -55,7 +56,7 @@ var auras = {
     naarusliver: 0,
     mastertact: 0,
 }
-var debuff_uptimes = {
+const debuff_uptimes = {
     hm: 0,
     judgewisdom: 0,
     judgecrusader: 0,
@@ -67,6 +68,7 @@ var debuff_uptimes = {
     mangle: 0
 }
 
+
 var talent_auras = {
     imp_hawk: {},
     imp_steady: {},
@@ -77,7 +79,7 @@ var talent_auras = {
     hunt_party: {}
 }
 
-/** Initializes auras for procs and actives */
+/** Initializes auras for procs and actives, ran once per sim */
 function initializeAuras() {
     // set up on use AP trinkets diff from the rest of auras
     let aptrink1 = currentgear.auras[gear.trinket1.id] || {};
@@ -85,16 +87,12 @@ function initializeAuras() {
     let aptrink1rap = (aptrink1.hasOwnProperty('stats')) ? aptrink1.stats.RAP : 0;
     let aptrink2rap = (aptrink2.hasOwnProperty('stats')) ? aptrink2.stats.RAP : 0;
  
-    auras.aptrink1.timer = 0;
-    auras.aptrink1.cooldown = 0;
     auras.aptrink1.duration = aptrink1.duration;
     auras.aptrink1.basecd = aptrink1.cd;
     auras.aptrink1.AP = aptrink1rap;
     auras.aptrink1.enable = (!aptrink1.is_proc && auras.aptrink1.AP > 0) ? true : false;
     auras.aptrink1.name = TRINKETS[gear.trinket1.id].name;
 
-    auras.aptrink2.timer = 0;
-    auras.aptrink2.cooldown = 0;
     auras.aptrink2.duration = aptrink2.duration;
     auras.aptrink2.basecd = aptrink2.cd;
     auras.aptrink2.AP = aptrink2rap;
@@ -137,6 +135,8 @@ function initializeAuras() {
     return;
  }
 
+
+ /** resets cds and timers to 0 or an offset if chosen, ran every iteration */
  function ResetAuras(){
     killcommand.cooldown = 0;
     pet.frenzy.timer = 0;

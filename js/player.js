@@ -83,8 +83,10 @@ var rangedmgmod = 1;
 var selectedRace = 3; // 0 for night elf, 1 for dwarf, 2 for draenei, 3 for orc, 4 for troll, 5 for tauren, 6 for blood elf
 var offhandDisabled = false;
 var totaldmgdone = 0;
+
 var two_min_cds = 120;
 var three_min_cds = 180;
+
 var useAverages = false;
 
 var range_wep = {};
@@ -92,7 +94,7 @@ var mainhand_wep = {};
 var consumestats = {};
 var target = {};
 var currentgear = {auras:{0:{}}, stats:{},special:{}};
-var custom = {
+const custom = {
    str: 0,
    agi: 0,
    int: 0,
@@ -299,29 +301,34 @@ function calcBaseStats() {
   
   // Crit rating and crit chance
    let critrating = GearStats.Crit + BuffStats.Crit + EnchantStats.Crit;
-  MeleeCritRating = critrating + (currentgear.stats.MeleeCrit || 0) + custom.meleecrit;
-  RangeCritRating = critrating + (currentgear.stats.RangeCrit || 0) + custom.rangecrit;
+   MeleeCritRating = critrating + (currentgear.stats.MeleeCrit || 0) + custom.meleecrit;
+   RangeCritRating = critrating + (currentgear.stats.RangeCrit || 0) + custom.rangecrit;
    let crit = BaseCritChance + Agi / AgiToCrit + BuffStats.CritChance + talents.killer_instinct;
+
   MeleeCritChance = crit + MeleeCritRating / CritRatingRatio;
   RangeCritChance = crit + RangeCritRating / CritRatingRatio + talents.lethal_shots + races[selectedRace].critchance;
   
   MeleeCritDamage = 2 * (currentgear.special.relentless_metagem_crit_dmg_inc * 1);
   RangeCritDamage = 1 + (talents.mortal_shots) * (2 * currentgear.special.relentless_metagem_crit_dmg_inc - 1);
   // Hit rating and hit chance - split between ranged and melee because of hit scope and crit scope and racial
-   let hitrating = GearStats.Hit + BuffStats.Hit + EnchantStats.Hit;
-  MeleeHitRating = hitrating + custom.meleehit;
 
-  RangeHitRating = hitrating + (currentgear.stats.RangeHit || 0) + custom.rangehit;
+   let hitrating = GearStats.Hit + BuffStats.Hit + EnchantStats.Hit;
+   MeleeHitRating = hitrating + custom.meleehit;
+
+   RangeHitRating = hitrating + (currentgear.stats.RangeHit || 0) + custom.rangehit;
    let racialhit = (selectedRace == 2 && buffslist[12] == 0) ? 1 : 0;
+
    let hit = BaseHitChance + talents.focus_aim + BuffStats.HitChance + racialhit;
   MeleeHitChance = hit + MeleeHitRating / HitRatingRatio; // need dual wield condition
   RangeHitChance = hit + RangeHitRating / HitRatingRatio;
+
 
    let penalty = (RangeHitChance >= 1) ? HitPenalty:0; // include penalty here? assumes lvl 73 target
    let dw_penalty = 0;
    if (!offhandDisabled && (gear.offhand !== undefined)) {
       dw_penalty = (gear.offhand.id > 0) ? -19:0; // offhand penalty for dual wielding 
    } else { dw_penalty = 0; }
+
   MeleeMissChance = Math.max(8 - MeleeHitChance - penalty - dw_penalty,0);
   RaptorMissChance = Math.max(8 - MeleeHitChance - penalty,0);
   RangeMissChance = Math.max(8 - RangeHitChance - penalty,0);
@@ -344,6 +351,7 @@ function calcBaseStats() {
   
   BaseRangeSpeed = RANGED_WEAPONS[gear.range.id].speed / QuiverSpeed / talents.serp_swift;
   BaseMeleeSpeed = MELEE_WEAPONS[gear.mainhand.id].speed;
+
   
 }
 
@@ -351,8 +359,6 @@ function initialize(){
    checkWeaponType();
    currentgear = getStatsFromGear(gear);
    addGear();
-   //console.log("current gear: ");
-   //console.log(currentgear);
    addBuffs();
    calcBaseStats();
    petStatsCalc();
@@ -851,6 +857,7 @@ function attackSpell(spell,spellcost) {
       raptordmg += done;
    }
 
+
    procattack(attack,result);
    procMana(attack,result); // expensiveish
    magicproc(attack);
@@ -1142,7 +1149,7 @@ function procattack(attack,result) {
    } 
    return;
 }
-var romulos = 0;
+
 // handling for magic dmg procs from items (think rumulo's)
 function magicproc(attack) {
 
@@ -1174,7 +1181,6 @@ function magicproc(attack) {
             dmg *= 0.65; // average reduction of 35% on partial resists
          }
          let done = dealdamage(dmg,result,'magic');
-         romulos += done;
          totaldmgdone += done;
          if(combatlogRun) {
             combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player Romulo's Poison " + RESULTARRAY[result] + " for " + done;
@@ -1210,6 +1216,8 @@ function magicproc(attack) {
 // handling for physical dmg procs from items (if any?)
 function physproc() {
 }
+
+// using runes
 function runeHandling() {
    let runemana = 0;
    let prev_mana = 0;
@@ -1233,6 +1241,8 @@ function runeHandling() {
    }
    return true;
 }
+
+// using potions
 function potionHandling() {
 
    let primary = auras.potion.primary;
