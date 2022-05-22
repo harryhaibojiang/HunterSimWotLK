@@ -1,25 +1,10 @@
 const FOODS = {
-  33292: {
-    name: 'Blackened Sporefish',
-    icon: 'inv_misc_food_79',
-    stats: {
-      Stam: 20,
-      MP5: 8,
-    },
-  },
   27664: {
     name: 'Grilled Mudfish',
     icon: 'inv_misc_food_78',
     stats: {
       Spi: 20,
       Agi: 20
-    }
-  },
-  13928: {
-    name: 'Grilled Squid',
-    icon: 'inv_misc_fish_13',
-    stats: {
-      Agi: 10
     }
   },
   27655: {
@@ -47,14 +32,6 @@ const FOODS = {
       Hit: 20
     }
   },
-  27660: {
-    name: 'Talbuk Steak',
-    icon: 'inv_misc_food_84_roastclefthoof',
-    stats: {
-      Stam: 20,
-      Spi: 20
-    }
-  },
   27659: {
     name: 'Warp Burger',
     icon: 'inv_misc_food_65',
@@ -62,7 +39,123 @@ const FOODS = {
       Spi: 20,
       Agi: 20
     }
-  }
+  },
+  42999: {
+    name: 'Blackened Dragonfin',
+    icon: '',
+    stats: {
+      Agi: 40,
+      Stam: 20
+    }
+  },
+  43015: {
+    name: 'Fish Feast',
+    icon: '',
+    stats: {
+      RAP: 80,
+      MAP: 80,
+      Stam: 40
+    }
+  },
+  34753: {
+    name: 'Great Feast',
+    icon: '',
+    stats: {
+      RAP: 60,
+      MAP: 60,
+      Stam: 30
+    }
+  },
+  42995: {
+    name: 'Hearty Rhino',
+    icon: '',
+    stats: {
+      ArP: 40,
+      Stam: 40
+    }
+  },
+  34769: {
+    name: 'Imperial Manta Steak',
+    icon: '',
+    stats: {
+      Haste: 40,
+      Stam: 40
+    }
+  },
+  34748: {
+    name: 'Mammoth Meal',
+    icon: '',
+    stats: {
+      RAP: 60,
+      MAP: 60,
+      Stam: 30
+    }
+  },
+  34754: {
+    name: 'Mega Mammoth Meal',
+    icon: '',
+    stats: {
+      RAP: 80,
+      MAP: 80,
+      Stam: 40
+    }
+  },
+  34766: {
+    name: 'Poached Northern Sculpin',
+    icon: '',
+    stats: {
+      RAP: 80,
+      MAP: 80,
+      Stam: 40
+    }
+  },
+  42996: {
+    name: 'Snapper Extreme',
+    icon: '',
+    stats: {
+      Hit: 40,
+      Stam: 40
+    }
+  },
+  34768: {
+    name: 'Spicy Blue Nettlefish',
+    icon: '',
+    stats: {
+      Crit: 40,
+      Stam: 40
+    }
+  },
+  42993: {
+    name: 'Spicy Fried Herring',
+    icon: '',
+    stats: {
+      MP5: 16,
+      Stam: 40
+    }
+  },
+  34756: {
+    name: 'Spiced Worm Burger',
+    icon: '',
+    stats: {
+      Crit: 40,
+      Stam: 40
+    }
+  },
+  44953: {
+    name: 'Worg Tartare',
+    icon: '',
+    stats: {
+      Hit: 40
+    }
+  },
+  34750: {
+    name: 'Worm Delight',
+    icon: '',
+    stats: {
+      Crit: 30,
+      Stam: 30
+    }
+  },
 }
 
 const BATTLE_ELIXIRS = {
@@ -82,101 +175,75 @@ const BATTLE_ELIXIRS = {
       Crit: 20
     }
   },
-  13452: {
-    name: 'Elixir of the Mongoose',
-    icon: 'inv_potion_32',
+  44325: {
+    name: 'Elixir of Accuracy',
+    icon: '',
     stats: {
-      Agi: 25,
-      Crit: 28
+      Hit: 45
     }
   },
-  31679: {
-    name: 'Fel Strength Elixir',
-    icon: 'inv_potion_152',
+  44330: {
+    name: 'Elixir of Armor Piercing',
+    icon: '',
     stats: {
-      Stam: -10,
-      MAP: 90,
-      RAP: 90
+      ArP: 45
     }
   },
-  28102: {
-    name: 'Onslaught Elixir',
-    icon: 'inv_potion_58',
+  44327: {
+    name: 'Elixir of Deadly Strikes',
+    icon: '',
     stats: {
-      MAP: 60,
-      RAP: 60
+      Crit: 45
     }
   },
-  9187: {
-    name: 'Elixir of Greater Agility',
-    icon: 'inv_potion_94',
+  44331: {
+    name: 'Elixir of Lightning Speed',
+    icon: '',
     stats: {
-      Agi: 25
+      Haste: 45
     }
   },
-  8949: {
-    name: 'Elixir of Agility',
-    icon: 'inv_potion_93',
+  39666: {
+    name: 'Elixir of Mighty Agility',
+    icon: '',
     stats: {
-      Agi: 15
+      Agi: 45
     }
   },
-  28104: {
-    name: 'Elixir of Mastery',
-    icon: 'inv_potion_111',
+  40068: {
+    name: 'Wrath Elixir',
+    icon: '',
     stats: {
-      Str: 15,
-      Agi: 15,
-      Stam: 15,
-      Int: 15,
-      Spi: 15
+      RAP: 90,
+      MAP: 90
+    }
+  },
+  40076: {
+    name: 'Guru\'s Elixir',
+    icon: '',
+    stats: {
+      Str: 20,
+      Agi: 20,
+      Stam: 20,
+      Int: 20,
+      Spi: 20
     }
   }
 }
 
 const GUARDIAN_ELIXIRS = {
-  22840: {
-    name: 'Elixir of Major Mageblood',
-    icon: 'inv_potion_151',
+  40109: {
+    name: 'Elixir of Mighty Mageblood',
+    icon: '',
     stats: {
-      MP5: 16
-    }
-  },
-  32067: {
-    name: 'Elixir of Draenic Wisdom',
-    icon: 'inv_potion_155',
-    stats: {
-      Int: 30,
-      Spi: 30
-    }
-  },
-  20007: {
-    name: 'Mageblood Potion',
-    icon: 'inv_potion_45',
-    stats: {
-      MP5: 12
+      MP5: 30
     }
   },
   9179: {
-    name: 'Elixir of Greater Intellect',
-    icon: 'inv_potion_10',
+    name: 'Elixir of Mighty Thoughts',
+    icon: '',
     stats: {
-      Int: 25
-    }
-  },
-  32062: {
-    name: 'Elixir of Major Fortitude',
-    icon: 'inv_potion_158',
-    stats: {
-      Health: 250,
-      HP5: 10
-    }
-  },
-  3825: {
-    name: 'Elixir of Fortitude',
-    icon: 'inv_potion_43',
-    stats: {
-      Health: 120
+      Int: 45
     }
   }
 }
@@ -187,13 +254,6 @@ const FLASKS = {
     icon: 'inv_potion_97',
     stats: {
       Int: 65
-    }
-  },
-  22851: {
-    name: 'Flask of Fortification',
-    icon: 'inv_potion_119',
-    stats: {
-      Health: 500
     }
   },
   22853: {
@@ -211,99 +271,98 @@ const FLASKS = {
       RAP: 120
     }
   },
-  13510: {
-    name: 'Flask of the Titans',
-    icon: 'inv_potion_62',
+  47499: {
+    name: 'Flask of the North',
+    icon: '',
     stats: {
-      Health: 400
+      MAP: 80,
+      RAP: 80
     }
   },
-  32599: {
-    name: 'Unstable Flask of the Bandit',
-    icon: 'inv_potion_91',
+  46377: {
+    name: 'Flask of Endless Rage',
+    icon: '',
     stats: {
-      Agi: 20,
-      MAP: 40,
-      RAP: 40,
-      Stam: 30
+      MAP: 180,
+      RAP: 180
     }
   }
 }
 
 const SCROLLS_OF_AGILITY = {
-  3012: {
-    name: 'Scroll of Agility I',
-    icon: 'inv_scroll_02',
-    stats: {
-      Agi: 5
-    }
-  },
-  1477: {
-    name: 'Scroll of Agility II',
-    icon: 'inv_scroll_02',
-    stats: {
-      Agi: 9
-    }
-  },
-  4425: {
-    name: 'Scroll of Agility III',
-    icon: 'inv_scroll_02',
-    stats: {
-      Agi: 13
-    }
-  },
   10309: {
     name: 'Scroll of Agility IV',
     icon: 'inv_scroll_02',
     stats: {
-      Agi: 17
+      Agi: 10
     }
   },
   27498: {
     name: 'Scroll of Agility V',
     icon: 'inv_scroll_02',
     stats: {
+      Agi: 15
+    }
+  },
+  33457: {
+    name: 'Scroll of Agility VI',
+    icon: 'inv_scroll_02',
+    stats: {
       Agi: 20
     }
-  }
+  },
+  43463: {
+    name: 'Scroll of Agility VII',
+    icon: 'inv_scroll_02',
+    stats: {
+      Agi: 25
+    }
+  },
+  43464: {
+    name: 'Scroll of Agility VIII',
+    icon: 'inv_scroll_02',
+    stats: {
+      Agi: 30
+    }
+  },
 }
 
 const SCROLLS_OF_STRENGTH = {
-  954: {
-    name: 'Scroll of Strength I',
-    icon: 'inv_scroll_02',
-    stats: {
-      Str: 5
-    }
-  },
-  2289: {
-    name: 'Scroll of Strength II',
-    icon: 'inv_scroll_02',
-    stats: {
-      Str: 9
-    }
-  },
-  4426: {
-    name: 'Scroll of Strength III',
-    icon: 'inv_scroll_02',
-    stats: {
-      Str: 13
-    }
-  },
   10310: {
     name: 'Scroll of Strength IV',
     icon: 'inv_scroll_02',
     stats: {
-      Str: 17
+      Str: 10
     }
   },
   27503: {
     name: 'Scroll of Strength V',
     icon: 'inv_scroll_02',
     stats: {
+      Str: 15
+    }
+  },
+  33462: {
+    name: 'Scroll of Strength VI',
+    icon: 'inv_scroll_02',
+    stats: {
       Str: 20
     }
-  }
+  },
+  43465: {
+    name: 'Scroll of Strength VII',
+    icon: 'inv_scroll_02',
+    stats: {
+      Str: 25
+    }
+  },
+  43466: {
+    name: 'Scroll of Strength VIII',
+    icon: 'inv_scroll_02',
+    stats: {
+      Str: 30
+    }
+  },
 }
 
 const PET_FOODS = {
@@ -313,6 +372,14 @@ const PET_FOODS = {
     stats: {
       Str: 20,
       Spi: 20
+    }
+  },
+  43005: {
+    name: "Spiced Mammoth Treats",
+    icon: 'inv_misc_food_123_roast',
+    stats: {
+      Str: 30,
+      Spi: 30
     }
   },
   27656: {
