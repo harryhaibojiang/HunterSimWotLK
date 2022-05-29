@@ -32,7 +32,7 @@ var auras = {
     judgewisdom: {uptime_g:98, timer:0, duration:20, uptime:0},
     judgecrusader: {uptime_g:98, timer:0, duration:20, crit:3, uptime:0},
     sunder: {uptime_g:98, timer:0, duration:30, stacktime:5, stacks:1, arp:0.04, uptime:0},
-    faeriefire: {uptime_g:98, timer:0, duration:300, crit:3, arp:0.05, uptime:0},
+    faeriefire: {uptime_g:98, timer:0, duration:300, arp:0.05, uptime:0},
     expose: {uptime_g:90, timer:0, duration:30, arp:0.2, uptime:0},
     bloodfrenzy: {uptime_g:98, timer:0, duration:12, dmgbonus:1.04, uptime:0},
     curseofele: {uptime_g:98, timer:0, duration:120, dmgbonus:1.13, uptime:0},
@@ -190,7 +190,6 @@ function setSpellCDs(){
     auras.bloodfury.basecd = two_min_cds;
     auras.aptrink1.basecd = two_min_cds;
     auras.aptrink2.basecd = two_min_cds;
-    auras.tenacity.basecd = two_min_cds;
     auras.potion.basecd = two_min_cds;
     auras.beastwithin.basecd = two_min_cds;
 

@@ -4,7 +4,7 @@ const SETS = {
     abrv: 'beast_lord',
     bonuses: {
       2: { trap_cdr: 4 },
-      4: { kc_arp: 600 }
+      4: { kc_arp: 85 }
     }
   },
   '-7': {
@@ -737,7 +737,7 @@ const BACKS = {
             RAP: 46,
             Crit: 20,
             Resil: 20,
-            ArP: 112
+            ArP: 16
         },
         Location: "Badge Reward",
         Phase: 4,
@@ -1690,7 +1690,7 @@ const CHESTS = {
             Stam: 46,
             MAP: 92,
             RAP: 92,
-            ArP: 210
+            ArP: 30
         },
         Location: "Zul'Aman",
         Phase: 4,
@@ -1709,7 +1709,7 @@ const CHESTS = {
             Crit: 25,
             Hit: 12,
             Resil: 21,
-            ArP: 84
+            ArP: 12
         },
         Location: "Arena Reward",
         sockets: [
@@ -1732,7 +1732,7 @@ const CHESTS = {
             Int: 30,
             MAP: 104,
             RAP: 104,
-            ArP: 182
+            ArP: 26
         },
         Location: "Sunwell",
         sockets: [
@@ -1804,7 +1804,7 @@ const CHESTS = {
             MAP: 120,
             RAP: 120,
             Crit: 38,
-            ArP: 210
+            ArP: 30
         },
         Location: "Sunwell",
         sockets: [
@@ -1913,7 +1913,7 @@ const CHESTS = {
             Crit: 29,
             Hit: 16,
             Resil: 21,
-            ArP: 84
+            ArP: 12
         },
         Location: "Arena Reward",
         sockets: [
@@ -2538,7 +2538,7 @@ const FEET = {
             Int: 25,
             MAP: 66,
             RAP: 66,
-            ArP: 105
+            ArP: 15
         },
         Location: "Zul'Aman",
         Phase: 4,
@@ -2572,7 +2572,7 @@ const FEET = {
             RAP: 86,
             Crit: 21,
             Hit: 14,
-            ArP: 140
+            ArP: 20
         },
         Location: "Sunwell",
         sockets: [
@@ -2592,7 +2592,7 @@ const FEET = {
             Stam: 28,
             MAP: 58,
             RAP: 58,
-            ArP: 126
+            ArP: 18
         },
         Location: "Dungeon",
         sockets: [
@@ -3110,7 +3110,7 @@ const HANDS = {
             MAP: 62,
             RAP: 62,
             Crit: 13,
-            ArP: 140
+            ArP: 20
         },
         Location: "Mount Hyjal",
         sockets: [
@@ -3321,7 +3321,7 @@ const HANDS = {
             MAP: 80,
             RAP: 80,
             Crit: 23,
-            ArP: 182
+            ArP: 26
         },
         Location: "Sunwell",
         sockets: [
@@ -3343,7 +3343,7 @@ const HANDS = {
             MAP: 90,
             RAP: 90,
             Crit: 30,
-            ArP: 154
+            ArP: 22
         },
         Location: "Crafting",
         sockets: [
@@ -4185,7 +4185,7 @@ const HEADS = {
             Int: 35,
             MAP: 72,
             RAP: 72,
-            ArP: 140
+            ArP: 20
         },
         Location: "Zul'Aman",
         sockets: [
@@ -4236,7 +4236,7 @@ const HEADS = {
             Crit: 26,
             Hit: 12,
             Resil: 22,
-            ArP: 84
+            ArP: 12
         },
         Location: "Arena Reward",
         sockets: [
@@ -4281,7 +4281,7 @@ const HEADS = {
             MAP: 126,
             RAP: 126,
             Crit: 34,
-            ArP: 182
+            ArP: 26
         },
         Location: "Sunwell",
         sockets: [
@@ -4328,7 +4328,7 @@ const HEADS = {
             Crit: 30,
             Hit: 17,
             Resil: 22,
-            ArP: 84
+            ArP: 12
         },
         Location: "Arena Reward",
         sockets: [
@@ -4950,7 +4950,7 @@ const LEGS = {
             Stam: 61,
             MAP: 102,
             RAP: 102,
-            ArP: 175
+            ArP: 25
         },
         Location: "Mount Hyjal",
         Phase: 3,
@@ -5095,7 +5095,7 @@ const LEGS = {
             Int: 30,
             MAP: 90,
             RAP: 90,
-            ArP: 175
+            ArP: 25
         },
         Location: "Badge Reward",
         Phase: 5,
@@ -5128,7 +5128,7 @@ const LEGS = {
             Crit: 25,
             Hit: 12,
             Resil: 33,
-            ArP: 84
+            ArP: 12
         },
         Location: "Arena Reward",
         Phase: 3,
@@ -5167,7 +5167,7 @@ const LEGS = {
             MAP: 124,
             RAP: 124,
             Hit: 32,
-            ArP: 224
+            ArP: 32
         },
         Location: "Sunwell",
         sockets: [
@@ -5259,7 +5259,7 @@ const LEGS = {
             Crit: 29,
             Hit: 17,
             Resil: 33,
-            ArP: 84
+            ArP: 12
         },
         Location: "Arena Reward",
         Phase: 5,
@@ -7022,7 +7022,7 @@ const MELEE_WEAPONS = {
         stats: {
             Agi: 49,
             Stam: 70,
-            ArP: 315
+            ArP: 45
         },
         Location: "Zul'Aman",
         type: "staff",
@@ -7126,7 +7126,7 @@ const MELEE_WEAPONS = {
         name: "Boundless Agony",
         stats: {
             Crit: 24,
-            ArP: 210
+            ArP: 30
         },
         Location: "Mount Hyjal",
         type: "dagger",
@@ -7143,7 +7143,7 @@ const MELEE_WEAPONS = {
         stats: {
             Str: 75,
             Stam: 49,
-            ArP: 335
+            ArP: 48
         },
         Location: "Hyjal",
         type: "sword",
@@ -7811,7 +7811,7 @@ const MELEE_WEAPONS = {
             Stam: 30,
             MAP: 42,
             RAP: 42,
-            ArP: 140
+            ArP: 20
         },
         Location: "Zul'Aman",
         type: "dagger",
@@ -7847,7 +7847,7 @@ const MELEE_WEAPONS = {
             Agi: 21,
             MAP: 40,
             RAP: 40,
-            ArP: 140
+            ArP: 20
         },
         Location: "Zul'Aman",
         type: "dagger",
@@ -7986,7 +7986,7 @@ const MELEE_WEAPONS = {
             Crit: 21,
             Hit: 8,
             Resil: 12,
-            ArP: 49
+            ArP: 7
         },
         Location: "Arena Reward",
         type: "axe",
@@ -8045,7 +8045,7 @@ const MELEE_WEAPONS = {
             Crit: 21,
             Hit: 8,
             Resil: 12,
-            ArP: 49
+            ArP: 7
         },
         Location: "Arena Reward",
         type: "axe",
@@ -8066,7 +8066,7 @@ const MELEE_WEAPONS = {
             Crit: 21,
             Hit: 8,
             Resil: 12,
-            ArP: 49
+            ArP: 7
         },
         Location: "Arena Reward",
         type: "fist",
@@ -8106,7 +8106,7 @@ const MELEE_WEAPONS = {
             Crit: 21,
             Hit: 8,
             Resil: 12,
-            ArP: 49
+            ArP: 7
         },
         Location: "Arena Reward",
         type: "sword",
@@ -8127,7 +8127,7 @@ const MELEE_WEAPONS = {
             Crit: 21,
             Hit: 8,
             Resil: 12,
-            ArP: 49
+            ArP: 7
         },
         Location: "Arena Reward",
         type: "fist",
@@ -8148,7 +8148,7 @@ const MELEE_WEAPONS = {
             Crit: 21,
             Hit: 8,
             Resil: 12,
-            ArP: 49
+            ArP: 7
         },
         Location: "Arena Reward",
         type: "dagger",
@@ -8169,7 +8169,7 @@ const MELEE_WEAPONS = {
             Crit: 21,
             Hit: 8,
             Resil: 12,
-            ArP: 49
+            ArP: 7
         },
         Location: "Arena Reward",
         type: "dagger",
@@ -8190,7 +8190,7 @@ const MELEE_WEAPONS = {
             Crit: 21,
             Hit: 8,
             Resil: 12,
-            ArP: 49
+            ArP: 7
         },
         Location: "Arena Reward",
         type: "sword",
@@ -8211,7 +8211,7 @@ const MELEE_WEAPONS = {
             Crit: 21,
             Hit: 8,
             Resil: 12,
-            ArP: 49
+            ArP: 7
         },
         Location: "Arena Reward",
         type: "dagger",
@@ -8232,7 +8232,7 @@ const MELEE_WEAPONS = {
             Crit: 46,
             Hit: 15,
             Resil: 33,
-            ArP: 98
+            ArP: 14
         },
         Location: "Arena Reward",
         type: "axe",
@@ -8253,7 +8253,7 @@ const MELEE_WEAPONS = {
             Crit: 21,
             Hit: 8,
             Resil: 12,
-            ArP: 49
+            ArP: 7
         },
         Location: "Arena Reward",
         type: "axe",
@@ -8274,7 +8274,7 @@ const MELEE_WEAPONS = {
             Crit: 21,
             Hit: 8,
             Resil: 12,
-            ArP: 49
+            ArP: 7
         },
         Location: "Arena Reward",
         type: "fist",
@@ -8353,7 +8353,7 @@ const MELEE_WEAPONS = {
             Agi: 25,
             MAP: 42,
             RAP: 42,
-            ArP: 196
+            ArP: 28
         },
         Location: "Sunwell",
         type: "dagger",
@@ -8414,7 +8414,7 @@ const MELEE_WEAPONS = {
             Stam: 28,
             MAP: 54,
             RAP: 54,
-            ArP: 196
+            ArP: 28
         },
         Location: "Sunwell",
         sockets: [
@@ -8440,7 +8440,7 @@ const MELEE_WEAPONS = {
             Stam: 22,
             MAP: 46,
             RAP: 46,
-            ArP: 140
+            ArP: 20
         },
         Location: "Sunwell",
         sockets: [
@@ -8564,7 +8564,7 @@ const MELEE_WEAPONS = {
             Stam: 21,
             MAP: 28,
             RAP: 28,
-            ArP: 98
+            ArP: 14
         },
         Location: "Dungeon",
         type: "sword",
@@ -8717,7 +8717,7 @@ const MELEE_WEAPONS = {
             Agi: 75,
             Str: 47,
             Stam: 50,
-            ArP: 350
+            ArP: 50
         },
         Location: "Sunwell",
         type: "staff",
@@ -8756,7 +8756,7 @@ const MELEE_WEAPONS = {
             Crit: 22,
             Hit: 9,
             Resil: 12,
-            ArP: 49
+            ArP: 7
         },
         Location: "Arena Reward",
         type: "axe",
@@ -8776,7 +8776,7 @@ const MELEE_WEAPONS = {
             RAP: 100,
             Crit: 50,
             Hit: 19,
-            ArP: 98,
+            ArP: 14,
             Resil: 33
         },
         Location: "Arena Reward",
@@ -8796,7 +8796,7 @@ const MELEE_WEAPONS = {
             Str: 50,
             Crit: 50,
             Hit: 19,
-            ArP: 98,
+            ArP: 14,
             Resil: 33
         },
         Location: "Arena Reward",
@@ -8818,7 +8818,7 @@ const MELEE_WEAPONS = {
             Crit: 22,
             Hit: 9,
             Resil: 12,
-            ArP: 49
+            ArP: 7
         },
         Location: "Arena Reward",
         type: "axe",
@@ -8839,7 +8839,7 @@ const MELEE_WEAPONS = {
             Crit: 22,
             Hit: 9,
             Resil: 12,
-            ArP: 49
+            ArP: 7
         },
         Location: "Arena Reward",
         type: "fist",
@@ -8879,7 +8879,7 @@ const MELEE_WEAPONS = {
             Crit: 22,
             Hit: 9,
             Resil: 12,
-            ArP: 49
+            ArP: 7
         },
         Location: "Arena Reward",
         type: "sword",
@@ -8900,7 +8900,7 @@ const MELEE_WEAPONS = {
             Crit: 22,
             Hit: 9,
             Resil: 12,
-            ArP: 49
+            ArP: 7
         },
         Location: "Arena Reward",
         type: "fist",
@@ -8921,7 +8921,7 @@ const MELEE_WEAPONS = {
             Crit: 22,
             Hit: 9,
             Resil: 12,
-            ArP: 49
+            ArP: 7
         },
         Location: "Arena Reward",
         type: "dagger",
@@ -8942,7 +8942,7 @@ const MELEE_WEAPONS = {
             Crit: 22,
             Hit: 9,
             Resil: 12,
-            ArP: 49
+            ArP: 7
         },
         Location: "Arena Reward",
         type: "dagger",
@@ -8963,7 +8963,7 @@ const MELEE_WEAPONS = {
             Crit: 22,
             Hit: 9,
             Resil: 12,
-            ArP: 49
+            ArP: 7
         },
         Location: "Arena Reward",
         type: "sword",
@@ -8984,7 +8984,7 @@ const MELEE_WEAPONS = {
             Crit: 22,
             Hit: 9,
             Resil: 12,
-            ArP: 49
+            ArP: 7
         },
         Location: "Arena Reward",
         type: "dagger",
@@ -9005,7 +9005,7 @@ const MELEE_WEAPONS = {
             Crit: 22,
             Hit: 9,
             Resil: 12,
-            ArP: 49
+            ArP: 7
         },
         Location: "Arena Reward",
         type: "axe",
@@ -9026,7 +9026,7 @@ const MELEE_WEAPONS = {
             Crit: 22,
             Hit: 9,
             Resil: 12,
-            ArP: 49
+            ArP: 7
         },
         Location: "Arena Reward",
         type: "axe",
@@ -9047,7 +9047,7 @@ const MELEE_WEAPONS = {
             Crit: 22,
             Hit: 9,
             Resil: 12,
-            ArP: 49
+            ArP: 7
         },
         Location: "Arena Reward",
         type: "fist",
@@ -9461,7 +9461,7 @@ const NECKS = {
             Stam: 37,
             MAP: 70,
             RAP: 70,
-            ArP: 175
+            ArP: 25
         },
         Location: "MH/BT",
         Phase: 3,
@@ -9541,7 +9541,7 @@ const NECKS = {
             Stam: 42,
             MAP: 58,
             RAP: 58,
-            ArP: 150,
+            ArP: 22,
             Haste: 29
         },
         Location: "Crafting",
@@ -10486,7 +10486,7 @@ const RANGED_WEAPONS = {
         stats: {
             MAP: 38,
             RAP: 38,
-            ArP: 126
+            ArP: 18
         },
         type: "Bow",
         mindmg: 181,
@@ -10519,7 +10519,7 @@ const RANGED_WEAPONS = {
             Agi: 18,
             MAP: 34,
             RAP: 34,
-            ArP: 175
+            ArP: 25
         },
         type: "Bow",
         mindmg: 204,
@@ -10537,7 +10537,7 @@ const RANGED_WEAPONS = {
             MAP: 34,
             RAP: 34,
             Crit: 16,
-            ArP: 112
+            ArP: 16
         },
         type: "Bow",
         mindmg: 356,
@@ -11315,7 +11315,7 @@ const RINGS = {
             MAP: 66,
             RAP: 66,
             Hit: 30,
-            ArP: 126
+            ArP: 18
         },
         Location: "Black Temple",
         Phase: 3,
@@ -11382,7 +11382,7 @@ const RINGS = {
             Stam: 30,
             MAP: 58,
             RAP: 58,
-            ArP: 126
+            ArP: 18
         },
         Location: "Zul'Aman",
         Phase: 4,
@@ -11408,7 +11408,7 @@ const RINGS = {
             RAP: 44,
             Crit: 26,
             Resil: 22,
-            ArP: 56
+            ArP: 8
         },
         Location: "Honor Reward",
         Phase: 2,
@@ -11434,7 +11434,7 @@ const RINGS = {
             MAP: 66,
             RAP: 66,
             Crit: 32,
-            ArP: 161
+            ArP: 23
         },
         Location: "Sunwell",
         Phase: 5,
@@ -11475,7 +11475,7 @@ const RINGS = {
             Stam: 28,
             MAP: 58,
             RAP: 58,
-            ArP: 126
+            ArP: 18
         },
         Location: "Badge Reward",
         Phase: 5,
@@ -11952,7 +11952,7 @@ const SHOULDERS = {
             Int: 17,
             MAP: 68,
             RAP: 68,
-            ArP: 126
+            ArP: 18
         },
         Location: "Black Temple",
         sockets: [
@@ -12166,7 +12166,7 @@ const SHOULDERS = {
             Stam: 40,
             MAP: 90,
             RAP: 90,
-            ArP: 154
+            ArP: 22
         },
         Location: "Sunwell",
         sockets: [
@@ -12521,7 +12521,7 @@ const TRINKETS = {
             duration: 20,
             cd: 120,
             stats: {
-                ArP: 600
+                ArP: 85
             }
         },
         Location: "Dungeon",
@@ -13610,7 +13610,7 @@ const WAISTS = {
             MAP: 58,
             RAP: 58,
             Crit: 21,
-            ArP: 77
+            ArP: 11
         },
         Location: "Zul'Aman",
         sockets: [
@@ -13632,7 +13632,7 @@ const WAISTS = {
             Int: 28,
             MAP: 56,
             RAP: 56,
-            ArP: 70
+            ArP: 10
         },
         Location: "Badge Reward",
         Phase: 4,
@@ -13666,7 +13666,7 @@ const WAISTS = {
             RAP: 86,
             Crit: 19,
             Hit: 24,
-            ArP: 140
+            ArP: 20
         },
         Location: "Sunwell",
         sockets: [
@@ -14213,7 +14213,7 @@ const WRISTS = {
             Int: 19,
             MAP: 50,
             RAP: 50,
-            ArP: 105
+            ArP: 15
         },
         Location: "Badge Reward",
         Phase: 4,
@@ -14272,7 +14272,7 @@ const WRISTS = {
             MAP: 64,
             RAP: 64,
             Crit: 17,
-            ArP: 112
+            ArP: 16
         },
         Location: "Sunwell",
         sockets: [
@@ -14293,7 +14293,7 @@ const WRISTS = {
             Int: 10,
             MAP: 32,
             RAP: 32,
-            ArP: 70
+            ArP: 10
         },
         Location: "Dungeon",
         sockets: [

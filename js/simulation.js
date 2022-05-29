@@ -357,7 +357,6 @@ function startStepOnly(){
         playertimestart = startTime(spell);
         
     }
-    killCommandCheck();
 
     nextEvent(playertimestart);
     //console.log("time end => "+(Math.round(steptimeend * 1000) / 1000));
@@ -396,23 +395,7 @@ function startTime(spell){
 
     return playertimestart;
 }
-/**Selection for whether to use kill command or not. */
-function killCommandCheck(){
-    if((killcommand.cooldown === 0) && killcommand.ready && (currentMana >= 75)) {
-        petspell = 'kill command';
-        currentMana = (auras.beastwithin.timer > 0) ? currentMana - 0.8 * 75 : currentMana - 75;
-        let result = 0;
-        procMana('',result);
-        petSpell(petspell);
-        killcommand.cooldown = 5;
-        killcommand.ready = false;
-        if(auras.beastlord.enable){
-            auras.beastlord.timer = auras.beastlord.duration;
-        }
-        //console.log("kill command used");
-    }
-    return;
-}
+
 /**This function decides which event to choose next for player or pet, kind of like an event queue. */
 function nextEvent(playertimestart){
 
