@@ -27,7 +27,7 @@ var preferredGems = {
 
 var hitCap = 142;
 var ArmorPenCap = 10000;
-
+var base_link = "https://wotlkdb.com/"
 var equippedStats = {
     head: {hit: 0, arp: 0},
     neck: {hit: 0, arp: 0},
@@ -81,6 +81,7 @@ document.getElementById("mainhandench").addEventListener("click", function(){gea
 document.getElementById("offhandench").addEventListener("click", function(){gearModalDisplay("offhand")}, false);
 document.getElementById("rangeench").addEventListener("click", function(){gearModalDisplay("range")}, false);
 document.getElementById("handench").addEventListener("click", function(){gearModalDisplay("hand")}, false);
+document.getElementById("waistench").addEventListener("click", function(){gearModalDisplay("waist")}, false);
 document.getElementById("legench").addEventListener("click", function(){gearModalDisplay("leg")}, false);
 document.getElementById("feetench").addEventListener("click", function(){gearModalDisplay("feet")}, false);
 document.getElementById("ring1ench").addEventListener("click", function(){gearModalDisplay("ring1")}, false);
@@ -106,6 +107,25 @@ document.getElementById("ring2slot").addEventListener("click", function(){gearMo
 document.getElementById("trinket1slot").addEventListener("click", function(){gearModalDisplay("trinket1")}, false);
 document.getElementById("trinket2slot").addEventListener("click", function(){gearModalDisplay("trinket2")}, false);
 document.getElementById("ammoslot").addEventListener("click", function(){gearModalDisplay("ammo")}, false);
+
+document.getElementById("headicon").addEventListener("click", function(){gearModalDisplay("head")}, false);
+document.getElementById("neckicon").addEventListener("click", function(){gearModalDisplay("neck")}, false);
+document.getElementById("shouldericon").addEventListener("click", function(){gearModalDisplay("shoulder")}, false);
+document.getElementById("backicon").addEventListener("click", function(){gearModalDisplay("back")}, false);
+document.getElementById("chesticon").addEventListener("click", function(){gearModalDisplay("chest")}, false);
+document.getElementById("wristicon").addEventListener("click", function(){gearModalDisplay("wrist")}, false);
+document.getElementById("mainhandicon").addEventListener("click", function(){gearModalDisplay("mainhand")}, false);
+document.getElementById("offhandicon").addEventListener("click", function(){gearModalDisplay("offhand")}, false);
+document.getElementById("rangeicon").addEventListener("click", function(){gearModalDisplay("range")}, false);
+document.getElementById("handicon").addEventListener("click", function(){gearModalDisplay("hand")}, false);
+document.getElementById("waisticon").addEventListener("click", function(){gearModalDisplay("waist")}, false);
+document.getElementById("legicon").addEventListener("click", function(){gearModalDisplay("leg")}, false);
+document.getElementById("feeticon").addEventListener("click", function(){gearModalDisplay("feet")}, false);
+document.getElementById("ring1icon").addEventListener("click", function(){gearModalDisplay("ring1")}, false);
+document.getElementById("ring2icon").addEventListener("click", function(){gearModalDisplay("ring2")}, false);
+document.getElementById("trinket1icon").addEventListener("click", function(){gearModalDisplay("trinket1")}, false);
+document.getElementById("trinket2icon").addEventListener("click", function(){gearModalDisplay("trinket2")}, false);
+document.getElementById("ammoicon").addEventListener("click", function(){gearModalDisplay("ammo")}, false);
 
 function updateAttachments(itemid, attachid) {
     let attach = attachid;
@@ -181,7 +201,7 @@ function selectItem(itemid) {
         break;
         case 'waist':
             console.log("you selected "+ itemid);
-            gear[activeslot] = { id: parseInt(itemid), gems: []};
+            gear[activeslot] = { id: parseInt(itemid), gems: [], enchant: ench };
         break;
         case 'leg':
             console.log("you selected "+ itemid);
@@ -553,6 +573,7 @@ function gearModalDisplay(slot){
     }
     if (slot === 'waist') {
         itemSelectorDisplay(WAISTS);
+        enchSelectorDisplay(WAIST_ENCHANTS);
         gemSelectorDisplay(WAISTS);
     }
     if (slot === 'leg') {
@@ -602,6 +623,8 @@ function qualityColorCheck(color){
         quality = "epic-text";
     } else if(color === "Legendary") {
         quality = "legendary-text";
+    } else if(color === "Heirloom") {
+        quality = "heirloom-text";
     } else { new Error("No color selected")}
 
     return quality;
@@ -625,26 +648,14 @@ function textColorDisplay(slot,array){
 // used for gear lists calculating hit, ArP in gear and caps
 function getStatsCapData(){
     // hit
-    let ffbonus = document.getElementById("ffbonus").selected;
-    if (talents.surefooted > 0 && ffbonus) {
-       hitCap = 142 - (HitRatingRatio * talents.surefooted + HitRatingRatio * 3);
+    if (talents.focus_aim > 0) {
+       hitCap = 142 - (HitRatingRatio * talents.focus_aim);
     }
-    else if (ffbonus) {
-       hitCap = 142 - HitRatingRatio * 3;
-    }
+
     else hitCap = 142;
 
     // ARP cap calculation
-    let arp = 0;
-    arp += (debuffs.faeriefire.uptime_g > 0) ? debuffs.faeriefire.arp : 0;
-    arp += (debuffs.curseofreck.uptime_g > 0) ? debuffs.curseofreck.arp : 0;
-    if (debuffs.impexpose.uptime_g > 0) {
-        arp += debuffs.impexpose.arp;
-    }
-    else if (debuffs.sunder.uptime_g > 0) {
-        arp += 5 * debuffs.sunder.arp;
-    }
-    ArmorPenCap = target.armor - arp;
+    ArmorPenCap = 100 * ArPRatingRatio;
     
     for (let slot in equippedStats) {
         let SLOT_DATA = GEAR_MAP[slot];
@@ -669,30 +680,9 @@ function estimateDps(item, weights) {
     if (item.name == 'Relentless Earthstorm Diamond') {
         dps += weights.relentless + weights.Agi * 12;
         return dps;
-    } else if (item.name == 'Swift Skyfire Diamond' || item.name == 'Potent Unstable Diamond') {
-        dps += weights.RAP * 24 + weights.MAP * 24;
-        return dps;
-    } else if (item.name == 'Swift Windfire Diamond') {
-        dps += weights.RAP * 20 + weights.MAP * 20;
-        return dps;
-    } else if (item.name == 'Enigmatic Skyfire Diamond') {
-        dps += weights.Crit * 12;
-        return dps;
     } 
-    // check for special weight
-    else if (item.name == 'Beast-tamer\'s Shoulders') {
-        dps += weights.beasttamer;
-    }
-    else if (item.name == 'Band of the Eternal Champion') {
-        dps += 15;
-    }
     // check for weightstone/sharp stone for weps
     if ((activeslot == 'mainhand' || activeslot == 'offhand') && !!item.type) {
-        if (item.type == 'fist' || item.type == 'staff') {
-            dps += weights.rangedmgbonus * 12 + weights.dmgbonus * 12 + weights.RangeCrit * 14 + weights.MeleeCrit * 14;
-        } else {
-            dps += weights.rangedmgbonus * 12 + weights.dmgbonus * 12 + weights.MeleeCrit * 14;
-        }
         if (item.hand == 'Two') {
             dps += weights.Agi * 35;
         } else {
@@ -729,7 +719,7 @@ function estimateDps(item, weights) {
             }
             else if (stat === "ArP") {
 
-                let currentarp = ArmorPen - equippedStats[activeslot].arp;
+                let currentarp = ArPRating - equippedStats[activeslot].arp;
                 usedValue = currentarp < ArmorPenCap ? Math.min(ArmorPenCap - currentarp, value) : 0;
             }
             return acc + (weights[stat] || 0) * usedValue
@@ -877,7 +867,7 @@ function generateGearTbodies(array, fnc, idname, lookup, hrefdata, locdata){
         id = parseInt(array[i].id);
         highlight = (id == lookup) ? "class='highlight-border'" : "";
         imgreformat = (id == lookup) ? "highlight-img-td" : "norm-img-td";
-        href = "https://tbc.wowhead.com/" + hrefdata + id;
+        href = base_link + hrefdata + id;
         result = (array[i].delta >= 0) ? 'positive-result' : 'negative-result';
         quality = qualityColorCheck(array[i].quality);
 
@@ -996,8 +986,7 @@ function displayCurrentGearTabs(){
         document.getElementsByClassName('item-selector-tab')[2].style.display = "none"; // gem 2
         document.getElementsByClassName('item-selector-tab')[3].style.display = "none"; // gem 3
     }
-    if((activeslot !== 'neck') && (activeslot !== 'trinket1') && (activeslot !== 'trinket2') 
-        && (activeslot !== 'waist') && (activeslot !== 'ammo')) {   
+    if((activeslot !== 'neck') && (activeslot !== 'trinket1') && (activeslot !== 'trinket2') && (activeslot !== 'ammo')) {   
         document.getElementsByClassName('item-selector-tab')[4].style.display = "block";
         document.getElementById('selectorenchant').src = (!!currgear.enchant) ? "https://wow.zamimg.com/images/wow/icons/large/" + enchobj[currgear.enchant].icon +".jpg" : defaultench;
     } else {
@@ -1115,9 +1104,9 @@ function gearSlotsDisplay(){
     let headpcslist = "&pcs="+headitem+":"+shoulderitem+":"+chestitem+":"+wristitem+":"+handitem+":"+legitem+":"+waistitem+":"+feetitem;
     let headdata = headitem + headencheffect + headgemlist+ headpcslist;
 
-    document.getElementById("headslot").href = "https://tbc.wowhead.com/item="+ headdata;
+    document.getElementById("headslot").href = base_link + "item="+ headdata;
     document.getElementById("headslot").innerHTML = HEADS[gear.head.id].name;
-    document.getElementById("headench").href = (headench > 0) ? "https://tbc.wowhead.com/spell="+ headench : "";
+    document.getElementById("headench").href = (headench > 0) ? base_link + "spell="+ headench : "";
     document.getElementById("headench").innerHTML = (headench > 0) ? HEAD_ENCHANTS[gear.head.enchant].desc: "No Enchant";
     // neck
     textColorDisplay('neck',NECKS);
@@ -1159,7 +1148,7 @@ function gearSlotsDisplay(){
     let neckgemlist = "&gems="+neckgem1+":"+neckgem2;
     let neckdata = neckitem + neckgemlist;
 
-    document.getElementById("neckslot").href = "https://tbc.wowhead.com/item="+ neckdata;
+    document.getElementById("neckslot").href = base_link + "item="+ neckdata;
     document.getElementById("neckslot").innerHTML = NECKS[gear.neck.id].name;
 
     // shoulder
@@ -1205,9 +1194,9 @@ function gearSlotsDisplay(){
     let shoulderpcslist = "&pcs="+headitem+":"+shoulderitem+":"+chestitem+":"+wristitem+":"+handitem+":"+legitem+":"+waistitem+":"+feetitem;
     let shoulderdata = shoulderitem + shoulderencheffect + shouldergemlist+ shoulderpcslist;
     
-    document.getElementById("shoulderslot").href = "https://tbc.wowhead.com/item="+ shoulderdata;
+    document.getElementById("shoulderslot").href = base_link + "item="+ shoulderdata;
     document.getElementById("shoulderslot").innerHTML = SHOULDERS[gear.shoulder.id].name;
-    document.getElementById("shoulderench").href = (shoulderench > 0) ? "https://tbc.wowhead.com/spell="+ shoulderench : "";
+    document.getElementById("shoulderench").href = (shoulderench > 0) ? base_link + "spell="+ shoulderench : "";
     document.getElementById("shoulderench").innerHTML = (shoulderench > 0) ? SHOULDER_ENCHANTS[gear.shoulder.enchant].desc: "No Enchant";
     
     // back
@@ -1239,9 +1228,9 @@ function gearSlotsDisplay(){
     let backgemlist = "&gems="+backgem1;
     let backdata = backitem + backencheffect + backgemlist;
 
-    document.getElementById("backslot").href = "https://tbc.wowhead.com/item="+ backdata;
+    document.getElementById("backslot").href = base_link + "item="+ backdata;
     document.getElementById("backslot").innerHTML = BACKS[gear.back.id].name;
-    document.getElementById("backench").href = (backench > 0) ? "https://tbc.wowhead.com/spell="+ backench : "";
+    document.getElementById("backench").href = (backench > 0) ? base_link + "spell="+ backench : "";
     document.getElementById("backench").innerHTML = (backench > 0) ? BACK_ENCHANTS[gear.back.enchant].desc: "No Enchant";
     
     // chest
@@ -1300,9 +1289,9 @@ function gearSlotsDisplay(){
     let chestpcslist = "&pcs="+headitem+":"+shoulderitem+":"+chestitem+":"+wristitem+":"+handitem+":"+legitem+":"+waistitem+":"+feetitem;
     let chestdata = chestitem + chestencheffect + chestgemlist+ chestpcslist;
 
-    document.getElementById("chestslot").href = "https://tbc.wowhead.com/item="+ chestdata;
+    document.getElementById("chestslot").href = base_link + "item="+ chestdata;
     document.getElementById("chestslot").innerHTML = CHESTS[gear.chest.id].name;
-    document.getElementById("chestench").href = (chestench > 0) ? "https://tbc.wowhead.com/spell="+ chestench : "";
+    document.getElementById("chestench").href = (chestench > 0) ? base_link + "spell="+ chestench : "";
     document.getElementById("chestench").innerHTML = (chestench > 0) ? CHEST_ENCHANTS[gear.chest.enchant].desc: "No Enchant";
     
     // wrist
@@ -1311,15 +1300,21 @@ function gearSlotsDisplay(){
     let wristicon = "https://wow.zamimg.com/images/wow/icons/large/"+WRISTS[gear.wrist.id].icon+".jpg";
     document.getElementById("wristicon").src = wristicon;
     let wristgem1 = 0;
+    let wristgem2 = 0;
 
     let wristskt = (WRISTS[gear.wrist.id].hasOwnProperty('sockets')) ? WRISTS[gear.wrist.id].sockets : [];
     if (wristskt.length >= 1) { 
         document.getElementsByClassName("itemsocket")[11].style.display = "block";
         document.getElementById("wristskt1").src = "images/" + wristskt[0] + "_empty.jfif";
     } else {document.getElementsByClassName("itemsocket")[11].style.display = "none";}
+    if (wristskt.length >= 2) { 
+        document.getElementsByClassName("itemsocket")[12].style.display = "block";
+        document.getElementById("wristskt2").src = "images/" + wristskt[1] + "_empty.jfif";
+    } else {document.getElementsByClassName("itemsocket")[12].style.display = "none";}
 
     if(gear.wrist.hasOwnProperty('gems')){
         wristgem1 = gear.wrist.gems[0] || 0;
+        wristgem2 = gear.wrist.gems[1] || 0;
 
         if(wristgem1 === 0){
             document.getElementsByClassName("gemskt")[11].style.visibility = "hidden";
@@ -1327,17 +1322,24 @@ function gearSlotsDisplay(){
             document.getElementsByClassName("gemskt")[11].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[wristgem1].icon+".jpg";
             document.getElementsByClassName("gemskt")[11].style.visibility = "visible";
         }
+        if(wristgem2 === 0){
+            document.getElementsByClassName("gemskt")[12].style.visibility = "hidden";
+        } else {
+            document.getElementsByClassName("gemskt")[12].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[wristgem2].icon+".jpg";
+            document.getElementsByClassName("gemskt")[12].style.visibility = "visible";
+        }
 
     }
     let wristench = gear.wrist.enchant || 0;
     let wristencheffect = (wristench > 0) ? "&ench="+WRIST_ENCHANTS[gear.wrist.enchant].effectId : 0;
-    let wristgemlist = "&gems="+wristgem1;
+    let wristgemlist = "&gems="+wristgem1+":"+wristgem2;
     let wristpcslist = "&pcs="+headitem+":"+shoulderitem+":"+chestitem+":"+wristitem+":"+handitem+":"+legitem+":"+waistitem+":"+feetitem;
     let wristdata = wristitem + wristencheffect + wristgemlist+ wristpcslist;
-
-    document.getElementById("wristslot").href = "https://tbc.wowhead.com/item="+ wristdata;
+    
+    document.getElementsByClassName("img-link")[0].href = base_link + "item="+ wristdata;
+    document.getElementById("wristslot").href = base_link + "item="+ wristdata;
     document.getElementById("wristslot").innerHTML = WRISTS[gear.wrist.id].name;
-    document.getElementById("wristench").href = (wristench > 0) ? "https://tbc.wowhead.com/spell="+ wristench:""; 
+    document.getElementById("wristench").href = (wristench > 0) ? base_link + "spell="+ wristench:""; 
     document.getElementById("wristench").innerHTML = (wristench > 0) ? WRIST_ENCHANTS[gear.wrist.enchant].desc: "No Enchant";
     
     // mainhand
@@ -1351,17 +1353,17 @@ function gearSlotsDisplay(){
 
     let mainhandskt = (MELEE_WEAPONS[gear.mainhand.id].hasOwnProperty('sockets')) ? MELEE_WEAPONS[gear.mainhand.id].sockets : [];
     if (mainhandskt.length >= 1) { 
-        document.getElementsByClassName("itemsocket")[12].style.display = "block";
-        document.getElementById("mainhandskt1").src = "images/" + mainhandskt[0] + "_empty.jfif";
-    } else {document.getElementsByClassName("itemsocket")[12].style.display = "none";}
-    if (mainhandskt.length >= 2) { 
         document.getElementsByClassName("itemsocket")[13].style.display = "block";
-        document.getElementById("mainhandskt2").src = "images/" + mainhandskt[1] + "_empty.jfif";
+        document.getElementById("mainhandskt1").src = "images/" + mainhandskt[0] + "_empty.jfif";
     } else {document.getElementsByClassName("itemsocket")[13].style.display = "none";}
-    if (mainhandskt.length >= 3) { 
+    if (mainhandskt.length >= 2) { 
         document.getElementsByClassName("itemsocket")[14].style.display = "block";
-        document.getElementById("mainhandskt3").src = "images/" + mainhandskt[2] + "_empty.jfif";
+        document.getElementById("mainhandskt2").src = "images/" + mainhandskt[1] + "_empty.jfif";
     } else {document.getElementsByClassName("itemsocket")[14].style.display = "none";}
+    if (mainhandskt.length >= 3) { 
+        document.getElementsByClassName("itemsocket")[15].style.display = "block";
+        document.getElementById("mainhandskt3").src = "images/" + mainhandskt[2] + "_empty.jfif";
+    } else {document.getElementsByClassName("itemsocket")[15].style.display = "none";}
 
     if(gear.mainhand.hasOwnProperty('gems')){
         mainhandgem1 = gear.mainhand.gems[0] || 0;
@@ -1369,24 +1371,24 @@ function gearSlotsDisplay(){
         mainhandgem3 = gear.mainhand.gems[2] || 0;
 
         if(mainhandgem1 === 0){
-            document.getElementsByClassName("gemskt")[12].style.visibility = "hidden";
-        } else {
-            document.getElementsByClassName("gemskt")[12].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[mainhandgem1].icon+".jpg";
-            document.getElementsByClassName("gemskt")[12].style.visibility = "visible";
-        }
-        
-        if(mainhandgem2 === 0){
             document.getElementsByClassName("gemskt")[13].style.visibility = "hidden";
         } else {
-            document.getElementsByClassName("gemskt")[13].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[mainhandgem2].icon+".jpg";
+            document.getElementsByClassName("gemskt")[13].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[mainhandgem1].icon+".jpg";
             document.getElementsByClassName("gemskt")[13].style.visibility = "visible";
         }
         
-        if(mainhandgem3 === 0){
+        if(mainhandgem2 === 0){
             document.getElementsByClassName("gemskt")[14].style.visibility = "hidden";
         } else {
-            document.getElementsByClassName("gemskt")[14].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[mainhandgem3].icon+".jpg";
+            document.getElementsByClassName("gemskt")[14].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[mainhandgem2].icon+".jpg";
             document.getElementsByClassName("gemskt")[14].style.visibility = "visible";
+        }
+        
+        if(mainhandgem3 === 0){
+            document.getElementsByClassName("gemskt")[15].style.visibility = "hidden";
+        } else {
+            document.getElementsByClassName("gemskt")[15].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[mainhandgem3].icon+".jpg";
+            document.getElementsByClassName("gemskt")[15].style.visibility = "visible";
         }
         
     }
@@ -1397,11 +1399,11 @@ function gearSlotsDisplay(){
     let mainhanddata = mainhanditem + mainhandencheffect + mainhandgemlist;
     let mainhandattach = gear.mainhand.attachment || 0;
 
-    document.getElementById("mainhandslot").href = "https://tbc.wowhead.com/item="+ mainhanddata;
+    document.getElementById("mainhandslot").href = base_link + "item="+ mainhanddata;
     document.getElementById("mainhandslot").innerHTML = MELEE_WEAPONS[gear.mainhand.id].name;
-    document.getElementById("mainhandench").href = (mainhandench > 0) ? "https://tbc.wowhead.com/spell="+ mainhandench :"";  
+    document.getElementById("mainhandench").href = (mainhandench > 0) ? base_link + "spell="+ mainhandench :"";  
     document.getElementById("mainhandench").innerHTML = (mainhandench > 0) ? MELEE_ENCHANTS[gear.mainhand.enchant].desc: "No Enchant";
-    document.getElementById("mainhandattach").href = (mainhandattach > 1) ? "https://tbc.wowhead.com/item="+ mainhandattach : "";
+    document.getElementById("mainhandattach").href = (mainhandattach > 1) ? base_link + "item="+ mainhandattach : "";
     document.getElementById("mainhandattach").innerHTML = (mainhandattach > 1) ? ATTACHMENTS[gear.mainhand.attachment].name: "No Attachment";
     
     document.getElementById("offhandslot").removeAttribute("class");
@@ -1431,17 +1433,17 @@ function gearSlotsDisplay(){
 
         let offhandskt = (MELEE_WEAPONS[gear.offhand.id].hasOwnProperty('sockets')) ? MELEE_WEAPONS[gear.offhand.id].sockets : [];
         if (offhandskt.length >= 1) { 
-            document.getElementsByClassName("itemsocket")[15].style.display = "block";
-            document.getElementById("offhandskt1").src = "images/" + offhandskt[0] + "_empty.jfif";
-        } else {document.getElementsByClassName("itemsocket")[15].style.display = "none";}
-        if (offhandskt.length >= 2) { 
             document.getElementsByClassName("itemsocket")[16].style.display = "block";
-            document.getElementById("offhandskt2").src = "images/" + offhandskt[1] + "_empty.jfif";
+            document.getElementById("offhandskt1").src = "images/" + offhandskt[0] + "_empty.jfif";
         } else {document.getElementsByClassName("itemsocket")[16].style.display = "none";}
-        if (offhandskt.length >= 3) { 
+        if (offhandskt.length >= 2) { 
             document.getElementsByClassName("itemsocket")[17].style.display = "block";
-            document.getElementById("offhandskt3").src = "images/" + offhandskt[2] + "_empty.jfif";
+            document.getElementById("offhandskt2").src = "images/" + offhandskt[1] + "_empty.jfif";
         } else {document.getElementsByClassName("itemsocket")[17].style.display = "none";}
+        if (offhandskt.length >= 3) { 
+            document.getElementsByClassName("itemsocket")[18].style.display = "block";
+            document.getElementById("offhandskt3").src = "images/" + offhandskt[2] + "_empty.jfif";
+        } else {document.getElementsByClassName("itemsocket")[18].style.display = "none";}
     
         if(gear.offhand.hasOwnProperty('gems')){
             offhandgem1 = gear.offhand.gems[0] || 0;
@@ -1449,24 +1451,24 @@ function gearSlotsDisplay(){
             offhandgem3 = gear.offhand.gems[2] || 0;
 
             if(offhandgem1 === 0){
-                document.getElementsByClassName("gemskt")[15].style.visibility = "hidden";
-            } else {
-                document.getElementsByClassName("gemskt")[15].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[offhandgem1].icon+".jpg";
-                document.getElementsByClassName("gemskt")[15].style.visibility = "visible";
-            }
-            
-            if(offhandgem2 === 0){
                 document.getElementsByClassName("gemskt")[16].style.visibility = "hidden";
             } else {
-                document.getElementsByClassName("gemskt")[16].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[offhandgem2].icon+".jpg";
+                document.getElementsByClassName("gemskt")[16].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[offhandgem1].icon+".jpg";
                 document.getElementsByClassName("gemskt")[16].style.visibility = "visible";
             }
             
-            if(offhandgem3 === 0){
+            if(offhandgem2 === 0){
                 document.getElementsByClassName("gemskt")[17].style.visibility = "hidden";
             } else {
-                document.getElementsByClassName("gemskt")[17].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[offhandgem3].icon+".jpg";
+                document.getElementsByClassName("gemskt")[17].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[offhandgem2].icon+".jpg";
                 document.getElementsByClassName("gemskt")[17].style.visibility = "visible";
+            }
+            
+            if(offhandgem3 === 0){
+                document.getElementsByClassName("gemskt")[18].style.visibility = "hidden";
+            } else {
+                document.getElementsByClassName("gemskt")[18].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[offhandgem3].icon+".jpg";
+                document.getElementsByClassName("gemskt")[18].style.visibility = "visible";
             }
             
         }
@@ -1476,11 +1478,11 @@ function gearSlotsDisplay(){
         let offhanddata = offhanditem + offhandencheffect + offhandgemlist;
         let offhandattach = gear.offhand.attachment || 0;
 
-        document.getElementById("offhandslot").href = "https://tbc.wowhead.com/item="+ offhanddata;
+        document.getElementById("offhandslot").href = base_link + "item="+ offhanddata;
         document.getElementById("offhandslot").innerHTML = MELEE_WEAPONS[gear.offhand.id].name;
-        document.getElementById("offhandench").href = (offhandench > 0) ? "https://tbc.wowhead.com/spell="+ offhandench : ""; 
+        document.getElementById("offhandench").href = (offhandench > 0) ? base_link + "spell="+ offhandench : ""; 
         document.getElementById("offhandench").innerHTML = (offhandench > 0) ? MELEE_ENCHANTS[gear.offhand.enchant].desc: "No Enchant";
-        document.getElementById("offhandattach").href = (offhandattach > 1) ? "https://tbc.wowhead.com/item="+ offhandattach : "";
+        document.getElementById("offhandattach").href = (offhandattach > 1) ? base_link + "item="+ offhandattach : "";
         document.getElementById("offhandattach").innerHTML = (offhandattach > 1) ? ATTACHMENTS[gear.offhand.attachment].name: "No Attachment";
 
     }
@@ -1495,30 +1497,30 @@ function gearSlotsDisplay(){
 
     let rangeskt = (RANGED_WEAPONS[gear.range.id].hasOwnProperty('sockets')) ? RANGED_WEAPONS[gear.range.id].sockets : [];
     if (rangeskt.length >= 1) { 
-        document.getElementsByClassName("itemsocket")[18].style.display = "block";
-        document.getElementById("rangeskt1").src = "images/" + rangeskt[0] + "_empty.jfif";
-    } else {document.getElementsByClassName("itemsocket")[18].style.display = "none";}
-    if (rangeskt.length >= 2) { 
         document.getElementsByClassName("itemsocket")[19].style.display = "block";
-        document.getElementById("rangeskt2").src = "images/" + rangeskt[1] + "_empty.jfif";
+        document.getElementById("rangeskt1").src = "images/" + rangeskt[0] + "_empty.jfif";
     } else {document.getElementsByClassName("itemsocket")[19].style.display = "none";}
+    if (rangeskt.length >= 2) { 
+        document.getElementsByClassName("itemsocket")[20].style.display = "block";
+        document.getElementById("rangeskt2").src = "images/" + rangeskt[1] + "_empty.jfif";
+    } else {document.getElementsByClassName("itemsocket")[20].style.display = "none";}
 
     if(gear.range.hasOwnProperty('gems')){
         rangegem1 = gear.range.gems[0] || 0;
         rangegem2 = gear.range.gems[1] || 0;
 
         if(rangegem1 === 0){
-            document.getElementsByClassName("gemskt")[18].style.visibility = "hidden";
+            document.getElementsByClassName("gemskt")[19].style.visibility = "hidden";
         } else {
-            document.getElementsByClassName("gemskt")[18].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[rangegem1].icon+".jpg";
-            document.getElementsByClassName("gemskt")[18].style.visibility = "visible";
+            document.getElementsByClassName("gemskt")[19].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[rangegem1].icon+".jpg";
+            document.getElementsByClassName("gemskt")[19].style.visibility = "visible";
         }
         
         if(rangegem2 === 0){
-            document.getElementsByClassName("gemskt")[19].style.visibility = "hidden";
+            document.getElementsByClassName("gemskt")[20].style.visibility = "hidden";
         } else {
-            document.getElementsByClassName("gemskt")[19].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[rangegem2].icon+".jpg";
-            document.getElementsByClassName("gemskt")[19].style.visibility = "visible";
+            document.getElementsByClassName("gemskt")[20].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[rangegem2].icon+".jpg";
+            document.getElementsByClassName("gemskt")[20].style.visibility = "visible";
         }
         
     }
@@ -1527,9 +1529,9 @@ function gearSlotsDisplay(){
     let rangegemlist = "&gems="+rangegem1+":"+rangegem2;
     let rangedata = rangeitem + rangeencheffect + rangegemlist;
 
-    document.getElementById("rangeslot").href = "https://tbc.wowhead.com/item="+ rangedata;
+    document.getElementById("rangeslot").href = base_link + "item="+ rangedata;
     document.getElementById("rangeslot").innerHTML = RANGED_WEAPONS[gear.range.id].name;
-    document.getElementById("rangeench").href = (rangeench > 0) ? "https://tbc.wowhead.com/spell="+ rangeench : "";
+    document.getElementById("rangeench").href = (rangeench > 0) ? base_link + "spell="+ rangeench : "";
     document.getElementById("rangeench").innerHTML = (rangeench > 0) ? RANGE_ENCHANTS[gear.range.enchant].desc: "No Enchant";
     
     // hand
@@ -1539,44 +1541,56 @@ function gearSlotsDisplay(){
     document.getElementById("handicon").src = handicon;
     let handgem1 = 0;
     let handgem2 = 0;
+    let handgem3 = 0;
 
     let handskt = (HANDS[gear.hand.id].hasOwnProperty('sockets')) ? HANDS[gear.hand.id].sockets : [];
     if (handskt.length >= 1) { 
-        document.getElementsByClassName("itemsocket")[20].style.display = "block";
-        document.getElementById("handskt1").src = "images/" + handskt[0] + "_empty.jfif";
-    } else {document.getElementsByClassName("itemsocket")[20].style.display = "none";}
-    if (handskt.length >= 2) { 
         document.getElementsByClassName("itemsocket")[21].style.display = "block";
-        document.getElementById("handskt2").src = "images/" + handskt[1] + "_empty.jfif";
+        document.getElementById("handskt1").src = "images/" + handskt[0] + "_empty.jfif";
     } else {document.getElementsByClassName("itemsocket")[21].style.display = "none";}
+    if (handskt.length >= 2) { 
+        document.getElementsByClassName("itemsocket")[22].style.display = "block";
+        document.getElementById("handskt2").src = "images/" + handskt[1] + "_empty.jfif";
+    } else {document.getElementsByClassName("itemsocket")[22].style.display = "none";}
+    if (handskt.length >= 3) { 
+        document.getElementsByClassName("itemsocket")[23].style.display = "block";
+        document.getElementById("handskt3").src = "images/" + handskt[2] + "_empty.jfif";
+    } else {document.getElementsByClassName("itemsocket")[23].style.display = "none";}
 
     if(gear.hand.hasOwnProperty('gems')){
         handgem1 = gear.hand.gems[0] || 0;
         handgem2 = gear.hand.gems[1] || 0;
+        handgem3 = gear.hand.gems[2] || 0;
 
         if(handgem1 === 0){
-            document.getElementsByClassName("gemskt")[20].style.visibility = "hidden";
-        } else {
-            document.getElementsByClassName("gemskt")[20].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[handgem1].icon+".jpg";
-            document.getElementsByClassName("gemskt")[20].style.visibility = "visible";
-        }
-        if(handgem2 === 0){
             document.getElementsByClassName("gemskt")[21].style.visibility = "hidden";
         } else {
-            document.getElementsByClassName("gemskt")[21].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[handgem2].icon+".jpg";
+            document.getElementsByClassName("gemskt")[21].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[handgem1].icon+".jpg";
             document.getElementsByClassName("gemskt")[21].style.visibility = "visible";
+        }
+        if(handgem2 === 0){
+            document.getElementsByClassName("gemskt")[22].style.visibility = "hidden";
+        } else {
+            document.getElementsByClassName("gemskt")[22].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[handgem2].icon+".jpg";
+            document.getElementsByClassName("gemskt")[22].style.visibility = "visible";
+        }
+        if(handgem3 === 0){
+            document.getElementsByClassName("gemskt")[23].style.visibility = "hidden";
+        } else {
+            document.getElementsByClassName("gemskt")[23].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[handgem3].icon+".jpg";
+            document.getElementsByClassName("gemskt")[23].style.visibility = "visible";
         }
         
     }
     let handench = gear.hand.enchant || 0;
     let handencheffect = (handench > 0) ? "&ench="+HAND_ENCHANTS[gear.hand.enchant].effectId : 0;
-    let handgemlist = "&gems="+handgem1+":"+handgem2;
+    let handgemlist = "&gems="+handgem1+":"+handgem2+":"+handgem3;
     let handpcslist = "&pcs="+headitem+":"+shoulderitem+":"+chestitem+":"+wristitem+":"+handitem+":"+legitem+":"+waistitem+":"+feetitem;
     let handdata = handitem + handencheffect + handgemlist+ handpcslist;
 
-    document.getElementById("handslot").href = "https://tbc.wowhead.com/item="+ handdata;
+    document.getElementById("handslot").href = base_link + "item="+ handdata;
     document.getElementById("handslot").innerHTML = HANDS[gear.hand.id].name;
-    document.getElementById("handench").href = (handench > 0) ? "https://tbc.wowhead.com/spell="+ handench : "";
+    document.getElementById("handench").href = (handench > 0) ? base_link + "spell="+ handench : "";
     document.getElementById("handench").innerHTML = (handench > 0) ? HAND_ENCHANTS[gear.hand.enchant].desc: "No Enchant";
     
     // waist
@@ -1586,42 +1600,57 @@ function gearSlotsDisplay(){
     document.getElementById("waisticon").src = waisticon;
     let waistgem1 = 0;
     let waistgem2 = 0;
+    let waistgem3 = 0;
 
     let waistskt = (WAISTS[gear.waist.id].hasOwnProperty('sockets')) ? WAISTS[gear.waist.id].sockets : [];
     if (waistskt.length >= 1) { 
-        document.getElementsByClassName("itemsocket")[22].style.display = "block";
+        document.getElementsByClassName("itemsocket")[24].style.display = "block";
         document.getElementById("waistskt1").src = "images/" + waistskt[0] + "_empty.jfif";
-    } else {document.getElementsByClassName("itemsocket")[22].style.display = "none";}
+    } else {document.getElementsByClassName("itemsocket")[24].style.display = "none";}
     if (waistskt.length >= 2) { 
-        document.getElementsByClassName("itemsocket")[23].style.display = "block";
+        document.getElementsByClassName("itemsocket")[25].style.display = "block";
         document.getElementById("waistskt2").src = "images/" + waistskt[1] + "_empty.jfif";
-    } else {document.getElementsByClassName("itemsocket")[23].style.display = "none";}
+    } else {document.getElementsByClassName("itemsocket")[25].style.display = "none";}
+    if (waistskt.length >= 3) { 
+        document.getElementsByClassName("itemsocket")[26].style.display = "block";
+        document.getElementById("waistskt3").src = "images/" + waistskt[2] + "_empty.jfif";
+    } else {document.getElementsByClassName("itemsocket")[26].style.display = "none";}
 
     if(gear.waist.hasOwnProperty('gems')){
         waistgem1 = gear.waist.gems[0] || 0;
         waistgem2 = gear.waist.gems[1] || 0;
+        waistgem3 = gear.waist.gems[2] || 0;
 
         if(waistgem1 === 0){
-            document.getElementsByClassName("gemskt")[22].style.visibility = "hidden";
+            document.getElementsByClassName("gemskt")[24].style.visibility = "hidden";
         } else {
-            document.getElementsByClassName("gemskt")[22].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[waistgem1].icon+".jpg";
-            document.getElementsByClassName("gemskt")[22].style.visibility = "visible";
+            document.getElementsByClassName("gemskt")[24].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[waistgem1].icon+".jpg";
+            document.getElementsByClassName("gemskt")[24].style.visibility = "visible";
         }
         if(waistgem2 === 0){
-            document.getElementsByClassName("gemskt")[23].style.visibility = "hidden";
+            document.getElementsByClassName("gemskt")[25].style.visibility = "hidden";
         } else {
-            document.getElementsByClassName("gemskt")[23].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[waistgem2].icon+".jpg";
-            document.getElementsByClassName("gemskt")[23].style.visibility = "visible";
+            document.getElementsByClassName("gemskt")[25].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[waistgem2].icon+".jpg";
+            document.getElementsByClassName("gemskt")[25].style.visibility = "visible";
+        }
+        if(waistgem3 === 0){
+            document.getElementsByClassName("gemskt")[26].style.visibility = "hidden";
+        } else {
+            document.getElementsByClassName("gemskt")[26].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[waistgem3].icon+".jpg";
+            document.getElementsByClassName("gemskt")[26].style.visibility = "visible";
         }
         
     }
-    let waistgemlist = "&gems="+waistgem1+":"+waistgem2;
+    let waistench = gear.waist.enchant || 0;
+    let waistencheffect = (waistench > 0) ? "&ench="+WAIST_ENCHANTS[gear.waist.enchant].effectId : 0;
+    let waistgemlist = "&gems="+waistgem1+":"+waistgem2+":"+waistgem3;
     let waistpcslist = "&pcs="+headitem+":"+shoulderitem+":"+chestitem+":"+wristitem+":"+handitem+":"+legitem+":"+waistitem+":"+feetitem;
-    let waistdata = waistitem + waistgemlist + waistpcslist;
+    let waistdata = waistitem + waistencheffect + waistgemlist + waistpcslist;
 
-    document.getElementById("waistslot").href = "https://tbc.wowhead.com/item="+ waistdata;
+    document.getElementById("waistslot").href = base_link + "item="+ waistdata;
     document.getElementById("waistslot").innerHTML = WAISTS[gear.waist.id].name;
-
+    document.getElementById("waistench").href = (waistench > 0) ? base_link + "spell="+ waistench : "";
+    document.getElementById("waistench").innerHTML = (waistench > 0) ? WAIST_ENCHANTS[gear.waist.enchant].desc: "No Enchant";
     // leg
     textColorDisplay('leg',LEGS);
 
@@ -1633,17 +1662,17 @@ function gearSlotsDisplay(){
 
     let legskt = (LEGS[gear.leg.id].hasOwnProperty('sockets')) ? LEGS[gear.leg.id].sockets : [];
     if (legskt.length >= 1) { 
-        document.getElementsByClassName("itemsocket")[24].style.display = "block";
+        document.getElementsByClassName("itemsocket")[27].style.display = "block";
         document.getElementById("legskt1").src = "images/" + legskt[0] + "_empty.jfif";
-    } else {document.getElementsByClassName("itemsocket")[24].style.display = "none";}
+    } else {document.getElementsByClassName("itemsocket")[27].style.display = "none";}
     if (legskt.length >= 2) { 
-        document.getElementsByClassName("itemsocket")[25].style.display = "block";
+        document.getElementsByClassName("itemsocket")[28].style.display = "block";
         document.getElementById("legskt2").src = "images/" + legskt[1] + "_empty.jfif";
-    } else {document.getElementsByClassName("itemsocket")[25].style.display = "none";}
+    } else {document.getElementsByClassName("itemsocket")[28].style.display = "none";}
     if (legskt.length >= 3) { 
-        document.getElementsByClassName("itemsocket")[26].style.display = "block";
+        document.getElementsByClassName("itemsocket")[29].style.display = "block";
         document.getElementById("legskt3").src = "images/" + legskt[2] + "_empty.jfif";
-    } else {document.getElementsByClassName("itemsocket")[26].style.display = "none";}
+    } else {document.getElementsByClassName("itemsocket")[29].style.display = "none";}
 
     if(gear.leg.hasOwnProperty('gems')){
         leggem1 = gear.leg.gems[0] || 0;
@@ -1651,24 +1680,24 @@ function gearSlotsDisplay(){
         leggem3 = gear.leg.gems[2] || 0;
 
         if(leggem1 === 0){
-            document.getElementsByClassName("gemskt")[24].style.visibility = "hidden";
+            document.getElementsByClassName("gemskt")[27].style.visibility = "hidden";
         } else {
-            document.getElementsByClassName("gemskt")[24].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[leggem1].icon+".jpg";
-            document.getElementsByClassName("gemskt")[24].style.visibility = "visible";
+            document.getElementsByClassName("gemskt")[27].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[leggem1].icon+".jpg";
+            document.getElementsByClassName("gemskt")[27].style.visibility = "visible";
         }
         
         if(leggem2 === 0){
-            document.getElementsByClassName("gemskt")[25].style.visibility = "hidden";
+            document.getElementsByClassName("gemskt")[28].style.visibility = "hidden";
         } else {
-            document.getElementsByClassName("gemskt")[25].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[leggem2].icon+".jpg";
-            document.getElementsByClassName("gemskt")[25].style.visibility = "visible";
+            document.getElementsByClassName("gemskt")[28].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[leggem2].icon+".jpg";
+            document.getElementsByClassName("gemskt")[28].style.visibility = "visible";
         }
         
         if(leggem3 === 0){
-            document.getElementsByClassName("gemskt")[26].style.visibility = "hidden";
+            document.getElementsByClassName("gemskt")[29].style.visibility = "hidden";
         } else {
-            document.getElementsByClassName("gemskt")[26].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[leggem3].icon+".jpg";
-            document.getElementsByClassName("gemskt")[26].style.visibility = "visible";
+            document.getElementsByClassName("gemskt")[29].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[leggem3].icon+".jpg";
+            document.getElementsByClassName("gemskt")[29].style.visibility = "visible";
         }
         
     }
@@ -1678,9 +1707,9 @@ function gearSlotsDisplay(){
     let legpcslist = "&pcs="+headitem+":"+shoulderitem+":"+chestitem+":"+wristitem+":"+handitem+":"+legitem+":"+waistitem+":"+feetitem;
     let legdata = legitem + legencheffect + leggemlist+ legpcslist;
 
-    document.getElementById("legslot").href = "https://tbc.wowhead.com/item="+ legdata;
+    document.getElementById("legslot").href = base_link + "item="+ legdata;
     document.getElementById("legslot").innerHTML = LEGS[gear.leg.id].name;
-    document.getElementById("legench").href = (legench > 0) ? "https://tbc.wowhead.com/spell="+ legench : "";
+    document.getElementById("legench").href = (legench > 0) ? base_link + "spell="+ legench : "";
     document.getElementById("legench").innerHTML = (legench > 0) ? LEG_ENCHANTS[gear.leg.enchant].desc: "No Enchant";
     
     // feet
@@ -1693,29 +1722,29 @@ function gearSlotsDisplay(){
 
     let feetskt = (FEET[gear.feet.id].hasOwnProperty('sockets')) ? FEET[gear.feet.id].sockets : [];
     if (feetskt.length >= 1) { 
-        document.getElementsByClassName("itemsocket")[27].style.display = "block";
+        document.getElementsByClassName("itemsocket")[30].style.display = "block";
         document.getElementById("feetskt1").src = "images/" + feetskt[0] + "_empty.jfif";
-    } else {document.getElementsByClassName("itemsocket")[27].style.display = "none";}
+    } else {document.getElementsByClassName("itemsocket")[30].style.display = "none";}
     if (feetskt.length >= 2) { 
-        document.getElementsByClassName("itemsocket")[28].style.display = "block";
+        document.getElementsByClassName("itemsocket")[31].style.display = "block";
         document.getElementById("feetskt2").src = "images/" + feetskt[1] + "_empty.jfif";
-    } else {document.getElementsByClassName("itemsocket")[28].style.display = "none";}
+    } else {document.getElementsByClassName("itemsocket")[31].style.display = "none";}
 
     if(gear.feet.hasOwnProperty('gems')){
         feetgem1 = gear.feet.gems[0] || 0;
         feetgem2 = gear.feet.gems[1] || 0;
 
         if(feetgem1 === 0){
-            document.getElementsByClassName("gemskt")[27].style.visibility = "hidden";
+            document.getElementsByClassName("gemskt")[30].style.visibility = "hidden";
         } else {
-            document.getElementsByClassName("gemskt")[27].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[feetgem1].icon+".jpg";
-            document.getElementsByClassName("gemskt")[27].style.visibility = "visible";
+            document.getElementsByClassName("gemskt")[30].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[feetgem1].icon+".jpg";
+            document.getElementsByClassName("gemskt")[30].style.visibility = "visible";
         }
         if(feetgem2 === 0){
-            document.getElementsByClassName("gemskt")[28].style.visibility = "hidden";
+            document.getElementsByClassName("gemskt")[31].style.visibility = "hidden";
         } else {
-            document.getElementsByClassName("gemskt")[28].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[feetgem2].icon+".jpg";
-            document.getElementsByClassName("gemskt")[28].style.visibility = "visible";
+            document.getElementsByClassName("gemskt")[31].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[feetgem2].icon+".jpg";
+            document.getElementsByClassName("gemskt")[31].style.visibility = "visible";
         }
         
     }
@@ -1725,9 +1754,9 @@ function gearSlotsDisplay(){
     let feetpcslist = "&pcs="+headitem+":"+shoulderitem+":"+chestitem+":"+wristitem+":"+handitem+":"+legitem+":"+waistitem+":"+feetitem;
     let feetdata = feetitem + feetencheffect + feetgemlist+ feetpcslist;
 
-    document.getElementById("feetslot").href = "https://tbc.wowhead.com/item="+ feetdata;
+    document.getElementById("feetslot").href = base_link + "item="+ feetdata;
     document.getElementById("feetslot").innerHTML = FEET[gear.feet.id].name;
-    document.getElementById("feetench").href = (feetench > 0) ? "https://tbc.wowhead.com/spell="+ feetench : "";
+    document.getElementById("feetench").href = (feetench > 0) ? base_link + "spell="+ feetench : "";
     document.getElementById("feetench").innerHTML = (feetench > 0) ? FEET_ENCHANTS[gear.feet.enchant].desc: "No Enchant";
 
     // ring1
@@ -1739,18 +1768,18 @@ function gearSlotsDisplay(){
     
     let ring1skt = (RINGS[gear.ring1.id].hasOwnProperty('sockets')) ? RINGS[gear.ring1.id].sockets : [];
     if (ring1skt.length >= 1) { 
-        document.getElementsByClassName("itemsocket")[29].style.display = "block";
+        document.getElementsByClassName("itemsocket")[32].style.display = "block";
         document.getElementById("ring1skt1").src = "images/" + ring1skt[0] + "_empty.jfif";
-    } else {document.getElementsByClassName("itemsocket")[29].style.display = "none";}
+    } else {document.getElementsByClassName("itemsocket")[32].style.display = "none";}
 
     if(gear.ring1.hasOwnProperty('gems')){
         ring1gem1 = gear.ring1.gems[0] || 0;
 
         if(ring1gem1 === 0){
-            document.getElementsByClassName("gemskt")[29].style.visibility = "hidden";
+            document.getElementsByClassName("gemskt")[32].style.visibility = "hidden";
         } else {
-            document.getElementsByClassName("gemskt")[29].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[ring1gem1].icon+".jpg";
-            document.getElementsByClassName("gemskt")[29].style.visibility = "visible";
+            document.getElementsByClassName("gemskt")[32].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[ring1gem1].icon+".jpg";
+            document.getElementsByClassName("gemskt")[32].style.visibility = "visible";
         }
 
     }
@@ -1760,9 +1789,9 @@ function gearSlotsDisplay(){
     let ring1pcslist = "&pcs="+headitem+":"+shoulderitem+":"+chestitem+":"+wristitem+":"+handitem+":"+waistitem+":"+feetitem+":"+ring1item+":"+ring2item+":"+legitem;
     let ring1data = ring1item + ring1encheffect + ring1gemlist+ ring1pcslist;
 
-    document.getElementById("ring1slot").href = "https://tbc.wowhead.com/item="+ ring1data;
+    document.getElementById("ring1slot").href = base_link + "item="+ ring1data;
     document.getElementById("ring1slot").innerHTML = RINGS[gear.ring1.id].name;
-    document.getElementById("ring1ench").href = (ring1ench > 0) ? "https://tbc.wowhead.com/spell="+ ring1ench : "";
+    document.getElementById("ring1ench").href = (ring1ench > 0) ? base_link + "spell="+ ring1ench : "";
     document.getElementById("ring1ench").innerHTML = (ring1ench > 0) ? RING_ENCHANTS[gear.ring1.enchant].desc: "No Enchant";
     // ring2
     textColorDisplay('ring2',RINGS);
@@ -1773,18 +1802,18 @@ function gearSlotsDisplay(){
 
     let ring2skt = (RINGS[gear.ring2.id].hasOwnProperty('sockets')) ? RINGS[gear.ring2.id].sockets : [];
     if (ring2skt.length >= 1) { 
-        document.getElementsByClassName("itemsocket")[30].style.display = "block";
+        document.getElementsByClassName("itemsocket")[33].style.display = "block";
         document.getElementById("ring2skt1").src = "images/" + ring2skt[0] + "_empty.jfif";
-    } else {document.getElementsByClassName("itemsocket")[30].style.display = "none";}
+    } else {document.getElementsByClassName("itemsocket")[33].style.display = "none";}
 
     if(gear.ring2.hasOwnProperty('gems')){
         ring2gem1 = gear.ring2.gems[0] || 0;
 
         if(ring2gem1 === 0){
-            document.getElementsByClassName("gemskt")[30].style.visibility = "hidden";
+            document.getElementsByClassName("gemskt")[33].style.visibility = "hidden";
         } else {
-            document.getElementsByClassName("gemskt")[30].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[ring2gem1].icon+".jpg";
-            document.getElementsByClassName("gemskt")[30].style.visibility = "visible";
+            document.getElementsByClassName("gemskt")[33].src = "https://wow.zamimg.com/images/wow/icons/large/"+GEMS[ring2gem1].icon+".jpg";
+            document.getElementsByClassName("gemskt")[33].style.visibility = "visible";
         }
 
     }
@@ -1794,9 +1823,9 @@ function gearSlotsDisplay(){
     let ring2pcslist = "&pcs="+headitem+":"+shoulderitem+":"+chestitem+":"+wristitem+":"+handitem+":"+waistitem+":"+feetitem+":"+ring1item+":"+ring2item+":"+legitem;
     let ring2data = ring2item + ring2encheffect + ring2gemlist+ ring2pcslist;
 
-    document.getElementById("ring2slot").href = "https://tbc.wowhead.com/item="+ ring2data;
+    document.getElementById("ring2slot").href = base_link + "item="+ ring2data;
     document.getElementById("ring2slot").innerHTML = RINGS[gear.ring2.id].name;
-    document.getElementById("ring2ench").href = (ring2ench > 0) ? "https://tbc.wowhead.com/spell="+ ring2ench : "";
+    document.getElementById("ring2ench").href = (ring2ench > 0) ? base_link + "spell="+ ring2ench : "";
     document.getElementById("ring2ench").innerHTML = (ring2ench > 0) ? RING_ENCHANTS[gear.ring2.enchant].desc: "No Enchant";
 
     // trinket1
@@ -1804,7 +1833,7 @@ function gearSlotsDisplay(){
 
     let trinket1icon = "https://wow.zamimg.com/images/wow/icons/large/"+TRINKETS[gear.trinket1.id].icon+".jpg";
     document.getElementById("trinket1icon").src = trinket1icon;
-    document.getElementById("trinket1slot").href = "https://tbc.wowhead.com/item="+ trink1item;
+    document.getElementById("trinket1slot").href = base_link + "item="+ trink1item;
     document.getElementById("trinket1slot").innerHTML = TRINKETS[gear.trinket1.id].name;
 
     // trinket2
@@ -1812,7 +1841,7 @@ function gearSlotsDisplay(){
 
     let trinket2icon = "https://wow.zamimg.com/images/wow/icons/large/"+TRINKETS[gear.trinket2.id].icon+".jpg";
     document.getElementById("trinket2icon").src = trinket2icon;
-    document.getElementById("trinket2slot").href = "https://tbc.wowhead.com/item="+ trink2item;
+    document.getElementById("trinket2slot").href = base_link + "item="+ trink2item;
     document.getElementById("trinket2slot").innerHTML = TRINKETS[gear.trinket2.id].name;
     
     // ammo
@@ -1820,7 +1849,7 @@ function gearSlotsDisplay(){
     
     let ammoicon = "https://wow.zamimg.com/images/wow/icons/large/"+AMMOS[gear.ammo.id].icon+".jpg";
     document.getElementById("ammoicon").src = ammoicon;
-    document.getElementById("ammoslot").href = "https://tbc.wowhead.com/item="+ ammoitem;
+    document.getElementById("ammoslot").href = base_link + "item="+ ammoitem;
     document.getElementById("ammoslot").innerHTML = AMMOS[gear.ammo.id].name;
 
 }

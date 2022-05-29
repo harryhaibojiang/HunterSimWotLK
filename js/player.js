@@ -5,7 +5,7 @@
 const HitRatingRatio = 32.79;
 const CritRatingRatio = 45.91;
 const HasteRatingRatio = 32.79;
-const ArPRatingRatio = 13.99;
+const ArPRatingRatio = 14;
 const AgiToCrit = 83.33;
 const IntToCrit = 166.6667;
 const BaseCritChance = -1.53;
@@ -293,7 +293,7 @@ function calcBaseStats() {
   Spi  = Math.floor((GearStats.Spi + BuffStats.Spi + EnchantStats.Spi + races[selectedRace].spi) * spimod);
 
   mapmod = (1 + Stam * talents.hunt_vs_wild) * tsa_ap * 1;
-  rapmod = talents.master_marksman * tsa_ap * 1;
+  rapmod = (1 + Stam * talents.hunt_vs_wild) * tsa_ap * 1;
   // Attack Power
   BaseMAP = (GearStats.MAP + BuffStats.MAP + EnchantStats.MAP + Agi + Str + races[selectedRace].mAP + custom.MAP) * mapmod;
   // flat 300 added for Aspect of the Hawk - need to change later
@@ -477,7 +477,7 @@ function updateArmorReduction() {
    let armorPenReduc = 0;
    let arp_cap = (target.armor + 15232.5) / 3;
    //arp += (auras.executioner.timer > 0) ? 120 : 0; // executioner
-   
+   arp = Math.min(ArmorPenCap, arp);
    armorPenReduc = arp / ArPRatingRatio / 100;
 
    // armor debuffs
@@ -610,9 +610,7 @@ function updateCritChance(attack) {
    if(debuffs.judgecrusader.timer > 0 && !debuffs.judgecrusader.inactive) { 
       combatCrit += debuffs.judgecrusader.crit; 
    } // imp crusader debuff
-   else if (debuffs.faeriefire.timer > 0 && !debuffs.faeriefire.inactive) { 
-      combatCrit += debuffs.faeriefire.crit;
-   }
+
 
    return combatCrit;
 }

@@ -14,8 +14,6 @@ function storeData(){
     localStorage.setItem('pet_consumes',JSON.stringify(petconsumes));
     // debuffs
     localStorage.setItem('debuffs',JSON.stringify(debuffs));
-    // partybuffs
-    localStorage.setItem('partybuffs',JSON.stringify(partybuffs));
     // statweights
     localStorage.setItem('statweights', JSON.stringify(statweights));
     // consumes
@@ -101,7 +99,6 @@ function fetchData(){
     petconsumes = (localStorage.getItem('pet_consumes') != null) ? JSON.parse(localStorage.getItem('pet_consumes')):petconsumes;
     // debuffs
     debuffs = (localStorage.getItem('debuffs') != null) ? JSON.parse(localStorage.getItem('debuffs')):debuffs;
-    partybuffs = (localStorage.getItem('partybuffs') != null) ? JSON.parse(localStorage.getItem('partybuffs')):partybuffs;
     // statweights
     statweights = (localStorage.getItem('statweights') != null) ? JSON.parse(localStorage.getItem('statweights')):statweights;
     displayStatWeights();
@@ -130,9 +127,7 @@ function fetchData(){
     racialenable = (localStorage.getItem('racialcheck') != null) ? JSON.parse(localStorage.getItem('racialcheck')):racialenable;
     auras.lust.enable = (localStorage.getItem('lustcheck') != null) ? JSON.parse(localStorage.getItem('lustcheck')):auras.lust.enable;
 
-    auras.drums.enable = (localStorage.getItem('drumcheck') != null) ? JSON.parse(localStorage.getItem('drumcheck')):auras.drums.enable;
     auras.potion.primary = (localStorage.getItem('hastecheck') != null) ? JSON.parse(localStorage.getItem('hastecheck')):auras.potion.primary;
-    auras.potion.secondary = (localStorage.getItem('secpotcheck') != null) ? JSON.parse(localStorage.getItem('secpotcheck')):auras.potion.secondary;
 
     auras.rune.enable = (localStorage.getItem('runecheck') != null) ? JSON.parse(localStorage.getItem('runecheck')):auras.rune.enable;
     SPELLS.multishot.enable = (localStorage.getItem('multicheck') != null) ? JSON.parse(localStorage.getItem('multicheck')):SPELLS.multishot.enable;
@@ -148,7 +143,6 @@ function fetchData(){
         auras.bloodfury.offset = parseInt(localStorage.getItem('racialoffset'));
     }
     auras.lust.offset = (localStorage.getItem('lustoffset') != null) ? parseInt(localStorage.getItem('lustoffset')):auras.lust.offset;
-    auras.drums.offset = (localStorage.getItem('drumoffset') != null) ? parseInt(localStorage.getItem('drumoffset')):auras.drums.offset;
     auras.aptrink1.offset = (localStorage.getItem('trink1offset') != null) ? parseInt(localStorage.getItem('trink1offset')):auras.aptrink1.offset;
     auras.aptrink2.offset = (localStorage.getItem('trink2offset') != null) ? parseInt(localStorage.getItem('trink2offset')):auras.aptrink2.offset;
     auras.potion.offset = (localStorage.getItem('startpotoffset') != null) ? parseInt(localStorage.getItem('startpotoffset')):auras.potion.offset;
@@ -168,7 +162,6 @@ function fetchData(){
             break;
         }
     } else lustoption = "1";
-    auras.drums.type = (localStorage.getItem('drumoption') != null) ? localStorage.getItem('drumoption'):auras.drums.type;
     let spellcdoption = '';
     if (localStorage.getItem('spellcdoption') != null) {
         spellcdoption = localStorage.getItem('spellcdoption');
@@ -190,7 +183,6 @@ function fetchData(){
             break;
         }
     } else { spellcdoption = "CD"; }
-    secondaryPotion = (localStorage.getItem('secpotoption') != null) ? localStorage.getItem('secpotoption') : secondaryPotion;
     phase = (localStorage.getItem("phasecheck") != null) ? parseInt(localStorage.getItem("phasecheck")) : phase;
     raidcheck = (localStorage.getItem("raidcheck") != null) ? JSON.parse(localStorage.getItem("raidcheck")) : raidcheck;
     pvpcheck = (localStorage.getItem("pvpcheck") != null) ? JSON.parse(localStorage.getItem("pvpcheck")) : pvpcheck;
@@ -265,30 +257,21 @@ function fetchData(){
     // initialize saved debuffs visuals
     document.getElementById("hmuptime").value = debuffs.hm.uptime_g;
     document.getElementById("hmbonus").selected = debuffs.hm.improved ? true : false;
-    document.getElementById("ewuptime").value = debuffs.exposeweakness.uptime_g;
-    document.getElementById("ewagil").value = debuffs.exposeweakness.agi;
     document.getElementById("jowuptime").value = debuffs.judgewisdom.uptime_g;
     document.getElementById("jocuptime").value = debuffs.judgecrusader.uptime_g;
-    document.getElementById("coruptime").value = debuffs.curseofreck.uptime_g;
     document.getElementById("ffuptime").value = debuffs.faeriefire.uptime_g;
     document.getElementById("ffbonus").selected = debuffs.faeriefire.improved ? true : false;
     document.getElementById("sauptime").value = debuffs.sunder.uptime_g;
     document.getElementById("sunderapp").value = debuffs.sunder.stacktime;
-    document.getElementById("ieuptime").value = debuffs.impexpose.uptime_g;
+    document.getElementById("ieuptime").value = debuffs.expose.uptime_g;
     document.getElementById("bfuptime").value = debuffs.bloodfrenzy.uptime_g;
-    document.getElementById("misuptime").value = debuffs.misery.uptime_g;
     document.getElementById("coeuptime").value = debuffs.curseofele.uptime_g;
-    document.getElementById("coebonus").selected = debuffs.curseofele.improved ? true : false;
-    document.getElementById("unlrageuptime").value = partybuffs.unleashedrage.uptime_g;
-    document.getElementById("ferocuptime").value = partybuffs.ferociousinsp.uptime_g;
-    document.getElementById("ferocstacks").value = partybuffs.ferociousinsp.stacks;
 
     // spell enables
     document.getElementById("rapidcheck").checked = auras.rapid.enable;
     document.getElementById("beastcheck").checked = beastenable;
     document.getElementById("racialcheck").checked = racialenable;
     document.getElementById("lustcheck").checked = auras.lust.enable;
-    document.getElementById("drumcheck").checked = auras.drums.enable;
     document.getElementById("hastecheck").checked = auras.potion.primary;
     document.getElementById("secpotcheck").checked = auras.potion.secondary;
     document.getElementById("runecheck").checked = auras.rune.enable;
@@ -301,15 +284,12 @@ function fetchData(){
     document.getElementById("beastoffset").value = auras.beastwithin.offset;
     document.getElementById("racialoffset").value = (auras.berserk.enable) ? auras.berserk.offset: auras.bloodfury.offset;
     document.getElementById("lustoffset").value = auras.lust.offset;
-    document.getElementById("drumoffset").value = auras.drums.offset;
     document.getElementById("trink1offset").value = auras.aptrink1.offset;
     document.getElementById("trink2offset").value = auras.aptrink2.offset;
     document.getElementById("startpotoffset").value = auras.potion.offset;
     // spell options
     document.getElementById("lustoption").value = lustoption;
-    document.getElementById("drumoption").value = auras.drums.type;
     document.getElementById("spellcdoption").value = spellcdoption;
-    document.getElementById("secpotoption").value = secondaryPotion;
 
     document.getElementById("phasecheck").value = phase;
     document.getElementById("raidcheck").checked = raidcheck;

@@ -1,36 +1,32 @@
 // default buffs for settings go here
 var buffslist = [
-    25898, // bok
-    { id: 27141, talented: true }, // bom
-    { id: 27143, talented: false }, // bow
-    17007, // lotp
-    { id: 25359, talented: true }, // GoA
-    { id: 25528, talented: true }, // SoE
-    25570, // MsTot
-    27127, // AI
-    { id: 26991, talented: true }, // GotW
-    { id: 25392, talented: true }, // PW:F
-    { id: 0, talented: false }, // BP
-    { id: 0, talented: false }, // WF
+    
+    { id: 0, talented: false }, // might 27141
+    { id: 2048, talented: false }, // shout 2048
     0, // heroic presence
-    { id: 0, talented: false }, // BS
-    0, // tsa
-    0, // braided eternium
-    0, // imp sanctity
-    0  // feral crit idol
+    17007, // lotp/rampage 17007
+    { id: 25528, talented: true }, // SoE/Horn 25528
+    0, // tsa 27066
+    0, // swift ret 53648
+    0, // feroc insp 75447
+    { id: 0, talented: false }, // WF 25587
+    { id: 26991, talented: true }, // GotW 26991
+    25898, // bok 25898
+    { id: 27143, talented: true }, // bow 27143
+    { id: 0, talented: false }, // ms totem 25570
+    27127, // AI 27127
+    0, // fel intel 57567
+    { id: 25392, talented: true }, // PW:F 25392
+    
 ];
-var SavedSets = []; // blank array for saving sets, stored in localstorage?
+var SavedSets = []; // blank array for saving sets
 
 var filteredbuffs = [];
 var playerconsumes = {
-    battle_elixir: 22831,
-    guardian_elixir: 22840,
-    agi_scroll: 27498,
-    food: 27664
+    
 };
 var petconsumes = {
-    pet_food:33874,
-    str_scroll:27503
+
 };
 var talentindex = '6';
 var whtalentlink = '';
@@ -50,9 +46,9 @@ document.getElementById("shoutbonus2").disabled = true;
 
 // show the stats on the HTML
 function displayStats(){
-    let bonusagi = (buffslist[4].talented && (buffslist[4].id > 0)) ? 1.15 * 77 * agimod : 77 * agimod;
+    
     document.getElementById("str").innerHTML = Str;
-    document.getElementById("agi").innerHTML = Agi + " (" + (Agi + bonusagi).toFixed(0)+ ")";
+    document.getElementById("agi").innerHTML = Agi;
     document.getElementById("stam").innerHTML = Stam;
     document.getElementById("int").innerHTML = Int;
     document.getElementById("spi").innerHTML = Spi;
@@ -60,7 +56,7 @@ function displayStats(){
     document.getElementById("rangehit").innerHTML = RangeHitRating + " ("+RangeHitChance.toFixed(2)+"%)";
     document.getElementById("rangecrit").innerHTML = RangeCritRating + " ("+RangeCritChance.toFixed(2)+"%)";
     document.getElementById("haste").innerHTML = HasteRating + " (" + (HasteRating / HasteRatingRatio).toFixed(2)+"%)";
-    document.getElementById("arp").innerHTML = ArmorPen;
+    document.getElementById("arp").innerHTML = ArPRating + " (" + (ArPRating / ArPRatingRatio).toFixed(2)+"%)";
     document.getElementById("map").innerHTML = Math.floor(BaseMAP);
     document.getElementById("meleehit").innerHTML = MeleeHitRating + " ("+MeleeHitChance.toFixed(2)+"%)";
     document.getElementById("meleecrit").innerHTML = MeleeCritRating + " ("+MeleeCritChance.toFixed(2)+"%)";
@@ -441,7 +437,7 @@ function initializeTargetDropdown() {
         let findtarget = targets.find(key => key.name == savedtarget.name);
         initialId = findtarget.id;
     } else {
-        initialId = 19044;
+        initialId = 1;
     }
     
     var targetsOptions = "";
@@ -503,43 +499,27 @@ function selectGearlist() {
 function auraUptimeSettings(){
     let hmuptime = document.getElementById("hmuptime").value;
     let hmbonus = document.getElementById("hmbonus").selected;
-    let ewuptime = document.getElementById("ewuptime").value;
-    let ewagil = document.getElementById("ewagil").value;
     let jowuptime = document.getElementById("jowuptime").value;
     let jocuptime = document.getElementById("jocuptime").value;
-    let coruptime = document.getElementById("coruptime").value;
     let ffuptime = document.getElementById("ffuptime").value;
-    let ffbonus = document.getElementById("ffbonus").selected;
     let sauptime = document.getElementById("sauptime").value;
     let sunderapp = document.getElementById("sunderapp").value;
     let ieuptime = document.getElementById("ieuptime").value;
     let bfuptime = document.getElementById("bfuptime").value;
-    let misuptime = document.getElementById("misuptime").value;
+    let manguptime = document.getElementById("manguptime").value;
     let coeuptime = document.getElementById("coeuptime").value;
-    let coebonus = document.getElementById("coebonus").selected;
-    let unluptime = document.getElementById("unlrageuptime").value;
-    let ferocuptime = document.getElementById("ferocuptime").value;
-    let ferocstacks = document.getElementById("ferocstacks").value;
 
     debuffs.hm.uptime_g = parseInt(hmuptime);
     debuffs.hm.improved = hmbonus ? true : false;
-    debuffs.exposeweakness.uptime_g = parseInt(ewuptime);
-    debuffs.exposeweakness.agi = parseInt(ewagil);
     debuffs.judgewisdom.uptime_g = parseInt(jowuptime);
     debuffs.judgecrusader.uptime_g = parseInt(jocuptime);
-    debuffs.curseofreck.uptime_g = parseInt(coruptime);
     debuffs.faeriefire.uptime_g = parseInt(ffuptime);
-    debuffs.faeriefire.improved = ffbonus ? true : false;
     debuffs.sunder.uptime_g = parseInt(sauptime);
     debuffs.sunder.stacktime = parseInt(sunderapp);
-    debuffs.impexpose.uptime_g = parseInt(ieuptime);
-    debuffs.misery.uptime_g = parseInt(misuptime);
+    debuffs.expose.uptime_g = parseInt(ieuptime);
+    debuffs.mangle.uptime_g = parseInt(manguptime);
     debuffs.bloodfrenzy.uptime_g = parseInt(bfuptime);
     debuffs.curseofele.uptime_g = parseInt(coeuptime);
-    debuffs.curseofele.improved = coebonus ? true : false;
-    partybuffs.unleashedrage.uptime_g = parseInt(unluptime);
-    partybuffs.ferociousinsp.uptime_g = parseInt(ferocuptime);
-    partybuffs.ferociousinsp.stacks = parseInt(ferocstacks);
 
     getStatsCapData();
     storeData();
@@ -553,8 +533,6 @@ function fightSettings(){
     let playerup = document.getElementById("playeruptime").value;
     let petup = document.getElementById("petuptime").value;
     let weave = document.getElementById("weavetime").value;
-    let huntercount = document.getElementById("huntersinraid").value;
-    let berserkhp = document.getElementById("berserkinghp").value;
     iterations = parseInt(simulations);
     minfighttimer = parseInt(minfight);
     maxfighttimer = parseInt(maxfight);
@@ -562,107 +540,16 @@ function fightSettings(){
     playeruptime = parseInt(playerup);
     petuptime = parseInt(petup);
     weavetime = JSON.parse(weave);
-    huntersinraid = parseInt(huntercount);
-    BerserkStartHP = parseInt(berserkhp);
     storeData();
 
 }
-// check for kings toggle
-function kingsCheck() {
-    let isChecked = document.getElementById("kings").checked;
-    buffslist[0] = isChecked ? 25898 : 0;
-    selectedOptionsResults();
 
-}
 // check for might toggle and modifier
 function mightCheck() {
     let isChecked = document.getElementById("might").checked;
     let isTalented = document.getElementById("mightmod").selected;
-    buffslist[1].id = isChecked ? 27141 : 0;
-    buffslist[1].talented = isTalented ? true : false;
-    selectedOptionsResults();
-
-}
-// check for wisdom toggle and modifier
-function wisdomCheck() {
-    let isChecked = document.getElementById("wisdom").checked;
-    let isTalented = document.getElementById("wisdommod").selected;
-    buffslist[2].id = isChecked ? 27143 : 0;
-    buffslist[2].talented = isTalented ? true : false;
-    selectedOptionsResults();
-
-}
-// check for leader of the pack toggle
-function lotpCheck() {
-    let isChecked = document.getElementById("lotp").checked; 
-    buffslist[3] = isChecked ? 17007 : 0;
-    let isImproved = document.getElementById("lotpidol").selected;
-    if (isChecked && isImproved) {
-        buffslist[17] = 39926;
-    } 
-    else { buffslist[17] = 0; }
-    selectedOptionsResults();
-
-}
-// check for grace of air and strength of earth toggle and modifier
-function totemCheck() {
-    let goaIsChecked = document.getElementById("goa").checked;
-    let soeIsChecked = document.getElementById("soe").checked;
-    let isTalented = document.getElementById("imptotem").selected;
-    buffslist[4].id = goaIsChecked ? 25359 : 0;
-    buffslist[4].talented = isTalented ? true : false;
-    buffslist[5].id = soeIsChecked ? 25528 : 0;
-    buffslist[5].talented = isTalented ? true : false;
-    selectedOptionsResults();
-
-}
-// check for mana spring toggle
-function manaspringCheck() {
-    let isChecked = document.getElementById("manaspring").checked; 
-    buffslist[6] = isChecked ? 25570 : 0;
-    selectedOptionsResults();
-
-}
-// check for Arcane Brilliance toggle
-function aiCheck() {
-    let isChecked = document.getElementById("ai").checked; 
-    buffslist[7] = isChecked ? 27127 : 0;
-    selectedOptionsResults();
-
-}
-// check for Gift of the Wild toggle and modifier
-function gotwCheck() {
-    let isChecked = document.getElementById("gotw").checked;
-    let isTalented = document.getElementById("gotwmod").selected;
-    buffslist[8].id = isChecked ? 26991 : 0;
-    buffslist[8].talented = isTalented ? true : false;
-    selectedOptionsResults();
-
-}
-// check for Prayer of Fortitude toggle and modifier
-function fortCheck() {
-    let isChecked = document.getElementById("fort").checked;
-    let isTalented = document.getElementById("fortmod").selected;
-    buffslist[9].id = isChecked ? 25392 : 0;
-    buffslist[9].talented = isTalented ? true : false;
-    selectedOptionsResults();
-
-}
-// check for Blood Pact toggle and modifier
-function pactCheck() {
-    let isChecked = document.getElementById("pact").checked;
-    let isTalented = document.getElementById("pactmod").selected;
-    buffslist[10].id = isChecked ? 27268 : 0;
-    buffslist[10].talented = isTalented ? true : false;
-    selectedOptionsResults();
-
-}
-// check for Windfury Totem toggle and modifier
-function windfuryCheck() {
-    let isChecked = document.getElementById("windfury").checked;
-    let isTalented = document.getElementById("windfurymod").selected;
-    buffslist[11].id = isChecked ? 25587 : 0;
-    buffslist[11].talented = isTalented ? true : false;
+    buffslist[0].id = isChecked ? 27141 : 0;
+    buffslist[0].talented = isTalented ? true : false;
     selectedOptionsResults();
 
 }
@@ -670,39 +557,123 @@ function windfuryCheck() {
 function shoutCheck() {
     let isChecked = document.getElementById("shout").checked;
     let isTalented = document.getElementById("shoutmod").selected;
-    buffslist[13].id = isChecked ? 2048 : 0;
-    buffslist[13].talented = isTalented ? true : false;
-    selectedOptionsResults();
-
-}
-// check for Trueshot Aura toggle
-function tsaCheck() {
-    let isChecked = document.getElementById("tsa").checked; 
-    buffslist[14] = isChecked ? 27066 : 0;
-    selectedOptionsResults();
-
-}
-// check for Braided Eternium Chain toggle
-function braidedCheck() {
-    let isChecked = document.getElementById("braided").checked; 
-    buffslist[15] = isChecked ? 31025 : 0;
+    buffslist[1].id = isChecked ? 2048 : 0;
+    buffslist[1].talented = isTalented ? true : false;
     selectedOptionsResults();
 
 }
 // check for Heroic Presence toggle
 function heroicpresCheck() {
     let isChecked = document.getElementById("heroicpres").checked; 
-    buffslist[12] = isChecked ? 6562 : 0;
+    buffslist[2] = isChecked ? 6562 : 0;
     selectedOptionsResults();
 
 }
-// check for Improved Sanctity Aura toggle
-function sanctCheck() {
-    let isChecked = document.getElementById("sanct").checked; 
-    buffslist[16] = isChecked ? 31870 : 0;
+
+// check for leader of the pack toggle
+function lotpCheck() {
+    let isChecked = document.getElementById("lotp").checked; 
+    buffslist[3] = isChecked ? 17007 : 0;
     selectedOptionsResults();
 
 }
+// check for grace of air and strength of earth toggle and modifier
+function totemCheck() {
+    let soeIsChecked = document.getElementById("soe").checked;
+    let isTalented = document.getElementById("imptotem").selected;
+    buffslist[4].id = soeIsChecked ? 25528 : 0;
+    buffslist[4].talented = isTalented ? true : false;
+    selectedOptionsResults();
+
+}
+// check for Trueshot Aura toggle
+function tsaCheck() {
+    let isChecked = document.getElementById("tsa").checked; 
+    buffslist[5] = isChecked ? 27066 : 0;
+    selectedOptionsResults();
+
+}
+// check for Braided Eternium Chain toggle
+function swiftretCheck() {
+    let isChecked = document.getElementById("swiftret").checked; 
+    buffslist[6] = isChecked ? 53648 : 0;
+    selectedOptionsResults();
+
+}
+// check for ferocious insp Aura toggle
+function ferocinspCheck() {
+    let isChecked = document.getElementById("ferocinsp").checked; 
+    buffslist[7] = isChecked ? 75447 : 0;
+    selectedOptionsResults();
+
+}
+// check for Windfury Totem toggle and modifier
+function windfuryCheck() {
+    let isChecked = document.getElementById("windfury").checked;
+    let isTalented = document.getElementById("windfurymod").selected;
+    buffslist[8].id = isChecked ? 25587 : 0;
+    buffslist[8].talented = isTalented ? true : false;
+    selectedOptionsResults();
+
+}
+// check for Gift of the Wild toggle and modifier
+function gotwCheck() {
+    let isChecked = document.getElementById("gotw").checked;
+    let isTalented = document.getElementById("gotwmod").selected;
+    buffslist[9].id = isChecked ? 26991 : 0;
+    buffslist[9].talented = isTalented ? true : false;
+    selectedOptionsResults();
+
+}
+// check for kings toggle
+function kingsCheck() {
+    let isChecked = document.getElementById("kings").checked;
+    buffslist[10] = isChecked ? 25898 : 0;
+    selectedOptionsResults();
+
+}
+// check for wisdom toggle and modifier
+function wisdomCheck() {
+    let isChecked = document.getElementById("wisdom").checked;
+    let isTalented = document.getElementById("wisdommod").selected;
+    buffslist[11].id = isChecked ? 27143 : 0;
+    buffslist[11].talented = isTalented ? true : false;
+    selectedOptionsResults();
+
+}
+// check for mana spring toggle
+function manaspringCheck() {
+    let isChecked = document.getElementById("manaspring").checked; 
+    let isTalented = document.getElementById("springmod").selected;
+    buffslist[12] = isChecked ? 25570 : 0;
+    buffslist[12].talented = isTalented ? true : false;
+    selectedOptionsResults();
+
+}
+// check for Arcane Brilliance toggle
+function aiCheck() {
+    let isChecked = document.getElementById("ai").checked; 
+    buffslist[13] = isChecked ? 27127 : 0;
+    selectedOptionsResults();
+
+}
+// check for Fel Intelligence toggle
+function felintelCheck() {
+    let isChecked = document.getElementById("felintel").checked;
+    buffslist[14].id = isChecked ? 57567 : 0;
+    selectedOptionsResults();
+
+}
+// check for Prayer of Fortitude toggle and modifier
+function fortCheck() {
+    let isChecked = document.getElementById("fort").checked;
+    let isTalented = document.getElementById("fortmod").selected;
+    buffslist[15].id = isChecked ? 25392 : 0;
+    buffslist[15].talented = isTalented ? true : false;
+    selectedOptionsResults();
+
+}
+
 // below functions check if selected check the list of items then call the update
 function flaskSelection() {
     let isSelected = document.getElementById("flask").value;

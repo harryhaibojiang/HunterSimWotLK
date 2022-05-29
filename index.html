@@ -6,7 +6,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>TBC Hunter Sim</title>
+    <title>WotLK Hunter Sim</title>
     <link rel="icon" href="images/WoW-Classic-Hunter.png">
     <link rel="stylesheet" href="css/nicepage.css" media="screen">
     <link rel="stylesheet" href="css/Main.css" media="screen">
@@ -44,8 +44,11 @@
     </script>
     
     <meta name="generator" content="Nicepage 3.28.7, nicepage.com">
-    <script>const whTooltips = {colorLinks: false, iconizeLinks: false, renameLinks: false};</script>
-    <script src="https://wow.zamimg.com/widgets/power.js"></script>
+    <!--<script>const whTooltips = {colorLinks: false, iconizeLinks: false, renameLinks: false};</script>-->
+    <!--<script src="https://wow.zamimg.com/widgets/power.js"></script>-->
+    <script type="text/javascript" src="https://wotlkdb.com/static/widgets/power.js"></script>
+    <script>const aowow_tooltips = { "colorlinks": false, "iconizelinks": false, "renamelinks": false };</script>
+
     <style> /* width */
 	::-webkit-scrollbar {
 	  width: 10px;
@@ -67,11 +70,11 @@
     
     
     <meta name="theme-color" content="#478ac9">
-    <meta property="og:title" content="TBC Hunter Sim">
+    <meta property="og:title" content="WotLK Hunter Sim">
     <meta property="og:description" content="Realistic Sim created by Sixx">
     <meta property="og:type" content="website">
   </head>
-  <body data-home-page="index.html" data-home-page-title="TBC Hunter Sim" class="u-body"><header class="u-black u-clearfix u-header u-sticky u-sticky-ca90 u-header" id="sec-f767"><div class="u-clearfix u-sheet u-sheet-1">
+  <body data-home-page="index.html" data-home-page-title="WotLK Hunter Sim" class="u-body"><header class="u-black u-clearfix u-header u-sticky u-sticky-ca90 u-header" id="sec-f767"><div class="u-clearfix u-sheet u-sheet-1">
         <a href="#" class="u-image u-logo u-image-1" data-image-width="256" data-image-height="256">
           <img src="images/WoW-Classic-Hunter.png" class="u-logo-image u-logo-image-1">
         </a>
@@ -329,9 +332,13 @@
                         </div>
                       </div>
                       <div class="gear-slot">
-                        <div class="gear-slot-icon"><img class="u-expanded-width u-image u-image-default u-preserve-proportions gear-images" src="images/Wrists.jpg" alt="" data-image-width="56" data-image-height="56" id="wristicon">
+                        <div class="gear-slot-icon">
+                          <a class="img-link" onmouseover="gearSlotsDisplay()" onclick="this.href='javascript:;';">
+                            <img class="u-expanded-width u-image u-image-default u-preserve-proportions gear-images" src="images/Wrists.jpg" alt="" data-image-width="56" data-image-height="56" id="wristicon">
+                          </a>
                           <div class="itemsockets">
                             <div class="itemsocket"><img class="itemsockets-img" src="images/Yellow_empty.jfif" id="wristskt1"><img class="gemskt" src=""></div>
+                            <div class="itemsocket"><img class="itemsockets-img" src="images/Blue_empty.jfif" id="wristskt2"><img class="gemskt" src=""></div>
                           </div>
                         </div>
                         <div class="gear-slot-details">
@@ -387,6 +394,7 @@
                           <div class="itemsockets">
                             <div class="itemsocket"><img class="itemsockets-img" src="images/Yellow_empty.jfif" id="handskt1"><img class="gemskt" src=""></div>
                             <div class="itemsocket"><img class="itemsockets-img" src="images/Red_empty.jfif" id="handskt2"><img class="gemskt" src=""></div>
+                            <div class="itemsocket"><img class="itemsockets-img" src="images/Blue_empty.jfif" id="handskt3"><img class="gemskt" src=""></div>
                           </div>
                         </div>
                         <div class="gear-slot-details detail-right-align">
@@ -399,10 +407,12 @@
                           <div class="itemsockets">
                             <div class="itemsocket"><img class="itemsockets-img" src="images/Yellow_empty.jfif" id="waistskt1"><img class="gemskt" src=""></div>
                             <div class="itemsocket"><img class="itemsockets-img" src="images/Red_empty.jfif" id="waistskt2"><img class="gemskt" src=""></div>
+                            <div class="itemsocket"><img class="itemsockets-img" src="images/Blue_empty.jfif" id="waistskt3"><img class="gemskt" src=""></div>
                           </div>
                         </div>
                         <div class="gear-slot-details  detail-right-align">
                           <p class="u-align-right u-text item-name"><a href="#" id="waistslot" onmouseover="gearSlotsDisplay()" onclick="this.href='javascript:;';">Waist</a></p>
+                          <p class="u-align-right u-text enchant-name"><a id="waistench" class="enchant-text" onmouseover="gearSlotsDisplay()" onclick="this.href='javascript:;';">No Enchant</a></p>
                         </div>
                       </div>
                       <div class="gear-slot">
@@ -1249,7 +1259,7 @@
     <script class="u-script" type="text/javascript" src="js/stats.js"></script> 
 
     <footer class="u-black u-clearfix u-footer u-footer" id="sec-5c75"><a href="https://nicepage.com" class="u-image u-logo u-image-1" data-image-width="255" data-image-height="198">
-        <img src="images/tbc_logo.jfif" class="u-logo-image u-logo-image-1">
+        <img src="images/wrathclassic.png" class="u-logo-image u-logo-image-1">
       </a><p class="u-align-right u-text u-text-1">made by WatchYourSixx</p><div class="u-custom-color-6 u-expanded-width u-shape u-shape-rectangle u-shape-1"></div></footer>
   </body>
 </html>

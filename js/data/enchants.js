@@ -43,33 +43,60 @@ const HEAD_ENCHANTS = {
         Stam: 18,
         Resil: 20
     },
-    Phase: 5,
+    Phase: 1,
     quality: "Uncommon",
     icon: 'inv_misc_statue_04',
     desc: '+18 Stam, +20 Resil'
   },
-  44968: {
-    name: 'Heavy Knothide Armor Kit',
-    effectId: 2841,
+  50909: {
+    name: 'Heavy Borean Armor Kit',
+    effectId: 3330,
     stats: {
-      Stam: 10
+      Stam: 18
     },
     Phase: 1,
     quality: "Common",
-    icon: 'inv_misc_armorkit_25',
-    desc: '+10 Stam'
+    icon: 'inv_misc_armorkit_30',
+    desc: '+18 Stam'
   },
-  15402: {
-    name: 'Lesser Arcanum of Voracity',
-    effectId: 1508,
+  61271: {
+    name: 'Arcanum of the Savage Gladiator',
+    effectId: 3842,
     stats: {
-      Agi: 8
+        Stam: 30,
+        Resil: 25
     },
     Phase: 1,
-    quality: "Uncommon",
-    icon: 'inv_misc_gem_03',
-    desc: '+8 Agi'
+    quality: "Heirloom",
+    icon: 'ability_warrior_shieldmastery',
+    desc: '+30 Stam, +25 Resil'
   },
+  59954: {
+    name: 'Arcanum of Torment',
+    effectId: 3817,
+    stats: {
+        RAP: 50,
+        MAP: 50,
+        Crit: 20
+    },
+    Phase: 1,
+    quality: "Heirloom",
+    icon: 'ability_warrior_rampage',
+    desc: '+50 AP, +20 Crit'
+  },
+  59777: {
+    name: 'Arcanum of Triumph',
+    effectId: 3795,
+    stats: {
+        RAP: 50,
+        MAP: 50,
+        Resil: 20
+    },
+    Phase: 1,
+    quality: "Rare",
+    icon: 'ability_warrior_shieldmastery',
+    desc: '+50 AP, +20 Resil'
+  }
 }
 
 const SHOULDER_ENCHANTS = {
@@ -99,39 +126,41 @@ const SHOULDER_ENCHANTS = {
     icon: 'spell_holy_greaterblessingofkings',
     desc: '+30 AP, +10 Crit'
   },
-  44968: {
-    name: 'Heavy Knothide Armor Kit',
-    effectId: 2841,
+  50909: {
+    name: 'Heavy Borean Armor Kit',
+    effectId: 3330,
     stats: {
-      Stam: 10
+      Stam: 18
     },
     Phase: 1,
     quality: "Common",
-    icon: 'inv_misc_armorkit_25',
-    desc: '+10 Stam'
+    icon: 'inv_misc_armorkit_30',
+    desc: '+18 Stam'
   },
-  35438: {
-    name: 'Inscription of the Blade',
-    effectId: 2996,
+  59934: {
+    name: 'Greater Inscription of the Axe',
+    effectId: 3808,
     stats: {
-      Crit: 13
+      RAP: 40,
+      MAP: 40,
+      Crit: 15
     },
     Phase: 1,
-    quality: "Uncommon",
-    icon: 'ability_dualwield',
-    desc: '+13 Crit'
+    quality: "Heirloom",
+    icon: 'inv_axe_85',
+    desc: '+40 AP, +15 Crit'
   },
-  35407: {
-    name: 'Inscription of Vengeance',
-    effectId: 2983,
+  62384: {
+    name: 'Greater Inscription of the Gladiator',
+    effectId: 3852,
     stats: {
-      MAP: 26,
-      RAP: 26,
+      Stam: 30,
+      Resil: 15
     },
     Phase: 1,
-    quality: "Uncommon",
-    icon: 'spell_holy_fistofjustice',
-    desc: '+26 AP'
+    quality: "Epic",
+    icon: 'inv_shoulder_61',
+    desc: '+30 Stam, +15 Resil'
   },
   29483: {
     name: 'Might of the Scourge',
@@ -146,17 +175,31 @@ const SHOULDER_ENCHANTS = {
     icon: 'spell_shadow_deathpact',
     desc: '+26 AP, +14 Crit'
   },
-  24422: {
-    name: 'Zandalar Signet of Might',
-    effectId: 2606,
+  59929: {
+    name: 'Lesser Inscription of the Axe',
+    effectId: 3875,
     stats: {
+      RAP: 30,
       MAP: 30,
-      RAP: 30
+      Crit: 10
     },
     Phase: 1,
     quality: "Rare",
-    icon: 'inv_misc_armorkit_08',
-    desc: '+30 AP'
+    icon: 'inv_axe_82',
+    desc: '+30 AP, +10 Crit'
+  },
+  61117: {
+    name: 'Master\'s Inscription of the Axe',
+    effectId: 3835,
+    stats: {
+      RAP: 120,
+      MAP: 120,
+      Crit: 15
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'inv_inscription_tradeskill01',
+    desc: '+120 AP, +15 Crit (Inscript)'
   },
 }
 
@@ -169,31 +212,85 @@ const BACK_ENCHANTS = {
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
+    icon: 'trade_engraving',
     desc: '+12 Agi'
   },
-  13882: {
-    name: 'Lesser Agility',
-    effectId: 849,
+  60663: {
+    name: 'Major Agility',
+    effectId: 1099,
     stats: {
-      Agi: 3
+      Agi: 22
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
-    desc: '+3 Agi'
+    icon: 'trade_engraving',
+    desc: '+22 Agi'
   },
-  13419: {
-    name: 'Minor Agility',
-    effectId: 247,
+  44500: {
+    name: 'Superior Agility',
+    effectId: 983,
     stats: {
-      Agi: 1
+      Agi: 16
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
-    desc: '+1 Agi'
-  }
+    icon: 'trade_engraving',
+    desc: '+16 Agi'
+  },
+  60609: {
+    name: 'Speed',
+    effectId: 3825,
+    stats: {
+      Haste: 15
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'trade_engraving',
+    desc: '+15 Haste'
+  },
+  47898: {
+    name: 'Greater Speed',
+    effectId: 3831,
+    stats: {
+      Haste: 23
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'trade_engraving',
+    desc: '+23 Haste'
+  },
+  55002: {
+    name: 'Flexweave Underlay',
+    effectId: 3605,
+    stats: {
+      Agi: 23
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'trade_engineering',
+    desc: '+23 Agi and Parachute (Engi)'
+  },
+  44631: {
+    name: 'Shadow Armor',
+    effectId: 3256,
+    stats: {
+      Agi: 10
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'trade_engraving',
+    desc: '+10 Agi'
+  },
+  55777: {
+    name: 'Swordguard Embroidery',
+    effectId: 3730,
+    stats: {
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'inv_misc_thread_01',
+    desc: '+400 AP Chance on Hit (Tailor)'
+  },
 }
 
 const CHEST_ENCHANTS = {
@@ -205,7 +302,7 @@ const CHEST_ENCHANTS = {
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
+    icon: 'trade_engraving',
     desc: '+150 HP'
   },
   27958: {
@@ -216,7 +313,7 @@ const CHEST_ENCHANTS = {
     },
     Phase: 1,
     quality: "Common",
-    icon: 'inv_misc_note_01',
+    icon: 'trade_engraving',
     desc: '+150 Mana'
   },
   27960: {
@@ -231,34 +328,34 @@ const CHEST_ENCHANTS = {
     },
     Phase: 1,
     quality: "Common",
-    icon: 'inv_misc_note_01',
+    icon: 'trade_engraving',
     desc: '+6 All Stats'
   },
-  20025: {
-    name: 'Greater Stats',
-    effectId: 1891,
+  44623: {
+    name: 'Super Stats',
+    effectId: 3252,
     stats: {
-      Agi: 4,
-      Str: 4,
-      Stam: 4,
-      Spi: 4,
-      Int: 4
+      Agi: 8,
+      Str: 8,
+      Stam: 8,
+      Spi: 8,
+      Int: 8
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
-    desc: '+4 All Stats'
+    icon: 'trade_engraving',
+    desc: '+8 All Stats'
   },
-  44968: {
-    name: 'Heavy Knothide Armor Kit',
-    effectId: 2841,
+  50909: {
+    name: 'Heavy Borean Armor Kit',
+    effectId: 3330,
     stats: {
-      Stam: 10
+      Stam: 18
     },
     Phase: 1,
     quality: "Common",
-    icon: 'inv_misc_armorkit_25',
-    desc: '+10 Stam'
+    icon: 'inv_misc_armorkit_30',
+    desc: '+18 Stam'
   },
   33992: {
     name: 'Major Resilience',
@@ -268,38 +365,72 @@ const CHEST_ENCHANTS = {
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
+    icon: 'trade_engraving',
     desc: '+15 Resil'
+  },
+  44588: {
+    name: 'Exceptional Resilience',
+    effectId: 3245,
+    stats: {
+      Resil: 20
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'trade_engraving',
+    desc: '+20 Resil'
+  },
+  44509: {
+    name: 'Greater Mana Restoration',
+    effectId: 2381,
+    stats: {
+      MP5: 8
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'trade_engraving',
+    desc: '+8 Mp5'
   },
   33991: {
     name: 'Restore Mana Prime',
     effectId: 3150,
     stats: {
-      MP5: 6
+      MP5: 7
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
+    icon: 'trade_engraving',
     desc: '+6 Mp5'
   },
-  13941: {
-    name: 'Stats',
-    effectId: 928,
+  60692: {
+    name: 'Powerful Stats',
+    effectId: 3832,
     stats: {
-      Agi: 3,
-      Str: 3,
-      Stam: 3,
-      Spi: 3,
-      Int: 3
+      Agi: 10,
+      Str: 10,
+      Stam: 10,
+      Spi: 10,
+      Int: 10
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
-    desc: '+3 All Stats'
+    icon: 'trade_engraving',
+    desc: '+10 All Stats'
   },
 }
 
 const WRIST_ENCHANTS = {
+  44575: {
+    name: 'Greater Assault',
+    effectId: 3845,
+    stats: {
+      MAP: 50,
+      RAP: 50
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'trade_engraving',
+    desc: '+50 AP'
+  },
   34002: {
     name: 'Assault',
     effectId: 1593,
@@ -309,41 +440,42 @@ const WRIST_ENCHANTS = {
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
+    icon: 'trade_engraving',
     desc: '+24 AP'
   },
-  27899: {
-    name: 'Brawn',
-    effectId: 2647,
+  60616: {
+    name: 'Striking',
+    effectId: 1600,
     stats: {
-      Str: 12
+      RAP: 38,
+      MAP: 38
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
-    desc: '+12 Str'
+    icon: 'trade_engraving',
+    desc: '+38 AP'
   },
-  27914: {
-    name: 'Fortitude',
-    effectId: 2649,
+  62256: {
+    name: 'Major Stamina',
+    effectId: 3850,
     stats: {
-      Stam: 12
+      Stam: 40
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
-    desc: '+12 Stam'
+    icon: 'trade_engraving',
+    desc: '+40 Stam'
   },
-  34001: {
-    name: 'Major Intellect',
-    effectId: 369,
+  44555: {
+    name: 'Exceptional Intellect',
+    effectId: 1119,
     stats: {
-      Int: 12
+      Int: 16
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
-    desc: '+12 Int'
+    icon: 'trade_engraving',
+    desc: '+16 Int'
   },
   27913: {
     name: 'Restore Mana Prime',
@@ -353,82 +485,115 @@ const WRIST_ENCHANTS = {
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
+    icon: 'trade_engraving',
     desc: '+6 Mp5'
   },
-  27905: {
-    name: 'Stats',
-    effectId: 1891,
+  44616: {
+    name: 'Greater Stats',
+    effectId: 2661,
     stats: {
-      Agi: 4,
-      Str: 4,
-      Stam: 4,
-      Spi: 4,
-      Int: 4
+      Agi: 6,
+      Str: 6,
+      Stam: 6,
+      Spi: 6,
+      Int: 6
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
+    icon: 'trade_engraving',
     desc: '+4 All Stats'
-  }
+  },
+  57690: {
+    name: 'Fur Lining - Stamina',
+    effectId: 3757,
+    stats: {
+      Stam: 102
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'trade_leatherworking',
+    desc: '+102 Stam (Leatherworking)'
+  },
+  57683: {
+    name: 'Fur Lining - Attack Power',
+    effectId: 3756,
+    stats: {
+      MAP: 130,
+      RAP: 130
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'trade_leatherworking',
+    desc: '+130 AP (Leatherworking)'
+  },
 }
 
 const HAND_ENCHANTS = {
-  13815: {
-    name: 'Agility',
-    effectId: 904,
+  44529: {
+    name: 'Major Agility',
+    effectId: 3222,
     stats: {
-      Agi: 5
+      Agi: 20
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
-    desc: '+5 Agi'
+    icon: 'trade_engraving',
+    desc: '+20 Agi'
   },
-  33996: {
-    name: 'Assault',
-    effectId: 1594,
+  44513: {
+    name: 'Greater Assault',
+    effectId: 3829,
     stats: {
-      MAP: 26,
-      RAP: 26
+      MAP: 35,
+      RAP: 35
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
-    desc: '+26 AP'
+    icon: 'trade_engraving',
+    desc: '+35 AP'
   },
-  20012: {
-    name: 'Greater Agility',
-    effectId: 1887,
+  60668: {
+    name: 'Crusher',
+    effectId: 1603,
     stats: {
-      Agi: 7
+      RAP: 44,
+      MAP: 44
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
-    desc: '+7 Agi'
+    icon: 'trade_engraving',
+    desc: '+44 AP'
   },
-  33995: {
-    name: 'Major Strength',
-    effectId: 684,
+  54998: {
+    name: 'Hand-Mounted Pyro Rocket',
+    effectId: 3603,
     stats: {
-      Str: 15
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
-    desc: '+15 Str'
+    icon: 'trade_engineering',
+    desc: '1800 Dmg Rocket on Use (Engi)'
   },
-  44968: {
-    name: 'Heavy Knothide Armor Kit',
-    effectId: 2841,
+  54999: {
+    name: 'Hyperspeed Accelerators',
+    effectId: 3604,
     stats: {
-      Stam: 10
     },
     Phase: 1,
     quality: "Common",
-    icon: 'inv_misc_armorkit_25',
-    desc: '+10 Stam'
+    icon: 'trade_engineering',
+    desc: '+340 Haste on Use (Engi)'
+  },
+  50909: {
+    name: 'Heavy Borean Armor Kit',
+    effectId: 3330,
+    stats: {
+      Stam: 18
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'inv_misc_armorkit_30',
+    desc: '+18 Stam'
   },
   25080: {
     name: 'Superior Agility',
@@ -438,23 +603,57 @@ const HAND_ENCHANTS = {
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
+    icon: 'trade_engraving',
     desc: '+15 Agi'
+  },
+  33994: {
+    name: 'Precise Strikes',
+    effectId: 2935,
+    stats: {
+      Hit: 15
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'trade_engraving',
+    desc: '+15 Hit'
+  },
+  44488: {
+    name: 'Precision',
+    effectId: 3234,
+    stats: {
+      Hit: 20
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'trade_engraving',
+    desc: '+20 Hit'
+  },
+}
+
+const WAIST_ENCHANTS = {
+  54793: {
+    name: 'Frag Belt',
+    effectId: 3601,
+    stats: {
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'trade_engineering',
+    desc: 'Cobalt Bomb every 6 min'
+  },
+  55655: {
+    name: 'Eternal Belt Buckle',
+    effectId: 3729,
+    stats: {
+    },
+    Phase: 1,
+    quality: "Rare",
+    icon: 'inv_belt_36',
+    desc: '+1 Prismatic Gem Socket'
   },
 }
 
 const LEG_ENCHANTS = {
-  22840: {
-    name: 'Arcanum of Rapidity',
-    effectId: 2543,
-    stats: {
-        Haste: 10
-    },
-    Phase: 1,
-    quality: "Uncommon",
-    icon: 'inv_misc_gem_02',
-    desc: '+10 Haste'
-  },
   35489: {
     name: 'Clefthide Leg Armor',
     effectId: 3011,
@@ -480,40 +679,16 @@ const LEG_ENCHANTS = {
     icon: 'inv_misc_armorkit_21',
     desc: '+40 AP, +10 Crit'
   },
-  24162: {
-    name: "Falcon's Call",
-    effectId: 2586,
+  50909: {
+    name: 'Heavy Borean Armor Kit',
+    effectId: 3330,
     stats: {
-      Stam: 10,
-      Hit: 10,
-      RAP: 24
-    },
-    Phase: 1,
-    icon: 'spell_nature_forceofnature',
-    quality: "Rare",
-    desc: '+10 Stam, +10 Hit, +24 RAP',
-  },
-  44968: {
-    name: 'Heavy Knothide Armor Kit',
-    effectId: 2841,
-    stats: {
-      Stam: 10
+      Stam: 18
     },
     Phase: 1,
     quality: "Common",
-    icon: 'inv_misc_armorkit_25',
-    desc: '+10 Stam'
-  },
-  15402: {
-    name: 'Lesser Arcanum of Voracity',
-    effectId: 1508,
-    stats: {
-      Agi: 8
-    },
-    Phase: 1,
-    quality: "Uncommon",
-    icon: 'inv_misc_gem_03',
-    desc: '+8 Agi'
+    icon: 'inv_misc_armorkit_30',
+    desc: '+18 Stam'
   },
   35495: {
     name: 'Nethercleft Leg Armor',
@@ -539,6 +714,93 @@ const LEG_ENCHANTS = {
     quality: "Epic",
     icon: 'inv_misc_armorkit_25',
     desc: '+50 AP, +12 Crit'
+  },
+  50901: {
+    name: 'Jormungar Leg Armor',
+    effectId: 3325,
+    stats: {
+      Agi: 15,
+      Stam: 45
+    },
+    Phase: 1,
+    quality: "Rare",
+    icon: 'inv_misc_armorkit_31',
+    desc: '+15 Agi, +45 Stam'
+  },
+  50902: {
+    name: 'Nerubian Leg Armor',
+    effectId: 3326,
+    stats: {
+      MAP: 55,
+      RAP: 55,
+      Crit: 15
+    },
+    Phase: 1,
+    quality: "Rare",
+    icon: 'inv_misc_armorkit_29',
+    desc: '+55 AP, +15 Crit'
+  },
+  60581: {
+    name: 'Frosthide Leg Armor',
+    effectId: 3822,
+    stats: {
+      Agi: 22,
+      Stam: 55
+    },
+    Phase: 1,
+    quality: "Epic",
+    icon: 'inv_misc_armorkit_32',
+    desc: '+22 Agi, +55 Stam'
+  },
+  60582: {
+    name: 'Icescale Leg Armor',
+    effectId:  3823,
+    stats: {
+      MAP: 75,
+      RAP: 75,
+      Crit: 22
+    },
+    Phase: 1,
+    quality: "Epic",
+    icon: 'inv_misc_armorkit_33',
+    desc: '+75 AP, +22 Crit'
+  },
+  60583: {
+    name: 'Jormungar Leg Reinforcements',
+    effectId: 3327,
+    stats: {
+      Agi: 22,
+      Stam: 55
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'trade_leatherworking',
+    desc: '+22 Agi, +55 Stam'
+  },
+  60584: {
+    name: 'Nerubian Leg Reinforcements',
+    effectId: 3328,
+    stats: {
+      MAP: 75,
+      RAP: 75,
+      Crit: 22
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'trade_leatherworking',
+    desc: '+75 AP, +22 Crit'
+  },
+  62447: {
+    name: 'Earthen Leg Armor',
+    effectId: 3853,
+    stats: {
+      Stam: 28,
+      Resil: 40
+    },
+    Phase: 1,
+    quality: "Epic",
+    icon: 'inv_misc_armorkit_18',
+    desc: '+28 Stam, +40 Resil'
   }
 }
 
@@ -551,7 +813,7 @@ const FEET_ENCHANTS = {
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
+    icon: 'trade_engraving',
     desc: '+5 Agi'
   },
   34008: {
@@ -563,7 +825,7 @@ const FEET_ENCHANTS = {
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
+    icon: 'trade_engraving',
     desc: '+9 Stam, +8% Speed'
   },
   34007: {
@@ -575,7 +837,7 @@ const FEET_ENCHANTS = {
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
+    icon: 'trade_engraving',
     desc: '+6 Agi, +8% Speed'
   },
   27951: {
@@ -586,7 +848,7 @@ const FEET_ENCHANTS = {
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
+    icon: 'trade_engraving',
     desc: '+12 Agi'
   },
   27950: {
@@ -597,7 +859,7 @@ const FEET_ENCHANTS = {
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
+    icon: 'trade_engraving',
     desc: '+12 Stam'
   },
   20023: {
@@ -608,19 +870,19 @@ const FEET_ENCHANTS = {
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
+    icon: 'trade_engraving',
     desc: '+7 Agi'
   },
-  44968: {
-    name: 'Heavy Knothide Armor Kit',
-    effectId: 2841,
+  50909: {
+    name: 'Heavy Borean Armor Kit',
+    effectId: 3330,
     stats: {
-      Stam: 10
+      Stam: 18
     },
     Phase: 1,
     quality: "Common",
-    icon: 'inv_misc_armorkit_25',
-    desc: '+10 Stam'
+    icon: 'inv_misc_armorkit_30',
+    desc: '+18 Stam'
   },
   27954: {
     name: 'Surefooted',
@@ -630,7 +892,7 @@ const FEET_ENCHANTS = {
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
+    icon: 'trade_engraving',
     desc: '+10 Hit'
   },
   27948: {
@@ -642,7 +904,7 @@ const FEET_ENCHANTS = {
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
+    icon: 'trade_engraving',
     desc: '+4 Mp5, 4 Hp5'
   }
 }
@@ -719,7 +981,7 @@ const MELEE_ENCHANTS = {
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
+    icon: 'trade_engraving',
     desc: '+35 Agi (2H)'
   },
   27968: {
@@ -730,7 +992,7 @@ const MELEE_ENCHANTS = {
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
+    icon: 'trade_engraving',
     desc: '+30 Int'
   },
   23804: {
@@ -752,7 +1014,7 @@ const MELEE_ENCHANTS = {
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
+    icon: 'trade_engraving',
     desc: '+20 Str'
   },
   27971: {
@@ -765,7 +1027,7 @@ const MELEE_ENCHANTS = {
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
+    icon: 'trade_engraving',
     desc: '+70 AP (2H)'
   },
   23799: {
@@ -793,7 +1055,7 @@ const MELEE_ENCHANTS = {
     },
     Phase: 1,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
+    icon: 'trade_engraving',
     desc: 'Proc +120 Agi for 15s'
   },
   42974: {
@@ -809,7 +1071,7 @@ const MELEE_ENCHANTS = {
     },
     Phase: 4,
     quality: "Common",
-    icon: 'spell_holy_greaterheal',
+    icon: 'trade_engraving',
     desc: 'Proc +840 ArP for 15s'
   }
 }
@@ -950,6 +1212,7 @@ const ENCHANT_MAP = {
   ring1: RING_ENCHANTS,
   ring2: RING_ENCHANTS,
   shoulder: SHOULDER_ENCHANTS,
+  waist: WAIST_ENCHANTS,
   wrist: WRIST_ENCHANTS,
   attachment: ATTACHMENTS
 };
