@@ -45,7 +45,7 @@ function initializeAuras() {
     aura_timer_resets = buildAuraTimerResets(auras)
     aura_cd_resets = buildAuraCdResets(auras)
 
-    buff_uptimes = {} // reset buff uptimes
+    buff_uptimes = {} // reset buff uptimes to empty obj, then builds the obj based on auras and sets to 0
     for (let prop in auras) {
         buff_uptimes[prop] = 0
     }
