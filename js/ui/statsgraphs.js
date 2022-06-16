@@ -14,36 +14,8 @@ var actions = {
   primary: "Primary (Pet)"
 };
 
-const AURA_MAPPER = {
-  drums: "Drums",
-  potion: "Potion",
-  abacus: "Haste (Abacus)",
-  lust: "Bloodlust",
-  rapid: "Rapid Fire",
-  berserk: "Berserking (Troll)",
-  unyieldingcourage: "Unyielding Courage",
-  bloodfury: "Bloodfury (Orc)",
-  swarmguard: "Insight of the Qiraji (Swarmguard)",
-  beastwithin: "The Beast Within",
-  tenacity: "Badge of Tenacity",
-  aptrink1: auras.aptrink1.name,
-  aptrink2: auras.aptrink2.name,
-  dragonspine: "Dragonspine Trophy",
-  imphawk: "Quick Shots (Imp Hawk)",
-  beastlord: "Beast Lord",
-  executioner: "Executioner",
-  mongoose: "Mongoose",
-  madness: "Forceful Strike (MotB)",
-  tsunami: "Fury of the Crashing Waves (TT)",
-  hourglass: "Rage of the Unraveler (HG)",
-  naarusliver: "Battle Trance (BNS)",
-  eternalchamp: "Band of the Eternal Champion",
-  donsantos: "Santo's Blessing",
-  mastertact: "Master Tactitian",
-  ashtongue: "Deadly Aim (Ash)",
-  dmccrusade: "Darkmoon Card: Crusade",
-  righteous: "Righteousness (Oil)",
-  shattered: "Light's Strength (Aldor)"
+var AURA_MAPPER = {
+  
 }
 
 function buildData(spread){
@@ -296,7 +268,10 @@ var histogram = new Chart(ctx, {
 });
 
 function buildBuffUptimes(){
-
+  // build names for auras from aura effect names
+  for (let prop in buff_uptimes) {
+    AURA_MAPPER[prop] = auras[prop].effect_name;
+  }
   let filtereduptimes = Object.entries(buff_uptimes).filter(key => !key.includes('0.00'));
   let data = [];
 

@@ -6,7 +6,6 @@ const BM_TREE = [
       name: 'Improved Aspect of the Hawk',
       abrv: 'imp_hawk',
       max: 5,
-      is_modifier: true,
       per_point: 3 / 100
     },
     {
@@ -501,7 +500,7 @@ const SV_TREE = [
   [
     {
       name: 'Master Tactician',
-      abrv: 'master_tac',
+      abrv: 'master_tact',
       max: 5
     },
     {
@@ -533,7 +532,6 @@ const SV_TREE = [
       name: 'Hunting Party',
       abrv: 'hunt_party',
       max: 3,
-      is_modifier: true,
       per_point: 1 / 100
     }
   ],

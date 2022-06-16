@@ -401,7 +401,6 @@ function parsePetTalents(talentString) {
         if (Number.isNaN(points))
             throw new TypeError(`Received invalid character ${char} in the talent string`)
             
-        console.log(treeIdx)
         loadPetTalent(talents, PET_TREES[treeIdx][talentIdx++], points)
         total_points += points
         if (total_points > MAX_PET_POINTS) throw new Error(`Too many talent points used! Max is ${MAX_PET_POINTS}`)

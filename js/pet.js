@@ -41,6 +41,47 @@ var petsteptime = 0;
 var spellindex = 0;
 var beast_tame_weight = false;
 
+var pet_talents = {
+    blood_of_rhino: 0,
+    bloodthirst: 1,
+    boar_speed: 0,
+    bullheaded: 0,
+    call_of_wild: 1,
+    carrion_feeder: 0,
+    charge: 0,
+    cobra_reflex: 1.3,
+    cornered: 0,
+    cull_herd: 1.03,
+    dash: 1,
+    dive: 0,
+    feed_frenzy: 1,
+    grace_mantis: 0,
+    great_resist: 0,
+    great_stam: 0,
+    guard_dog: 0,
+    imp_cower: 0,
+    intervene: 0,
+    last_stand: 0,
+    lick_wounds: 0,
+    lionheart: 0,
+    mobility: 0,
+    nat_armor: 0,
+    owl_focus: 0,
+    pet_barding: 0,
+    pheonix: 0,
+    rabid: 1,
+    roar_recovery: 0,
+    roar_sacrifice: 0,
+    shark_attack: 1.03,
+    silverback: 0,
+    spider_bite: 0.09,
+    spike_collar: 1.09,
+    taunt: 0,
+    thunderstomp: 0,
+    wild_hunt: 0,
+    wolverine_bite: 0
+};
+
 const PET_FAMILY = [
     { 
         name: 'Ravager',
@@ -79,17 +120,15 @@ const PET_FAMILY = [
         secondary: 'Lightning Breath',
     },
 ];
-var killcommand = {ready:false, timeremaining:0, basecd:5, cooldown:0};
 var selectedPet = 0;
 
 var petdmg = {
-    kcdmg:0,
     attackdmg:0,
     primarydmg:0,
 }
 
 function petStatsCalc(){
-
+    pet_talents = Ferocitypet
     let racialmod = (selectedRace === 3) ? 1.05 : 1; // 5% pet dmg if orc
     let beasttamers_crit = 0;
     let beasttamers_dmg = 1;
@@ -132,19 +171,16 @@ function petStatsCalc(){
 function petUpdateDmgMod(){
     pet.combatdmgmod = 1;
     naturedmgmod = 1;
-    if(auras.beastwithin.timer > 0) { pet.combatdmgmod *= 1.5; } // bestial wrath
-    if(pet.ferocious.timer > 0) { pet.combatdmgmod *= talents.ferocious_insp; } // ferocious insp pet buff
-    if(partybuffs.ferociousinsp.timer > 0 && !partybuffs.ferociousinsp.inactive) { pet.combatdmgmod *= Math.pow(1.03, partybuffs.ferociousinsp.stacks); } // ferocious insp from others
-    if(debuffs.bloodfrenzy.timer > 0 && !debuffs.bloodfrenzy.inactive) { pet.combatdmgmod *= 1.04;} // blood frenzy debuff
+    if(!!auras.beastwithin && auras.beastwithin.timer > 0) pet.combatdmgmod *= 1.5; // bestial wrath
+    if(debuffs.bloodfrenzy.timer > 0 && !debuffs.bloodfrenzy.inactive) pet.combatdmgmod *= 1.04; // blood frenzy debuff
     
-    if((debuffs.misery.timer > 0) && !debuffs.misery.inactive) { naturedmgmod *= 1.05; } // misery
     return;
 }
 
 function petUpdateHaste(){
     pet.combatspeed = pet.speed;
-    pet.combatspeed = (pet.frenzy.timer > 0) ? pet.combatspeed / 1.3 : pet.combatspeed; // frenzy
-    pet.combatspeed = (auras.lust.timer > 0) ? pet.combatspeed / 1.3 : pet.combatspeed; // lust
+    pet.combatspeed = (!!auras.frenzy && auras.frenzy.timer > 0) ? pet.combatspeed / 1.3 : pet.combatspeed; // frenzy
+    pet.combatspeed = (!!auras.lust && auras.lust.timer > 0) ? pet.combatspeed / 1.3 : pet.combatspeed; // lust
     return;
 }
 
@@ -155,24 +191,8 @@ function petUpdateStats(){
     pet.combatmiss = pet.miss;
     // hunter AP
     let bonusAP = updateAP();
-    let HM_map = 0;
-    if (debuffs.hm.timer > 0 && debuffs.hm.improved && !debuffs.hm.inactive) {
-        if(talents.imp_hunter_mark > 0) {
-           HM_map = 110 * talents.imp_hunter_mark;
-        }
-        else {
-           HM_map = 110 * 1;
-        }
-    }
-    pet.combatap = bonusAP * 0.22 + pet.ap + HM_map;
-    if (talents.exp_weakness > 0) {
-        pet.combatap += (debuffs.exposeweakness.timer > 0) ? (Agi + combatAgi) / 4 : 0;
-    }
-    else if (debuffs.exposeweakness.timer > 0 && !debuffs.exposeweakness.inactive) {
-        pet.combatap += debuffs.exposeweakness.agi / 4;
-    }
-    let unleashMAP = (partybuffs.unleashedrage.timer > 0 && !partybuffs.unleashedrage.inactive) ? 1.1 : 1;
-    pet.combatap *= unleashMAP;
+    pet.combatap = bonusAP * 0.22 + pet.ap;
+
     // ******************** Crit *******************
     pet.combatcrit += combatAgi / 33;
     // pet crit imp crusader
@@ -180,8 +200,7 @@ function petUpdateStats(){
         pet.combatcrit += debuffs.judgecrusader.crit;
         pet.combatspellcrit += debuffs.judgecrusader.crit;
     } // imp crusader debuff
-    // pet miss imp faerie
-    if(debuffs.faeriefire.timer > 0 && debuffs.faeriefire.improved && !debuffs.faeriefire.inactive) { pet.combatmiss -= 3; }
+    
 }
 
 function petUpdateFocus(playercrit){
@@ -210,18 +229,8 @@ function petUpdateFocus(playercrit){
 
 function petAuras(steptime){
     // update uptime
-    if(pet.ferocious.timer > 0) { pet.ferocious.uptime += Math.min(pet.ferocious.timer,steptime); }// ferocious insp
-    if(pet.frenzy.timer > 0) { pet.frenzy.uptime += Math.min(pet.frenzy.timer,steptime); }// frenzy
-    // update timer
-    if(pet.ferocious.timer > 0) { pet.ferocious.timer = Math.max(pet.ferocious.timer - steptime,0); }// ferocious insp
-    if(pet.frenzy.timer > 0) { pet.frenzy.timer = Math.max(pet.frenzy.timer - steptime,0); }// frenzy
     
-    // kill command cooldown update
-    if(killcommand.cooldown > 0) { killcommand.cooldown = Math.max(killcommand.cooldown - steptime,0); 
-    } // kill command time since last crit update
-    if(killcommand.timeremaining > 0) { killcommand.timeremaining = Math.max(killcommand.timeremaining - steptime,0); 
-    } else if(killcommand.timeremaining === 0) { killcommand.ready = false;} // if time since last kc fades before use, ready is false
-
+    
 }
 
 function petRollAttack(){
@@ -309,24 +318,8 @@ function petSpell(petspell){
     result = 0;
     let specialcrit = 0;
     let spelltype = "";
-    // kill command use
-    if(petspell === 'kill command'){
-        specialcrit = talents.focused_fire * 10;
-        result = petRollSpell(specialcrit); // check attack table
-        spellResultSum(result,'killcommand');
-        if (result === RESULT.HIT) {
-            dmg = petKillCommCalc(); // calc damage
-        }
-        else if (result === RESULT.CRIT) {
-            dmg = petKillCommCalc();
-            dmg *= 2;
-            petCrit();
-        }
-        petkccount++;
-        spelltype = "phys";
-        
-    } // primary spell use determined by which pet selected
-    else if(petspell === 'primary') {
+
+    if(petspell === 'primary') {
 
         if(nextpetattack < nextpetspell){ nextpetspell = nextpetattack; }
 
@@ -369,17 +362,12 @@ function petSpell(petspell){
     }
     let done = petdealdamage(dmg,result,spelltype); // need special case for magic spells pet or player
     petdmgdone += done;
-    if (petspell === 'kill command'){
-        petdmg.kcdmg += done;
-    } else if (petspell === 'primary'){
+    if (petspell === 'primary'){
         petdmg.primarydmg += done;
     }
     petUpdateHaste();
     
-    if(combatlogRun && petspell === 'kill command') {
-        combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Pet Kill Command " + RESULTARRAY[result] + " for " + done;
-        combatlogindex++;
-    } else if(combatlogRun){
+    if(combatlogRun){
         combatlogarray[combatlogindex] = petsteptime.toFixed(3) + " - Pet " + PET_SPELLS[spellindex].name + " " + RESULTARRAY[result] + " for " + done;
         combatlogindex++;
     }
@@ -410,16 +398,12 @@ function petdealdamage(dmg, result, spelltype) {
 function petCrit(){
     let roll = 0;
     //frenzy
-    if (talents.frenzy > 0) {
+    if (!!auras.frenzy) {
         roll = rng10k();
         let frenzychance = talents.frenzy * 2000;
-        pet.frenzy.timer = (roll <= frenzychance) ? 8 : pet.frenzy.timer; // proc check
+        auras.frenzy.timer = (roll <= frenzychance) ? 8 : pet.frenzy.timer; // proc check
         if(pet.frenzy.timer === 8) { 
-            if(combatlogRun && petspell === 'kill command') {
-                combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Pet gains Frenzy";
-                    combatlogindex++;
-            } 
-            else if(combatlogRun && nextpetspell >= nextpetattack) {
+            if(combatlogRun && nextpetspell >= nextpetattack) {
                     combatlogarray[combatlogindex] = nextpetattack.toFixed(3) + " - Pet gains Frenzy";
                     combatlogindex++;
             } 

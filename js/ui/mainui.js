@@ -375,7 +375,7 @@ function initializeSavedSets(setnum) {
 
 
 
-function initializeTargetDropdown() {
+function initializeTargetDropdown(delay) {
     let initialId = 0;
     let targets = targetData.getNameKeyTargetPairs();
 
@@ -396,10 +396,10 @@ function initializeTargetDropdown() {
     document.getElementById("armor").disabled = true;
     document.getElementById("typeSelect").disabled = true;
     document.getElementById("level").disabled = true;
-    selectTarget(initialId);
+    selectTarget(initialId,delay);
 }
 
-function selectTarget(id) {
+function selectTarget(id,delay) {
 
     target = targetData.selectTarget(id);
     if(id === "0") {
@@ -418,9 +418,13 @@ function selectTarget(id) {
     document.getElementById("typeSelect").value = target.type;
     document.getElementById("level").value = target.level;
     calcBaseStats();
-    update();
+    if (delay === undefined) {
+        //console.log('try store')
+        storeData();
+    }
+
 }
-initializeTargetDropdown();
+
 
 function initializeImportSets(){
 
@@ -446,10 +450,7 @@ function selectGearlist() {
 
 gearSlotsDisplay();
 
-// checks if saved before, if so - load saved data
-
 fetchData();
-selectedOptionsResults();
-
+initializeTargetDropdown('start');
 initializeImportSets();
 initializeSavedSets();

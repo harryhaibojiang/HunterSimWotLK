@@ -2,21 +2,21 @@
 var buffslist = [
     
     { id: 0, talented: false }, // might 27141
-    { id: 2048, talented: false }, // shout 2048
+    { id: 0, talented: false }, // shout 2048
     0, // heroic presence
-    17007, // lotp/rampage 17007
-    { id: 25528, talented: true }, // SoE/Horn 25528
+    0, // lotp/rampage 17007
+    { id: 0, talented: false }, // SoE/Horn 25528
     0, // tsa 27066
     0, // swift ret 53648
     0, // feroc insp 75447
     { id: 0, talented: false }, // WF 25587
-    { id: 26991, talented: true }, // GotW 26991
-    25898, // bok 25898
-    { id: 27143, talented: true }, // bow 27143
+    { id: 0, talented: false }, // GotW 26991
+    0, // bok 25898
+    { id: 0, talented: true }, // bow 27143
     { id: 0, talented: false }, // ms totem 25570
-    27127, // AI 27127
+    0, // AI 27127
     0, // fel intel 57567
-    { id: 25392, talented: true }, // PW:F 25392
+    { id: 0, talented: true }, // PW:F 25392
     
 ];
 
@@ -52,7 +52,7 @@ function selectedOptionsResults(){
     displayStats();
     gearSlotsDisplay();
     storeData();
-    //console.log(buffslist);
+    console.log('options');
 }
 
 function auraUptimeSettings(){
@@ -236,24 +236,22 @@ function fortCheck() {
 // below functions check if selected check the list of items then call the update
 function flaskSelection() {
     let isSelected = document.getElementById("flask").value;
+    let flasks = Object.entries(FLASKS)
     switch (isSelected) {
         case "assault":
-            playerconsumes.flask = 22854;
+            playerconsumes.flask = flasks[0];
         break;
         case "wisdom":
-            playerconsumes.flask = 13511;
+            playerconsumes.flask = flasks[1];
         break;
         case "bandit":
-            playerconsumes.flask = 32599;
+            playerconsumes.flask = flasks[2];
         break;
         case "fortification":
-            playerconsumes.flask = 22851;
+            playerconsumes.flask = flasks[3];
         break;
         case "titans":
-            playerconsumes.flask = 13510;
-        break;
-        case "restoration":
-            playerconsumes.flask = 22853;
+            playerconsumes.flask = flasks[4];
         break;
         case "none":
             delete playerconsumes.flask;
@@ -506,32 +504,32 @@ function selectTalents(talent){
     switch (talent) {
         case "6":
             talents = T_53_16_2;
-            document.getElementById("currtalent").innerHTML = "41/20/0";
+            document.getElementById("currtalent").innerHTML = "53/16/2";
             document.getElementById("specimg").src = "images/Ability_Hunter_BeastTaming.png";
         break;
         case "5":
-            talents = T_53_16_2;
-            document.getElementById("currtalent").innerHTML = "0/20/41";
+            talents = T_7_57_7hm;
+            document.getElementById("currtalent").innerHTML = "7/57/7hm";
             document.getElementById("specimg").src = "images/Ability_Hunter_Camoflauge.png";
         break;
         case "4":
-            talents = T_53_16_2;
-            document.getElementById("currtalent").innerHTML = "7/20/34";
+            talents = T_7_57_7;
+            document.getElementById("currtalent").innerHTML = "7/57/7";
             document.getElementById("specimg").src = "images/Ability_Hunter_Camoflauge.png";
         break;
         case "3":
-            talents = T_53_16_2;
-            document.getElementById("currtalent").innerHTML = "5/20/36";
+            talents = T_54_13_4;
+            document.getElementById("currtalent").innerHTML = "54/13/4";
             document.getElementById("specimg").src = "images/Ability_Hunter_Camoflauge.png";
         break;
         case "2":
             talents = T_53_16_2;
-            document.getElementById("currtalent").innerHTML = "0/27/34";
+            document.getElementById("currtalent").innerHTML = "53/16/2";
             document.getElementById("specimg").src = "images/Ability_Hunter_Camoflauge.png";
         break;
         case "1":
             talents = T_53_16_2;
-            document.getElementById("currtalent").innerHTML = "17/44/0";
+            document.getElementById("currtalent").innerHTML = "53/16/2";
             document.getElementById("specimg").src = "images/Ability_Marksmanship.png";
         break;
         case "0":
@@ -549,26 +547,16 @@ function selectTalents(talent){
 
 function spellEnableCheck(){
     let rapidcheck = document.getElementById("rapidcheck").checked;
-    let beastcheck = document.getElementById("beastcheck").checked;
-    let racialcheck = document.getElementById("racialcheck").checked;
     let lustcheck = document.getElementById("lustcheck").checked;
-    let drumcheck = document.getElementById("drumcheck").checked;
-    let hastecheck = document.getElementById("hastecheck").checked;
-    let secpotcheck = document.getElementById("secpotcheck").checked;
     let runecheck = document.getElementById("runecheck").checked;
     let multicheck = document.getElementById("multicheck").checked;
     let arcanecheck = document.getElementById("arcanecheck").checked;
     let raptorcheck = document.getElementById("raptorcheck").checked;
     let meleecheck = document.getElementById("meleecheck").checked;
 
-    auras.rapid.enable = rapidcheck;
-    beastenable = beastcheck;
-    racialenable = racialcheck;
-    auras.lust.enable = lustcheck;
-    auras.drums.enable = drumcheck;
-    auras.potion.primary = hastecheck;
-    auras.potion.secondary = secpotcheck;
-    auras.rune.enable = runecheck;
+    usable_CDs.rapid.enable = rapidcheck;
+    usable_CDs.lust.enable = lustcheck;
+    usable_CDs.rune.enable = runecheck;
     
     SPELLS.multishot.enable = multicheck;
     SPELLS.arcaneshot.enable = arcanecheck;
@@ -583,36 +571,18 @@ function spellOffsets(){
     let beastoffset = document.getElementById("beastoffset").value;
     let racialoffset = document.getElementById("racialoffset").value;
     let lustoffset = document.getElementById("lustoffset").value;
-    let drumoffset = document.getElementById("drumoffset").value;
-    let trink1offset = document.getElementById("trink1offset").value;
-    let trink2offset = document.getElementById("trink2offset").value;
     let startpotoffset = document.getElementById("startpotoffset").value;
 
-    auras.rapid.offset = parseInt(rapidoffset);
-    auras.beastwithin.offset = parseInt(beastoffset);
-    auras.berserk.offset = parseInt(racialoffset);
-    auras.bloodfury.offset = parseInt(racialoffset);
-    auras.lust.offset = parseInt(lustoffset);
-    auras.drums.offset = parseInt(drumoffset);
-    auras.aptrink1.offset = (auras.aptrink1.enable) ? parseInt(trink1offset): 0;
-    auras.aptrink2.offset = (auras.aptrink2.enable) ? parseInt(trink2offset): 0;
-    auras.potion.offset = parseInt(startpotoffset);
+    usable_CDs.rapid.offset = parseInt(rapidoffset);
+    usable_CDs.beastwithin.offset = parseInt(beastoffset);
+    usable_CDs.berserk.offset = parseInt(racialoffset);
+    usable_CDs.bloodfury.offset = parseInt(racialoffset);
+    usable_CDs.lust.offset = parseInt(lustoffset);
+    usable_CDs.potion.offset = parseInt(startpotoffset);
     storeData();
 }
 
 function spellOptions(){
-    let lustoption = document.getElementById("lustoption").value;
-    switch (lustoption) {
-        case "1":   auras.lust.duration = 40;
-        break;
-        case "2":   auras.lust.duration = 80;
-        break;
-        case "3":   auras.lust.duration = 120;
-        break;
-        case "4":   auras.lust.duration = 160;
-        break;
-    }
-    auras.drums.type = document.getElementById("drumoption").value;
     
     let spellcdoption = document.getElementById("spellcdoption").value;
     switch (spellcdoption) {
@@ -632,8 +602,6 @@ function spellOptions(){
             setSpellCDs();
         break;
     }
-    secondaryPotion = document.getElementById("secpotoption").value;
     
     storeData();
-
 }
