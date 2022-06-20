@@ -427,8 +427,8 @@ const PET_CDS = {
             duration: 20,
             base_cd: 40,
             stats: {
-                RAP: 320,
-                MAP: 320
+                RAP: 204,
+                MAP: 204
             }
         },
         effect_name: 'Furious Howl'
@@ -461,6 +461,14 @@ const PET_PROCS = {
         },
         effect_name: 'Savage Rend'
     },
+    monstrousbite: { // todo
+        effect: {
+            duration: 12,
+            stacks: 3,
+            dmgbonus: 3
+        },
+        effect_name: 'Monstrous Bite'
+    }
 }
 // todo DBW, rest should work
 const TRINK_PROCS = {
@@ -1323,7 +1331,7 @@ const aura_template = { timer: 0, cd: 0, uptime: 0 };
 
 var usable_CDs = {
 
-    beastwithin: { enable: false, offset: 0, type: 'player'},
+    beastwithin: { enable: true, offset: 0, type: 'player'},
     readiness: { enable: true, offset: 0, type: 'player' },
     rapid: { enable: true, offset: 0, type: 'player' },
     rune: { enable: true, offset: 0, type: 'player' },

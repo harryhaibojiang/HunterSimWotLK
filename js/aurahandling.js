@@ -16,8 +16,7 @@ var debuffs = {
     mangle: {uptime_g:0, timer:0, duration:60, dmgbonus:1.3, uptime:0}
 }
 
-var buff_uptimes = {
-}
+var buff_uptimes = {}
 
 const debuff_uptimes = {
     hm: 0,

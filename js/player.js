@@ -85,6 +85,7 @@ var rangedmgmod = 1;
 var selectedRace = 3; 
 var offhandDisabled = false;
 var totaldmgdone = 0;
+var level = 70;
 
 var two_min_cds = 120;
 var three_min_cds = 180;
@@ -144,30 +145,31 @@ var selectedbuffs = {
    stats: { MAP:0, RAP:0, Str:0, Agi:0 },
    special: { kingsMod: 1, windfury: false }
 };
+var glyphs = {}
 var talents = {
-   imp_hawk: 1.15, 
+   imp_hawk: 1.15, //
    end_training: 1.01, // -
-   focused_fire: 2, 
+   focused_fire: 2, //
    imp_monkey: 0, // -
    thick_hide: 0,// -
-   imp_ress_pet: 2,
+   imp_ress_pet: 2, // - 
    pathfinding: 0,// -
    aspect_mast: 1,
-   unleash_fury: 1.2, 
+   unleash_fury: 1.2, // -
    imp_mend_pet: 1,// -
-   ferocity: 10,
+   ferocity: 10, // 
    spirit_bond: 0,// -
    intimidation: 1,// -
-   bestial_disc: 2,
-   animal_handler: 5,
-   frenzy: 4,
-   ferocious_insp: 1.03,
-   bestial_wrath: 1,
-   catlike_reflex: 0,// -
-   invigoration: 0,
-   serp_swift: 1.2,
+   bestial_disc: 2, // -
+   animal_handler: 10, // 
+   frenzy: 4, //
+   ferocious_insp: 1.03, //
+   bestial_wrath: 1, //
+   catlike_reflex: 0, 
+   invigoration: 0, //
+   serp_swift: 1.2, // 
    longevity: 3,
-   beast_within: 1,
+   beast_within: 1, // 
    cobra_strike: 60,
    kindred_spirit: 1.2,
    beast_mast: 1,
@@ -479,7 +481,6 @@ function updateArmorReduction() {
    let arp = ArPRating;
    let debuffarp = 0;
    let armorPenReduc = 0;
-   let level = 70;
    let targetlevel = 73;
    // formula consts for level 60 or higher
    let target_const = 400 + 85 * targetlevel + 4.5 * 85 * (targetlevel-59);

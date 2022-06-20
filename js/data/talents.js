@@ -98,7 +98,7 @@ const BM_TREE = [
       abrv: 'animal_handler',
       max: 2,
       is_modifier: true,
-      per_point: 2
+      per_point: 5
     },
     {
       name: 'Frenzy',
@@ -579,7 +579,8 @@ function parseTalents(talentString) {
   return talents
 }
 
-const T_53_16_2 = parseTalents('51200201515012243100531351-035005201-2')
-const T_7_57_7hm = parseTalents('502-035335101030013233135030351-5000002')
-const T_7_57_7 = parseTalents('502-035305131030013233135030351-5000002')
-const T_54_13_4 = parseTalents('51200201505112253100531351-005305-4')
+const BM_ImpHM_Track = parseTalents('51200201515012243100531151-0050352-5')
+const MM_ImpHM_FA_Track = parseTalents('502-035335001230013233135031351-5')
+const MM_ImpAS_FA_Track = parseTalents('502-035305131030013233135030351-5000002')
+const SV_FA_Resrc_Aimed = parseTalents('-035305001-5000032500033330533035001331')
+const BM_FA_Track = parseTalents('51200201515012243100531151-0350052-5')

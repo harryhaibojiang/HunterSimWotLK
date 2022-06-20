@@ -75,7 +75,6 @@ function storeData(){
     localStorage.setItem("sets", JSON.stringify(SavedSets));
     // checks if saved before
     localStorage.setItem('savecheck','true');
-    console.log('store')
 }
 
 function fetchData(){

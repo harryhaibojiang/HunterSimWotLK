@@ -25,7 +25,7 @@ var targetData = (function() {
         level: 83
       },
       1: {
-        name: 'Level 83 Boss',
+        name: 'Level 83 10463',
         armor: 10463,
         phase: 1,
         resilience: 0,

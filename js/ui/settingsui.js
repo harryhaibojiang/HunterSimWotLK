@@ -493,44 +493,45 @@ function selectTalents(talent){
 
     
     let customtalentlink = document.getElementById("customtalent").value;
-    let regioncheck = customtalentlink.substr(0,11);
+    let regioncheck = customtalentlink.substr(0,13);
     let customtalents = "";
-    if(regioncheck !== "https://tbc") {
-        customtalents = customtalentlink.slice(46);
+    if(regioncheck !== "https://wotlk") {
+        customtalents = customtalentlink.slice(50);
     }
     else {
-        customtalents = customtalentlink.slice(43);
+        customtalents = customtalentlink.slice(45);
     }
+    console.log(customtalents)
     switch (talent) {
         case "6":
-            talents = T_53_16_2;
-            document.getElementById("currtalent").innerHTML = "53/16/2";
+            talents = BM_ImpHM_Track;
+            document.getElementById("currtalent").innerHTML = "BM Imp HM Tracking";
             document.getElementById("specimg").src = "images/Ability_Hunter_BeastTaming.png";
         break;
         case "5":
-            talents = T_7_57_7hm;
-            document.getElementById("currtalent").innerHTML = "7/57/7hm";
-            document.getElementById("specimg").src = "images/Ability_Hunter_Camoflauge.png";
+            talents = MM_ImpHM_FA_Track;
+            document.getElementById("currtalent").innerHTML = "MM ImpHM Focused Aim";
+            document.getElementById("specimg").src = "images/Ability_Marksmanship.png";
         break;
         case "4":
-            talents = T_7_57_7;
-            document.getElementById("currtalent").innerHTML = "7/57/7";
+            talents = MM_ImpAS_FA_Track;
+            document.getElementById("currtalent").innerHTML = "MM ImpArcane Focused Aim";
             document.getElementById("specimg").src = "images/Ability_Hunter_Camoflauge.png";
         break;
         case "3":
-            talents = T_54_13_4;
-            document.getElementById("currtalent").innerHTML = "54/13/4";
+            talents = SV_FA_Resrc_Aimed;
+            document.getElementById("currtalent").innerHTML = "SV Focused Aim Resrc Aimed Shot";
             document.getElementById("specimg").src = "images/Ability_Hunter_Camoflauge.png";
         break;
         case "2":
-            talents = T_53_16_2;
-            document.getElementById("currtalent").innerHTML = "53/16/2";
-            document.getElementById("specimg").src = "images/Ability_Hunter_Camoflauge.png";
+            talents = BM_FA_Track;
+            document.getElementById("currtalent").innerHTML = "BM Focused Aim Tracking";
+            document.getElementById("specimg").src = "images/Ability_Hunter_BeastTaming.png";
         break;
         case "1":
-            talents = T_53_16_2;
-            document.getElementById("currtalent").innerHTML = "53/16/2";
-            document.getElementById("specimg").src = "images/Ability_Marksmanship.png";
+            talents = BM_FA_Track;
+            document.getElementById("currtalent").innerHTML = "BM Focused Aim Tracking";
+            document.getElementById("specimg").src = "images/Ability_Hunter_BeastTaming.png";
         break;
         case "0":
             if (customtalentlink !== "") {
@@ -542,6 +543,7 @@ function selectTalents(talent){
     }
     whtalentlink = customtalentlink;
     talentindex = talent;
+    glyphs = selectGlyphs(selected_glyphs);
     selectedOptionsResults();
 }
 
