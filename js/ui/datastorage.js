@@ -34,8 +34,6 @@ function storeData(){
     localStorage.setItem('playeruptime',playeruptime);
     localStorage.setItem('petuptime',petuptime);
     localStorage.setItem('weavetime',JSON.stringify(weavetime));
-    localStorage.setItem('huntraid',huntersinraid);
-    localStorage.setItem('berserkhp',BerserkStartHP);
     localStorage.setItem('petselect',selectedPet);
     localStorage.setItem('raceselect',selectedRace);
     localStorage.setItem('target',JSON.stringify(target));
@@ -48,10 +46,8 @@ function storeData(){
     localStorage.setItem("beastcheck", document.getElementById("beastcheck").checked);
     localStorage.setItem("racialcheck", document.getElementById("racialcheck").checked);
     localStorage.setItem("lustcheck", document.getElementById("lustcheck").checked);
-    localStorage.setItem("drumcheck", document.getElementById("drumcheck").checked);
-    localStorage.setItem("hastecheck", document.getElementById("hastecheck").checked);
-    localStorage.setItem("secpotcheck", document.getElementById("secpotcheck").checked);
     localStorage.setItem("runecheck", document.getElementById("runecheck").checked);
+
     localStorage.setItem("multicheck", document.getElementById("multicheck").checked);
     localStorage.setItem("arcanecheck", document.getElementById("arcanecheck").checked);
     localStorage.setItem("raptorcheck", document.getElementById("raptorcheck").checked);
@@ -61,16 +57,10 @@ function storeData(){
     localStorage.setItem("beastoffset", document.getElementById("beastoffset").value);
     localStorage.setItem("racialoffset", document.getElementById("racialoffset").value);
     localStorage.setItem("lustoffset", document.getElementById("lustoffset").value);
-    localStorage.setItem("drumoffset", document.getElementById("drumoffset").value);
-    localStorage.setItem("trink1offset", document.getElementById("trink1offset").value);
-    localStorage.setItem("trink2offset", document.getElementById("trink2offset").value);
     localStorage.setItem("startpotoffset", document.getElementById("startpotoffset").value);
     //localStorage.setItem("runeoffset", document.getElementById("runeoffset").value);
     // spell options
-    localStorage.setItem("lustoption", document.getElementById("lustoption").value);
-    localStorage.setItem("drumoption", document.getElementById("drumoption").value);
     localStorage.setItem("spellcdoption", document.getElementById("spellcdoption").value);
-    localStorage.setItem("secpotoption", document.getElementById("secpotoption").value);
     // settings for gear filters
     localStorage.setItem("phasecheck", document.getElementById("phasecheck").value);
     localStorage.setItem("raidcheck", document.getElementById("raidcheck").checked);
@@ -111,8 +101,6 @@ function fetchData(){
     playeruptime = (localStorage.getItem('playeruptime') != null) ? parseInt(localStorage.getItem('playeruptime')):playeruptime;
     petuptime = (localStorage.getItem('petuptime') != null) ? parseInt(localStorage.getItem('petuptime')):petuptime;
     weavetime = (localStorage.getItem('weavetime') != null) ? JSON.parse(localStorage.getItem('weavetime')):weavetime;
-    huntersinraid = (localStorage.getItem('huntraid') != null) ? parseInt(localStorage.getItem('huntraid')): huntersinraid;
-    BerserkStartHP = (localStorage.getItem('berserkhp') != null) ? parseInt(localStorage.getItem('berserkhp')):BerserkStartHP;
     selectedPet = (localStorage.getItem('petselect') != null) ? parseInt(localStorage.getItem('petselect')):selectedPet;
     selectedRace = (localStorage.getItem('raceselect') != null) ? parseInt(localStorage.getItem('raceselect')):selectedRace;
 
@@ -122,46 +110,26 @@ function fetchData(){
     whtalentlink = (localStorage.getItem('whtalentlink') != null) ? localStorage.getItem('whtalentlink'):whtalentlink;
     talents = (localStorage.getItem('talents') != null) ? JSON.parse(localStorage.getItem('talents')):talents;
     // spell enables
-    auras.rapid.enable = (localStorage.getItem('rapidcheck') != null) ? JSON.parse(localStorage.getItem('rapidcheck')):auras.rapid.enable;
-    beastenable = (localStorage.getItem('beastcheck') != null) ? JSON.parse(localStorage.getItem('beastcheck')):beastenable;
-    racialenable = (localStorage.getItem('racialcheck') != null) ? JSON.parse(localStorage.getItem('racialcheck')):racialenable;
-    auras.lust.enable = (localStorage.getItem('lustcheck') != null) ? JSON.parse(localStorage.getItem('lustcheck')):auras.lust.enable;
+    usable_CDs.rapid.enable = (localStorage.getItem('rapidcheck') != null) ? JSON.parse(localStorage.getItem('rapidcheck')):usable_CDs.rapid.enable;
+    usable_CDs.lust.enable = (localStorage.getItem('lustcheck') != null) ? JSON.parse(localStorage.getItem('lustcheck')):usable_CDs.lust.enable;
 
-    auras.potion.primary = (localStorage.getItem('hastecheck') != null) ? JSON.parse(localStorage.getItem('hastecheck')):auras.potion.primary;
-
-    auras.rune.enable = (localStorage.getItem('runecheck') != null) ? JSON.parse(localStorage.getItem('runecheck')):auras.rune.enable;
+    usable_CDs.rune.enable = (localStorage.getItem('runecheck') != null) ? JSON.parse(localStorage.getItem('runecheck')):usable_CDs.rune.enable;
     SPELLS.multishot.enable = (localStorage.getItem('multicheck') != null) ? JSON.parse(localStorage.getItem('multicheck')):SPELLS.multishot.enable;
     SPELLS.arcaneshot.enable = (localStorage.getItem('arcanecheck') != null) ? JSON.parse(localStorage.getItem('arcanecheck')):SPELLS.arcaneshot.enable;
     SPELLS.raptorstrike.enable = (localStorage.getItem('raptorcheck') != null) ? JSON.parse(localStorage.getItem('raptorcheck')):SPELLS.raptorstrike.enable;
     SPELLS.melee.enable = (localStorage.getItem('meleecheck') != null) ? JSON.parse(localStorage.getItem('meleecheck')):SPELLS.melee.enable;
 
     // spell offsets
-    auras.rapid.offset = (localStorage.getItem('rapidoffset') != null) ? parseInt(localStorage.getItem('rapidoffset')) : auras.rapid.offset;
-    auras.beastwithin.offset = (localStorage.getItem('beastoffset') != null) ? parseInt(localStorage.getItem('beastoffset')):auras.beastwithin.offset;
+    usable_CDs.rapid.offset = (localStorage.getItem('rapidoffset') != null) ? parseInt(localStorage.getItem('rapidoffset')) : usable_CDs.rapid.offset;
+    usable_CDs.beastwithin.offset = (localStorage.getItem('beastoffset') != null) ? parseInt(localStorage.getItem('beastoffset')):usable_CDs.beastwithin.offset;
     if (localStorage.getItem('racialoffset') != null) {
-        auras.berserk.offset = parseInt(localStorage.getItem('racialoffset'));
-        auras.bloodfury.offset = parseInt(localStorage.getItem('racialoffset'));
+        usable_CDs.berserking.offset = parseInt(localStorage.getItem('racialoffset'));
+        usable_CDs.bloodfury.offset = parseInt(localStorage.getItem('racialoffset'));
     }
-    auras.lust.offset = (localStorage.getItem('lustoffset') != null) ? parseInt(localStorage.getItem('lustoffset')):auras.lust.offset;
-    auras.aptrink1.offset = (localStorage.getItem('trink1offset') != null) ? parseInt(localStorage.getItem('trink1offset')):auras.aptrink1.offset;
-    auras.aptrink2.offset = (localStorage.getItem('trink2offset') != null) ? parseInt(localStorage.getItem('trink2offset')):auras.aptrink2.offset;
-    auras.potion.offset = (localStorage.getItem('startpotoffset') != null) ? parseInt(localStorage.getItem('startpotoffset')):auras.potion.offset;
+    usable_CDs.lust.offset = (localStorage.getItem('lustoffset') != null) ? parseInt(localStorage.getItem('lustoffset')):usable_CDs.lust.offset;
+    usable_CDs.potion.offset = (localStorage.getItem('startpotoffset') != null) ? parseInt(localStorage.getItem('startpotoffset')):usable_CDs.potion.offset;
 
     // spell option
-    let lustoption = '';
-    if (localStorage.getItem('lustoption') != null) {
-        lustoption = localStorage.getItem('lustoption');
-        switch (lustoption) {
-            case "1":   auras.lust.duration = 40;
-            break;
-            case "2":   auras.lust.duration = 80;
-            break;
-            case "3":   auras.lust.duration = 120;
-            break;
-            case "4":   auras.lust.duration = 160;
-            break;
-        }
-    } else lustoption = "1";
     let spellcdoption = '';
     if (localStorage.getItem('spellcdoption') != null) {
         spellcdoption = localStorage.getItem('spellcdoption');
@@ -183,6 +151,7 @@ function fetchData(){
             break;
         }
     } else { spellcdoption = "CD"; }
+
     phase = (localStorage.getItem("phasecheck") != null) ? parseInt(localStorage.getItem("phasecheck")) : phase;
     raidcheck = (localStorage.getItem("raidcheck") != null) ? JSON.parse(localStorage.getItem("raidcheck")) : raidcheck;
     pvpcheck = (localStorage.getItem("pvpcheck") != null) ? JSON.parse(localStorage.getItem("pvpcheck")) : pvpcheck;
@@ -202,8 +171,6 @@ function fetchData(){
     document.getElementById("playeruptime").value = playeruptime;
     document.getElementById("petuptime").value = petuptime;
     document.getElementById("weavetime").value = weavetime.toFixed(1);
-    document.getElementById("huntersinraid").value = huntersinraid;
-    document.getElementById("berserkinghp").value = BerserkStartHP;
     document.getElementById("pet").value = selectedPet;
     document.getElementById("race").value = selectedRace;
     document.getElementById("racedisplay").innerHTML = races[selectedRace].name;
@@ -231,8 +198,6 @@ function fetchData(){
     document.getElementById("wisdom").checked = (buffslist[2].id == 27143) ? true : false;
     document.getElementById("wisdommod").selected = (buffslist[2].talented) ? true : false;
     document.getElementById("lotp").checked = (buffslist[3] == 17007) ? true : false;
-    document.getElementById("lotpidol").selected = (buffslist[17] == 39926) ? true : false;
-    document.getElementById("goa").checked = (buffslist[4].id == 25359) ? true : false;
     document.getElementById("soe").checked = (buffslist[5].id == 25528) ? true : false;
     document.getElementById("imptotem").selected = (buffslist[4].talented) ? true : false;
     document.getElementById("manaspring").checked = (buffslist[6] == 25570) ? true : false;
@@ -241,18 +206,16 @@ function fetchData(){
     document.getElementById("gotwmod").selected = (buffslist[8].talented) ? true : false;
     document.getElementById("fort").checked = (buffslist[9].id == 25392) ? true : false;
     document.getElementById("fortmod").selected = (buffslist[9].talented) ? true : false;
-    document.getElementById("pact").checked = (buffslist[10].id == 27268) ? true : false;
-    document.getElementById("pactmod").selected = (buffslist[10].talented) ? true : false;
     document.getElementById("windfury").checked = (buffslist[11].id == 25587) ? true : false;
     document.getElementById("windfurymod").selected = (buffslist[11].talented) ? true : false;
     document.getElementById("heroicpres").checked = (buffslist[12] == 6562) ? true : false;
     document.getElementById("shout").checked = (buffslist[13].id == 2048) ? true : false;
     document.getElementById("shoutmod").selected = (buffslist[13].talented) ? true : false;
     document.getElementById("tsa").checked = (buffslist[14] == 27066) ? true : false;
-    document.getElementById("braided").checked = (buffslist[15] == 31025) ? true : false;
-    document.getElementById("sanct").checked = (buffslist[16] == 31870) ? true : false;
+
     document.getElementById("talentselect").value = talentindex;
     document.getElementById("customtalent").value = whtalentlink;
+    selectTalents(talentindex);
 
     // initialize saved debuffs visuals
     document.getElementById("hmuptime").value = debuffs.hm.uptime_g;
@@ -260,7 +223,6 @@ function fetchData(){
     document.getElementById("jowuptime").value = debuffs.judgewisdom.uptime_g;
     document.getElementById("jocuptime").value = debuffs.judgecrusader.uptime_g;
     document.getElementById("ffuptime").value = debuffs.faeriefire.uptime_g;
-    document.getElementById("ffbonus").selected = debuffs.faeriefire.improved ? true : false;
     document.getElementById("sauptime").value = debuffs.sunder.uptime_g;
     document.getElementById("sunderapp").value = debuffs.sunder.stacktime;
     document.getElementById("ieuptime").value = debuffs.expose.uptime_g;
@@ -268,27 +230,20 @@ function fetchData(){
     document.getElementById("coeuptime").value = debuffs.curseofele.uptime_g;
 
     // spell enables
-    document.getElementById("rapidcheck").checked = auras.rapid.enable;
-    document.getElementById("beastcheck").checked = beastenable;
-    document.getElementById("racialcheck").checked = racialenable;
-    document.getElementById("lustcheck").checked = auras.lust.enable;
-    document.getElementById("hastecheck").checked = auras.potion.primary;
-    document.getElementById("secpotcheck").checked = auras.potion.secondary;
-    document.getElementById("runecheck").checked = auras.rune.enable;
+    document.getElementById("rapidcheck").checked = usable_CDs.rapid.enable;
+    document.getElementById("lustcheck").checked = usable_CDs.lust.enable;
+    document.getElementById("runecheck").checked = usable_CDs.rune.enable;
     document.getElementById("multicheck").checked = SPELLS.multishot.enable;
     document.getElementById("arcanecheck").checked = SPELLS.arcaneshot.enable;
     document.getElementById("raptorcheck").checked = SPELLS.raptorstrike.enable;
     document.getElementById("meleecheck").checked = SPELLS.melee.enable;
-    // spell offsets
-    document.getElementById("rapidoffset").value = auras.rapid.offset;
-    document.getElementById("beastoffset").value = auras.beastwithin.offset;
-    document.getElementById("racialoffset").value = (auras.berserk.enable) ? auras.berserk.offset: auras.bloodfury.offset;
-    document.getElementById("lustoffset").value = auras.lust.offset;
-    document.getElementById("trink1offset").value = auras.aptrink1.offset;
-    document.getElementById("trink2offset").value = auras.aptrink2.offset;
-    document.getElementById("startpotoffset").value = auras.potion.offset;
+    // // spell offsets
+    document.getElementById("rapidoffset").value = usable_CDs.rapid.offset;
+    document.getElementById("beastoffset").value = usable_CDs.beastwithin.offset;
+    document.getElementById("racialoffset").value = (usable_CDs.berserking.enable) ? usable_CDs.berserking.offset: usable_CDs.bloodfury.offset;
+    document.getElementById("lustoffset").value = usable_CDs.lust.offset;
+    document.getElementById("startpotoffset").value = usable_CDs.potion.offset;
     // spell options
-    document.getElementById("lustoption").value = lustoption;
     document.getElementById("spellcdoption").value = spellcdoption;
 
     document.getElementById("phasecheck").value = phase;

@@ -3,8 +3,8 @@ var currentiteration = 0;
 var weightiteration = 0;
 var maxWeightIteration = 0;
 var loopcheck = 0;
-var minfighttimer = 180;
-var maxfighttimer = 182;
+var minfighttimer = 120;
+var maxfighttimer = 125;
 var DPS = 0;
 var petDPS = 0;
 var mindps = 99999;
@@ -16,6 +16,8 @@ var executecodetime = 0.000;
 var latency = 0.04;
 var currentgcd = 0;
 
+var zodsdmg = 0;
+var wild_quiverdmg = 0;
 var autodmg = 0;
 var steadydmg = 0;
 var multidmg = 0;
@@ -213,9 +215,6 @@ function finalResults() {
     for (let prop in debuff_uptimes){
         debuff_uptimes[prop] = (debuffs[prop].uptime / sumduration * 100).toFixed(2);
     }
-    for (let prop in partybuff_uptimes){
-        partybuff_uptimes[prop] = (partybuffs[prop].uptime / sumduration * 100).toFixed(2);
-    }
 
     damageResults();
     //console.log(pet);
@@ -276,7 +275,6 @@ function runSim() {
     combatlogindex = 0;
     manalogarray = [];
     manalogindex = 0;
-    killcommand.ready = false;
 
     initializeSpells();
     ResetAuras();
@@ -302,10 +300,9 @@ function runSim() {
             else { spell = spell_choice_method_B(); }
 
             playertimestart = startTime(spell);
-            
+
         }
         //console.log("spell => "+spell);
-        killCommandCheck();
         
         nextEvent(playertimestart);
     

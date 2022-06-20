@@ -1104,6 +1104,7 @@ function gearSlotsDisplay(){
     let headpcslist = "&pcs="+headitem+":"+shoulderitem+":"+chestitem+":"+wristitem+":"+handitem+":"+legitem+":"+waistitem+":"+feetitem;
     let headdata = headitem + headencheffect + headgemlist+ headpcslist;
 
+    document.getElementsByClassName("img-link")[0].href = "https://tbc.wowhead.com/item="+ headdata;
     document.getElementById("headslot").href = base_link + "item="+ headdata;
     document.getElementById("headslot").innerHTML = HEADS[gear.head.id].name;
     document.getElementById("headench").href = (headench > 0) ? base_link + "spell="+ headench : "";
@@ -1148,6 +1149,7 @@ function gearSlotsDisplay(){
     let neckgemlist = "&gems="+neckgem1+":"+neckgem2;
     let neckdata = neckitem + neckgemlist;
 
+    document.getElementsByClassName("img-link")[1].href = "https://tbc.wowhead.com/item="+ neckdata;
     document.getElementById("neckslot").href = base_link + "item="+ neckdata;
     document.getElementById("neckslot").innerHTML = NECKS[gear.neck.id].name;
 
@@ -1194,6 +1196,7 @@ function gearSlotsDisplay(){
     let shoulderpcslist = "&pcs="+headitem+":"+shoulderitem+":"+chestitem+":"+wristitem+":"+handitem+":"+legitem+":"+waistitem+":"+feetitem;
     let shoulderdata = shoulderitem + shoulderencheffect + shouldergemlist+ shoulderpcslist;
     
+    document.getElementsByClassName("img-link")[2].href = "https://tbc.wowhead.com/item="+ shoulderdata;
     document.getElementById("shoulderslot").href = base_link + "item="+ shoulderdata;
     document.getElementById("shoulderslot").innerHTML = SHOULDERS[gear.shoulder.id].name;
     document.getElementById("shoulderench").href = (shoulderench > 0) ? base_link + "spell="+ shoulderench : "";
@@ -1228,6 +1231,7 @@ function gearSlotsDisplay(){
     let backgemlist = "&gems="+backgem1;
     let backdata = backitem + backencheffect + backgemlist;
 
+    document.getElementsByClassName("img-link")[3].href = "https://tbc.wowhead.com/item="+ backdata;
     document.getElementById("backslot").href = base_link + "item="+ backdata;
     document.getElementById("backslot").innerHTML = BACKS[gear.back.id].name;
     document.getElementById("backench").href = (backench > 0) ? base_link + "spell="+ backench : "";
@@ -1289,6 +1293,7 @@ function gearSlotsDisplay(){
     let chestpcslist = "&pcs="+headitem+":"+shoulderitem+":"+chestitem+":"+wristitem+":"+handitem+":"+legitem+":"+waistitem+":"+feetitem;
     let chestdata = chestitem + chestencheffect + chestgemlist+ chestpcslist;
 
+    document.getElementsByClassName("img-link")[4].href = "https://tbc.wowhead.com/item="+ chestdata;
     document.getElementById("chestslot").href = base_link + "item="+ chestdata;
     document.getElementById("chestslot").innerHTML = CHESTS[gear.chest.id].name;
     document.getElementById("chestench").href = (chestench > 0) ? base_link + "spell="+ chestench : "";
@@ -1336,7 +1341,7 @@ function gearSlotsDisplay(){
     let wristpcslist = "&pcs="+headitem+":"+shoulderitem+":"+chestitem+":"+wristitem+":"+handitem+":"+legitem+":"+waistitem+":"+feetitem;
     let wristdata = wristitem + wristencheffect + wristgemlist+ wristpcslist;
     
-    document.getElementsByClassName("img-link")[0].href = base_link + "item="+ wristdata;
+    document.getElementsByClassName("img-link")[5].href = base_link + "item="+ wristdata;
     document.getElementById("wristslot").href = base_link + "item="+ wristdata;
     document.getElementById("wristslot").innerHTML = WRISTS[gear.wrist.id].name;
     document.getElementById("wristench").href = (wristench > 0) ? base_link + "spell="+ wristench:""; 
@@ -1399,6 +1404,7 @@ function gearSlotsDisplay(){
     let mainhanddata = mainhanditem + mainhandencheffect + mainhandgemlist;
     let mainhandattach = gear.mainhand.attachment || 0;
 
+    document.getElementsByClassName("img-link")[6].href = "https://tbc.wowhead.com/item="+ mainhanddata;
     document.getElementById("mainhandslot").href = base_link + "item="+ mainhanddata;
     document.getElementById("mainhandslot").innerHTML = MELEE_WEAPONS[gear.mainhand.id].name;
     document.getElementById("mainhandench").href = (mainhandench > 0) ? base_link + "spell="+ mainhandench :"";  
@@ -1478,6 +1484,7 @@ function gearSlotsDisplay(){
         let offhanddata = offhanditem + offhandencheffect + offhandgemlist;
         let offhandattach = gear.offhand.attachment || 0;
 
+        document.getElementsByClassName("img-link")[7].href = "https://tbc.wowhead.com/item="+ offhanddata;
         document.getElementById("offhandslot").href = base_link + "item="+ offhanddata;
         document.getElementById("offhandslot").innerHTML = MELEE_WEAPONS[gear.offhand.id].name;
         document.getElementById("offhandench").href = (offhandench > 0) ? base_link + "spell="+ offhandench : ""; 
@@ -1529,6 +1536,7 @@ function gearSlotsDisplay(){
     let rangegemlist = "&gems="+rangegem1+":"+rangegem2;
     let rangedata = rangeitem + rangeencheffect + rangegemlist;
 
+    document.getElementsByClassName("img-link")[8].href = "https://tbc.wowhead.com/item="+ rangedata;
     document.getElementById("rangeslot").href = base_link + "item="+ rangedata;
     document.getElementById("rangeslot").innerHTML = RANGED_WEAPONS[gear.range.id].name;
     document.getElementById("rangeench").href = (rangeench > 0) ? base_link + "spell="+ rangeench : "";
@@ -1588,6 +1596,7 @@ function gearSlotsDisplay(){
     let handpcslist = "&pcs="+headitem+":"+shoulderitem+":"+chestitem+":"+wristitem+":"+handitem+":"+legitem+":"+waistitem+":"+feetitem;
     let handdata = handitem + handencheffect + handgemlist+ handpcslist;
 
+    document.getElementsByClassName("img-link")[9].href = "https://tbc.wowhead.com/item="+ handdata;
     document.getElementById("handslot").href = base_link + "item="+ handdata;
     document.getElementById("handslot").innerHTML = HANDS[gear.hand.id].name;
     document.getElementById("handench").href = (handench > 0) ? base_link + "spell="+ handench : "";
@@ -1647,6 +1656,7 @@ function gearSlotsDisplay(){
     let waistpcslist = "&pcs="+headitem+":"+shoulderitem+":"+chestitem+":"+wristitem+":"+handitem+":"+legitem+":"+waistitem+":"+feetitem;
     let waistdata = waistitem + waistencheffect + waistgemlist + waistpcslist;
 
+    document.getElementsByClassName("img-link")[10].href = "https://tbc.wowhead.com/item="+ waistdata;
     document.getElementById("waistslot").href = base_link + "item="+ waistdata;
     document.getElementById("waistslot").innerHTML = WAISTS[gear.waist.id].name;
     document.getElementById("waistench").href = (waistench > 0) ? base_link + "spell="+ waistench : "";
@@ -1707,6 +1717,7 @@ function gearSlotsDisplay(){
     let legpcslist = "&pcs="+headitem+":"+shoulderitem+":"+chestitem+":"+wristitem+":"+handitem+":"+legitem+":"+waistitem+":"+feetitem;
     let legdata = legitem + legencheffect + leggemlist+ legpcslist;
 
+    document.getElementsByClassName("img-link")[11].href = "https://tbc.wowhead.com/item="+ legdata;
     document.getElementById("legslot").href = base_link + "item="+ legdata;
     document.getElementById("legslot").innerHTML = LEGS[gear.leg.id].name;
     document.getElementById("legench").href = (legench > 0) ? base_link + "spell="+ legench : "";
@@ -1754,6 +1765,7 @@ function gearSlotsDisplay(){
     let feetpcslist = "&pcs="+headitem+":"+shoulderitem+":"+chestitem+":"+wristitem+":"+handitem+":"+legitem+":"+waistitem+":"+feetitem;
     let feetdata = feetitem + feetencheffect + feetgemlist+ feetpcslist;
 
+    document.getElementsByClassName("img-link")[12].href = "https://tbc.wowhead.com/item="+ feetdata;
     document.getElementById("feetslot").href = base_link + "item="+ feetdata;
     document.getElementById("feetslot").innerHTML = FEET[gear.feet.id].name;
     document.getElementById("feetench").href = (feetench > 0) ? base_link + "spell="+ feetench : "";
@@ -1789,6 +1801,7 @@ function gearSlotsDisplay(){
     let ring1pcslist = "&pcs="+headitem+":"+shoulderitem+":"+chestitem+":"+wristitem+":"+handitem+":"+waistitem+":"+feetitem+":"+ring1item+":"+ring2item+":"+legitem;
     let ring1data = ring1item + ring1encheffect + ring1gemlist+ ring1pcslist;
 
+    document.getElementsByClassName("img-link")[13].href = "https://tbc.wowhead.com/item="+ ring1data;
     document.getElementById("ring1slot").href = base_link + "item="+ ring1data;
     document.getElementById("ring1slot").innerHTML = RINGS[gear.ring1.id].name;
     document.getElementById("ring1ench").href = (ring1ench > 0) ? base_link + "spell="+ ring1ench : "";
@@ -1823,6 +1836,7 @@ function gearSlotsDisplay(){
     let ring2pcslist = "&pcs="+headitem+":"+shoulderitem+":"+chestitem+":"+wristitem+":"+handitem+":"+waistitem+":"+feetitem+":"+ring1item+":"+ring2item+":"+legitem;
     let ring2data = ring2item + ring2encheffect + ring2gemlist+ ring2pcslist;
 
+    document.getElementsByClassName("img-link")[14].href = "https://tbc.wowhead.com/item="+ ring2data;
     document.getElementById("ring2slot").href = base_link + "item="+ ring2data;
     document.getElementById("ring2slot").innerHTML = RINGS[gear.ring2.id].name;
     document.getElementById("ring2ench").href = (ring2ench > 0) ? base_link + "spell="+ ring2ench : "";
@@ -1833,6 +1847,7 @@ function gearSlotsDisplay(){
 
     let trinket1icon = "https://wow.zamimg.com/images/wow/icons/large/"+TRINKETS[gear.trinket1.id].icon+".jpg";
     document.getElementById("trinket1icon").src = trinket1icon;
+    document.getElementsByClassName("img-link")[15].href = "https://tbc.wowhead.com/item="+ trink1item;
     document.getElementById("trinket1slot").href = base_link + "item="+ trink1item;
     document.getElementById("trinket1slot").innerHTML = TRINKETS[gear.trinket1.id].name;
 
@@ -1841,6 +1856,7 @@ function gearSlotsDisplay(){
 
     let trinket2icon = "https://wow.zamimg.com/images/wow/icons/large/"+TRINKETS[gear.trinket2.id].icon+".jpg";
     document.getElementById("trinket2icon").src = trinket2icon;
+    document.getElementsByClassName("img-link")[16].href = "https://tbc.wowhead.com/item="+ trink2item;
     document.getElementById("trinket2slot").href = base_link + "item="+ trink2item;
     document.getElementById("trinket2slot").innerHTML = TRINKETS[gear.trinket2.id].name;
     
@@ -1849,6 +1865,7 @@ function gearSlotsDisplay(){
     
     let ammoicon = "https://wow.zamimg.com/images/wow/icons/large/"+AMMOS[gear.ammo.id].icon+".jpg";
     document.getElementById("ammoicon").src = ammoicon;
+    document.getElementsByClassName("img-link")[17].href = "https://tbc.wowhead.com/item="+ ammoitem;
     document.getElementById("ammoslot").href = base_link + "item="+ ammoitem;
     document.getElementById("ammoslot").innerHTML = AMMOS[gear.ammo.id].name;
 

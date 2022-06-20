@@ -6,7 +6,6 @@ const BM_TREE = [
       name: 'Improved Aspect of the Hawk',
       abrv: 'imp_hawk',
       max: 5,
-      is_modifier: true,
       per_point: 3 / 100
     },
     {
@@ -99,7 +98,7 @@ const BM_TREE = [
       abrv: 'animal_handler',
       max: 2,
       is_modifier: true,
-      per_point: 2
+      per_point: 5
     },
     {
       name: 'Frenzy',
@@ -501,7 +500,7 @@ const SV_TREE = [
   [
     {
       name: 'Master Tactician',
-      abrv: 'master_tac',
+      abrv: 'master_tact',
       max: 5
     },
     {
@@ -533,7 +532,6 @@ const SV_TREE = [
       name: 'Hunting Party',
       abrv: 'hunt_party',
       max: 3,
-      is_modifier: true,
       per_point: 1 / 100
     }
   ],
@@ -581,9 +579,8 @@ function parseTalents(talentString) {
   return talents
 }
 
-const T_53_16_2 = parseTalents('51200201515012243100531351-035005201-2')
-//const T_0_20_41 = parseTalents('-0550201205-33320002200322300520351')
-//const T_7_20_34 = parseTalents('502-0550201205-333200022003223005103')
-//const T_5_20_36 = parseTalents('5-0550201205-333200022003223005303')
-//const T_0_27_34 = parseTalents('-055220120500302-333200022003223005103')
-//const T_17_44_0 = parseTalents('51200200502-0551201205013253135');
+const BM_ImpHM_Track = parseTalents('51200201515012243100531151-0050352-5')
+const MM_ImpHM_FA_Track = parseTalents('502-035335001230013233135031351-5')
+const MM_ImpAS_FA_Track = parseTalents('502-035305131030013233135030351-5000002')
+const SV_FA_Resrc_Aimed = parseTalents('-035305001-5000032500033330533035001331')
+const BM_FA_Track = parseTalents('51200201515012243100531151-0350052-5')

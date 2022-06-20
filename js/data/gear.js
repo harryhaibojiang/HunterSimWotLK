@@ -1,139 +1,118 @@
 const SETS = {
-  650: {
-    name: 'Beast Lord Armor',
-    abrv: 'beast_lord',
-    bonuses: {
-      2: { trap_cdr: 4 },
-      4: { kc_arp: 85 }
-    }
-  },
-  '-7': {
-    name: "Brutal Gladiator's Pursuit",
-    abrv: 'brutal_gladiator_pursuit',
-    bonuses: {
-      2: { stats: { Resil: 35 } },
-      4: { multishot_cdr: 1 }
-    }
-  },
-  530: {
-    name: 'Cryptstalker Armor',
-    abrv: 'cryptstalker',
-    bonuses: {
-      2: { rf_duration: 4 },
-      4: { stats: { RAP: 50, MAP: 50 } },
-      6: { crit_mana_return: 50 },
-      8: { reduced_mana_cost: 20 },
-    }
-  },
-  651: {
-    name: 'Demon Stalker Armor',
-    abrv: 'demon_stalker',
-    bonuses: {
-      2: { fd_resist: 0.05 },
-      4: { reduced_ms_mana_ratio: 0.9 },
-    }
-  },
-  660: {
-    name: 'Desolation Battlegear',
-    abrv: 'desolation_battlegear',
-    bonuses: {
-      2: { stats: { Hit: 35 }},
-      4: { aura: { stats: { MAP: 160, RAP: 160 }, duration: 15, is_proc: true, proc_type: 2, proc_chance: 0.01 }}
-    }
-  },
-  561: {
-    name: 'Fel Iron Chain',
-    abrv: 'fel_iron_chain',
-    bonuses: {
-      2: { stats: { Crit: 14 } },
-      4: { stats: { MP5: 8 } },
-    }
-  },
-  611: {
-    name: 'Felscale Armor',
-    abrv: 'felscale',
-    bonuses: {
-      2: { stats: { Crit: 15 } },
-      4: { stats: { Stam: 20 } },
-    }
-  },
-  575: {
-    name: 'Felstalker Armor',
-    abrv: 'felstalker',
-    bonuses: {
-      2: { stats: { Hit: 20 } }
-    }
-  },
-  586: {
-    name: "Gladiator's Pursuit",
-    abrv: 'gladiator_pursuit',
-    bonuses: {
-      2: { stats: { Resil: 35 } },
-      4: { multishot_cdr: 1 }
-    }
-  },
-  669: {
-    name: "Gronnstalker's Armor",
-    abrv: 'gronnstalker',
-    bonuses: {
-      2: { viper_mana_gain_ratio: 0.05 },
-      4: { steady_shot_dmg_ratio: 0.1 }
-    }
-  },
-  706: {
-    name: "Merciless Gladiator's Pursuit",
-    abrv: 'merciless_gladiator_pursuit',
-    bonuses: {
-      2: { stats: { Resil: 35 } },
-      4: { multishot_cdr: 1 }
-    }
-  },
-  616: {
-    name: 'Netherscale Armor',
-    abrv: 'netherscale',
-    bonuses: {
-      2: { stats: { Hit: 20 } }
-    }
-  },
-  619: {
-    name: 'Primal Intent',
-    abrv: 'primalstrike',
-    bonuses: {
-        2: { stats: { MAP: 40, RAP: 40 } }
-    }
-  },
-  652: {
-    name: 'Rift Stalker Armor',
-    abrv: 'rift_stalker',
-    bonuses: {
-      2: { pet_heal_on_dmg: 0.15 },
-      4: { ss_crit: 5 }
-    }
-  },
-  749: {
-      name: "Stalker's Chain Battlegear",
-      abrv: 'stalker_chain_battlegear',
-      bonuses: {
-        2: { stats: { Resil: +35 } },
-        4: { conc_shot_cdr: 1 }
-      }
-  },
-  723: {
-    name: "Vengeful Gladiator's Pursuit",
-    abrv: 'vengeful_gladiator_pursuit',
-    bonuses: {
-      2: { stats: { Resil: 35 } },
-      4: { multishot_cdr: 1 }
-    }
-  },
-  659: {
-      name: 'Wastewalker Armor',
-      abrv: 'wastewalker',
-      bonuses: {
-        2: { stats: { Hit: 35 } },
-        4: { aura: { stats: { MAP: 160, RAP: 160 }, duration: 15, is_proc: true, proc_type: 2, proc_chance: 0.02 }}
-      }
-  }
+    263: {
+        name: 'Ahn\'Kahar Blood Hunter',
+        abrv: 't10',
+        bonuses: {
+         2: { exploit_weakness: 15 },
+         4: { stinger: 20 }
+        }
+    },
+    859: {
+        name: 'Windrunner',
+        abrv: 't9',
+        bonuses: {
+         2: { serpent_crits: 1 },
+         4: { pet_ap: 600 }
+        }
+    },
+    170: {
+        name: 'Scourgestalker',
+        abrv: 't8',
+        bonuses: {
+         2: { serpent_dmg: 10 },
+         4: { precision_shots: 600 }
+        }
+    },
+    140: {
+        name: 'Scourgestalker',
+        abrv: 't7',
+        bonuses: {
+         2: { pet_dmg: 5 },
+         4: { speed_viper: 20 }
+        }
+    },
+    650: {
+        name: 'Beast Lord Armor',
+        abrv: 'beast_lord',
+        bonuses: {
+         2: { trap_cdr: 4 },
+         4: { kc_arp: 85 }
+        }
+    },
+    '-7': {
+        name: "Brutal Gladiator's Pursuit",
+        abrv: 'brutal_gladiator_pursuit',
+        bonuses: {
+         2: { stats: { Resil: 35 } },
+         4: { multishot_cdr: 1 }
+        }
+    },
+    530: {
+        name: 'Cryptstalker Armor',
+        abrv: 'cryptstalker',
+        bonuses: {
+         2: { rf_duration: 4 },
+         4: { stats: { RAP: 50, MAP: 50 } },
+         6: { crit_mana_return: 50 },
+         8: { reduced_mana_cost: 20 },
+        }
+    },
+    651: {
+        name: 'Demon Stalker Armor',
+        abrv: 'demon_stalker',
+        bonuses: {
+         2: { fd_resist: 0.05 },
+         4: { reduced_ms_mana_ratio: 0.9 },
+        }
+    },
+    586: {
+        name: "Gladiator's Pursuit",
+        abrv: 'gladiator_pursuit',
+        bonuses: {
+         2: { stats: { Resil: 35 } },
+         4: { multishot_cdr: 1 }
+        }
+    },
+    669: {
+        name: "Gronnstalker's Armor",
+        abrv: 'gronnstalker',
+        bonuses: {
+         2: { viper_mana_gain_ratio: 0.05 },
+         4: { steady_shot_dmg_ratio: 0.1 }
+        }
+    },
+    706: {
+        name: "Merciless Gladiator's Pursuit",
+        abrv: 'merciless_gladiator_pursuit',
+        bonuses: {
+         2: { stats: { Resil: 35 } },
+         4: { multishot_cdr: 1 }
+        }
+    },
+    652: {
+        name: 'Rift Stalker Armor',
+        abrv: 'rift_stalker',
+        bonuses: {
+         2: { pet_heal_on_dmg: 0.15 },
+         4: { ss_crit: 5 }
+        }
+    },
+    749: {
+        name: "Stalker's Chain Battlegear",
+        abrv: 'stalker_chain_battlegear',
+        bonuses: {
+            2: { stats: { Resil: +35 } },
+            4: { conc_shot_cdr: 1 }
+        }
+    },
+    723: {
+        name: "Vengeful Gladiator's Pursuit",
+        abrv: 'vengeful_gladiator_pursuit',
+        bonuses: {
+         2: { stats: { Resil: 35 } },
+         4: { multishot_cdr: 1 }
+        }
+    },
 }
 
 const AMMOS = {

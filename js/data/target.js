@@ -25,12 +25,28 @@ var targetData = (function() {
         level: 83
       },
       1: {
-        name: 'Level 83 Boss',
+        name: 'Level 83 10463',
         armor: 10463,
         phase: 1,
         resilience: 0,
         type: Target_Types.HUMANOID,
         level: 83
+      },
+      2: {
+        name: 'Level 73 6193',
+        armor: 6193,
+        phase: 1,
+        resilience: 0,
+        type: Target_Types.HUMANOID,
+        level: 73
+      },
+      3: {
+        name: 'Level 73 7685',
+        armor: 7685,
+        phase: 1,
+        resilience: 0,
+        type: Target_Types.HUMANOID,
+        level: 73
       },
   }
 

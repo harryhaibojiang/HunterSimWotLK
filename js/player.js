@@ -2,23 +2,24 @@
 /* this script contains relevant calculations for stats and damage of player */
 /*****************************************************************************/
 // initialize constants
-const HitRatingRatio = 32.79;
-const CritRatingRatio = 45.91;
-const HasteRatingRatio = 32.79;
-const ArPRatingRatio = 14;
-const AgiToCrit = 83.33;
-const IntToCrit = 166.6667;
+const HitRatingRatio = 15.77; // 32.79 at 80
+const CritRatingRatio = 22.08; // 45.91 at 80
+const HasteRatingRatio = 15.77; // 32.79 at 80
+const ArPRatingRatio = 5.92; // 14 at 80
+const AgiToCrit = 40; // 83.33 at 80
+const IntToCrit = 80; // 166.6667 at 80
 const BaseCritChance = -1.53;
 const BaseHitChance = 0;
 const CritPenalty = -3;
 const CritAuraPenalty = -1.8;
 const HitPenalty = -1;
-const ExpertiseRatio = 7.69;
+const ExpertiseRatio = 3.9423081875; // 8.1974973675 at 80 
 const GlanceDmgReduction = 0.75;
 const GlanceChance = 24;
 const QuiverSpeed = 1.15;
 const BaseRegen = 0.009327;
-const BaseMana = 5046;
+const BaseMana = 3383; // 5046 at 80
+const ExpertiseReduction = 0.25;
 
 // initialize stat variables
 var RangeCritRating = 0;
@@ -80,9 +81,11 @@ var rapmod = 1;
 var dmgmod = 1;
 var rangedmgmod = 1;
 
-var selectedRace = 3; // 0 for night elf, 1 for dwarf, 2 for draenei, 3 for orc, 4 for troll, 5 for tauren, 6 for blood elf
+// 0 for night elf, 1 for dwarf, 2 for draenei, 3 for orc, 4 for troll, 5 for tauren, 6 for blood elf
+var selectedRace = 3; 
 var offhandDisabled = false;
 var totaldmgdone = 0;
+var level = 70;
 
 var two_min_cds = 120;
 var three_min_cds = 180;
@@ -142,30 +145,31 @@ var selectedbuffs = {
    stats: { MAP:0, RAP:0, Str:0, Agi:0 },
    special: { kingsMod: 1, windfury: false }
 };
+var glyphs = {}
 var talents = {
-   imp_hawk: 1.15, 
+   imp_hawk: 1.15, //
    end_training: 1.01, // -
-   focused_fire: 2, 
+   focused_fire: 2, //
    imp_monkey: 0, // -
    thick_hide: 0,// -
-   imp_ress_pet: 2,
+   imp_ress_pet: 2, // - 
    pathfinding: 0,// -
    aspect_mast: 1,
-   unleash_fury: 1.2, 
+   unleash_fury: 1.2, // -
    imp_mend_pet: 1,// -
-   ferocity: 10,
+   ferocity: 10, // 
    spirit_bond: 0,// -
    intimidation: 1,// -
-   bestial_disc: 2,
-   animal_handler: 5,
-   frenzy: 4,
-   ferocious_insp: 1.03,
-   bestial_wrath: 1,
-   catlike_reflex: 0,// -
-   invigoration: 0,
-   serp_swift: 1.2,
+   bestial_disc: 2, // -
+   animal_handler: 10, // 
+   frenzy: 4, //
+   ferocious_insp: 1.03, //
+   bestial_wrath: 1, //
+   catlike_reflex: 0, 
+   invigoration: 0, //
+   serp_swift: 1.2, // 
    longevity: 3,
-   beast_within: 1,
+   beast_within: 1, // 
    cobra_strike: 60,
    kindred_spirit: 1.2,
    beast_mast: 1,
@@ -217,7 +221,7 @@ var talents = {
    exp_weakness: 0,
    wyvern_sting: 0,
    TotH: 0,
-   master_tac: 0,
+   master_tact: 0,
    nox_stings: 0,
    no_escape: 0,
    sniper_training: 0,
@@ -295,9 +299,10 @@ function calcBaseStats() {
   mapmod = (1 + Stam * talents.hunt_vs_wild) * tsa_ap * 1;
   rapmod = (1 + Stam * talents.hunt_vs_wild) * tsa_ap * 1;
   // Attack Power
+  let hawkAP = 155
   BaseMAP = (GearStats.MAP + BuffStats.MAP + EnchantStats.MAP + Agi + Str + races[selectedRace].mAP + custom.MAP) * mapmod;
   // flat 300 added for Aspect of the Hawk - need to change later
-  BaseRAP = (300 + GearStats.RAP + BuffStats.RAP + EnchantStats.RAP + Agi + races[selectedRace].rAP + Int * talents.careful_aim + custom.RAP) * rapmod;
+  BaseRAP = (hawkAP + GearStats.RAP + BuffStats.RAP + EnchantStats.RAP + Agi + races[selectedRace].rAP + Int * talents.careful_aim + custom.RAP) * rapmod;
   
   // Crit rating and crit chance
    let critrating = GearStats.Crit + BuffStats.Crit + EnchantStats.Crit;
@@ -333,9 +338,9 @@ function calcBaseStats() {
   RaptorMissChance = Math.max(8 - MeleeHitChance - penalty,0);
   RangeMissChance = Math.max(8 - RangeHitChance - penalty,0);
 
-  // Expertise and Dodge - every 3.9 rating is 1 expertise, 1 expertise = 0.25% reduction rounded down to nearest integer
+  // Expertise and Dodge - every 8.19 rating is 1 expertise, 1 expertise = 0.25% reduction rounded down to nearest integer
   Expertise = Math.floor(GearStats.Exp / ExpertiseRatio + races[selectedRace].expertise + custom.expertise);
-  DodgeChance = 6.5 - Expertise * 0.25;
+  DodgeChance = 6.5 - Expertise * ExpertiseReduction;
 
   ArPRating = GearStats.ArP + custom.arp;
   ManaPer5 = Math.floor(BuffStats.MP5 + GearStats.MP5 + EnchantStats.MP5 + custom.mp5);
@@ -363,6 +368,7 @@ function initialize(){
    calcBaseStats();
    petStatsCalc();
    initializeWeps();
+   buildAurasObj();
    initializeAuras();
    getStatsCapData(); // used for gear display, simple formula to set stats cap goals
 }
@@ -475,8 +481,22 @@ function updateArmorReduction() {
    let arp = ArPRating;
    let debuffarp = 0;
    let armorPenReduc = 0;
-   let arp_cap = (target.armor + 15232.5) / 3;
-   //arp += (auras.executioner.timer > 0) ? 120 : 0; // executioner
+   let targetlevel = 73;
+   // formula consts for level 60 or higher
+   let target_const = 400 + 85 * targetlevel + 4.5 * 85 * (targetlevel-59);
+   let attacker_const = 400 + 85 * level + 4.5 * 85 * (level-59);
+   
+   if (Object.values(arp_auras).length !== 0) {
+      arp += Object.entries(arp_auras).reduce((acc, [stat, value]) => {
+         let arpval = 0
+         if(value.timer > 0) {
+            if (!!value.stacks){
+               arpval = value.stacks * value.effect.stats.ArP} 
+            else {arpval = value.effect.stats.ArP}
+         }
+         return acc + arpval
+      }, 0)
+   }
    arp = Math.min(ArmorPenCap, arp);
    armorPenReduc = arp / ArPRatingRatio / 100;
 
@@ -490,11 +510,13 @@ function updateArmorReduction() {
    }
    else {debuffs.sunder.stacks = 0;}
    let debuffArmor = target.armor * (1 - debuffarp);
-   let playerRemainingArmor = debuffArmor - Math.min(target.armor, arp_cap) * armorPenReduc;
+
+   let armor_cap = (debuffArmor + target_const) / 3;
+   let playerRemainingArmor = debuffArmor - Math.min(target.armor, armor_cap) * armorPenReduc;
 
    // target armor reduction calculation
-   PlyrArmorReduc = playerRemainingArmor / (playerRemainingArmor + 400 + 85 * ((5.5 * 80) - 265.5));
-   PetArmorReduc = debuffArmor / (debuffArmor + 400 + 85 * ((5.5 * 80) - 265.5));
+   PlyrArmorReduc = playerRemainingArmor / (playerRemainingArmor + attacker_const);
+   PetArmorReduc = debuffArmor / (debuffArmor + attacker_const);
    //console.log("reduction " + PlyrArmorReduc);
    return;
 }
@@ -505,18 +527,24 @@ function updateAP() {
    combatRAP = BaseRAP;
    combatMAP = BaseMAP;
    let bonusAP = 0;
-   if(auras.bloodfury.timer > 0) { bonusAP += 322; } // bloodfury
-   if(auras.naarusliver.timer > 0) {bonusAP += 44 * auras.naarusliver.stacks; } // blackened naaru sliver
-
-   if(auras.aptrink1.enable && (auras.aptrink1.AP > 0) && (auras.aptrink1.timer > 0)) { bonusAP += auras.aptrink1.AP; }
-   if(auras.aptrink2.enable && (auras.aptrink2.AP > 0) && (auras.aptrink2.timer > 0)) { bonusAP += auras.aptrink2.AP; }
-   // AP from combat agi
+   if (Object.values(ap_auras).length !== 0) {
+      bonusAP = Object.entries(ap_auras).reduce((acc, [stat, value]) => {
+         let apval = 0
+         if(value.timer > 0) {
+            if (!!value.stacks){
+               apval = value.stacks * value.effect.stats.RAP} // they all use RAP + MAP on auras, so no need to separate MAP
+            else {apval = value.effect.stats.RAP}
+         }
+         return acc + apval
+      }, 0)
+      
+      //console.log(bonusAP)
+   }
+    // AP from combat agi
    bonusAP += combatAgi;
    // target AP - expose weakness
    let targetAP = 0;
-   if (talents.exp_weakness > 0) {
-      bonusAP += (debuffs.exposeweakness.timer > 0) ? (Agi + combatAgi) / 4 : 0; // expose from player if talented
-   }
+   bonusAP += (!!auras.exp_weakness && auras.exp_weakness.timer > 0) ? (Agi + combatAgi) / 4 : 0; // expose from player if talented
 
    // demonslaying AP
    if (target.type === 'Demon'){
@@ -525,7 +553,7 @@ function updateAP() {
    // Hunter's mark - RAP 500
    let HM_rap = (debuffs.hm.timer > 0 && !debuffs.hm.inactive) ? debuffs.hm.rap : 0;
 
-   // HM - MAP set from talents if talented else if checked in settings
+   // HM - bonus from talents
    if (debuffs.hm.timer > 0 && !debuffs.hm.inactive) {
       if(talents.imp_hunter_mark > 1) {
          HM_rap *= talents.imp_hunter_mark;
@@ -547,9 +575,15 @@ function updateAP() {
 // handling for Agi changes
 function updateAgi() {
    combatAgi = 0;
-
-   if(auras.mongoose.timer > 0) { combatAgi += 120; } // mongoose proc
-
+   if (Object.values(agi_auras).length !== 0) {
+      combatAgi += Object.entries(agi_auras).reduce((acc, [stat, value]) => {
+         let agival = 0
+         if(value.timer > 0) {
+            agival = value.effect.stats.Agi
+         }  
+         return acc + agival
+      }, 0)
+   }
    combatAgi = Math.floor(combatAgi * agimod);
    //console.log("agi bonus: " + combatAgi);
    // updating crit and AP from the gained agi - in AP and crit funct
@@ -557,28 +591,35 @@ function updateAgi() {
 }
 // handling for updating speed
 function updateHaste() {
-   haste = 1;
+   hasted_speed = 1;
    rangespeed = BaseRangeSpeed;
    meleespeed = BaseMeleeSpeed;
    let hasterating = HasteRating;
    
-   hasterating += ((auras.potion.timer > 0) && (auras.potion.used === 'Haste')) ? 500 : 0; // haste potion
-
-   let berserkspeed = 1.2;    // troll berserking (20% in wotlk)
-   haste = (auras.berserk.timer > 0) ? haste * berserkspeed : haste;  // troll berserking (20% in wotlk)
-   haste = (auras.lust.timer > 0) ? haste * 1.3 : haste; // lust
+   if (Object.values(haste_auras).length !== 0) {
+      hasterating += Object.entries(haste_auras).reduce((acc, [stat, value]) => {
+         let hasteval = 0
+         if(value.timer > 0) {
+            hasteval = value.effect.stats.Haste
+         }  
+         return acc + hasteval
+      }, 0)
+      //console.log(hasterating)
+   }
+   hasted_speed = (auras.berserk?.timer > 0) ? hasted_speed * 1.2 : hasted_speed;  // troll berserking (20% in wotlk)
+   hasted_speed = (auras.lust?.timer > 0) ? hasted_speed * 1.3 : hasted_speed; // lust
 
    let hasteRatingSpeed = (hasterating / HasteRatingRatio / 100) + 1;
-   haste *= hasteRatingSpeed;
+   hasted_speed *= hasteRatingSpeed;
 
    // ranged only
-   rangespeed = (auras.rapid.timer > 0) ? rangespeed / 1.4 : rangespeed; // rapid fire
-   rangespeed = (auras.imphawk.timer > 0) ? rangespeed / talents.imp_hawk : rangespeed; // quick shots
+   rangespeed = (auras.rapid?.timer > 0) ? rangespeed / (1+ auras.rapid.effect.rangespeed / 100) : rangespeed; // rapid fire
+   rangespeed = (auras.imp_hawk?.timer > 0) ? rangespeed / (1 + talents.imp_hawk) : rangespeed; // quick shots
    // melee only
-   meleespeed = (auras.mongoose.timer > 0) ? meleespeed / 1.02 : meleespeed; // mongoose
+   meleespeed = (auras.mongoose?.timer > 0) ? meleespeed / 1.02 : meleespeed; // mongoose
 
-   rangespeed = rangespeed / haste;
-   meleespeed = meleespeed / haste;
+   rangespeed = rangespeed / hasted_speed;
+   meleespeed = meleespeed / hasted_speed;
    //console.log("haste rating: " + hasterating);
    //console.log("range spd: " + (Math.round(rangespeed * 100) / 100));
    //console.log("melee spd: " + (Math.round(meleespeed * 100) / 100));
@@ -590,7 +631,7 @@ function updateDmgMod() {
    physdmgmod = 1;
    magdmgmod = 1;
 
-   if(auras.beastwithin.timer > 0) { combatdmgmod *= 1.1;} // beast within
+   if(!!auras.beastwithin && auras.beastwithin.timer > 0) { combatdmgmod *= 1.1;} // beast within
    
    if((debuffs.bloodfrenzy.timer > 0) && !debuffs.bloodfrenzy.inactive) { physdmgmod *= 1.04; } // blood frenzy
    // special mods for non-physical dmg
@@ -603,7 +644,21 @@ function updateCritChance(attack) {
    let critsuppression = CritPenalty + CritAuraPenalty;
    let attackcrit = (attack === 'melee') ? MeleeCritChance : RangeCritChance; 
    let combatCrit = attackcrit + critsuppression;
-   if(auras.mastertact.timer > 0) { combatCrit += talents.master_tac; } // master tactician
+   let critrating = 0;
+
+   if (Object.values(crit_auras).length !== 0){
+      critrating += Object.entries(crit_auras).reduce((acc, [stat, value]) => {
+         let critval = 0
+         if(value.timer > 0) {
+            if (!!value.stacks){
+               critval = value.stacks * value.effect.stats.Crit} 
+            else {critval = value.effect.stats.Crit}
+         }
+         return acc + critval
+      }, 0)
+      combatCrit += (critrating / CritRatingRatio);
+   }
+   if(!!auras.master_tact && auras.master_tact.timer > 0) { combatCrit += talents.master_tact; } // master tactician
    
    // from agi changes
    combatCrit += combatAgi / AgiToCrit;
@@ -707,8 +762,8 @@ function attackMainhand(meleeAP) {
    totaldmgdone += done;
    meleedmg += done;
    procattack(attack,result);
-   procMana(attack,result); // expensiveish
-   magicproc(attack);
+   //procMana(attack,result); // expensiveish
+   //magicproc(attack);
 
    if(combatlogRun) {
       combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player Melee " + RESULTARRAY[result] + " for " + done;
@@ -720,14 +775,15 @@ function attackMainhand(meleeAP) {
 }
 
 /** attack with auto shot */
-function attackRange() {
+function attackRange(type) {
 
+   if (type === undefined) type = 'autoshot';
    let attack = 'ranged';
    let combatCrit = updateCritChance(attack);
 
    let dmg = 0;
    let result = rollRangeWep(combatCrit); // check attack table
-   spellResultSum(result, 'autoshot');
+   spellResultSum(result, type);
    if (result === RESULT.HIT) {
          dmg = autoShotCalc(range_wep,combatRAP); // calc damage
    }
@@ -736,15 +792,28 @@ function attackRange() {
          dmg *= RangeCritDamage;
          proccrit(0, attack);
    }
-
-   let done = dealdamage(dmg,result);
+   let done = 0;
+   if (type === 'wild_quiver') {
+      done = dealdamage(dmg,result, 'magic') * 0.8;
    
-   totaldmgdone += done;
-   autodmg += done;
+      totaldmgdone += done;
+      wild_quiverdmg += done;
+   } else if (type === 'zods_repeat'){
+      done = dealdamage(dmg,result) * 0.5;
+   
+      totaldmgdone += done;
+      zodsdmg += done;
+   } else {
+      done = dealdamage(dmg,result);
+   
+      totaldmgdone += done;
+      autodmg += done;
+   }
+   
    procauto();
    procattack(attack,result);
    procMana(attack,result); // expensiveish
-   magicproc(attack);
+   //magicproc(attack);
 
    if(combatlogRun) {
       combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player Auto Shot " + RESULTARRAY[result] + " for " + done + ". RAP => " + combatRAP;
@@ -761,16 +830,17 @@ function attackSpell(spell,spellcost) {
    let result = 0;
    let attack = "";
    let specialcrit = 0;
-   let beastwithinreduc = (auras.beastwithin.timer > 0) ? 0.5 : 1;
    let cost = 0;
 
    if (spell === 'steadyshot'){
       attack = 'ranged';
       cost = Math.floor(spellcost * talents.efficiency * beastwithinreduc);
       currentMana -= cost;
-
+      
       combatCrit = updateCritChance(attack);
-      result = rollSpell(attack, combatCrit); // check attack table
+
+      result = rollSpell(attack, combatCrit, specialcrit); // check attack table
+
       spellResultSum(result, spell);
       if (result === RESULT.HIT) {
          dmg = steadyShotCalc(range_wep,combatRAP); // calc damage
@@ -780,7 +850,7 @@ function attackSpell(spell,spellcost) {
          dmg *= RangeCritDamage;
          proccrit(cost, attack);   
       }
-      procsteady();
+      procsteady(attack);
       steadycount++;
    } 
    else if (spell === 'multishot') {
@@ -858,7 +928,7 @@ function attackSpell(spell,spellcost) {
 
    procattack(attack,result);
    procMana(attack,result); // expensiveish
-   magicproc(attack);
+   //magicproc(attack);
 
    if(combatlogRun) {
       combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player " + SPELL_MAPPER[spell] + " " + RESULTARRAY[result] + " for " + done + ". RAP => " + combatRAP + ". Mana => " + currentMana;
@@ -931,6 +1001,26 @@ function dealdamage(dmg, result, spell) {
 function proccrit(cost, attack) {
 
    let roll = 0;
+
+   let trink1_has_aura = (Object.values(auras.trink1).length !== 0);
+   let trink2_has_aura = (Object.values(auras.trink2).length !== 0);
+   let slot = '';
+
+   if (trink1_has_aura) {
+      slot = 'trink1';
+      // if effect is proc and cd is up verify proc type condition is met
+      if ((auras[slot].effect.is_proc && auras[slot].cd === 0 )){
+         if (auras[slot].effect.proc_type === 'Melee or Range Crit') rollTrinkProc(slot,attack);
+      }
+   }
+   if (trink2_has_aura) {
+      slot = 'trink2';
+      // if effect is proc and cd is up verify proc type condition is met
+      if ((auras[slot].effect.is_proc && auras[slot].cd === 0 )){
+         if (auras[slot].effect.proc_type === 'Melee or Range Crit') rollTrinkProc(slot,attack);
+      }
+   }
+
    // thrill of the hunt
    if (talents.TotH > 0 && cost > 0 && attack === 'ranged'){
       roll = rng10k();
@@ -942,11 +1032,11 @@ function proccrit(cost, attack) {
          }
       }
    }
-   if (talents.exp_weakness > 0 && attack === 'ranged') {
+   if (!!auras.exp_weakness && attack === 'ranged') {
       roll = rng10k();
-      debuffs.exposeweakness.timer = (roll <= talents.exp_weakness * 3333) ? debuffs.exposeweakness.duration : debuffs.exposeweakness.timer;
-      if(debuffs.exposeweakness.timer > 0 && combatlogRun) {
-         combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Target is afflicted by Expose Weakness.";
+      auras.exp_weakness.timer = (roll <= talents.exp_weakness * 3333) ? auras.exp_weakness.effect.duration : auras.exp_weakness.timer;
+      if(auras.exp_weakness.timer === auras.exp_weakness.effect.duration && combatlogRun) {
+         combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player gains Expose Weakness";
          combatlogindex++;
       }
    }
@@ -959,188 +1049,245 @@ function proccrit(cost, attack) {
 }
 /** handling for procs by autos (quick shots only) */
 function procauto() {
-   if (auras.imphawk.enable) {
-      let x = rng10k();
-      auras.imphawk.timer = (x <= 1000) ? 12 : auras.imphawk.timer; // proc check
-      if(auras.imphawk.timer === 12 && combatlogRun) {
+   if (!!auras.imp_hawk) {
+      let roll = rng10k();
+
+      auras.imp_hawk.timer = (roll <= auras.imp_hawk.effect.proc_chance * 100) ? auras.imp_hawk.effect.duration : auras.imp_hawk.timer; // proc check
+      if((auras.imp_hawk.timer === auras.imp_hawk.effect.duration) && combatlogRun) {
          combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player gains Quick Shots (Imp Hawk Proc)";
          combatlogindex++;
       }
    }
+
+   if (talents.wild_quiver > 0) {
+      let roll = rng10k();
+      if (roll <= talents.wild_quiver * 100) {
+         attackRange('wild_quiver');
+      }
+   }
+   if (gear.range.id === 50034) { // zod's repeating longbow
+      let procchance = 4;
+      let roll = rng10k();
+      if (roll <= procchance * 100) {
+         attackRange('zods_repeat');
+      }
+   } else if (gear.range.id === 50638) { // zod's repeating longbow heroic
+      let procchance = 5;
+      let roll = rng10k();
+      if (roll <= procchance * 100) {
+         attackRange('zods_repeat');
+      }
+   }
+
 }
 /** handling for procs by steady only */
-function procsteady() {
-      // madness of the betrayer
-   if (auras.imp_steady_shot.enable){
+function procsteady(attack) {
+
+   let trink1_has_aura = (Object.values(auras.trink1).length !== 0);
+   let trink2_has_aura = (Object.values(auras.trink2).length !== 0);
+   let slot = '';
+
+   if (trink1_has_aura) {
+      slot = 'trink1';
+      // if effect is proc and cd is up verify proc type condition is met
+      if ((auras[slot].effect.is_proc && auras[slot].cd === 0 )){
+         if (auras[slot].effect.proc_type === 'Steady') rollTrinkProc(slot,attack);
+      }
+   }
+   if (trink2_has_aura) {
+      slot = 'trink2';
+      // if effect is proc and cd is up verify proc type condition is met
+      if ((auras[slot].effect.is_proc && auras[slot].cd === 0 )){
+         if (auras[slot].effect.proc_type === 'Steady') rollTrinkProc(slot,attack);
+      }
+   }
+
+      // imp steady shot
+   if (!!auras.imp_steady_shot){
       let roll = rng10k(); 
-      auras.imp_steady_shot.timer = (roll <= auras.imp_steady_shot.procchance * 100) ? auras.imp_steady_shot.duration : auras.imp_steady_shot.timer;
+      auras.imp_steady_shot.timer = (roll <= auras.imp_steady_shot.effect.proc_chance * 100) ? auras.imp_steady_shot.effect.duration : auras.imp_steady_shot.timer;
       if(auras.imp_steady_shot.timer === auras.imp_steady_shot.duration && combatlogRun) { 
 
-         combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player gains Deadly Aim (Asht. Proc)";
+         combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player gains " + auras.imp_steady_shot.effect_name;
          combatlogindex++;
       }
-
    }
 }
+
+function rollTrinkProc(slot,attack) {
+   let meleehit = (attack === "melee") ? true:false;
+   let rangehit = (attack === "ranged") ? true:false;
+   let meleePPM = BaseMeleeSpeed / 60 * 100;
+   let rangePPM = 1/60 * RANGED_WEAPONS[gear.range.id].speed * 100;
+   
+   let roll = rng10k();
+   if (!!auras[slot].effect.ppm) {
+      if(rangehit) procchance = auras[slot].effect.ppm * rangePPM;
+      if(meleehit) procchance = auras[slot].effect.ppm * meleePPM;
+   }
+   else procchance = (!!auras[slot].effect.proc_chance) ? auras[slot].effect.proc_chance: 100;
+   //console.log('try ' + slot)
+   if (roll <= procchance * 100) {
+      //console.log('success ' + slot)
+      auras[slot].timer = auras[slot].effect.duration;
+      auras[slot].cd = (!!auras[slot].effect.base_cd) ? auras[slot].effect.base_cd : 0;
+
+      if(procchance = 100) auras[slot].stacks = Math.min(auras[slot].stacks + 1, auras[slot].effect.stacks);
+      if(auras[slot].timer === auras[slot].effect.duration && combatlogRun) {
+         let stack_string = (auras[slot].stacks) ? " stacks: " + auras[slot].stacks : '';
+         combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player gains " + auras[slot].effect_name + stack_string;
+         combatlogindex++;
+      }
+   }
+}
+
 // handling for procs by normal hits - melee or ranegd
 function procattack(attack,result) {
    let roll = 0;
    let procchance = 0;
-   PPM = 0;
    let meleehit = (attack === "melee") ? true:false;
    let rangehit = (attack === "ranged") ? true:false;
+   let meleePPM = BaseMeleeSpeed / 60 * 100;
+   let rangePPM = 1/60 * RANGED_WEAPONS[gear.range.id].speed * 100;
+   let success = (result === RESULT.HIT) || (result === RESULT.CRIT) || (result === RESULT.GLANCE);
 
-   // dragonspine trophy
-   if (auras.dragonspine.enable && auras.dragonspine.cooldown === 0){
-      roll = rng10k(); 
-      if(rangehit) {PPM = 1/60 * RANGED_WEAPONS[gear.range.id].speed * 100; }
-      if(meleehit) {PPM = BaseMeleeSpeed / 60 * 100; }
-      procchance = auras.dragonspine.ppm * PPM;
-      auras.dragonspine.timer = (roll <= procchance * 100) ? auras.dragonspine.duration : 0;
-      if(auras.dragonspine.timer > 0) { 
-         auras.dragonspine.cooldown = 20; 
+   let trink1_has_aura = (Object.values(auras.trink1).length !== 0);
+   let trink2_has_aura = (Object.values(auras.trink2).length !== 0);
+   let naarutrink = '';
+   let swarmguard = '';
+   let slot = '';
 
-         if(combatlogRun) {
-            combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player gains Haste (DST Proc)";
-            combatlogindex++;
-         }
+   
+   if (trink1_has_aura) {
+      slot = 'trink1';
+      // condition swarmguard and naaru for stack tracking
+      if ((auras[slot].timer > 0) && auras[slot].effect_name === TRINKET_CDS.swarmguard.effect_name) {
+         swarmguard = slot;
+      } else if ((auras[slot].timer > 0) && (auras[slot].effect_name === TRINK_PROCS.naarusliver.effect_name)) {
+         naarutrink = slot;
       }
-   }  
-   // madness of the betrayer
-   if (auras.madness.enable){
-      roll = rng10k(); 
-      if(rangehit) {PPM = 1/60 * RANGED_WEAPONS[gear.range.id].speed * 100; }
-      if(meleehit) {PPM = BaseMeleeSpeed / 60 * 100; }
-      procchance = auras.madness.ppm * PPM;
-      auras.madness.timer = (roll <= procchance * 100) ? auras.madness.duration : auras.madness.timer;
-      if(auras.madness.timer === auras.madness.duration && combatlogRun) { 
-         combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player gains Forceful Strike (Madness Proc)";
-         combatlogindex++;
+      // if effect is proc and cd is up verify proc type condition is met
+      if ((auras[slot].effect.is_proc && auras[slot].cd === 0 )){
+         if ((auras[slot].effect.proc_type === 'Melee or Range') || 
+               (success && (auras[slot].effect.proc_type === 'Melee or Range Hit'))) {
+               
+            rollTrinkProc(slot,attack);
+         } 
+      }
    }
+
+   if (trink2_has_aura) {
+      slot = 'trink2';
+      // condition swarmguard and naaru for stack tracking
+      if ((auras[slot].timer > 0) && auras[slot].effect_name === TRINKET_CDS.swarmguard.effect_name) {
+         swarmguard = slot;
+      } else if ((auras[slot].timer > 0) && (auras[slot].effect_name === TRINK_PROCS.naarusliver.effect_name)) {
+         naarutrink = slot;
+      }
+      // if effect is proc and cd is up verify proc type condition is met
+      if ((auras[slot].effect.is_proc && auras[slot].cd === 0 )){
+         if ((auras[slot].effect.proc_type === 'Melee or Range') || 
+               (success && (auras[slot].effect.proc_type === 'Melee or Range Hit'))) {
+               
+            rollTrinkProc(slot,attack);
+         } 
+      }
    }
+
    // executioner enchant
-   if (meleehit && auras.executioner.enable){
-      roll = rng10k(); 
-      PPM = BaseMeleeSpeed / 60 * 100;
-      procchance = auras.executioner.ppm * PPM;
-      auras.executioner.timer = (roll <= procchance * 100) ? auras.executioner.duration : auras.executioner.timer;
-      if(auras.executioner.timer === auras.executioner.duration && combatlogRun) { 
+   if (!!auras.executioner && meleehit){
+      roll = rng10k();
+      procchance = auras.executioner.ppm * meleePPM;
+      auras.executioner.timer = (roll <= procchance * 100) ? auras.executioner.effect.duration : auras.executioner.timer;
+      if(auras.executioner.timer === auras.executioner.effect.duration && combatlogRun) { 
          combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player gains Executioner";
          combatlogindex++;
       }
    } 
    // mongoose enchant
-   if (meleehit && auras.mongoose.enable){
+   if (!!auras.mongoose && meleehit){
       roll = rng10k(); 
-      PPM = BaseMeleeSpeed / 60 * 100;
-      procchance = auras.mongoose.ppm * PPM;
-      auras.mongoose.timer = (roll <= procchance * 100) ? auras.mongoose.duration : auras.mongoose.timer;
-      if(auras.mongoose.timer === auras.mongoose.duration && combatlogRun) { 
+      procchance = auras.mongoose.ppm * meleePPM;
+      auras.mongoose.timer = (roll <= procchance * 100) ? auras.mongoose.effect.duration : auras.mongoose.timer;
+      if(auras.mongoose.timer === auras.mongoose.effect.duration && combatlogRun) { 
          combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player gains Mongoose";
          combatlogindex++;
       }
    }
-   // blackened naaru sliver - roll to buff
-   if (auras.naarusliver.enable && auras.naarusliver.cooldown === 0){
-      roll = rng10k(); 
-      procchance = auras.naarusliver.procchance;
-      auras.naarusliver.timer = (roll <= procchance * 100) ? auras.naarusliver.duration : 0;
-      if(auras.naarusliver.timer === auras.naarusliver.duration) { 
-         auras.naarusliver.cooldown = 45; 
-         auras.naarusliver.stacks = 0;  
-         if(combatlogRun) {
-            combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player gains Battle Trance (BNS Proc)";
-            combatlogindex++;
-         }
-      }
+   // add stacks
+   if (naarutrink !== '') {
+      auras[naarutrink].stacks = Math.min(auras[naarutrink].stacks + 1, auras[naarutrink].effect.stacks);
+      //console.log("naaru stacks: " + auras[naarutrink].stacks);
    }
-      // add stacks
-   if (auras.naarusliver.enable && auras.naarusliver.timer > 0) {
-      auras.naarusliver.stacks = Math.min(auras.naarusliver.stacks + 1, 10);
-      //console.log("naaru stacks: " + auras.naarusliver.stacks);
-   }
+   
    // swarmguard stack handling
-   if (auras.swarmguard.enable && auras.swarmguard.timer > 0) {
+   if (swarmguard !== '') {
       roll = rng10k();
-      if(rangehit) { PPM = 1/60 * RANGED_WEAPONS[gear.range.id].speed * 100; }
-      if(meleehit) { PPM = BaseMeleeSpeed / 60 * 100; }
-      procchance = auras.swarmguard.ppm * PPM;
-      auras.swarmguard.stacks = (roll <= procchance * 100) ? Math.min(auras.swarmguard.stacks + 1,6) : auras.swarmguard.stacks;
-      //console.log("swarmguard stacks: " + auras.swarmguard.stacks);
+      if(rangehit) procchance = auras[swarmguard].effect.ppm * rangePPM;
+      if(meleehit) procchance = auras[swarmguard].effect.ppm * meleePPM;
+      let curr_stacks = auras[swarmguard].stacks;
+      auras[swarmguard].stacks = (roll <= procchance * 100) ? Math.min(auras[swarmguard].stacks + 1,auras[swarmguard].effect.stacks) : auras[swarmguard].stacks;
+      if(curr_stacks < auras[swarmguard].stacks && combatlogRun) { 
+         combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player gains " + auras[swarmguard].effect_name + " stacks: " + auras[swarmguard].stacks;
+         combatlogindex++;
+      }//console.log("swarmguard stacks: " + auras[swarmguard].stacks);
    }
 
    // don santos hunting rifle (only ranged attacks)
-   if (rangehit && auras.donsantos.enable){
+   if (!!auras.donsantos && rangehit){
       roll = rng10k(); 
-      PPM = 1/60 * RANGED_WEAPONS[gear.range.id].speed * 100;
-      procchance = auras.donsantos.ppm * PPM;
-      auras.donsantos.timer = (roll <= procchance * 100) ? auras.donsantos.duration : auras.donsantos.timer;
-      if(auras.donsantos.timer === auras.donsantos.duration && combatlogRun) { 
+      procchance = auras.donsantos.effect.ppm * rangePPM;
+      auras.donsantos.timer = (roll <= procchance * 100) ? auras.donsantos.effect.duration : auras.donsantos.timer;
+      if(auras.donsantos.timer === auras.donsantos.effect.duration && combatlogRun) { 
          combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player gains Santos' Blessing (DSFHR Proc)";
          combatlogindex++;
       }
    }  
    // master tactician (only successful ranged attacks)
-   if (rangehit && ((result === RESULT.HIT) || (result === RESULT.CRIT)) && talents.master_tac > 0){
+   if (!!auras.master_tact && rangehit && success){
       roll = rng10k(); 
-      auras.mastertact.timer = (roll <= auras.mastertact.procchance * 100) ? auras.mastertact.duration : auras.mastertact.timer;
-      if(auras.mastertact.timer === auras.mastertact.duration && combatlogRun) { 
-         combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player gains Master Tactician";
+      auras.master_tact.timer = (roll <= auras.master_tact.effect.proc_chance * 100) ? auras.master_tact.effect.duration : auras.master_tact.timer;
+      if(auras.master_tact.timer === auras.master_tact.effect.duration && combatlogRun) { 
+         combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player gains " + auras.master_tact.effect_name;
          combatlogindex++;
       }
    }
    // band of eternal champion
-   if (auras.eternalchamp.enable && auras.eternalchamp.cooldown === 0){
+   if (!!auras.eternalchamp && auras.eternalchamp.cd === 0){
       roll = rng10k(); 
-      if(rangehit) {PPM = 1/60 * RANGED_WEAPONS[gear.range.id].speed * 100; }
-      if(meleehit) {PPM = BaseMeleeSpeed / 60 * 100; }
-      procchance = auras.eternalchamp.ppm * PPM;
-      auras.eternalchamp.timer = (roll <= procchance * 100) ? auras.eternalchamp.duration : 0;
+      if(rangehit) PPM = procchance = auras.eternalchamp.effect.ppm * rangePPM;
+      if(meleehit) PPM = procchance = auras.eternalchamp.effect.ppm * meleePPM;
+      auras.eternalchamp.timer = (roll <= procchance * 100) ? auras.eternalchamp.effect.duration : 0;
       if(auras.eternalchamp.timer > 0) { 
-         auras.eternalchamp.cooldown = 60; 
+         auras.eternalchamp.cd = 60; 
          if(combatlogRun) {
             combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player gains Band of the Eternal Champion";
             combatlogindex++;
          }
       }
    }  
-   // darkmoon card crusade
-   let success = (result === RESULT.HIT) || (result === RESULT.CRIT) || (result === RESULT.GLANCE);
-   if (auras.dmccrusade.enable && success){
-      auras.dmccrusade.stacks = Math.min(auras.dmccrusade.stacks + 1, 20);
-      auras.dmccrusade.timer = 10;
-      if(auras.dmccrusade.stacks < 20) {
-         if(combatlogRun) {
-            combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player gains Aura of the Crusade (DMC) (" + (auras.dmccrusade.stacks + 1) + ")";
-            combatlogindex++;
-         }
-      }
-   }  
-   // shattered sun pendant - aldor proc
-   if (auras.shattered.enable && (auras.shattered.type === 'aldor') && (auras.shattered.cooldown === 0)){
-      roll = rng10k(); 
-      procchance = auras.shattered.procchance;
-      auras.shattered.timer = (roll <= procchance * 100) ? auras.shattered.duration : 0;
-      if(auras.shattered.timer === auras.shattered.duration) { 
-         auras.shattered.cooldown = 45; 
-         auras.shattered.stacks = 0;  
-         if(combatlogRun) {
-            combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player gains Light's Strength";
-            combatlogindex++;
-         }
-      }
-   }
+   
    // righteous weapon coating
-   if (auras.righteous.enable && auras.righteous.cooldown === 0){
+   if (!!auras.righteousness && auras.righteousness.cd === 0){
       roll = rng10k(); 
-      if(rangehit) {PPM = 1/60 * RANGED_WEAPONS[gear.range.id].speed * 100; }
-      if(meleehit) {PPM = BaseMeleeSpeed / 60 * 100; }
-      procchance = auras.righteous.ppm * PPM;
-      auras.righteous.timer = (roll <= procchance * 100) ? auras.righteous.duration : 0;
-      if(auras.righteous.timer > 0) { 
-         auras.righteous.cooldown = 45; 
+      auras.righteousness.timer = (roll <= auras.righteousness.effect.proc_chance * 100) ? auras.righteousness.effect.duration : 0;
+      if(auras.righteousness.timer > 0) { 
+         auras.righteousness.cd = auras.righteousness.effect.base_cd; 
          if(combatlogRun) {
             combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player gains Righteousness";
+            combatlogindex++;
+         }
+      }
+   } 
+
+   // swordguard embroidery
+   if (!!auras.swordguard && auras.swordguard.cd === 0){
+      roll = rng10k(); 
+      auras.swordguard.timer = (roll <= auras.swordguard.effect.proc_chance * 100) ? auras.swordguard.effect.duration : 0;
+      if(auras.swordguard.timer > 0) { 
+         auras.swordguard.cd = auras.swordguard.effect.base_cd; 
+         if(combatlogRun) {
+            combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player gains " + auras.swordguard.effect_name;
             combatlogindex++;
          }
       }
@@ -1186,33 +1333,6 @@ function magicproc(attack) {
          }
       }
    }
-   // scryer neck proc
-   if (auras.shattered.enable && (auras.shattered.type === 'scryer') && (auras.shattered.cooldown === 0)){
-      roll = rng10k(); 
-      procchance = auras.shattered.procchance;
-      if (roll <= procchance * 100) {
-         auras.shattered.cooldown = 45;
-         
-         result = rollSpell('melee');
-         if (result === RESULT.HIT) {
-            dmg = rng(333,367) * physdmgmod;
-         }
-         else if (result === RESULT.CRIT) {
-            dmg = rng(333,367) * physdmgmod;
-            dmg *= MeleeCritDamage;
-         }
-         let done = dealdamage(dmg,result,'magic');
-         totaldmgdone += done;
-
-         if(combatlogRun) {
-            combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player Arcane Strike " + RESULTARRAY[result] + " for " + done;
-            combatlogindex++;
-         }
-      }
-   }
-}
-// handling for physical dmg procs from items (if any?)
-function physproc() {
 }
 
 // using runes
@@ -1221,14 +1341,14 @@ function runeHandling() {
    let prev_mana = 0;
    let gain = 0;
    let over = 0;
-   if (Mana - currentMana >= 1500) {
+   if (Mana - currentMana >= auras.rune.effect.maxMana) {
 
-      runemana = rng(900,1500);
+      runemana = rng(auras.rune.effect.minMana,auras.rune.effect.maxMana);
       prev_mana = currentMana;
       currentMana = Math.min(currentMana + runemana, Mana);
       gain = currentMana - prev_mana;
       over = runemana - gain;
-      auras.rune.cooldown = 120;
+      auras.rune.cd = auras.rune.effect.base_cd;
       if(combatlogRun) {
          combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player used rune for " + gain + " Mana (O: " + over + ")";
          combatlogindex++;
@@ -1272,7 +1392,7 @@ function potionHandling() {
    else {
       return false;
    }
-   auras.potion.cooldown = 60;
+   auras.potion.cd = 60;
    return true;
 }
 
