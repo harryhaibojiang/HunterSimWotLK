@@ -5,8 +5,8 @@ var beastwithinreduc = 1;
 var sharedtrinketcd = 0;
 
 var debuffs = {
-    hm: {uptime_g:100, timer:0, duration:300, improved:true, rap:110, uptime:0},
-    judgewisdom: {uptime_g:100, timer:0, duration:20, uptime:0},
+    hm: {uptime_g:0, timer:0, duration:300, improved:true, rap:0, uptime:0},
+    judgewisdom: {uptime_g:0, timer:0, duration:20, uptime:0},
     judgecrusader: {uptime_g:0, timer:0, duration:20, crit:3, uptime:0},
     sunder: {uptime_g:0, timer:0, duration:30, stacktime:5, stacks:1, arp:0.04, uptime:0},
     faeriefire: {uptime_g:0, timer:0, duration:300, arp:0.05, uptime:0},
@@ -296,7 +296,7 @@ function intervalAuraInitializer(){
  * steps and are applied potentially during a step. A timer of 30 would start at 29.9 on the next step.
  */
 function IntervalAuraHandler(){
-    if(debuffs.hm.timer <= 0 || debuffs.hm.inactive && (debuffs.hm.uptime_g < 98)) {debuffs.hm.stacks = 0;} // sets stacks to 0 when inactive
+
     if((debuffs.hm.timer <= 0) && (debuffs.hm.uptime_g > 0)) { debuffs.hm.timer += IntervalAuraSetTime("hm","debuff"); } // sets the timer to inactive or active
     
     if((debuffs.judgewisdom.timer <= 0) && (debuffs.judgewisdom.uptime_g > 0)) { 
@@ -416,6 +416,7 @@ function onUseSpellCheck(){
         if ((currentMana >= beastcost) && auras.beastwithin.timer == 0) {
             auras.beastwithin.timer = auras.beastwithin.effect.duration; // set timer
             auras.beastwithin.cd = auras.beastwithin.effect.base_cd; // set cd
+            beastwithinreduc = 0.8;
             if(combatlogRun) {
                 combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player gains " + auras.beastwithin.effect_name;
                 combatlogindex++;
@@ -460,10 +461,10 @@ function onUseSpellCheck(){
 // trinkets on use, if's for non-shared CDs, if-else if's for shared CDs
 
     if(!!auras.trink1) {
-        trinketOnUseTrigger('trink1')
+        //trinketOnUseTrigger('trink1')
     }
     if(!!auras.trink2) {
-        trinketOnUseTrigger('trink2')
+        //trinketOnUseTrigger('trink2')
     }
 
     if (!!auras.readiness && (auras.readiness.cd === 0) && auras.rapid.cd > 0) {
@@ -480,7 +481,7 @@ function onUseSpellCheck(){
 
 function trinketOnUseTrigger(slot) {
 
-    if ((!auras[slot].effect.is_proc) && (auras[slot].cd === 0)) {
+    if ((!auras[slot].effect?.is_proc) && (auras[slot].cd === 0)) {
         if ((auras[slot].shares_cd && sharedtrinketcd === 0) || (!auras[slot].shares_cd)) {
 
             sharedtrinketcd = auras[slot].effect.duration;

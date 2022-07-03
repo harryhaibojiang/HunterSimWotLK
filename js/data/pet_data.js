@@ -1,161 +1,161 @@
 const PET_FAMILY = [
     { 
-        name: 'Ravager',
+        name: 'Ravager',//0
         pet_special: 'Ravage',
         pet_focus_dump: 'Bite',
     },
     { 
-        name: 'Cat',
+        name: 'Cat',//1
         pet_special: 'Rake',
         pet_focus_dump: 'Claw',
     },
     { 
-        name: 'Raptor',
+        name: 'Raptor',//2
         pet_special: 'Savage Rend',
         pet_focus_dump: 'Claw',
     },
     { 
-        name: 'Bird of Prey',
+        name: 'Bird of Prey',//3
         pet_special: 'Snatch',
         pet_focus_dump: 'Claw',
     },
     { 
-        name: 'Bat',
+        name: 'Bat',//4
         pet_special: 'Sonic Blast',
         pet_focus_dump: 'Bite',
     },
     { 
-        name: 'Wind Serpent',
+        name: 'Wind Serpent',//5
         pet_special: 'Lightning Breath',
         pet_focus_dump: 'Bite',
     },
     { 
-        name: 'Wolf',
+        name: 'Wolf',//6
         pet_special: 'Furious Howl',
         pet_focus_dump: 'Bite',
     },
     { 
-        name: 'Wasp',
+        name: 'Wasp',//7
         pet_special: 'Sting',
         pet_focus_dump: 'Smack',
     },
     { 
-        name: 'Worm',
+        name: 'Worm',//8
         pet_special: 'Acid Spit',
         pet_focus_dump: 'Bite',
     },
     { 
-        name: 'Warp Stalker',
+        name: 'Warp Stalker',//9
         pet_special: 'Warp',
         pet_focus_dump: 'Bite',
     },
     { 
-        name: 'Turtle',
+        name: 'Turtle',//10
         pet_special: 'Shell Shield',
         pet_focus_dump: 'Bite',
     },
     { 
-        name: 'Tallstrider',
+        name: 'Tallstrider',//11
         pet_special: 'Dust Cloud',
         pet_focus_dump: 'Claw',
     },
     { 
-        name: 'Spore Bat',
+        name: 'Spore Bat',//12
         pet_special: 'Spore Cloud',
         pet_focus_dump: 'Smack',
     },
     { 
-        name: 'Spirit Beast',
+        name: 'Spirit Beast',//13
         pet_special: 'Spirit Strike',
         pet_focus_dump: 'Claw',
     },
     { 
-        name: 'Silithid',
+        name: 'Silithid',//14
         pet_special: 'Venom Web Spray',
         pet_focus_dump: 'Claw',
     },
     { 
-        name: 'Serpent',
+        name: 'Serpent',//15
         pet_special: 'Poison Spit',
         pet_focus_dump: 'Bite',
     },
     { 
-        name: 'Spider',
+        name: 'Spider',//16
         pet_special: 'Web',
         pet_focus_dump: 'Bite',
     },
     { 
-        name: 'Scorpid',
+        name: 'Scorpid',//17
         pet_special: 'Scorpid Poison',
         pet_focus_dump: 'Bite',
     },
     { 
-        name: 'Rhino',
+        name: 'Rhino',//18
         pet_special: 'Stampede',
         pet_focus_dump: 'Bite',
     },
     { 
-        name: 'Nether Ray',
+        name: 'Nether Ray',//19
         pet_special: 'Nether Shock',
         pet_focus_dump: 'Bite',
     },
     { 
-        name: 'Moth',
+        name: 'Moth',//20
         pet_special: 'Serenity Dust',
         pet_focus_dump: 'Smack',
     },
     { 
-        name: 'Hyena',
+        name: 'Hyena',//21
         pet_special: 'Tendon Rip',
         pet_focus_dump: 'Bite',
     },
     { 
-        name: 'Gorrilla',
+        name: 'Gorrilla',//22
         pet_special: 'Pummel',
         pet_focus_dump: 'Smack',
     },
     { 
-        name: 'Dragonhawk',
+        name: 'Dragonhawk',//23
         pet_special: 'Fire Breath',
         pet_focus_dump: 'Bite',
     },
     { 
-        name: 'Devilsaur',
+        name: 'Devilsaur',//24
         pet_special: 'Monstrous Bite',
         pet_focus_dump: 'Bite',
     },
     { 
-        name: 'Crocolisk',
+        name: 'Crocolisk',//25
         pet_special: 'Bad Attitude',
         pet_focus_dump: 'Bite',
     },
     { 
-        name: 'Crab',
+        name: 'Crab',//26
         pet_special: 'Pin',
         pet_focus_dump: 'Claw',
     },
     { 
-        name: 'Core Hound',
+        name: 'Core Hound',//27
         pet_special: 'Lava Breath',
         pet_focus_dump: 'Bite',
     },
     { 
-        name: 'Bear',
+        name: 'Bear',//28
         pet_special: 'Swipe',
         pet_focus_dump: 'Claw',
     },
     { 
-        name: 'Boar',
+        name: 'Boar',//29
         pet_special: 'Gore',
         pet_focus_dump: 'Bite',
     },
     { 
-        name: 'Carrion Bird',
+        name: 'Carrion Bird',//30
         pet_special: 'Demoralizing Screech',
         pet_focus_dump: 'Bite',
     },
     { 
-        name: 'Chimaera',
+        name: 'Chimaera',//31
         pet_special: 'Froststorm Breath',
         pet_focus_dump: 'Bite',
     },

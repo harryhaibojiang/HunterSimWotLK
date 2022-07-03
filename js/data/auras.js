@@ -1331,7 +1331,7 @@ const aura_template = { timer: 0, cd: 0, uptime: 0 };
 
 var usable_CDs = {
 
-    beastwithin: { enable: true, offset: 0, type: 'player'},
+    beastwithin: { enable: false, offset: 0, type: 'player'},
     readiness: { enable: true, offset: 0, type: 'player' },
     rapid: { enable: true, offset: 0, type: 'player' },
     rune: { enable: true, offset: 0, type: 'player' },
@@ -1360,7 +1360,7 @@ function updateUsableCDs() {
     let profession_2 = 'Leatherworking';
 
     if (selectedRace == 3) { // orc
-        usable_CDs.bloodfury.enable = true;
+        usable_CDs.bloodfury.enable = false; // fixme
         usable_CDs.berserking.enable = false;
         usable_CDs.arcanetorrent.enable = false;
 
@@ -1558,7 +1558,9 @@ function buildAurasObj(){
     for (let aura_ in PET_PROCS) {
         let checkaura = false;
         if (((aura_ === 'cullingherd') && (pet_talents.cull_herd > 1)) ||
-        ((aura_ === 'frenzy') && (talents.frenzy > 0)) || ((aura_ === 'savagerend') && (selectedPet === 2))) { 
+            ((aura_ === 'frenzy') && (talents.frenzy > 0)) ||
+            ((aura_ === 'savagerend') && (selectedPet === 2)) ||
+            ((aura_ === 'monstrousbite') && (selectedPet === 24))) { 
             checkaura = true;
         }
         if (checkaura) {

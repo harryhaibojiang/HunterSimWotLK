@@ -45,6 +45,8 @@ var spellresult = {
     autoshot: { Hit: 0, Miss: 0, Crit: 0 },
     steadyshot: { Hit: 0, Miss: 0, Crit: 0 },
     multishot: { Hit: 0, Miss: 0, Crit: 0 },
+    aimedshot: { Hit: 0, Miss: 0, Crit: 0 },
+    chimerashot: { Hit: 0, Miss: 0, Crit: 0 },
     arcaneshot: { Hit: 0, Miss: 0, Crit: 0 },
     raptorstrike: { Hit: 0, Miss: 0, Dodge: 0, Crit: 0 },
     melee: { Hit: 0, Miss: 0, Glance: 0, Dodge: 0, Crit: 0 },
@@ -63,6 +65,8 @@ var sumduration = 0;
 var steptime = 0;
 var steptimeend = 0;
 var playertimeend = 0;
+var playertimestart = 0;
+var nextauto = 0;
 
 var autocount = 0;
 var steadycount = 0;
@@ -259,6 +263,7 @@ function runSim() {
     let playertimestart = 0;
     steptimeend = 0;
     prevtimeend = 0;
+    playertimestart = 0;
     playertimeend = 0;
     totalduration = 0;
     sunderstart = 0; // start time for sunder check initialized as 0, then steptime + 30 after first apply
@@ -275,6 +280,7 @@ function runSim() {
     combatlogindex = 0;
     manalogarray = [];
     manalogindex = 0;
+    nextauto = 0;
 
     initializeSpells();
     ResetAuras();
@@ -288,7 +294,7 @@ function runSim() {
         updateAuras(steptime);
         petAuras(steptime);
 
-        //console.log("Auto cd: " + SPELLS.autoshot.cd);
+        //console.log("Auto cd: " + USED_SPELLS.autoshot.cd);
         //console.log("spell => "+spell);
         /******* decide spell selection ******/
         if (spell === '') {
@@ -330,13 +336,17 @@ function startStepInitialize(){
     fightduration = 180;
     initializeAuras();
     initializeSpells();
+    buildSpellsObj();
     intervalAuraInitializer();
+    spell = '';
+    nextpetattack = 100;
+    nextpetspell = 100;
+    nextauto = 0;
 }
 /** This is used to step through a fight rather than do a while loop. Useful for debugging. */
 function startStepOnly(){
     performancecheck1 = performance.now(); // test debug time check
     combatlogRun = true;
-    let playertimestart = 0;
     // choices
     onUseSpellCheck();
 
@@ -344,23 +354,32 @@ function startStepOnly(){
     petAuras(steptime);
 
     /******* decide spell selection ******/
+    console.log("current spell: "+spell)
     if (spell === '') {
 
         if (queueReadiness) {
             spell = 'readiness';
         }
         else { spell = spell_choice_method_B(); }
-
-        playertimestart = startTime(spell);
-        
+        console.log("next spell: " + spell)
+        if (spell !== 'autoshot'){
+            playertimestart = startTime(spell);
+        }
     }
 
-    nextEvent(playertimestart);
+    //shootAutoShot(playertimestart);
+   
+    if (nextauto < playertimestart || spell === 'autoshot') {
+        console.log("next auto: "+nextauto)
+        console.log("player time start: "+playertimestart)
+        shootAutoShot();
+    } else nextEvent(playertimestart);
+    
     //console.log("time end => "+(Math.round(steptimeend * 1000) / 1000));
-    petUpdateFocus();
+    //petUpdateFocus();
     updateMana();
-    //console.log("step "+ steptime);
-    prevtimeend = steptimeend;
+    console.log("step "+ steptime);
+    prevtimeend = (steptimeend);
     totalduration = Math.min(maxfighttimer, steptimeend);
     avgDPS = totaldmgdone / totalduration;
     //console.log("steadys => "+ steadycount);
@@ -379,20 +398,54 @@ function startStepOnly(){
 }
 /**Sets the start time for the next player event based on remaining cd's and selected spell. */
 function startTime(spell){
-
+    
     playertimestart = playertimeend;
-    playertimestart += (spell === "autoshot") ? Math.max(SPELLS.autoshot.cd,0) : 0;
-    playertimestart += (spell === "steadyshot") ? Math.max(SPELLS.steadyshot.cd,0) + latency : 0;
-    playertimestart += (spell === "multishot") ? Math.max(SPELLS.multishot.cd,0) + latency : 0;
-    playertimestart += (spell === "arcaneshot") ? Math.max(SPELLS.arcaneshot.cd,0) + latency : 0;
-    playertimestart += (spell === "raptorstrike") ? Math.max(SPELLS.raptorstrike.cd,0) + latency + 0.5 * weavetime: 0;
-    playertimestart += (spell === "melee") ? Math.max(SPELLS.melee.cd,0) + latency + 0.5 * weavetime : 0;
-    playertimestart += (spell === "aimedshot") ? Math.max(SPELLS.aimedshot.cd,0) + latency: 0;
+    playertimestart += (spell === "steadyshot") ? Math.max(USED_SPELLS.steadyshot.cd,0) + latency : 0;
+    playertimestart += (spell === "multishot") ? Math.max(USED_SPELLS.multishot.cd,0) + latency : 0;
+    playertimestart += (spell === "arcaneshot") ? Math.max(USED_SPELLS.arcaneshot.cd,0) + latency : 0;
+    playertimestart += (spell === "raptorstrike") ? Math.max(USED_SPELLS.raptorstrike.cd,0) + latency + 0.5 * weavetime: 0;
+    playertimestart += (spell === "melee") ? Math.max(USED_SPELLS.melee.cd,0) + latency + 0.5 * weavetime : 0;
+    playertimestart += (spell === "mongoose") ? Math.max(USED_SPELLS.mongoose.cd,0) + latency + 0.5 * weavetime : 0;
+    playertimestart += (spell === "aimedshot") ? Math.max(USED_SPELLS.aimedshot.cd,0) + latency: 0;
     playertimestart += (spell === "readiness") ? Math.max(currentgcd - playertimeend,0) : 0;
-
-    return playertimestart;
+    playertimestart += (spell === "chimerashot") ? Math.max(USED_SPELLS.chimerashot.cd,0) + latency: 0;
+    playertimestart += (spell === "explosiveshot") ? Math.max(USED_SPELLS.explosiveshot.cd,0) + latency: 0;
+    playertimestart += (spell === "explosivetrap") ? Math.max(USED_SPELLS.explosivetrap.cd,0) + latency + 0.5 * weavetime : 0;
+    playertimestart += (spell === "frosttrap") ? Math.max(USED_SPELLS.frosttrap.cd,0) + latency + 0.5 * weavetime : 0;
+    playertimestart += (spell === "snaketrap") ? Math.max(USED_SPELLS.snaketrap.cd,0) + latency + 0.5 * weavetime : 0;
+    playertimestart += (spell === "blackarrow") ? Math.max(USED_SPELLS.blackarrow.cd,0) + latency + 0.5 * weavetime : 0;
+    playertimestart += (spell === "killshot") ? Math.max(USED_SPELLS.killshot.cd,0) + latency: 0;
+    playertimestart += (spell === "volley") ? Math.max(USED_SPELLS.volley.cd,0) + latency: 0;
+    playertimestart += (spell === "silencingshot") ? Math.max(USED_SPELLS.silencingshot.cd,0) + latency: 0;
+    playertimestart += (spell === "scattershot") ? Math.max(USED_SPELLS.scattershot.cd,0) + latency: 0;
+    console.log("next player start: " + playertimestart)
+    return (playertimestart);
 }
 
+function roundFloat(number){
+    return Math.round(number * 10000) / 10000;
+}
+
+function shootAutoShot() {
+    //console.log("auto cd: "+USED_SPELLS.autoshot.cd)
+    steptimeend = (nextauto);
+    steptime = (steptimeend - prevtimeend);
+    updateSpellCDs();
+    //console.log("auto cd: "+USED_SPELLS.autoshot.cd)
+    if(USED_SPELLS.autoshot.cd <= 0.0001){
+        update();   
+        console.log("cast: auto")
+        USED_SPELLS.autoshot.cd = (rangespeed);
+        
+        if(combatlogRun) {
+            combatlogarray[combatlogindex] = nextauto.toFixed(3) + " - Player casts Auto Shot. eWS => " + rangespeed.toFixed(2);
+            combatlogindex++;
+        }
+        attackRange();
+        nextauto += rangespeed;
+        console.log("next auto: "+nextauto)
+    }
+}
 /**This function decides which event to choose next for player or pet, kind of like an event queue. */
 function nextEvent(playertimestart){
 
@@ -401,40 +454,50 @@ function nextEvent(playertimestart){
 
     if(playerattackready === false){
 
-        if(spell === 'autoshot'){
-            SPELLS.autoshot.cast = 0.5 / rangehastemod;
-            playertimeend = SPELLS.autoshot.cast + playertimestart;
-            if(combatlogRun) {
-                combatlogarray[combatlogindex] = playertimestart.toFixed(3) + " - Player starts casting Auto Shot (" + SPELLS.autoshot.cast.toFixed(3) + "s cast). eWS => " + rangespeed.toFixed(2);
-                combatlogindex++;
-            }
-        }
-        else if (spell === 'steadyshot'){
-            SPELLS.steadyshot.cast = 1.5 / rangehastemod;
+        if (spell === 'steadyshot'){
+            USED_SPELLS.steadyshot.cast = USED_SPELLS.steadyshot.base_cast / rangehastemod;
             currentgcd = playertimestart + 1.5; // gcd
             //console.log("gcd => " + (Math.round(currentgcd * 1000) / 1000));
-            playertimeend = SPELLS.steadyshot.cast + playertimestart;
+            playertimeend = (USED_SPELLS.steadyshot.cast + playertimestart);
             if(combatlogRun) {
-                combatlogarray[combatlogindex] = playertimestart.toFixed(3) + " - Player starts casting Steady Shot (" + SPELLS.steadyshot.cast.toFixed(3) + "s cast). Next GCD => " + (Math.round(currentgcd * 1000) / 1000).toFixed(3) + "s";
+                combatlogarray[combatlogindex] = playertimestart.toFixed(3) + " - Player starts casting " + USED_SPELLS[spell].spell_name + " (" + USED_SPELLS.steadyshot.cast.toFixed(3) + "s cast). Next GCD => " + (Math.round(currentgcd * 1000) / 1000).toFixed(3) + "s";
                 combatlogindex++;
             }
         }
         else if (spell === 'multishot'){
-            SPELLS.multishot.cast = 0.5 / rangehastemod;
+            USED_SPELLS.multishot.cast = USED_SPELLS.multishot.base_cast / rangehastemod;
             currentgcd = playertimestart + 1.5; // gcd
             //console.log("gcd => " + (Math.round(currentgcd * 1000) / 1000));
-            playertimeend = SPELLS.multishot.cast + playertimestart;
+            playertimeend = (USED_SPELLS.multishot.cast + playertimestart);
             if(combatlogRun) {
-                combatlogarray[combatlogindex] = playertimestart.toFixed(3) + " - Player starts casting Multi Shot (" + SPELLS.multishot.cast.toFixed(3) + "s cast). Next GCD => " + (Math.round(currentgcd * 1000) / 1000).toFixed(3) + "s";
+                combatlogarray[combatlogindex] = playertimestart.toFixed(3) + " - Player starts casting " + USED_SPELLS[spell].spell_name + " (" + USED_SPELLS.multishot.cast.toFixed(3) + "s cast). Next GCD => " + (Math.round(currentgcd * 1000) / 1000).toFixed(3) + "s";
+                combatlogindex++;
+            }
+        }
+        else if (spell === 'aimedshot'){
+            currentgcd = playertimestart + 1.5; // gcd
+            //console.log("gcd => " + (Math.round(currentgcd * 1000) / 1000));
+            playertimeend = playertimestart;
+            if(combatlogRun) {
+                combatlogarray[combatlogindex] = playertimestart.toFixed(3) + " - Player casts " + USED_SPELLS[spell].spell_name + ". Next GCD => " + (Math.round(currentgcd * 1000) / 1000).toFixed(3) + "s";
+                combatlogindex++;
+            }
+        }
+        else if (spell === 'chimerashot'){
+            currentgcd = playertimestart + 1.5; // gcd
+            //console.log("gcd => " + (Math.round(currentgcd * 1000) / 1000));
+            playertimeend = playertimestart;
+            if(combatlogRun) {
+                combatlogarray[combatlogindex] = playertimestart.toFixed(3) + " - Player casts " + USED_SPELLS[spell].spell_name + ". Next GCD => " + (Math.round(currentgcd * 1000) / 1000).toFixed(3) + "s";
                 combatlogindex++;
             }
         }
         else if (spell === 'arcaneshot'){
             currentgcd = playertimestart + 1.5; // gcd
             //console.log("gcd => " + (Math.round(currentgcd * 1000) / 1000));
-            playertimeend = SPELLS.arcaneshot.cast + playertimestart;
+            playertimeend = playertimestart;
             if(combatlogRun) {
-                combatlogarray[combatlogindex] = playertimestart.toFixed(3) + " - Player casts Arcane Shot. Next GCD => " + (Math.round(currentgcd * 1000) / 1000).toFixed(3) + "s";
+                combatlogarray[combatlogindex] = playertimestart.toFixed(3) + " - Player casts " + USED_SPELLS[spell].spell_name + ". Next GCD => " + (Math.round(currentgcd * 1000) / 1000).toFixed(3) + "s";
                 combatlogindex++;
             }
         }
@@ -457,11 +520,11 @@ function nextEvent(playertimestart){
             queueReadiness = false;
         }
         playerattackready = true;
-        //console.log(SPELLS);
+        //console.log(USED_SPELLS);
     }
     //console.log("next pet "+nextpetattack);
     //console.log("next pet spell "+nextpetspell);
-    //console.log("next player "+playertimeend);
+    console.log("next player end "+playertimeend);
     if (nextpetattack < playertimeend && nextpetspell >= nextpetattack) { // check for pet white hit
 
         let step = petAttack();
@@ -483,8 +546,11 @@ function nextEvent(playertimestart){
             //console.log("not enough focus");
         }
     }
+    else if (nextauto < playertimeend) {
+        shootAutoShot();
+    }
     else { // do player hit
-        cast(spell);
+        
 		if (spell === 'melee' || spell === 'raptorstrike'){
             playertimeend += 0.5 * weavetime;
 			steptimeend = playertimeend;
@@ -492,7 +558,9 @@ function nextEvent(playertimestart){
 		else {
 			steptimeend = playertimeend;
         }
-        steptime = steptimeend - prevtimeend;
+        steptime = (steptimeend - prevtimeend);
+        console.log("cast: "+spell)
+        cast(spell);
         updateSpellCDs(spell);
         playerattackready = false;
         spell = '';
@@ -501,26 +569,21 @@ function nextEvent(playertimestart){
 
 /** attempt at creating spell choices based on a ratio of speed and damage */
 function spell_choice_method_B(){
-/*
-problematic cases: raptor + arcane, multi + arcane + raptor
-*/
-	let t_ready_auto = SPELLS.autoshot.cd;
-	let t_ready_steady = SPELLS.steadyshot.cd;
-	let t_ready_multi = SPELLS.multishot.cd;
-	let t_ready_arcane = SPELLS.arcaneshot.cd;
-	let t_ready_raptor = SPELLS.raptorstrike.cd;
-	let t_ready_melee = SPELLS.melee.cd;
+
+    exp_update()
+	let t_ready_steady = USED_SPELLS.steadyshot.cd;
+	let t_ready_multi = USED_SPELLS.multishot.cd;
+    let t_ready_aimed = USED_SPELLS.aimedshot.cd;
+	let t_ready_arcane = USED_SPELLS.arcaneshot.cd;
+    let t_ready_chimera = USED_SPELLS.chimerashot.cd;
 	
-    let steadyuse = (SPELLS.steadyshot.cost <= currentMana) && SPELLS.steadyshot.enable && (t_ready_steady <= t_ready_auto); // check if cost is usable or not
-    let multiuse = (SPELLS.multishot.cost <= currentMana) && SPELLS.multishot.enable && (t_ready_multi <= t_ready_auto);
-    let arcaneuse = (SPELLS.arcaneshot.cost <= currentMana) && SPELLS.arcaneshot.enable && (t_ready_arcane <= t_ready_auto);
-    let raptoruse = (SPELLS.raptorstrike.cost <= currentMana) && SPELLS.raptorstrike.enable && (t_ready_raptor <= t_ready_auto);
-    let meleeuse = SPELLS.melee.enable && (t_ready_melee <= t_ready_auto);
+    let steadyuse = (USED_SPELLS.steadyshot.cost / 100 * BaseMana <= currentMana) && settings.steadyshot; // check if cost is usable or not
+    let multiuse = (USED_SPELLS.multishot.cost / 100 * BaseMana <= currentMana) && settings.multishot;
+    let aimeduse = (USED_SPELLS.aimedshot.cost / 100 * BaseMana <= currentMana) && settings.aimedshot;
+    let arcaneuse = (USED_SPELLS.arcaneshot.cost / 100 * BaseMana <= currentMana) && settings.arcaneshot;
+    let chimerause = (USED_SPELLS.chimerashot.cost / 100 * BaseMana <= currentMana) && settings.chimerashot;
 	
 	let h = rangespeed / range_wep.speed;
-
-	let dmg_auto = exp_dmg_AutoShot(range_wep, combatRAP);
-	let dps_auto = dmg_auto/rangespeed;
 
 	let dmg_steady = 0;
 	let dps_steady = 0;
@@ -528,73 +591,64 @@ problematic cases: raptor + arcane, multi + arcane + raptor
 	let dmg_multi = 0;
 	let dps_multi = 0;
 
+    let dmg_aimed = 0;
+	let dps_aimed = 0;
+
 	let dmg_arcane = 0;
 	let dps_arcane = 0;
-	
-	let dmg_raptor = 0;
-	let dps_raptor = 0;
-	
-	let dmg_melee = 0;
-	let dps_melee = 0;
+
+    let dmg_chimera = 0;
+	let dps_chimera = 0;
 	
 	if(steadyuse){
 		dmg_steady = exp_dmg_SteadyShot(range_wep, combatRAP);
-		dps_steady = dmg_steady/1.5;
+		dps_steady = dmg_steady * USED_SPELLS.steadyshot.cast / 1.5;
 	}
 	if(multiuse){
 		dmg_multi = exp_dmg_MultiShot(range_wep, combatRAP);
-		dps_multi = dmg_multi/(10 + 0.5*h);
+		dps_multi = dmg_multi / (10 + 0.5*h);
+	}
+    if(aimeduse){
+		dmg_aimed = exp_dmg_AimedShot(range_wep, combatRAP);
+		dps_aimed = dmg_aimed/ 10 ;
 	}
 	if(arcaneuse){
 		dmg_arcane = exp_dmg_ArcaneShot(range_wep, combatRAP);
-		dps_arcane = dmg_arcane/(6 - talents.imp_arc_shot);
+		dps_arcane = dmg_arcane/ 6 ;
 	}
-	if(raptoruse){
-		dmg_raptor = exp_dmg_RaptorStrike(mainhand_wep, combatMAP);
-		dps_raptor = dmg_raptor/6;
-	}
-	if(meleeuse){
-		dmg_melee = exp_dmg_MeleeSwing(mainhand_wep, combatMAP);
-		dps_melee = dmg_melee/meleespeed;
+    if(chimerause){
+		dmg_chimera = exp_dmg_ChimeraShot(range_wep, combatRAP);
+		dps_chimera = dmg_chimera/ 10 ;
 	}
 	
-	let melee_window_raptor = Math.max(0, Math.min(t_ready_steady, t_ready_auto) - t_ready_raptor - 0.5 * weavetime);
-	let melee_window_melee = Math.max(0, Math.min(t_ready_steady, t_ready_auto) - t_ready_melee - 0.5 * weavetime);
-	if(melee_window_raptor > 0.1 && raptoruse){
-		return "raptorstrike";
-	}
-	if(melee_window_melee > 0.1 && meleeuse){
-		return "melee";
-	}
-	
-	let t_equi_steady2auto = t_ready_auto + (t_ready_auto + 0.5*h - t_ready_steady) * dps_steady / dps_auto - 1.5*h - latency;
-	steadyuse = steadyuse && (t_ready_steady <= t_equi_steady2auto);
  
-	if(steadyuse){
-		if(t_ready_steady + 1.5*h < t_ready_auto - latency){
-			//no clipping of auto via casting steady
-			return "steadyshot";
-		}
-	}
-	let clip_multi2auto = Math.max(0, t_ready_multi + 0.5*h + latency - t_ready_auto);
-	let clip_steady2auto = Math.max(0, t_ready_steady + 1.5*h + latency - t_ready_auto);
-	let dmg_gain_arcane = (arcaneuse) ? dmg_arcane : 0;
-	let dmg_gain_multi = (multiuse) ? dmg_multi - clip_multi2auto * dps_auto : 0;
-	let dmg_gain_steady = (steadyuse) ? dmg_steady - clip_steady2auto * dps_auto : 0;
-	
-	if(dmg_gain_steady > dmg_gain_multi && dmg_gain_steady > dmg_gain_arcane){
+	let dmg_gain_arcane = (arcaneuse) ? dmg_arcane / (t_ready_arcane + 1.5) : 0;
+	let dmg_gain_multi = (multiuse) ? dmg_multi / (t_ready_multi + 1.5) : 0;
+    let dmg_gain_aimed = (aimeduse) ? dmg_aimed / (t_ready_aimed + 1.5) : 0;
+    let dmg_gain_chimera = (chimerause) ? dmg_chimera / (t_ready_chimera + 1.5) : 0;
+	let dmg_gain_steady = (steadyuse) ? dmg_steady / (t_ready_steady + Math.max(2*h,1.5)) : 0;
+    //console.log(dmg_gain_arcane)
+    //console.log(dmg_gain_multi)
+    //console.log(dmg_gain_aimed)
+    //console.log(dmg_gain_chimera)
+    //console.log(dmg_gain_steady)
+    let maxresult = Math.max(dmg_gain_aimed,dmg_gain_multi,dmg_gain_arcane,dmg_gain_steady,dmg_gain_chimera);
+	if(maxresult == dmg_gain_steady){
 		return "steadyshot";
 	}
-	
-	if(dmg_gain_steady < dmg_gain_multi &&  dmg_gain_multi > dmg_gain_arcane){
+	if(maxresult == dmg_gain_multi){
 		return "multishot";
 	}
-	
-	if(dmg_gain_steady < dmg_gain_arcane &&  dmg_gain_multi < dmg_gain_arcane){
+	if(maxresult == dmg_gain_aimed){
+        return "aimedshot";
+    }
+	if(maxresult == dmg_gain_arcane){
 		return "arcaneshot";
 	}
-
-	return "autoshot";
+    if(maxresult == dmg_gain_chimera){
+        return "chimerashot";
+    }
+    return "autoshot";
 }
 
 function statWeightLoop(){

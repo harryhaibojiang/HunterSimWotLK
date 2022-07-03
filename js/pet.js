@@ -163,7 +163,7 @@ function petUpdateStats(){
     if(debuffs.judgecrusader.timer > 0 && !debuffs.judgecrusader.inactive) { 
         pet.combatcrit += debuffs.judgecrusader.crit;
         pet.combatspellcrit += debuffs.judgecrusader.crit;
-    } // imp crusader debuff
+    } 
     
 }
 
@@ -174,7 +174,7 @@ function petUpdateFocus(playercrit){
     if(playercrit === true) {
         pet.focus += talents.GftT;
         if(combatlogRun) {
-            combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Pet gains " + talents.GftT + " Focus from Go for the Throat";
+            combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Pet gains " + talents.GftT + " Focus from Go for the Throat";
             combatlogindex++;
         }
     }
