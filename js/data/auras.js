@@ -403,7 +403,9 @@ const PET_CDS = {
     killcommand: {
         effect: {
             duration: 30,
-            base_cd: 60
+            base_cd: 60,
+            stacks: 3,
+            dmgmod: 20
         },
         effect_name: 'Kill Command'
     },
@@ -446,6 +448,7 @@ const PET_PROCS = {
     cullingherd: { // todo
         effect: {
             duration: 10,
+            dmgbonus: 1,
         },
         effect_name: 'Culling the Herd'
     },
@@ -458,6 +461,7 @@ const PET_PROCS = {
     savagerend: { // todo
         effect: {
             duration: 30,
+            dmgbonus: 10
         },
         effect_name: 'Savage Rend'
     },
@@ -1263,7 +1267,6 @@ const TALENT_PROCS = {
         effect: {
             is_proc: true,
             proc_type: 'Steady',
-            proc_chance: 5,
             duration: 12,
         },
         effect_name: 'Improved Steady Shot'
@@ -1303,7 +1306,8 @@ const TALENT_PROCS = {
         effect: {
             is_proc: true,
             proc_type: 'Special',
-            duration: 8
+            duration: 8,
+            ticks: 1
         },
         effect_name: 'Piercing Shots'
     },
@@ -1316,6 +1320,95 @@ const TALENT_PROCS = {
         },
         effect_name: 'Replenishment'
     },
+}
+
+const AURA_DOTS = {
+
+    blackarrow: {
+        effect: {
+            tick_rate: 3,
+            duration: 15
+        },
+    },
+    serpentsting: {
+        effect: {
+            tick_rate: 3,
+            duration: 15
+        },
+    },
+    immolatetrap: {
+        effect: {
+            tick_rate: 3,
+            duration: 15
+        },
+    },
+    explosivetrap: {
+        effect: {
+            tick_rate: 2,
+            duration: 20
+        },
+    },
+    explosiveshot: {
+        effect: {
+            tick_rate: 1,
+            duration: 2
+        },
+    },
+    rake: {
+        effect: {
+            tick_rate: 3,
+            duration: 9
+        },
+    },
+    scorpid_poison: {
+        effect: {
+            tick_rate: 2,
+            duration: 10
+        },
+    },
+    savage_rend: {
+        effect: {
+            tick_rate: 5,
+            duration: 15
+        },
+    },
+    spore_cloud: {
+        effect: {
+            tick_rate: 3,
+            duration: 9
+        },
+    },
+    spirit_strike: {
+        effect: {
+            tick_rate: 6,
+            duration: 6
+        },
+    },
+    venom_web_spray: {
+        effect: {
+            tick_rate: 1,
+            duration: 4
+        },
+    },
+    poison_spit: {
+        effect: {
+            tick_rate: 2,
+            duration: 8
+        },
+    },
+    fire_breath: {
+        effect: {
+            tick_rate: 1,
+            duration: 2
+        },
+    },
+    pin: {
+        effect: {
+            tick_rate: 1,
+            duration: 4
+        },
+    },
+
 }
 
 var auras = {};
@@ -1541,10 +1634,14 @@ function buildAurasObj(){
             auras[aura_] = JSON.parse(JSON.stringify(aura_template));
             auras[aura_].stat_type = (!!cd_obj[aura_].stat_type) ? cd_obj[aura_].stat_type : '';
             auras[aura_].effect = cd_obj[aura_].effect;
-            auras[aura_].offset = cd_obj[aura_].offset;
+            auras[aura_].offset = usable_CDs[aura_].offset;
             auras[aura_].effect_name = cd_obj[aura_].effect_name;
+            if (aura_ === 'killcommand') {
+                auras[aura_].stacks = 0;
+            }
         }
     }
+    
     // updates auras with talent procs
     for (let talent_ in TALENT_PROCS) {
         if (talents[talent_] > 0) {
@@ -1568,6 +1665,9 @@ function buildAurasObj(){
             auras[aura_].stat_type = (!!PET_PROCS[aura_].stat_type) ? PET_PROCS[aura_].stat_type : '';
             auras[aura_].effect = PET_PROCS[aura_].effect;
             auras[aura_].effect_name = PET_PROCS[aura_].effect_name;
+            if((aura_ === 'monstrousbite') && (selectedPet === 24)) {
+                auras[aura_].stacks = 0;
+            }
         }
     }
     // updates auras with set procs

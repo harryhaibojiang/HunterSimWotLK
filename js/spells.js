@@ -26,7 +26,8 @@ function initializeSpells(){
     if(!!USED_SPELLS.silencingshot) USED_SPELLS.silencingshot.cd = 0;
     if(!!USED_SPELLS.scattershot) USED_SPELLS.scattershot.cd = 0;
     // set pet spell CDs to 0
-    //PET_SPELLS[0].cd = 0;
+    PET_SPELLS.pet_special.cd = 0;
+    PET_SPELLS.pet_focus_dump.cd = 0;
 
 }
 
@@ -53,8 +54,13 @@ function readinessCDUpdate() {
     if(USED_SPELLS.scattershot?.cd > 0) USED_SPELLS.scattershot.cd = 0;
 }
 
-function updateSpellCDs(spell,petspell) {
+function updateSpellCDs(spell) {
 
+    // pet spells
+    PET_SPELLS.pet_special.cd = (spell === 'pet_special' && !!PET_SPELLS.pet_special.base_cd) ? PET_SPELLS.pet_special.base_cd * (1 - talents.longevity) : Math.max(PET_SPELLS.pet_special.cd - steptime, 0);
+    PET_SPELLS.pet_focus_dump.cd = (spell === 'pet_focus_dump' && !!PET_SPELLS.pet_focus_dump.base_cd) ? PET_SPELLS.pet_focus_dump.base_cd : Math.max(PET_SPELLS.pet_focus_dump.cd - steptime, 0);
+
+    // player spells
     USED_SPELLS.autoshot.cd = roundFloat(Math.max(USED_SPELLS.autoshot.cd - steptime, 0));
     if (!!USED_SPELLS.steadyshot)   {
         let spell_cd = 1.5 - USED_SPELLS.steadyshot.cast; // gcd minus cast time
@@ -206,14 +212,24 @@ function autoShotCalc(range_wep, combatRAP) {
     //console.log(shotDmg)
     return shotDmg;
 }
+function wildQuiverCalc(range_wep, combatRAP) {
+
+    let dmg = (useAverages) ? (range_wep.mindmg + range_wep.maxdmg) * avgConst : rng(range_wep.mindmg,range_wep.maxdmg);
+    let shotDmg = (combatRAP * range_wep.speed / DmgAPRatio + dmg + range_wep.flatdmg) * range_wep.basedmgmod * combatdmgmod * magdmgmod * 0.8;
+    //console.log(shotDmg)
+    return shotDmg;
+}
 
 function steadyShotCalc(range_wep, combatRAP) {
 
     let dmg = (useAverages) ? (range_wep.mindmg + range_wep.maxdmg) * avgConst : rng(range_wep.mindmg,range_wep.maxdmg);
+    let ferocious_insp = (talents.ferocious_insp - 1) * 3;
     let steadymod_1 = (!!currentgear.special.gronnstalker_4p_steady_shot_dmg_bonus) ? currentgear.special.gronnstalker_4p_steady_shot_dmg_bonus : 0;
     let steadymod_2 = (!!glyphs.steadyshot) ? glyphs.steadyshot.bonus : 0;
     let sniper_training = (auras.sniper_training?.timer > 0) ? talents.sniper_training * 2 : 0;
-    let specials_mod = (steadymod_1 > 0) ? (1 + steadymod_1 + sniper_training) * (1 + steadymod_2) : (1 + steadymod_2 + sniper_training);
+    
+    let specials_mod = (steadymod_1 > 0) ? (1 + steadymod_1 + sniper_training + ferocious_insp) * (1 + steadymod_2) : (1 + steadymod_2 + sniper_training);
+    
     let shotDmg = (combatRAP * 0.1 + range_wep.ammodps * 2.8 + dmg + SPELLS.steadyshot.ranks.rankdmg) * range_wep.basedmgmod * specials_mod * combatdmgmod * physdmgmod;
     //console.log(shotDmg)
     return shotDmg;
@@ -230,8 +246,9 @@ function multiShotCalc(range_wep, combatRAP) {
 
 function arcaneShotCalc(range_wep, combatRAP) {
     let arc_mod = talents.imp_arc_shot;
-    let imp_steady_shot = (auras.imp_steady_shot?.timer > 0) ? talents.imp_steady_shot : 0;
-    let specials_mod = (1 + arc_mod + imp_steady_shot);
+    let ferocious_insp = (talents.ferocious_insp - 1) * 3;
+    let imp_steady_shot = (auras.imp_steady_shot?.timer > 0) ? 0.15 : 0;
+    let specials_mod = (1 + arc_mod + imp_steady_shot + ferocious_insp);
     let shotDmg = (combatRAP * 0.15 + SPELLS.arcaneshot.ranks.rankdmg) * range_wep.basedmgmod * specials_mod * combatdmgmod * magdmgmod;
     //console.log(shotDmg)
     return shotDmg;
@@ -240,7 +257,7 @@ function arcaneShotCalc(range_wep, combatRAP) {
 function aimedShotCalc(range_wep, combatRAP) {
 
     let dmg = (useAverages) ? (range_wep.mindmg + range_wep.maxdmg) * avgConst : rng(range_wep.mindmg,range_wep.maxdmg);
-    let imp_steady_shot = (auras.imp_steady_shot?.timer > 0) ? talents.imp_steady_shot : 0;
+    let imp_steady_shot = (auras.imp_steady_shot?.timer > 0) ? 0.15 : 0;
     let sniper_training = (auras.sniper_training?.timer > 0) ? talents.sniper_training * 2 : 0;
     let specials_mod = (1 + imp_steady_shot + sniper_training + talents.barrage);
     let shotDmg = (combatRAP * 0.2 + range_wep.ammodps * range_wep.speed + dmg + range_wep.flatdmg + SPELLS.aimedshot.ranks.rankdmg) * range_wep.basedmgmod * specials_mod * combatdmgmod * physdmgmod;
@@ -278,7 +295,7 @@ function blackArrowCalc(combatRAP) {
 function chimeraShotCalc(range_wep, combatRAP) {
 
     let dmg = (useAverages) ? (range_wep.mindmg + range_wep.maxdmg) * avgConst : rng(range_wep.mindmg,range_wep.maxdmg);
-    let imp_steady_shot = (auras.imp_steady_shot?.timer > 0) ? talents.imp_steady_shot : 0;
+    let imp_steady_shot = (auras.imp_steady_shot?.timer > 0) ? 0.15 : 0;
     let specials_mod = (1 + imp_steady_shot);
     let shotDmg = (combatRAP * 0.2 + range_wep.ammodps * range_wep.speed + dmg + range_wep.flatdmg) * 1.25 * specials_mod * range_wep.basedmgmod * combatdmgmod * physdmgmod;
     return shotDmg;
@@ -324,7 +341,8 @@ function immolateTrapCalc(combatRAP) {
     // Volley
 function volleyCalc(combatRAP) {
 
-    let shotDmg = (combatRAP * 0.0837 + SPELLS.volley.ranks.rankdmg) * combatdmgmod * magdmgmod;
+    let barragemod = 1 + talents.barrage;
+    let shotDmg = (combatRAP * 0.0837 + SPELLS.volley.ranks.rankdmg) * barragemod * combatdmgmod * magdmgmod;
     return shotDmg;
 }
 
@@ -347,53 +365,43 @@ function ScatterSilenceShotCalc(range_wep, combatRAP) {
 
 function petAutoCalc(){
     let dmg = (useAverages) ? (PetMinDmg + PetMaxDmg) * avgConst : rng(PetMinDmg,PetMaxDmg);
-    let autoDmg = (dmg + pet.combatap * 2 / DmgAPRatio) * pet.dmgmod * pet.combatdmgmod * CobraReflexesPenalty;
+    let basedmgmod = pet.dmgmod * pet.combatdmgmod * PetFamilyMod;
+    let apbonus = pet.combatap * PetBaseSpeed / DmgAPRatio;
+    let autoDmg = (dmg + apbonus) * basedmgmod * physdmgmod * PetFamilyMod * CobraReflexesPenalty;
+    // debugging
+    //let minauto = (PetMinDmg + apbonus) * basedmgmod * physdmgmod * CobraReflexesPenalty;
+    //let maxauto = (PetMaxDmg + apbonus) * basedmgmod * physdmgmod * CobraReflexesPenalty;
+    //console.log(Math.floor(minauto) + " - " + Math.ceil(maxauto))
     return autoDmg;
 }
 
-function spellPetCalc(spellindex){
+function spellPetCalc(petspell){
     let mindmg = 0;
     let maxdmg = 0;
     let dmg = 0;
-    let spelldmg = 0;
-    let spellpwr = (pet.combatap - pet.ap) * 0.581818 + BaseRAP * 0.128; // spell power from hunter 12.8% - 58% of AP gained from combat
-    let basedmgmod = pet.dmgmod * pet.combatdmgmod / PET_FAMILY[selectedPet].dmgmod;
-    if(spellindex <= 3){ // phys spells
-        mindmg = PET_SPELLS[spellindex].mindmg; // min dmg of phys spell selected
-        maxdmg = PET_SPELLS[spellindex].maxdmg; 
-        dmg = (useAverages) ? (mindmg + maxdmg) * avgConst : rng(mindmg,maxdmg);
-        spelldmg = dmg * basedmgmod;
-    } 
-    else if (spellindex <= 5 && spellindex > 3){ // lightning breath/stomp
-        mindmg = PET_SPELLS[spellindex].mindmg; // min dmg of phys spell selected
-        maxdmg = PET_SPELLS[spellindex].maxdmg; 
-        dmg = (useAverages) ? (mindmg + maxdmg) * avgConst : rng(mindmg,maxdmg);
-        spelldmg = (dmg + spellpwr * PET_SPELLS[spellindex].sp_coeff) * basedmgmod * naturedmgmod;
-    } 
-    else if (spellindex === 6) { // fire breath
-        dmg = PET_SPELLS[spellindex].tick;
-        spelldmg = (dmg + spellpwr * PET_SPELLS[spellindex].sp_coeff) * basedmgmod * 3 * magdmgmod; // 3 ticks over 3 sec, just doing x3
-    } 
-    else if (spellindex === 7) { // poison spit
-        dmg = PET_SPELLS[spellindex].tick;
-        spelldmg = dmg * basedmgmod * 4 * naturedmgmod; // 4 ticks over 8 sec, just doing x4
-    }
-    else if (spellindex === 8) { // scorpid poison
-        dmg = PET_SPELLS[spellindex].tick;
-        // add stacking logic up to 5
-        //spelldmg = (dmg + spellpwr * PET_SPELLS[spellindex].sp_coeff) * basedmgmod * basecombatdmgmod * 3; // 3 ticks over 3 sec, just doing x3
-    } 
+    let apbonus = pet.combatap * PET_SPELLS[petspell].ap_mod / 100;
 
-    // gore bonus dmg
-    if(spellindex === 3) {
-        let roll = 0;
-        if (!useAverages) { 
-            roll = rng10k();
-            if(roll < 5000) {
-                spelldmg *= 2;
-            }
-        }
-        else { spelldmg *= 1.5; } // use 150% damage instead of rolling 50% double dmg
+    let basedmgmod = pet.dmgmod * pet.combatdmgmod * pet_special_mod;
+
+    if(PET_SPELLS[petspell].type === 'physical' || PET_SPELLS[petspell].type === 'bleed'){ // phys spells
+        mindmg = PET_SPELLS[petspell].ranks.mindmg; 
+        maxdmg = PET_SPELLS[petspell].ranks.maxdmg; 
+        dmg = (useAverages) ? (mindmg + maxdmg) * avgConst : rng(mindmg,maxdmg);
+        spelldmg = (dmg + apbonus) * basedmgmod * physdmgmod * PetFamilyMod;
+        //let minspell = (mindmg + apbonus) * basedmgmod * physdmgmod * PetFamilyMod;
+        //let maxspell = (maxdmg + apbonus) * basedmgmod * physdmgmod * PetFamilyMod;
+        //console.log(Math.floor(minspell) + " - " + Math.ceil(maxspell))
     }
+    else if ((PET_SPELLS[petspell].type === 'nature' || PET_SPELLS[petspell].type === 'fire' 
+    || PET_SPELLS[petspell].type === 'frost' || PET_SPELLS[petspell].type === 'arcane')) {
+        mindmg = (!!PET_SPELLS[petspell].ranks.mindmg) ? PET_SPELLS[petspell].ranks.mindmg : 0; 
+        maxdmg = (PET_SPELLS[petspell].ranks.maxdmg) ? PET_SPELLS[petspell].ranks.maxdmg : 0; 
+        dmg = (useAverages) ? (mindmg + maxdmg) * avgConst : rng(mindmg,maxdmg);
+        spelldmg = (dmg + apbonus) * basedmgmod * magdmgmod;
+        //let minspell = (mindmg + apbonus) * basedmgmod * magdmgmod;
+        //let maxspell = (maxdmg + apbonus) * basedmgmod * magdmgmod;
+        //console.log(Math.floor(minspell) + " - " + Math.ceil(maxspell))
+    }
+    
     return spelldmg;
 }

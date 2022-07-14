@@ -147,7 +147,7 @@ const KILL_SHOT = {
         rankdmg: 205,
         level: 80
     },
-    3: {
+    2: {
         rankdmg: 325,
         level: 80
     },
@@ -331,7 +331,7 @@ function generateSpellData(){
 
     SPELLS = {
     
-        autoshot: { cast:0.00001, cd:0 },
+        autoshot: { cast:0, cd:0 },
 
     }
     console.log(level);

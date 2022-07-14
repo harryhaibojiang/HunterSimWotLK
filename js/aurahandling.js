@@ -5,7 +5,7 @@ var beastwithinreduc = 1;
 var sharedtrinketcd = 0;
 
 var debuffs = {
-    hm: {uptime_g:0, timer:0, duration:300, improved:true, rap:0, uptime:0},
+    hm: {uptime_g:0, timer:0, duration:300, improved:false, rap:110, uptime:0},
     judgewisdom: {uptime_g:0, timer:0, duration:20, uptime:0},
     judgecrusader: {uptime_g:0, timer:0, duration:20, crit:3, uptime:0},
     sunder: {uptime_g:0, timer:0, duration:30, stacktime:5, stacks:1, arp:0.04, uptime:0},
@@ -36,8 +36,8 @@ function initializeAuras() {
     Object.values(auras).forEach(key => key.uptime = 0);
     Object.values(debuffs).forEach(key => key.uptime = 0);
     
-    auras.rapid.effect.base_cd = MAIN_CDS.rapid.effect.base_cd - talents.rapid_killing * 60;
-    
+    debuffs.hm.rap = (level === 70) ? 110 : 500;
+
     auratimers = buildAuraTimerSteps(auras)
     auracds = buildAuraCdSteps(auras)
     aurauptimes = buildAuraUptimeSteps(auras)
@@ -372,6 +372,15 @@ function IntervalAuraSetTime(name){
 /**Check for on use spells ready and usable, if ready and usable, set the duration and cooldown timers. */
 function onUseSpellCheck(){
     
+    if (!!auras.killcommand && (auras.killcommand.cd === 0)) {
+        auras.killcommand.stacks = 3;
+        auras.killcommand.timer = auras.killcommand.effect.duration; // set timer
+        auras.killcommand.cd = auras.killcommand.effect.base_cd - talents.catlike_reflex * 10; // set cd
+        if(combatlogRun) {
+            combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player gains " + auras.killcommand.effect_name;
+            combatlogindex++;
+        }
+    }
     if (!!auras.lust && (auras.lust.cd === 0)) {
 
         auras.lust.timer = auras.lust.effect.duration; // set timer
@@ -400,22 +409,25 @@ function onUseSpellCheck(){
         }
     }
 
-    if (!!auras.rapid && (auras.rapid.cd === 0)) {
+    if (!!auras.rapid && (auras.rapid.cd === 0) && auras.rapid.timer == 0) {
         let rapidcost = Math.floor((MAIN_CDS.rapid.cost / 100) * BaseMana * beastwithinreduc);
-        if ((currentMana >= rapidcost) && auras.rapid.timer == 0) {
+        if ((currentMana >= rapidcost)) {
             auras.rapid.timer = auras.rapid.effect.duration; // set timer
-            auras.rapid.cd = auras.rapid.effect.base_cd; // set cd
+            auras.rapid.cd = auras.rapid.effect.base_cd - talents.rapid_killing; // set cd
             if(combatlogRun) {
                 combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player gains " + auras.rapid.effect_name;
                 combatlogindex++;
             }
         }
     }
+    if (!!auras.beastwithin && (auras.beastwithin.timer === 0) && beastwithinreduc !== 0) {
+        beastwithinreduc = 1;
+    }
     if (!!auras.beastwithin && (auras.beastwithin.cd === 0)) {
         let beastcost = Math.floor((MAIN_CDS.beastwithin.cost / 100) * BaseMana);
         if ((currentMana >= beastcost) && auras.beastwithin.timer == 0) {
             auras.beastwithin.timer = auras.beastwithin.effect.duration; // set timer
-            auras.beastwithin.cd = auras.beastwithin.effect.base_cd; // set cd
+            auras.beastwithin.cd = auras.beastwithin.effect.base_cd * (1 - talents.longevity); // set cd
             beastwithinreduc = 0.8;
             if(combatlogRun) {
                 combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player gains " + auras.beastwithin.effect_name;
@@ -468,10 +480,7 @@ function onUseSpellCheck(){
     }
 
     if (!!auras.readiness && (auras.readiness.cd === 0) && auras.rapid.cd > 0) {
-        if (SPELLS.multishot.enable && SPELLS.multishot.cd > 5) {
-            queueReadiness = true;
-        }
-        else if (!SPELLS.multishot.enable && SPELLS.steadyshot.cd > 0) {
+        if (USED_SPELLS.chimerashot?.cd > 3 || USED_SPELLS.aimedshot?.cd > 3 || USED_SPELLS.multishot?.cd > 3) {
             queueReadiness = true;
         }
         else { queueReadiness = false;

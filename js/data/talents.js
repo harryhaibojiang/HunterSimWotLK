@@ -50,14 +50,14 @@ const BM_TREE = [
       name: 'Aspect Mastery',
       abrv: 'aspect_mast',
       max: 1,
-      per_point: 10/100
+      per_point: 10 / 100
     },
     {
       name: 'Unleashed Fury',
       abrv: 'unleash_fury',
       max: 5,
       is_modifier: true,
-      per_point: 4/100
+      per_point: 3 / 100
     }
   ],
   [
@@ -99,7 +99,7 @@ const BM_TREE = [
       abrv: 'animal_handler',
       max: 2,
       is_modifier: true,
-      per_point: 5
+      per_point: 5 / 100
     },
     {
       name: 'Frenzy',
@@ -146,6 +146,7 @@ const BM_TREE = [
       name: "Longevity",
       abrv: 'longevity',
       max: 3,
+      per_point: 10 / 100
     },
     {
       name: 'The Beast Within',
@@ -156,7 +157,7 @@ const BM_TREE = [
       name: "Cobra Strikes",
       abrv: 'cobra_strike',
       max: 3,
-      per_point: 20
+      per_point: 20 / 100
     }
   ],
   [
@@ -200,7 +201,7 @@ const MM_TREE = [
       name: 'Careful Aim',
       abrv: 'careful_aim',
       max: 3,
-      per_point: 33 / 100
+      per_point: 3333 / 10000
     },
     {
       name: "Improved Hunter's Mark",
@@ -239,6 +240,7 @@ const MM_TREE = [
       name: 'Rapid Killing',
       abrv: 'rapid_killing',
       max: 2,
+      per_point: 60
     }
   ],
   [
@@ -252,7 +254,6 @@ const MM_TREE = [
       name: 'Efficiency',
       abrv: 'efficiency',
       max: 5,
-      is_modifier: true,
       per_point: 3 / 100
     }
   ],
@@ -280,7 +281,7 @@ const MM_TREE = [
       abrv: 'combat_exp',
       max: 2,
       is_modifier: true,
-      per_point: 1 / 100
+      per_point: 2 / 100
     },
     {
       name: 'Ranged Weapon Specialization',
@@ -320,7 +321,8 @@ const MM_TREE = [
     {
       name: 'Rapid Recuperation',
       abrv: 'rapid_recup',
-      max: 5,
+      max: 2,
+      per_point: 2 / 100
     }
   ],
   [
