@@ -180,8 +180,7 @@ function petUpdateStats(){
     
 }
 
-function petUpdateFocus(playercrit){
-    // bestial discipline
+function procPetFocus(playercrit){
     
     // go for the throat
     if(playercrit === true) {
@@ -191,17 +190,21 @@ function petUpdateFocus(playercrit){
             combatlogindex++;
         }
     }
-    // focus regen per 5s
-    if (steptimeend > 5 * Math.ceil(prevtimeend / 5)) {
-        pet.focus += pet.focusregen;    
-        if(combatlogRun) {
-            combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Pet regens " + pet.focusregen + " Focus";
-            combatlogindex++;
-        }
-    }
     // cap focus at 100, reset crit flag
     pet.focus = Math.min(100, pet.focus);
     return playercrit = false;
+}
+
+function petUpdateFocus(){
+    // focus regen per 5s
+    pet.focus += pet.focusregen;    
+    if(combatlogRun) {
+        combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Pet regens " + pet.focusregen + " Focus";
+        combatlogindex++;
+    }
+    
+    // cap focus at 100, reset crit flag
+    pet.focus = Math.min(100, pet.focus);
 }
 
 function petAuras(steptime){
@@ -244,18 +247,10 @@ function petRollMagicSpell(){
     let miss = BaseMagicMiss - pet.spellhit;
     tmp += miss * 100;
     if (roll < tmp) return RESULT.MISS;
-    tmp += 14.5 * 100; // partial resist rate approx. 14.5% based on log data at 0 resistance
+    tmp += PartialResistRate * 100; // partial resist rate approx. 14.5% based on log data at 0 resistance
     if (roll < tmp) return RESULT.PARTIAL;
-    tmp += (100 - miss - 14.5) * pet.combatspellcrit; // pseudo 2 roll
+    tmp += (100 - miss - PartialResistRate) * pet.combatspellcrit; // pseudo 2 roll
     if (roll < tmp) return RESULT.CRIT;
-    return RESULT.HIT;
-}
-
-function petRollMagicDoT(){
-    let tmp = 0;
-    let roll = rng10k();
-    tmp += 14.5 * 100; // partial resist rate approx. 14.5% based on log data at 0 resistance
-    if (roll < tmp) return RESULT.PARTIAL;
     return RESULT.HIT;
 }
 
@@ -369,6 +364,17 @@ function petSpell(petspell){
         }
 
     }
+    if (!dot_only_check || hit_and_dot_check) {
+        // roll for initial hit if dot only
+        let hit = (spelltype === 'bleed' || spelltype === 'physical') ? pet.hit : pet.spellhit;
+        result = (!dot_only_check) ? rollMagicDoT(hit, spelltype) : result;
+        if (result !== RESULT.MISS) {
+            let ticks = PET_SPELLS.pet_special.duration / PET_SPELLS.pet_special.tick_rate;
+            let ap_mod = (hit_and_dot_check) ? PET_SPELLS.pet_special.ap_mod * ticks : PET_SPELLS.pet_special.ap_mod;
+            auras['pet_special'].damage = petSpecialDoTCalc(ap_mod);
+            dotHandler('pet_special', 'pet', true, spelltype);
+        }
+    }
 
     petsteptime = nextpetspell; // since pet steps don't change time (all instants) set time to current time
     nextpetspell = (PET_SPELLS[petspell].gcd) ? nextpetspell + 1.5 : nextpetspell; // set next available spell time by 1.5
@@ -394,9 +400,13 @@ function petSpell(petspell){
     
     petUpdateHaste();
     
-    if(combatlogRun){
+    if(combatlogRun && !dot_only_check){
+        combatlogarray[combatlogindex] = petsteptime.toFixed(3) + " - Pet casts " + PET_SPELLS[petspell].spell_name + " on Target - " + RESULTARRAY[result];
+        combatlogindex++;
+    } else if (combatlogRun) {
         combatlogarray[combatlogindex] = petsteptime.toFixed(3) + " - Pet " + PET_SPELLS[petspell].spell_name + " " + RESULTARRAY[result] + " for " + done;
         combatlogindex++;
+        
     }
     return petsteptime;
 }

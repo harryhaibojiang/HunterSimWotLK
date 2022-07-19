@@ -458,13 +458,6 @@ const PET_PROCS = {
         },
         effect_name: 'Frenzy'
     },
-    savagerend: { // todo
-        effect: {
-            duration: 30,
-            dmgbonus: 10
-        },
-        effect_name: 'Savage Rend'
-    },
     monstrousbite: { // todo
         effect: {
             duration: 12,
@@ -1302,12 +1295,10 @@ const TALENT_PROCS = {
         effect_name: 'Lock and Load'
     },
     pierce_shot: {
-        shares_cd: false,
+        type: 'bleed',
         effect: {
-            is_proc: true,
-            proc_type: 'Special',
             duration: 8,
-            ticks: 1
+            tick_rate: 1
         },
         effect_name: 'Piercing Shots'
     },
@@ -1325,88 +1316,44 @@ const TALENT_PROCS = {
 const AURA_DOTS = {
 
     blackarrow: {
+        type: 'shadow',
         effect: {
             tick_rate: 3,
             duration: 15
         },
+        effect_name: 'Black Arrow'
     },
     serpentsting: {
+        type: 'nature',
         effect: {
             tick_rate: 3,
             duration: 15
         },
+        effect_name: 'Serpent Sting'
     },
     immolatetrap: {
+        type: 'fire',
         effect: {
             tick_rate: 3,
             duration: 15
         },
+        effect_name: 'Immolation Trap'
     },
     explosivetrap: {
+        type: 'fire',
         effect: {
             tick_rate: 2,
             duration: 20
         },
+        effect_name: 'Explosive Trap'
     },
     explosiveshot: {
+        type: 'fire',
         effect: {
             tick_rate: 1,
             duration: 2
         },
-    },
-    rake: {
-        effect: {
-            tick_rate: 3,
-            duration: 9
-        },
-    },
-    scorpid_poison: {
-        effect: {
-            tick_rate: 2,
-            duration: 10
-        },
-    },
-    savage_rend: {
-        effect: {
-            tick_rate: 5,
-            duration: 15
-        },
-    },
-    spore_cloud: {
-        effect: {
-            tick_rate: 3,
-            duration: 9
-        },
-    },
-    spirit_strike: {
-        effect: {
-            tick_rate: 6,
-            duration: 6
-        },
-    },
-    venom_web_spray: {
-        effect: {
-            tick_rate: 1,
-            duration: 4
-        },
-    },
-    poison_spit: {
-        effect: {
-            tick_rate: 2,
-            duration: 8
-        },
-    },
-    fire_breath: {
-        effect: {
-            tick_rate: 1,
-            duration: 2
-        },
-    },
-    pin: {
-        effect: {
-            tick_rate: 1,
-            duration: 4
-        },
+        effect_name: 'Explosive Shot'
     },
 
 }
@@ -1649,6 +1596,13 @@ function buildAurasObj(){
             auras[talent_].stat_type = (!!TALENT_PROCS[talent_].stat_type) ? TALENT_PROCS[talent_].stat_type : '';
             auras[talent_].effect = TALENT_PROCS[talent_].effect;
             auras[talent_].effect_name = TALENT_PROCS[talent_].effect_name;
+            if (talent_ === 'pierce_shot') {
+                auras[talent_].apply_time = 0;
+                auras[talent_].next_tick = 0;
+                auras[talent_].ticks = 0;
+                auras[talent_].type = TALENT_PROCS[talent_].type;
+                auras[talent_].damage = 0;
+            }
         }
     }
     // updates auras with pet procs
@@ -1682,7 +1636,39 @@ function buildAurasObj(){
             auras[aura_].effect_name = SET_PROCS[aura_].effect_name;
         }
     }
+
+    // updates auras with dots
+    for (let aura_ in AURA_DOTS) {
+        let checkaura = false;
+        
+        if(settings[aura_]) checkaura = true;
+        
+        if (checkaura){
+            auras[aura_] = JSON.parse(JSON.stringify(aura_template));
+            //auras[aura_].stat_type = '';
+            auras[aura_].effect = AURA_DOTS[aura_].effect;
+            auras[aura_].effect_name = AURA_DOTS[aura_].effect_name;
+            auras[aura_].type = AURA_DOTS[aura_].type;
+            auras[aura_].apply_time = 0;
+            auras[aura_].next_tick = 0;
+            auras[aura_].ticks = 0;
+            auras[aura_].damage = 0;
+        }
+    }
     
+    if (!!PET_SPELLS.pet_special.tick_rate) {
+        auras.pet_special = JSON.parse(JSON.stringify(aura_template));
+        auras.pet_special.effect = {};
+        auras.pet_special.effect.duration = PET_SPELLS.pet_special.duration;
+        auras.pet_special.effect.tick_rate = PET_SPELLS.pet_special.tick_rate;
+        auras.pet_special.effect_name = PET_SPELLS.pet_special.spell_name;
+        auras.pet_special.type = PET_SPELLS.pet_special.type;
+        auras.pet_special.apply_time = 0;
+        auras.pet_special.next_tick = 0;
+        auras.pet_special.ticks = 0;
+        auras.pet_special.damage = 0;
+    }
+
     Object.filter = (obj, predicate) => Object.fromEntries(Object.entries(obj).filter(predicate));
 
     ap_auras = Object.filter(auras, ([key, obj]) => obj.stat_type === 'AP')

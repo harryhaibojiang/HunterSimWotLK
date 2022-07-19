@@ -21,6 +21,7 @@ const BaseMana = 3383; // 5046 at 80
 const ExpertiseReduction = 0.25;
 const BaseMagicMiss = 16;
 const BasePhysicalMiss = 8;
+const PartialResistRate = 14.5;
 
 // initialize stat variables
 var RangeCritRating = 0;
@@ -70,7 +71,7 @@ var combatMAP = 0;
 var combatdmgmod = 1;
 var physdmgmod = 1;
 var magdmgmod = 1;
-var naturedmgmod = 1;
+var bleeddmgmod = 1;
 var haste = 1;
 var PlyrArmorReduc = 1;
 var PetArmorReduc = 1;
@@ -468,19 +469,17 @@ function procMana(attack,result){
 function updateMana() {
    // spirit tick gain (if no casting condition)
    let spiregen = 0;
-   if ((steptimeend > 5 * Math.ceil(prevtimeend / 5)) && recentcast === false) {
+   if (recentcast === false) {
       //spiregen = fiveSecRulemp5; 
    } 
    else { spiregen = 0; 
    }
 
    // mp5 tick gain
-   if (steptimeend > 5 * Math.ceil(prevtimeend / 5)) {
-      currentMana += ManaPer5 + spiregen;
-      if(combatlogRun) {
-         //combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player regens " + (ManaPer5 + spiregen) + " Mana";
-         //combatlogindex++;
-      }
+   currentMana += ManaPer5 + spiregen;
+   if(combatlogRun) {
+      //combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player regens " + (ManaPer5 + spiregen) + " Mana";
+      //combatlogindex++;
    }
 
    if (auras.rapid?.timer > 0){
@@ -647,6 +646,7 @@ function updateDmgMod() {
    combatdmgmod = 1;
    physdmgmod = 1;
    magdmgmod = 1;
+   bleeddmgmod = 1;
    let spell_ranged = spell !== 'raptorstrike' && spell !== 'melee' && spell !== 'mongoosebite';
 
    if(!!auras.beastwithin && auras.beastwithin.timer > 0) { combatdmgmod *= 1 + auras.beastwithin.effect.dmgmod / 100;} // beast within
@@ -655,6 +655,8 @@ function updateDmgMod() {
    if(debuffs.hm.timer > 0 && !debuffs.hm.inactive && talents.mark_death > 0 && spell_ranged) combatdmgmod *= (1 + talents.mark_death);
    // special mods for non-physical dmg
    if((debuffs.curseofele.timer > 0) && !debuffs.curseofele.inactive) { magdmgmod *= debuffs.curseofele.dmgbonus } // curse of ele
+   if(debuffs.mangle.timer > 0) { magdmgmod *= debuffs.mangle.dmgbonus } // curse of ele
+   
    return;
 }
 
@@ -749,9 +751,33 @@ function rollMagicSpell(){
    let crit = 3.6 + (Int / IntToCrit); // spell crit
    tmp += miss * 100;
    if (roll < tmp) return RESULT.MISS;
-   tmp += 14.5 * 100; // partial resist rate approx. 14.5% based on log data at 0 resistance
+   tmp += PartialResistRate * 100; // partial resist rate approx. 14.5% based on log data at 0 resistance
    if (roll < tmp) return RESULT.PARTIAL;
-   tmp += (100 - miss - 14.5) * crit; // pseudo 2 roll
+   tmp += (100 - miss - PartialResistRate) * crit; // pseudo 2 roll
+   if (roll < tmp) return RESULT.CRIT;
+   return RESULT.HIT;
+}
+
+function rollMagicDoT(hit, type){
+   let tmp = 0;
+   let roll = rng10k();
+   let miss = (type === 'physical') ? Math.max(0, BasePhysicalMiss - hit) : Math.max(0, BaseMagicMiss - hit);
+   tmp += miss * 100;
+   if (roll < tmp) return RESULT.MISS;
+   return RESULT.HIT;
+}
+
+function rollDamageOverTime(hit, type){
+   let tmp = 0;
+   let roll = rng10k();
+   let miss = (type === 'physical') ? Math.max(0, BasePhysicalMiss - hit) : Math.max(0, BaseMagicMiss - hit);
+   let partial = (type !== 'physical' && type !== 'bleed') ? PartialResistRate : 0;
+   let crit = 0; // temp 0 until I do dots that crit (explosive, serpent sting)
+   tmp += miss * 100;
+   if (roll < tmp) return RESULT.MISS;
+   tmp += partial * 100;
+   if (roll < tmp) return RESULT.PARTIAL;
+   tmp += (100 - miss - partial) * crit; // pseudo 2 roll
    if (roll < tmp) return RESULT.CRIT;
    return RESULT.HIT;
 }
@@ -905,7 +931,7 @@ function attackSpell(spell,spellcost) {
       else if (result === RESULT.CRIT) {
          dmg = steadyShotCalc(range_wep,combatRAP);
          dmg *= SpecialCritDamage;
-         proccrit(cost, attack, spell);   
+         proccrit(cost, attack, spell, dmg);   
       }
       procsteady(attack);
       steadycount++;
@@ -946,7 +972,7 @@ function attackSpell(spell,spellcost) {
       else if (result === RESULT.CRIT) {
          dmg = aimedShotCalc(range_wep,combatRAP);
          dmg *= SpecialCritDamage;
-         proccrit(cost, attack, spell);
+         proccrit(cost, attack, spell, dmg);
       }
       if (impsteadyreduc !== 1) auras.imp_steady_shot.timer = 0;
       //aimedcount++;
@@ -965,7 +991,7 @@ function attackSpell(spell,spellcost) {
       else if (result === RESULT.CRIT) {
          dmg = chimeraShotCalc(range_wep,combatRAP);
          dmg *= SpecialCritDamage;
-         proccrit(cost, attack, spell);
+         proccrit(cost, attack, spell, dmg);
       }
       if (impsteadyreduc !== 1) auras.imp_steady_shot.timer = 0;
       //chimeracount++;
@@ -1096,7 +1122,7 @@ function dealdamage(dmg, result, type) {
       let mindmg = Math.floor(dmg);
       let maxdmg = Math.ceil(dmg);
       dmg = rng(mindmg,maxdmg);
-      //console.log(mindmg + " - " + maxdmg)
+      //console.log(type + ": " + mindmg + " - " + maxdmg)
       return dmg;
    }
    else {
@@ -1105,7 +1131,7 @@ function dealdamage(dmg, result, type) {
 }
 
 /** handling for procs by crits */
-function proccrit(cost, attack, spell) {
+function proccrit(cost, attack, spell, dmg) {
 
    let roll = 0;
 
@@ -1115,8 +1141,9 @@ function proccrit(cost, attack, spell) {
       }
    }
    if (talents.pierce_shot > 0) {
+      let type = (spell === 'chimerashot') ? 'nature' : 'physical'; 
       if (spell === 'aimedshot' || spell === 'steadyshot' || spell === 'chimerashot') {
-         // Dothandler('pierce_shot');
+         dotHandler('pierce_shot', 'player', true, type, dmg);
          if(combatlogRun) {
             combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Target is affected by Piercing Shots.";
             combatlogindex++;
@@ -1166,7 +1193,7 @@ function proccrit(cost, attack, spell) {
    // go for the throat proc
    if(talents.GftT > 0 && attack === 'ranged'){
       let playercrit = true;
-      petUpdateFocus(playercrit);
+      procPetFocus(playercrit);
    }
    return;
 }

@@ -504,3 +504,76 @@ function trinketOnUseTrigger(slot) {
         }
     }
 }
+
+function dotHandler(spellname, source, apply, type, crit_dmg) {
+
+    //console.log("dot handler "+ spellname + " - "+ apply)
+    let result = 0;
+    let dmg = 0;
+    let done = 0;
+    let dottype = (type === undefined) ? '' : type;
+    let timeapplied = (source === 'player') ? playertimeend : nextpetspell;
+    // handle starting the spell damage over time, with apply for using to overwrite
+    if (!!apply) {
+        //console.log(auras[spellname])
+        auras[spellname].timer = auras[spellname].effect.duration; // 10
+        auras[spellname].apply_time = timeapplied; // 5
+        auras[spellname].next_tick = auras[spellname].effect.tick_rate + auras[spellname].apply_time; // 7
+        auras[spellname].ticks = auras[spellname].effect.duration / auras[spellname].effect.tick_rate;
+        auras[spellname].damage = (crit_dmg !== undefined) ? crit_dmg * 0.3 : auras[spellname].damage;
+        if (spellname === 'pierce_shot') {
+            auras.pierce_shot.damage *= (type !== 'nature') ? (1 - PlyrArmorReduc) : 1;
+        }
+    }
+    // timer = 6, ticks 4, dot time = 9
+    // if tick ready, roll damage
+    if (next_dot_time === auras[spellname].next_tick && auras[spellname].ticks !== 0) { // 9
+        //console.log(auras[spellname].ticks)
+        if (dottype === 'bleed' || dottype === 'physical') {
+            updateDmgMod();
+            result = 0;
+            let ticks = auras[spellname].effect.duration / auras[spellname].effect.tick_rate;
+            dmg = auras[spellname].damage / ticks * bleeddmgmod;
+            //console.log(dottype)
+        }
+        else if (dottype !== 'physical') {
+            updateDmgMod();
+            let hit_type = source === 'player' ? 'physical' : 'magic'; // used for determining use range hit or spell hit
+            let hit = (source === 'player') ? RangeHitChance : pet.spellhit;
+            result = rollDamageOverTime(hit, hit_type);
+            let ticks = auras[spellname].effect.duration / auras[spellname].effect.tick_rate;
+            dmg = auras[spellname].damage / ticks * bleeddmgmod;
+        } 
+        done = dealdamage(dmg, result, dottype);
+        totaldmgdone += done;
+        if(combatlogRun) {
+            combatlogarray[combatlogindex] = next_dot_time.toFixed(3) + " - Target takes " + done + " damage from " + auras[spellname].effect_name;
+            combatlogindex++;
+        }
+        auras[spellname].ticks -= 1;
+        auras[spellname].next_tick += (auras[spellname].timer > 0) ? auras[spellname].effect.tick_rate : 0; // 11
+
+    }
+    // set next tick to 0 for sim check
+    if (auras[spellname].ticks === 0){
+        auras[spellname].next_tick = 0;
+    }
+}
+
+function dotCheckActive() {
+
+    let blackarrow = auras.blackarrow?.ticks > 0;
+    let serpentsting = auras.serpentsting?.ticks > 0;
+    let immolatetrap = auras.immolatetrap?.ticks > 0;
+    let explosivetrap = auras.explosivetrap?.ticks > 0;
+    let explosiveshot = auras.explosiveshot?.ticks > 0;
+    let pet_specialcheck = auras.pet_special?.ticks > 0;
+    let pierce_shot = auras.pierce_shot?.ticks > 0;
+
+    if (blackarrow || serpentsting || immolatetrap || explosivetrap || explosiveshot 
+        || pet_specialcheck || pierce_shot){
+            
+        return true;
+    }
+    else { return false; }
+}

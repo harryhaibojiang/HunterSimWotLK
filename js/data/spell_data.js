@@ -209,7 +209,7 @@ const RAPTOR_STRIKE = {
 const SERPENT_STING = {
     base: {
         cost: 9,
-        base_cast: 0.0001,
+        base_cast: 0,
         duration: 15,
         ticks: 3,
         gcd: true,
@@ -353,7 +353,8 @@ settings = {
     aimedshot: true,
     chimerashot: true,
     steadyshot: true,
-    arcaneshot: true
+    arcaneshot: true,
+    serpentsting: true,
 
 }
 function buildSpellsObj() {

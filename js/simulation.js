@@ -67,6 +67,7 @@ var steptime = 0;
 var steptimeend = 0;
 var playertimeend = 0;
 var playertimestart = 0;
+var next_dot_time = 0;
 var nextauto = 0;
 
 var autocount = 0;
@@ -78,6 +79,7 @@ var meleecount = 0;
 
 var spell = '';
 var petspell = '';
+var dotspell = '';
 var nextpetattack = 1;
 var nextpetspell = 1;
 var playerattackready = false;
@@ -290,34 +292,51 @@ function runSim() {
 
     while (totalduration < fightduration){
 
-    // choices
+        // choices
         onUseSpellCheck();
 
         updateAuras(steptime);
         petAuras(steptime);
 
-        //console.log("Auto cd: " + USED_SPELLS.autoshot.cd);
-        //console.log("spell => "+spell);
         /******* decide spell selection ******/
+        //console.log("current spell: "+spell)
         if (spell === '') {
-    
-			//spell = spell_choice_method_A();
-			if (queueReadiness) {
+
+            if (queueReadiness) {
                 spell = 'readiness';
             }
             else { spell = playerSpellChoice(); }
-
-            playertimestart = startTime(spell);
-
+            //console.log("next spell: " + spell)
+            if (spell !== 'autoshot'){
+                playertimestart = startTime(spell);
+            } else if (spell === 'autoshot' && steptimeend > 5 * Math.ceil(prevtimeend / 5)) {
+                
+                playertimestart = steptimeend + 5;
+                playertimeend = playertimestart;
+                spell = '';
+            } else {
+                playertimestart = steptimeend + 2;
+                playertimeend = playertimestart;
+                spell = '';
+            }
         }
-        //console.log("spell => "+spell);
-        
-        nextEvent(playertimestart);
-    
-        //console.log("step "+ steptime);
-        petUpdateFocus();
-        updateMana();
+        if (petspell === '') {
+            petspell = petSpellChoice();
+            //console.log("next petspell: " + petspell)
+        }
 
+        if (dotCheckActive()) {
+            dotspell = dotNextTick();
+            next_dot_time = auras[dotspell].next_tick;
+        }
+
+        nextEvent(playertimestart);
+        
+        //console.log("time end => "+(Math.round(steptimeend * 1000) / 1000));
+        if (steptimeend > 5 * Math.ceil(prevtimeend / 5)) {
+            petUpdateFocus();
+            updateMana();
+        }
         if((combatlogRun) && (playertimeend != prevtimeend)) {
             manalogarray[manalogindex] = [playertimeend, currentMana];
             manalogindex++;
@@ -358,14 +377,14 @@ function startStepOnly(){
     petAuras(steptime);
 
     /******* decide spell selection ******/
-    console.log("current spell: "+spell)
+    //console.log("current spell: "+spell)
     if (spell === '') {
 
         if (queueReadiness) {
             spell = 'readiness';
         }
         else { spell = playerSpellChoice(); }
-        console.log("next spell: " + spell)
+        //console.log("next spell: " + spell)
         if (spell !== 'autoshot'){
             playertimestart = startTime(spell);
         } else if (spell === 'autoshot' && steptimeend > 5 * Math.ceil(prevtimeend / 5)) {
@@ -381,15 +400,22 @@ function startStepOnly(){
     }
     if (petspell === '') {
         petspell = petSpellChoice();
-        console.log("next petspell: " + petspell)
+        //console.log("next petspell: " + petspell)
     }
-    
+
+    if (dotCheckActive()) {
+        dotspell = dotNextTick();
+        next_dot_time = auras[dotspell].next_tick;
+    }
+
     nextEvent(playertimestart);
     
     //console.log("time end => "+(Math.round(steptimeend * 1000) / 1000));
-    petUpdateFocus();
-    updateMana();
-    console.log("step "+ steptime);
+    if (steptimeend > 5 * Math.ceil(prevtimeend / 5)) {
+        petUpdateFocus();
+        updateMana();
+    }
+    //console.log("step "+ steptime);
     prevtimeend = (steptimeend);
     totalduration = Math.min(maxfighttimer, steptimeend);
     avgDPS = totaldmgdone / totalduration;
@@ -442,7 +468,7 @@ function shootAutoShot() {
     //console.log("auto cd: "+USED_SPELLS.autoshot.cd)
     if(USED_SPELLS.autoshot.cd <= 0.0001){
         
-        console.log("cast: auto")
+        //console.log("cast: auto")
         USED_SPELLS.autoshot.cd = rangespeed;
         
         if(combatlogRun) {
@@ -459,12 +485,13 @@ function nextEvent(playertimestart){
 
     update();
     let playercheck = (playerattackready) ? playertimeend : playertimestart;
-    let eventchecktime = Math.min(nextauto,playercheck,nextpetattack,nextpetspell);
-    console.log("check1: "+(nextauto))
-    console.log("check2: "+(nextpetattack))
-    console.log("check3: "+(nextpetspell))
-    console.log("check4: "+(playercheck))
-    console.log("check5: "+(playertimeend))
+    let dotcheck = (next_dot_time !== 0) ? next_dot_time : fightduration + 1; // if 0 set to duration outside range of time
+    let eventchecktime = Math.min(nextauto, playercheck, nextpetattack, nextpetspell, dotcheck);
+    // console.log("check1: "+(nextauto))
+    // console.log("check2: "+(nextpetattack))
+    // console.log("check3: "+(nextpetspell))
+    // console.log("check4: "+(playercheck))
+    // console.log("check6: "+(dotcheck))
     if (eventchecktime === nextauto) {
         //console.log("next auto: "+nextauto)
         //console.log("player time check: "+playercheck)
@@ -475,7 +502,7 @@ function nextEvent(playertimestart){
         shootAutoShot();
     }
     else if (eventchecktime === nextpetattack){
-        console.log("cast: petattack")
+        //console.log("cast: petattack")
         let step = petAttack();
         steptimeend = step;
         steptime = steptimeend - prevtimeend;
@@ -485,7 +512,7 @@ function nextEvent(playertimestart){
         if(petspell !== ''){
             
             pet.focus -= PET_SPELLS[petspell].cost;
-            console.log("cast: " + PET_SPELLS[petspell].spell_name);
+            //console.log("cast: " + PET_SPELLS[petspell].spell_name);
             let step = petSpell(petspell);
             steptimeend = step;
             steptime = steptimeend - prevtimeend;
@@ -501,7 +528,7 @@ function nextEvent(playertimestart){
 
         if (!playerattackready){
             spellNextCast(playertimestart); // sets player time end
-            console.log("start cast: "+spell)
+            //console.log("start cast: "+spell)
         }
         if (playertimeend === playercheck) { // do player hit
                 
@@ -513,18 +540,28 @@ function nextEvent(playertimestart){
                 steptimeend = playertimeend;
             }
             steptime = (steptimeend - prevtimeend);
-            console.log("cast: "+spell)
+            //console.log("cast: "+spell)
             cast(spell);
             updateSpellCDs(spell);
             playerattackready = false;
             spell = '';
         }
     }
-    console.log("check1: "+(nextauto))
-    console.log("check2: "+(nextpetattack))
-    console.log("check3: "+(nextpetspell))
-    console.log("check4: "+(playercheck))
-    console.log("check5: "+(playertimeend))
+    else if(eventchecktime === dotcheck) {
+
+        steptimeend = (dotcheck);
+        steptime = (steptimeend - prevtimeend);
+        let type = auras[dotspell].type;
+        dotHandler(dotspell, '', false, type);
+        updateSpellCDs();
+        next_dot_time = 0;
+        dotspell = '';
+    }
+    // console.log("check1: "+(nextauto))
+    // console.log("check2: "+(nextpetattack))
+    // console.log("check3: "+(nextpetspell))
+    // console.log("check4: "+(playercheck))
+    // console.log("check6: "+(dotcheck))
 }
 
 function spellNextCast(){
@@ -618,6 +655,47 @@ function petSpellChoice(){
     else if (t_ready_focus_dump < t_ready_special && focus_dump_use) {
         return 'pet_focus_dump'
     } else return ''
+}
+
+function dotNextTick(){
+
+    let fightend = fightduration +1;
+    let t_ready_blackarrow = (!!auras.blackarrow?.ticks > 0) ? auras.blackarrow.next_tick : fightend;
+    let t_ready_serpentsting = (!!auras.serpentsting?.ticks > 0) ? auras.serpentsting.next_tick : fightend;
+    let t_ready_immolatetrap = (!!auras.immolatetrap?.ticks > 0) ? auras.immolatetrap.next_tick : fightend;
+    let t_ready_explosivetrap = (!!auras.explosivetrap?.ticks > 0) ? auras.explosivetrap.next_tick : fightend;
+    let t_ready_explosiveshot = (!!auras.explosiveshot?.ticks > 0) ? auras.explosiveshot.next_tick : fightend;
+    let t_ready_pet_specialcheck = (!!auras.pet_special?.ticks > 0) ? auras.pet_special.next_tick : fightend;
+    let t_ready_pierce_shot = (!!auras.pierce_shot?.ticks > 0) ? auras.pierce_shot.next_tick : fightend;
+
+    let minresult = Math.min(t_ready_blackarrow,t_ready_serpentsting, t_ready_immolatetrap, 
+        t_ready_explosivetrap, t_ready_explosiveshot,t_ready_pet_specialcheck,t_ready_pierce_shot);
+   // console.log(minresult)
+    // if (minresult === 0) {
+    //     return '';
+    // }
+    if (minresult === t_ready_blackarrow) {
+        return 'blackarrow';
+    }
+    else if (minresult === t_ready_serpentsting) {
+        return 'serpentsting';
+    }
+    else if (minresult === t_ready_immolatetrap) {
+        return 'immolatetrap';
+    }
+    else if (minresult === t_ready_explosivetrap) {
+        return 'explosivetrap';
+    }
+    else if (minresult === t_ready_explosiveshot) {
+        return 'explosiveshot';
+    }
+    else if (minresult === t_ready_pet_specialcheck) {
+        return 'pet_special';
+    }
+    else if (minresult === t_ready_pierce_shot) {
+        return 'pierce_shot';
+    }
+
 }
 
 /** attempt at creating spell choices based on a ratio of speed and damage */

@@ -379,6 +379,7 @@ function spellPetCalc(petspell){
     let mindmg = 0;
     let maxdmg = 0;
     let dmg = 0;
+    let spelldmg = 0;
     let apbonus = pet.combatap * PET_SPELLS[petspell].ap_mod / 100;
 
     let basedmgmod = pet.dmgmod * pet.combatdmgmod * pet_special_mod;
@@ -388,19 +389,42 @@ function spellPetCalc(petspell){
         maxdmg = PET_SPELLS[petspell].ranks.maxdmg; 
         dmg = (useAverages) ? (mindmg + maxdmg) * avgConst : rng(mindmg,maxdmg);
         spelldmg = (dmg + apbonus) * basedmgmod * physdmgmod * PetFamilyMod;
-        //let minspell = (mindmg + apbonus) * basedmgmod * physdmgmod * PetFamilyMod;
-        //let maxspell = (maxdmg + apbonus) * basedmgmod * physdmgmod * PetFamilyMod;
-        //console.log(Math.floor(minspell) + " - " + Math.ceil(maxspell))
+
     }
     else if ((PET_SPELLS[petspell].type === 'nature' || PET_SPELLS[petspell].type === 'fire' 
     || PET_SPELLS[petspell].type === 'frost' || PET_SPELLS[petspell].type === 'arcane')) {
-        mindmg = (!!PET_SPELLS[petspell].ranks.mindmg) ? PET_SPELLS[petspell].ranks.mindmg : 0; 
-        maxdmg = (PET_SPELLS[petspell].ranks.maxdmg) ? PET_SPELLS[petspell].ranks.maxdmg : 0; 
+        mindmg = PET_SPELLS[petspell].ranks.mindmg; 
+        maxdmg = PET_SPELLS[petspell].ranks.maxdmg; 
         dmg = (useAverages) ? (mindmg + maxdmg) * avgConst : rng(mindmg,maxdmg);
         spelldmg = (dmg + apbonus) * basedmgmod * magdmgmod;
-        //let minspell = (mindmg + apbonus) * basedmgmod * magdmgmod;
-        //let maxspell = (maxdmg + apbonus) * basedmgmod * magdmgmod;
-        //console.log(Math.floor(minspell) + " - " + Math.ceil(maxspell))
+
+    }
+    
+    return spelldmg;
+}
+function petSpecialDoTCalc(ap_mod) {
+
+    let mindmg = 0;
+    let maxdmg = 0;
+    let dmg = 0;
+    let spelldmg = 0;
+    let apbonus = pet.combatap * ap_mod / 100;
+
+    let basedmgmod = pet.dmgmod * pet.combatdmgmod * pet_special_mod;
+
+    if(PET_SPELLS.pet_special.type === 'physical' || PET_SPELLS.pet_special.type === 'bleed'){ // phys spells
+        mindmg = PET_SPELLS.pet_special.ranks.dot_mindmg; 
+        maxdmg = PET_SPELLS.pet_special.ranks.dot_maxdmg; 
+        dmg = (useAverages) ? (mindmg + maxdmg) * avgConst : rng(mindmg,maxdmg);
+        spelldmg = (dmg + apbonus) * basedmgmod * physdmgmod * PetFamilyMod;
+        
+    }
+    else if ((PET_SPELLS.pet_special.type === 'nature' || PET_SPELLS.pet_special.type === 'fire' 
+    || PET_SPELLS.pet_special.type === 'frost' || PET_SPELLS.pet_special.type === 'arcane')) {
+        mindmg = PET_SPELLS.pet_special.ranks.dot_mindmg;
+        maxdmg = PET_SPELLS.pet_special.ranks.dot_maxdmg;
+        dmg = (useAverages) ? (mindmg + maxdmg) * avgConst : rng(mindmg,maxdmg);
+        spelldmg = (dmg + apbonus) * basedmgmod * magdmgmod;
     }
     
     return spelldmg;

@@ -307,15 +307,15 @@ const PET_FIRE_BREATH = {
     1: {
         mindmg: 20,
         maxdmg: 26,
-        dot_mindmg: 22,
-        dot_maxdmg: 26,
+        dot_mindmg: 44,
+        dot_maxdmg: 52,
         level: 70
     },
     2: {
         mindmg: 43,
         maxdmg: 57,
-        dot_mindmg: 44,
-        dot_maxdmg: 57,
+        dot_mindmg: 88,
+        dot_maxdmg: 114,
         level: 80
     }
 }
@@ -467,13 +467,13 @@ const PET_PIN = {
         type: 'physical'
     },
     1: {
-        mindmg: 56,
-        maxdmg: 72,
+        dot_mindmg: 56,
+        dot_maxdmg: 72,
         level: 70
     },
     2: {
-        mindmg: 112,
-        maxdmg: 144,
+        dot_mindmg: 112,
+        dot_maxdmg: 144,
         level: 80
     }
 }
@@ -489,13 +489,13 @@ const PET_POISON_SPIT = {
         type: 'nature'
     },
     1: {
-        mindmg: 48,
-        maxdmg: 64,
+        dot_mindmg: 48,
+        dot_maxdmg: 64,
         level: 70
     },
     2: {
-        mindmg: 104,
-        maxdmg: 136,
+        dot_mindmg: 104,
+        dot_maxdmg: 136,
         level: 80
     }
 }
@@ -513,15 +513,15 @@ const PET_RAKE = {
     1: {
         mindmg: 22,
         maxdmg: 30,
-        dot_mindmg: 7,
-        dot_maxdmg: 13,
+        dot_mindmg: 21,
+        dot_maxdmg: 39,
         level: 70
     },
     2: {
         mindmg: 47,
         maxdmg: 67,
-        dot_mindmg: 19,
-        dot_maxdmg: 25,
+        dot_mindmg: 57,
+        dot_maxdmg: 75,
         level: 80
     }
 }
@@ -529,7 +529,7 @@ const PET_RAVAGE = {
     base: {
         cost: 0,
         base_cd: 10,
-        gcd: true,
+        gcd: false,
         spell_name: 'Ravage',
         ap_mod: 7,
         type: 'physical'
@@ -549,7 +549,7 @@ const PET_SAVAGE_REND = {
     base: {
         cost: 20,
         duration: 15,
-        tick_rate: 3,
+        tick_rate: 5,
         base_cd: 60,
         gcd: true,
         spell_name: 'Savage Rend',
@@ -559,15 +559,15 @@ const PET_SAVAGE_REND = {
     1: {
         mindmg: 28,
         maxdmg: 38,
-        dot_mindmg: 10,
-        dot_maxdmg: 12,
+        dot_mindmg: 30,
+        dot_maxdmg: 36,
         level: 70
     },
     2: {
         mindmg: 59,
         maxdmg: 83,
-        dot_mindmg: 21,
-        dot_maxdmg: 27,
+        dot_mindmg: 63,
+        dot_maxdmg: 81,
         level: 80
     }
 }
@@ -576,20 +576,20 @@ const PET_SCORPID_POISON = {
         cost: 20,
         base_cd: 10,
         duration: 10,
-        tick_rate: 5,
+        tick_rate: 2,
         gcd: true,
         spell_name: 'Scorpid Poison',
         ap_mod: 1.4,
         type: 'nature'
     },
     1: {
-        mindmg: 35,
-        maxdmg: 65,
+        dot_mindmg: 35,
+        dot_maxdmg: 65,
         level: 70
     },
     2: {
-        mindmg: 100,
-        maxdmg: 130,
+        dot_mindmg: 100,
+        dot_maxdmg: 130,
         level: 80
     }
 }
@@ -667,17 +667,17 @@ const PET_SPORE_CLOUD = {
         tick_rate: 3,
         gcd: true,
         spell_name: 'Spore Cloud',
-        ap_mod: 4.9,
+        ap_mod: 14.7, // 4.9 * 3
         type: 'nature'
     },
     1: {
-        dot_mindmg: 11,
-        dot_maxdmg: 13,
+        dot_mindmg: 33,
+        dot_maxdmg: 39,
         level: 70
     },
     2: {
-        dot_mindmg: 22,
-        dot_maxdmg: 28,
+        dot_mindmg: 66,
+        dot_maxdmg: 84,
         level: 80
     }
 }
@@ -766,20 +766,20 @@ const PET_VENOM_WEB_SPRAY = {
         cost: 20,
         base_cd: 40,
         duration: 4,
-        tick_rate: 2,
+        tick_rate: 1,
         gcd: true,
         spell_name: 'Venom Web Spray',
-        ap_mod: 7,
+        ap_mod: 28, // 7 * 4
         type: 'nature'
     },
     1: {
-        dot_mindmg: 33,
-        dot_maxdmg: 33,
+        dot_mindmg: 132,
+        dot_maxdmg: 132,
         level: 70
     },
     2: {
-        dot_mindmg: 46,
-        dot_maxdmg: 46,
+        dot_mindmg: 184,
+        dot_maxdmg: 184,
         level: 80
     }
 }
