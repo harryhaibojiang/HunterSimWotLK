@@ -88,7 +88,7 @@ function fetchData(){
     // pet consumes
     petconsumes = (localStorage.getItem('pet_consumes') != null) ? JSON.parse(localStorage.getItem('pet_consumes')):petconsumes;
     // debuffs
-    debuffs = (localStorage.getItem('debuffs') != null) ? JSON.parse(localStorage.getItem('debuffs')):debuffs;
+    //debuffs = (localStorage.getItem('debuffs') != null) ? JSON.parse(localStorage.getItem('debuffs')):debuffs;
     // statweights
     statweights = (localStorage.getItem('statweights') != null) ? JSON.parse(localStorage.getItem('statweights')):statweights;
     displayStatWeights();
@@ -173,7 +173,7 @@ function fetchData(){
     document.getElementById("weavetime").value = weavetime.toFixed(1);
     document.getElementById("pet").value = selectedPet;
     document.getElementById("race").value = selectedRace;
-    document.getElementById("racedisplay").innerHTML = races[selectedRace].name;
+    document.getElementById("racedisplay").innerHTML = races[selectedRace][level].name;
     let targets = targetData.getNameKeyTargetPairs();
     let findtarget = targets.find(key => key.name == target.name);
     document.getElementById("targetSelect").value = findtarget.id;

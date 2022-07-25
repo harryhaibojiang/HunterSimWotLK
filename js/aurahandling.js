@@ -5,7 +5,7 @@ var beastwithinreduc = 1;
 var sharedtrinketcd = 0;
 
 var debuffs = {
-    hm: {uptime_g:100, timer:0, duration:300, improved:true, rap:110, uptime:0},
+    hm: {uptime_g:100, timer:0, duration:300, improved:false, rap:110, uptime:0},
     judgewisdom: {uptime_g:100, timer:0, duration:20, uptime:0},
     judgecrusader: {uptime_g:0, timer:0, duration:20, crit:3, uptime:0},
     sunder: {uptime_g:0, timer:0, duration:30, stacktime:5, stacks:1, arp:0.04, uptime:0},
@@ -36,8 +36,8 @@ function initializeAuras() {
     Object.values(auras).forEach(key => key.uptime = 0);
     Object.values(debuffs).forEach(key => key.uptime = 0);
     
-    auras.rapid.effect.base_cd = MAIN_CDS.rapid.effect.base_cd - talents.rapid_killing * 60;
-    
+    debuffs.hm.rap = (level === 70) ? 110 : 500;
+
     auratimers = buildAuraTimerSteps(auras)
     auracds = buildAuraCdSteps(auras)
     aurauptimes = buildAuraUptimeSteps(auras)
@@ -296,7 +296,7 @@ function intervalAuraInitializer(){
  * steps and are applied potentially during a step. A timer of 30 would start at 29.9 on the next step.
  */
 function IntervalAuraHandler(){
-    if(debuffs.hm.timer <= 0 || debuffs.hm.inactive && (debuffs.hm.uptime_g < 98)) {debuffs.hm.stacks = 0;} // sets stacks to 0 when inactive
+
     if((debuffs.hm.timer <= 0) && (debuffs.hm.uptime_g > 0)) { debuffs.hm.timer += IntervalAuraSetTime("hm","debuff"); } // sets the timer to inactive or active
     
     if((debuffs.judgewisdom.timer <= 0) && (debuffs.judgewisdom.uptime_g > 0)) { 
@@ -372,6 +372,15 @@ function IntervalAuraSetTime(name){
 /**Check for on use spells ready and usable, if ready and usable, set the duration and cooldown timers. */
 function onUseSpellCheck(){
     
+    if (!!auras.killcommand && (auras.killcommand.cd === 0)) {
+        auras.killcommand.stacks = 3;
+        auras.killcommand.timer = auras.killcommand.effect.duration; // set timer
+        auras.killcommand.cd = auras.killcommand.effect.base_cd - talents.catlike_reflex * 10; // set cd
+        if(combatlogRun) {
+            combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player gains " + auras.killcommand.effect_name;
+            combatlogindex++;
+        }
+    }
     if (!!auras.lust && (auras.lust.cd === 0)) {
 
         auras.lust.timer = auras.lust.effect.duration; // set timer
@@ -400,22 +409,26 @@ function onUseSpellCheck(){
         }
     }
 
-    if (!!auras.rapid && (auras.rapid.cd === 0)) {
+    if (!!auras.rapid && (auras.rapid.cd === 0) && auras.rapid.timer == 0) {
         let rapidcost = Math.floor((MAIN_CDS.rapid.cost / 100) * BaseMana * beastwithinreduc);
-        if ((currentMana >= rapidcost) && auras.rapid.timer == 0) {
+        if ((currentMana >= rapidcost)) {
             auras.rapid.timer = auras.rapid.effect.duration; // set timer
-            auras.rapid.cd = auras.rapid.effect.base_cd; // set cd
+            auras.rapid.cd = auras.rapid.effect.base_cd - talents.rapid_killing; // set cd
             if(combatlogRun) {
                 combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player gains " + auras.rapid.effect_name;
                 combatlogindex++;
             }
         }
     }
+    if (!!auras.beastwithin && (auras.beastwithin.timer === 0) && beastwithinreduc !== 0) {
+        beastwithinreduc = 1;
+    }
     if (!!auras.beastwithin && (auras.beastwithin.cd === 0)) {
         let beastcost = Math.floor((MAIN_CDS.beastwithin.cost / 100) * BaseMana);
         if ((currentMana >= beastcost) && auras.beastwithin.timer == 0) {
             auras.beastwithin.timer = auras.beastwithin.effect.duration; // set timer
-            auras.beastwithin.cd = auras.beastwithin.effect.base_cd; // set cd
+            auras.beastwithin.cd = auras.beastwithin.effect.base_cd * (1 - talents.longevity); // set cd
+            beastwithinreduc = 0.8;
             if(combatlogRun) {
                 combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player gains " + auras.beastwithin.effect_name;
                 combatlogindex++;
@@ -460,17 +473,14 @@ function onUseSpellCheck(){
 // trinkets on use, if's for non-shared CDs, if-else if's for shared CDs
 
     if(!!auras.trink1) {
-        trinketOnUseTrigger('trink1')
+        //trinketOnUseTrigger('trink1')
     }
     if(!!auras.trink2) {
-        trinketOnUseTrigger('trink2')
+        //trinketOnUseTrigger('trink2')
     }
 
-    if (!!auras.readiness && (auras.readiness.cd === 0) && auras.rapid.cd > 0) {
-        if (SPELLS.multishot.enable && SPELLS.multishot.cd > 5) {
-            queueReadiness = true;
-        }
-        else if (!SPELLS.multishot.enable && SPELLS.steadyshot.cd > 0) {
+    if (!!auras.readiness && (auras.readiness.cd === 0) && auras.rapid?.cd > 0) {
+        if (USED_SPELLS.chimerashot?.cd > 3 || USED_SPELLS.aimedshot?.cd > 3 || USED_SPELLS.multishot?.cd > 3) {
             queueReadiness = true;
         }
         else { queueReadiness = false;
@@ -480,7 +490,7 @@ function onUseSpellCheck(){
 
 function trinketOnUseTrigger(slot) {
 
-    if ((!auras[slot].effect.is_proc) && (auras[slot].cd === 0)) {
+    if ((!auras[slot].effect?.is_proc) && (auras[slot].cd === 0)) {
         if ((auras[slot].shares_cd && sharedtrinketcd === 0) || (!auras[slot].shares_cd)) {
 
             sharedtrinketcd = auras[slot].effect.duration;
@@ -493,4 +503,94 @@ function trinketOnUseTrigger(slot) {
             }
         }
     }
+}
+
+function dotHandler(dotname, source, apply, type, crit_dmg) {
+
+    //console.log("dot handler "+ dotname + " - "+ apply)
+    let result = 0;
+    let dmg = 0;
+    let done = 0;
+    let dottype = (type === undefined) ? '' : type;
+    let timeapplied = (source === 'player') ? playertimeend : nextpetspell;
+    // handle starting the spell damage over time, with apply for using to overwrite
+    if (!!apply) {
+        //console.log(auras[dotname])
+        if (dotname === 'pierce_shot') {
+
+            let maxticks = auras[dotname].effect.duration / auras[dotname].effect.tick_rate;
+            let dmg_per_tick = auras[dotname].damage / maxticks;
+            let ticks_counted = maxticks - auras[dotname].ticks;
+            let remainingdmg = auras[dotname].damage - dmg_per_tick * ticks_counted;
+
+            auras[dotname].damage = crit_dmg * talents.pierce_shot + remainingdmg;
+            auras[dotname].damage *= (type !== 'nature') ? (1 - PlyrArmorReduc) : 1;
+        }
+
+        auras[dotname].timer = auras[dotname].effect.duration;
+        auras[dotname].apply_time = timeapplied;
+        auras[dotname].next_tick = auras[dotname].effect.tick_rate + auras[dotname].apply_time;
+        auras[dotname].ticks = auras[dotname].effect.duration / auras[dotname].effect.tick_rate;
+        
+    }
+    // if tick ready, roll damage
+    if (next_dot_time === auras[dotname].next_tick && auras[dotname].ticks !== 0) {
+        //console.log(auras[dotname].ticks)
+        if (dottype === 'bleed' || dottype === 'physical') {
+            updateDmgMod(dotname);
+            result = 0;
+            let ticks = auras[dotname].effect.duration / auras[dotname].effect.tick_rate;
+            dmg = auras[dotname].damage / ticks * bleeddmgmod;
+            //console.log(dottype)
+        }
+        else if (dottype !== 'physical') {
+            updateDmgMod(dotname);
+            let crittable = false; // todo future crits trap and serpent crit conditions
+            let ticks = auras[dotname].effect.duration / auras[dotname].effect.tick_rate;
+            result = rollDamageOverTime(crittable, dotname);
+            dmg = auras[dotname].damage / ticks * magdmgmod;
+            if (result === RESULT.PARTIAL) {
+                dmg *= 0.65; // average reduction of 35% on partial resists
+            }
+            else if (result === RESULT.CRIT) {
+                dmg *= RangeCritDamage;
+            }
+            //console.log(dmg + " " +result)
+        } 
+        done = dealdamage(dmg, result, dottype);
+        totaldmgdone += done;
+        
+        spellresult[dotname].dmg += done;
+        spellresult[dotname].count++;
+
+        if(combatlogRun) {
+            combatlogarray[combatlogindex] = next_dot_time.toFixed(3) + " - Target takes " + done + " damage from " + auras[dotname].effect_name;
+            combatlogindex++;
+        }
+        auras[dotname].ticks -= 1;
+        auras[dotname].next_tick += (auras[dotname].timer > 0) ? auras[dotname].effect.tick_rate : 0;
+
+    }
+    // set next tick to 0 for sim check
+    if (auras[dotname].ticks === 0){
+        auras[dotname].next_tick = 0;
+    }
+}
+
+function dotCheckActive() {
+
+    let blackarrow = auras.blackarrow?.ticks > 0;
+    let serpentsting = auras.serpentsting?.ticks > 0;
+    let immolatetrap = auras.immolatetrap?.ticks > 0;
+    let explosivetrap = auras.explosivetrap?.ticks > 0;
+    let explosiveshot = auras.explosiveshot?.ticks > 0;
+    let pet_specialcheck = auras.pet_special?.ticks > 0;
+    let pierce_shot = auras.pierce_shot?.ticks > 0;
+
+    if (blackarrow || serpentsting || immolatetrap || explosivetrap || explosiveshot 
+        || pet_specialcheck || pierce_shot){
+            
+        return true;
+    }
+    else { return false; }
 }
