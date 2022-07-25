@@ -19,9 +19,10 @@ const QuiverSpeed = 1.15;
 const BaseRegen = 0.009327;
 const BaseMana = 3383; // 5046 at 80
 const ExpertiseReduction = 0.25;
-const BaseMagicMiss = 16;
+const BaseMagicMiss = 17;
 const BasePhysicalMiss = 8;
 const PartialResistRate = 14.5;
+const BaseSpellCrit = 3.6;
 
 // initialize stat variables
 var RangeCritRating = 0;
@@ -56,7 +57,6 @@ var fiveSecRulemp5 = 0;
 var pet_special_crit = 0;
 
 var currentMana = 0;
-var BerserkStartHP = 100;
 var rangespeed = 3.0;
 var meleespeed = 3.0;
 
@@ -369,7 +369,7 @@ function calcBaseStats() {
   BaseRangeSpeed = RANGED_WEAPONS[gear.range.id].speed / QuiverSpeed / talents.serp_swift;
   BaseMeleeSpeed = MELEE_WEAPONS[gear.mainhand.id].speed;
 
-  
+
 }
 
 function initialize(){
@@ -642,17 +642,17 @@ function updateHaste() {
    return;
 }
 // handling for dmg mod changes from auras
-function updateDmgMod() {
+function updateDmgMod(spell) {
    combatdmgmod = 1;
    physdmgmod = 1;
    magdmgmod = 1;
    bleeddmgmod = 1;
-   let spell_ranged = spell !== 'raptorstrike' && spell !== 'melee' && spell !== 'mongoosebite';
+   let spell_ranged_shot = (spell !== 'raptorstrike') && (spell !== 'melee') && (spell !== 'mongoosebite') && (spell !== 'serpentsting');
 
    if(!!auras.beastwithin && auras.beastwithin.timer > 0) { combatdmgmod *= 1 + auras.beastwithin.effect.dmgmod / 100;} // beast within
    if(auras.cullingherd?.timer > 0) combatdmgmod *= pet_talents.cull_herd;
    if((debuffs.bloodfrenzy.timer > 0) && !debuffs.bloodfrenzy.inactive) { physdmgmod *= debuffs.bloodfrenzy.dmgbonus; } // blood frenzy
-   if(debuffs.hm.timer > 0 && !debuffs.hm.inactive && talents.mark_death > 0 && spell_ranged) combatdmgmod *= (1 + talents.mark_death);
+   if(debuffs.hm.timer > 0 && !debuffs.hm.inactive && talents.mark_death > 0 && spell_ranged_shot) combatdmgmod *= (1 + talents.mark_death);
    // special mods for non-physical dmg
    if((debuffs.curseofele.timer > 0) && !debuffs.curseofele.inactive) { magdmgmod *= debuffs.curseofele.dmgbonus } // curse of ele
    if(debuffs.mangle.timer > 0) { magdmgmod *= debuffs.mangle.dmgbonus } // curse of ele
@@ -720,7 +720,7 @@ function rollRangeWep(combatCrit) {
    
 }
 /** hit table for spells 2 roll for all */
-function rollSpell(attack,combatCrit,specialcrit) {
+function rollSpell(attack,combatCrit,specialcrit, spell) {
    let tmp = 0;
    let roll = rng10k();
    let meleemiss = Math.max(RaptorMissChance,0);
@@ -737,9 +737,12 @@ function rollSpell(attack,combatCrit,specialcrit) {
       return RESULT.HIT;
    }
    else if (attack === 'ranged'){
+      let partial = (!!spell && (spell === 'arcaneshot' || spell === 'chimera_serpent' || spell === 'explosiveshot')) ? PartialResistRate : 0;
       tmp += rangemiss * 100;
       if (roll < tmp) return RESULT.MISS;
-      tmp += (100 - rangemiss) * crit; // pseudo 2 roll
+      tmp += partial * 100; // partial resist rate approx. 14.5% based on log data at 0 resistance
+      if (roll < tmp) return RESULT.PARTIAL;
+      tmp += (100 - rangemiss - partial) * crit; // pseudo 2 roll
       if (roll < tmp) return RESULT.CRIT;
       return RESULT.HIT;
    }
@@ -748,7 +751,7 @@ function rollMagicSpell(){
    let tmp = 0;
    let roll = rng10k();
    let miss = BaseMagicMiss;
-   let crit = 3.6 + (Int / IntToCrit); // spell crit
+   let crit = BaseSpellCrit + (Int / IntToCrit); // spell crit
    tmp += miss * 100;
    if (roll < tmp) return RESULT.MISS;
    tmp += PartialResistRate * 100; // partial resist rate approx. 14.5% based on log data at 0 resistance
@@ -767,17 +770,14 @@ function rollMagicDoT(hit, type){
    return RESULT.HIT;
 }
 
-function rollDamageOverTime(hit, type){
+function rollDamageOverTime(crittable, dotname){
    let tmp = 0;
    let roll = rng10k();
-   let miss = (type === 'physical') ? Math.max(0, BasePhysicalMiss - hit) : Math.max(0, BaseMagicMiss - hit);
-   let partial = (type !== 'physical' && type !== 'bleed') ? PartialResistRate : 0;
-   let crit = 0; // temp 0 until I do dots that crit (explosive, serpent sting)
-   tmp += miss * 100;
-   if (roll < tmp) return RESULT.MISS;
+   let crit = (crittable) ? RangeCritChance : 0; // temp 0 until I do dots that crit (explosive, serpent sting)
+   let partial = (!!dotname && dotname === 'serpentsting') ? 0 : PartialResistRate;
    tmp += partial * 100;
    if (roll < tmp) return RESULT.PARTIAL;
-   tmp += (100 - miss - partial) * crit; // pseudo 2 roll
+   tmp += (100 - partial) * crit; // pseudo 2 roll
    if (roll < tmp) return RESULT.CRIT;
    return RESULT.HIT;
 }
@@ -805,16 +805,17 @@ function attackMainhand(meleeAP) {
    let done = dealdamage(dmg,result);
    
    totaldmgdone += done;
-   meleedmg += done;
+   spellresult.melee.dmg += done;
+   spellresult.melee.count++;
    procattack(attack,result);
-   //procMana(attack,result); // expensiveish
+   procMana(attack,result); // expensiveish
    //magicproc(attack);
 
    if(combatlogRun) {
       combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player Melee " + RESULTARRAY[result] + " for " + done;
       combatlogindex++;
    }
-   meleecount++;
+   
 
    return;
 }
@@ -824,8 +825,8 @@ function attackRange(type) {
 
    updateAgi();
    updateAP();
-   updateDmgMod();
    if (type === undefined) type = 'autoshot';
+   updateDmgMod(type);
    let attack = 'ranged';
    let combatCrit = updateCritChance(attack);
 
@@ -876,23 +877,18 @@ function attackRange(type) {
       spellname = 'Auto Shot';
       dmg_type = 'physical';
       procauto();
-      autocount++;
+
    }
    
    
    let done = dealdamage(dmg,result, dmg_type);
    
    totaldmgdone += done;
-   if (type === 'wild_quiver'){
-      wild_quiverdmg += done;
-   } else if (type === 'zods_repeat'){
-      zodsdmg += done;
-   } else {
-      autodmg += done;
-   }
+   spellresult[type].dmg += done;
+   spellresult[type].count++;
 
    procattack(attack,result);
-   //procMana(attack,result); // expensiveish
+   procMana(attack,result); // expensiveish
    //magicproc(attack);
 
    if(combatlogRun) {
@@ -902,7 +898,113 @@ function attackRange(type) {
 
    return;
 }
+/** attack with a damage over time spell: roll for dmg, deal dmg, apply dots, and trigger any procs */
+function attackDoT(spell,spellcost) {
 
+   let combatCrit = 0;
+   let dmg = 0;
+   let result = 0;
+   let attack = "range";
+   let specialcrit = 0;
+   let cost = 0;
+   let dot_check = (spell === 'immolatetrap' || spell === 'serpentsting' || spell === 'blackarrow');
+
+   // rolls for hit first before dot application
+   if(spell === 'explosivetrap'){
+      attack = 'range'; // used for crit 
+      cost = Math.floor(spellcost * (1 - talents.efficiency) * beastwithinreduc * (1 - talents.resourcefulness));
+      currentMana -= cost;
+
+      combatCrit = updateCritChance(attack);
+      result = rollSpell(attack, combatCrit, specialcrit); // check attack table
+      //spellResultSum(result, spell);
+      if (result !== RESULT.MISS) {
+         dmg = explosiveTrapCalc(combatRAP, 'false'); // calc damage
+         auras.explosivetrap.damage = explosiveTrapCalc(combatRAP, 'true');
+      }
+      if (result === RESULT.CRIT) {
+         dmg *= RangeCritDamage;
+         proccrit(cost, attack, spell);
+      }
+      attack = ''; // used again for checking procs, and traps don't proc melee or range hits
+      console.log(auras.explosivetrap.damage);
+   } 
+   // rolls for hit first before dot application
+   else if(spell === 'explosiveshot') {
+      attack = 'range'
+      cost = Math.floor(spellcost * (1 - talents.efficiency) * beastwithinreduc);
+      currentMana -= cost;
+
+      combatCrit = updateCritChance(attack);
+      specialcrit = talents.surv_instincts;
+      result = rollSpell(attack, combatCrit, specialcrit, spell); // check attack table
+      //spellResultSum(result, spell);
+      if (result !== RESULT.MISS) {
+         dmg = explosiveShotCalc(combatRAP); // calc damage
+         let ticks = auras.explosiveshot.effect.duration / auras.explosiveshot.effect.tick_rate;
+         auras.explosiveshot.damage = dmg * ticks / magdmgmod; // remove mag mod to prevent double dip on ticks
+      }
+      if (result === RESULT.CRIT) {
+         dmg *= RangeCritDamage;
+         proccrit(cost, attack, spell);
+      }
+      if (result === RESULT.PARTIAL) {
+         dmg *= 0.65;
+      }
+
+      console.log(auras.explosiveshot.damage);
+   } 
+   else if(spell === 'immolatetrap') {
+      cost = Math.floor(spellcost * (1 - talents.efficiency) * beastwithinreduc * (1 - talents.resourcefulness));
+      currentMana -= cost;
+      auras.immolatetrap.damage = immolateTrapCalc(combatRAP);
+      auras[aura_].mod_snapshot = 1;
+   } 
+   else if(spell === 'serpentsting') {
+      cost = Math.floor(spellcost * (1 - talents.efficiency) * beastwithinreduc);
+      currentMana -= cost;
+      auras.serpentsting.damage = serpentStingCalc(combatRAP);
+      //auras.serpentsting.mod_snapshot = range_wep.basedmgmod * combatdmgmod;
+   } 
+   else if(spell === 'blackarrow') {
+      cost = Math.floor(spellcost * (1 - talents.efficiency) * beastwithinreduc * (1 - talents.resourcefulness));
+      currentMana -= cost;
+      auras.blackarrow.damage = blackArrowCalc(combatRAP);
+      
+   } 
+   else throw new Error(`invalid spell name: ${spell}`)
+
+   // roll for application if just a dot with no hit
+   if (dot_check) {
+      result = rollMagicDoT(RangeHitChance, 'physical');
+   }
+   if (result !== RESULT.MISS) {
+      dotHandler(spell, 'player', true, USED_SPELLS[spell].type);
+   }
+
+   if (!dot_check){
+      let done = dealdamage(dmg, result, USED_SPELLS[spell].type);
+      totaldmgdone += done;
+      spellresult[spell].dmg += done;
+      spellresult[spell].count++;
+      procattack(attack,result);
+      procMana(attack,result); // expensiveish
+      //magicproc(attack);
+
+      // initial hit 
+      if(combatlogRun) {
+         combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player " + USED_SPELLS[spell].spell_name + " " + RESULTARRAY[result] + " for " + done + ". RAP => " + combatRAP + ". Mana => " + currentMana;
+         combatlogindex++;
+      }
+   }
+   // application of dot
+   if(combatlogRun) {
+      combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player " + USED_SPELLS[spell].spell_name + " " + RESULTARRAY[result] + " on Target. RAP => " + combatRAP + ". Mana => " + currentMana;
+      combatlogindex++;
+   }
+
+   return;
+}
 /** attack with a spell (yellow) roll for dmg, deal dmg, and trigger any procs */
 function attackSpell(spell,spellcost) {
 
@@ -933,8 +1035,8 @@ function attackSpell(spell,spellcost) {
          dmg *= SpecialCritDamage;
          proccrit(cost, attack, spell, dmg);   
       }
-      procsteady(attack);
-      steadycount++;
+      procSteady(attack);
+
    } 
    else if (spell === 'multishot') {
       attack = 'ranged';
@@ -954,7 +1056,24 @@ function attackSpell(spell,spellcost) {
          proccrit(cost, attack, spell);
       }
 
-      multicount++;
+   }
+   else if (spell === 'silencingshot') {
+      attack = 'ranged';
+      cost = Math.floor(spellcost * (1 - talents.efficiency));
+      currentMana -= cost;
+
+      combatCrit = updateCritChance(attack);
+      result = rollSpell(attack, combatCrit, specialcrit); // check attack table
+      spellResultSum(result, spell);
+      if (result === RESULT.HIT) {
+         dmg = ScatterSilenceShotCalc(range_wep,combatRAP); // calc damage
+      }
+      else if (result === RESULT.CRIT) {
+         dmg = ScatterSilenceShotCalc(range_wep,combatRAP);
+         dmg *= RangeCritDamage;
+         proccrit(cost, attack, spell);
+      }
+
    }
    else if (spell === 'aimedshot') {
       attack = 'ranged';
@@ -962,7 +1081,7 @@ function attackSpell(spell,spellcost) {
       currentMana -= cost;
 
       combatCrit = updateCritChance(attack);
-      let trueshotglyph = (!!glyphs.trueshot_aura) ? glyphs.trueshot_aura.bonus : 0;
+      let trueshotglyph = (!!glyphs.trueshot_aura) ? glyphs.trueshot_aura : 0;
       specialcrit = talents.imp_barrage + trueshotglyph;
       result = rollSpell(attack, combatCrit, specialcrit); // check attack table
       spellResultSum(result, spell);
@@ -975,11 +1094,11 @@ function attackSpell(spell,spellcost) {
          proccrit(cost, attack, spell, dmg);
       }
       if (impsteadyreduc !== 1) auras.imp_steady_shot.timer = 0;
-      //aimedcount++;
+
    }
    else if (spell === 'chimerashot') {
       attack = 'ranged';
-      cost = Math.floor(spellcost * (1 - talents.efficiency) * beastwithinreduc * mastermarksreduc * impsteadyreduc);
+      cost = Math.floor(spellcost * (1 - talents.efficiency) * mastermarksreduc * impsteadyreduc);
       currentMana -= cost;
 
       combatCrit = updateCritChance(attack);
@@ -994,7 +1113,7 @@ function attackSpell(spell,spellcost) {
          proccrit(cost, attack, spell, dmg);
       }
       if (impsteadyreduc !== 1) auras.imp_steady_shot.timer = 0;
-      //chimeracount++;
+
    }
    else if (spell === 'arcaneshot') {
       attack = 'ranged';
@@ -1003,7 +1122,7 @@ function attackSpell(spell,spellcost) {
 
       combatCrit = updateCritChance(attack);
       specialcrit = talents.surv_instincts;
-      result = rollSpell(attack, combatCrit, specialcrit); // check attack table
+      result = rollSpell(attack, combatCrit, specialcrit, spell); // check attack table
       spellResultSum(result, spell);
       if (result === RESULT.HIT) {
          dmg = arcaneShotCalc(range_wep,combatRAP); // calc damage
@@ -1013,8 +1132,13 @@ function attackSpell(spell,spellcost) {
          dmg *= SpecialCritDamage;
          proccrit(cost, attack, spell);
       }
+      if (result === RESULT.PARTIAL) {
+         dmg = arcaneShotCalc(range_wep,combatRAP);
+         dmg *= 0.65;
+      }
+
       if (impsteadyreduc !== 1) auras.imp_steady_shot.timer = 0;
-      arcanecount++;
+
    }
    else if (spell === 'raptorstrike') {
       attack = 'melee';
@@ -1034,29 +1158,25 @@ function attackSpell(spell,spellcost) {
          proccrit(cost, attack, spell);
       }
 
-      raptorcount++;
    }
+   else throw new Error(`invalid spell name: ${spell}`)
    
-   let done = dealdamage(dmg,result,USED_SPELLS[spell].type);
+   let done = dealdamage(dmg, result, USED_SPELLS[spell].type);
    totaldmgdone += done;
-   if (spell === 'steadyshot') {
-      steadydmg += done;
-   } else if (spell === 'multishot'){
-      multidmg += done;
-   } else if (spell === 'arcaneshot'){
-      arcanedmg += done;
-   } else if (spell === 'raptorstrike'){
-      raptordmg += done;
-   }
-
+   spellresult[spell].dmg += done;
+   spellresult[spell].count++;
 
    procattack(attack,result);
-   //procMana(attack,result); // expensiveish
+   procMana(attack,result); // expensiveish
    //magicproc(attack);
 
    if(combatlogRun) {
       combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player " + USED_SPELLS[spell].spell_name + " " + RESULTARRAY[result] + " for " + done + ". RAP => " + combatRAP + ". Mana => " + currentMana;
       combatlogindex++;
+   }
+   // check and roll for dmg hit on chimera from serpent active, added to combatlog after initial hit
+   if (spell === 'chimerashot' && auras.serpentsting?.timer > 0) {
+      procChimera();
    }
    return;
 }
@@ -1066,51 +1186,41 @@ function cast(spell) {
    let spellcost = 0;
    updateAgi();
    updateAP();
-   updateDmgMod();
+   updateDmgMod(spell);
+   let dot_check = (spell === 'immolatetrap' || spell === 'serpentsting' || spell === 'blackarrow' || spell === 'explosivetrap' || spell === 'explosiveshot');
 
-   if (spell === 'steadyshot'){
-      spellcost = USED_SPELLS.steadyshot.cost / 100 * BaseMana;
-      attackSpell(spell,spellcost);
-      recentcast = true;
-      //console.log("gcd => " + (Math.round(currentgcd * 1000) / 1000));
-   }
-   else if (spell === 'multishot'){
-      spellcost = USED_SPELLS.multishot.cost / 100 * BaseMana;
-      attackSpell(spell,spellcost);
-      recentcast = true;
-      //console.log("gcd => " + (Math.round(currentgcd * 1000) / 1000));
-   }
-   else if (spell === 'aimedshot'){
-      spellcost = USED_SPELLS.aimedshot.cost / 100 * BaseMana;
-      attackSpell(spell,spellcost);
-      recentcast = true;
-      //console.log("gcd => " + (Math.round(currentgcd * 1000) / 1000));
-   }
-   else if (spell === 'chimerashot'){
-      spellcost = USED_SPELLS.chimerashot.cost / 100 * BaseMana;
-      attackSpell(spell,spellcost);
-      recentcast = true;
-      //console.log("gcd => " + (Math.round(currentgcd * 1000) / 1000));
-   }
-   else if (spell === 'arcaneshot'){
-      spellcost = USED_SPELLS.arcaneshot.cost / 100 * BaseMana;
-      attackSpell(spell,spellcost);
-      recentcast = true;
-      //console.log("gcd => " + (Math.round(currentgcd * 1000) / 1000));
-   }
-   else if (spell === 'raptorstrike'){
+   if (spell === 'raptorstrike'){
       spellcost = USED_SPELLS.raptorstrike.cost / 100 * BaseMana;
       attackSpell(spell,spellcost);
    }
    else if (spell === 'melee'){
       attackMainhand(combatMAP);
+   } 
+   else if (dot_check) {
+      spellcost = USED_SPELLS[spell].cost / 100 * BaseMana;
+      attackDoT(spell,spellcost);
+      //console.log("gcd => " + (Math.round(currentgcd * 1000) / 1000));
    }
-return;
+   else if (spell === 'readiness') {
+      return;
+   }
+   else {
+      
+      spellcost = USED_SPELLS[spell].cost / 100 * BaseMana;
+      attackSpell(spell,spellcost);
+      recentcast = true;
+      //console.log("gcd => " + (Math.round(currentgcd * 1000) / 1000));
+   }
+
+   return;
 }
 
 /** final damage calculation after rolls */
 function dealdamage(dmg, result, type) {
-   if (result != RESULT.MISS && result != RESULT.DODGE && type === 'physical') {
+   if (result === RESULT.MISS) {
+      return 0;
+   }
+   else if (result != RESULT.MISS && result != RESULT.DODGE && type === 'physical') {
       // randomizes the result to be always ±1 damage as in-game results show even with fine light crossbow
       let mindmg = Math.floor(dmg * (1 - PlyrArmorReduc));
       let maxdmg = Math.ceil(dmg * (1 - PlyrArmorReduc));
@@ -1126,7 +1236,7 @@ function dealdamage(dmg, result, type) {
       return dmg;
    }
    else {
-      return 0;
+      throw new Error(`invalid damage of type ${type}, result ${result}, dmg ${dmg}`)
    }
 }
 
@@ -1230,8 +1340,51 @@ function procauto() {
    }
 
 }
+/** handling for chimera shot proc with a sting active */
+function procChimera() {
+
+   if (auras.serpentsting?.timer > 0) {
+      let attack = 'ranged';
+      let combatCrit = 0;
+      let specialcrit = 0;
+      let result = 0;
+      let dmg = 0;
+
+      combatCrit = updateCritChance(attack);
+
+      result = rollSpell(attack, combatCrit, specialcrit, 'chimera_serpent'); // check attack table
+      spellResultSum(result, 'chimera_serpent');
+      if (result === RESULT.HIT) {
+         dmg = auras.serpentsting.damage * 0.4 * magdmgmod; // calc damage
+      }
+      else if (result === RESULT.CRIT) {
+         dmg = auras.serpentsting.damage * 0.4 * magdmgmod;
+         dmg *= RangeCritDamage;
+         //proccrit(cost, attack, spell); does it proc crit effects??
+      }
+      if (result === RESULT.PARTIAL) {
+         dmg = auras.serpentsting.damage * 0.4 * magdmgmod;
+         dmg *= 0.65;
+      }
+
+      let done = dealdamage(dmg, result, 'nature');
+      totaldmgdone += done;
+      spellresult['chimera_serpent'].dmg += done;
+      spellresult['chimera_serpent'].count++;
+
+      if(combatlogRun) {
+         combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player Chimera Shot - Serpent " + RESULTARRAY[result] + " for " + done + ". DMG => " + auras.serpentsting.damage.toFixed(2) + ".";
+         combatlogindex++;
+      }
+
+      // refresh serpent sting
+      auras.serpentsting.damage = serpentStingCalc(combatRAP); // overwrites regardless, need to only overwrite if more dmg
+      dotHandler('serpentsting', 'player', true, USED_SPELLS.serpentsting.type);
+   }
+
+}
 /** handling for procs by steady only */
-function procsteady(attack) {
+function procSteady(attack) {
 
    let trink1_has_aura = (Object.values(auras.trink1).length !== 0);
    let trink2_has_aura = (Object.values(auras.trink2).length !== 0);
@@ -1492,7 +1645,7 @@ function runeHandling() {
    let gain = 0;
    let over = 0;
    if (Mana - currentMana >= auras.rune.effect.maxMana) {
-
+      
       runemana = rng(auras.rune.effect.minMana,auras.rune.effect.maxMana);
       prev_mana = currentMana;
       currentMana = Math.min(currentMana + runemana, Mana);

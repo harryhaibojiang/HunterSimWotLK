@@ -5,8 +5,8 @@ var beastwithinreduc = 1;
 var sharedtrinketcd = 0;
 
 var debuffs = {
-    hm: {uptime_g:0, timer:0, duration:300, improved:false, rap:110, uptime:0},
-    judgewisdom: {uptime_g:0, timer:0, duration:20, uptime:0},
+    hm: {uptime_g:100, timer:0, duration:300, improved:false, rap:110, uptime:0},
+    judgewisdom: {uptime_g:100, timer:0, duration:20, uptime:0},
     judgecrusader: {uptime_g:0, timer:0, duration:20, crit:3, uptime:0},
     sunder: {uptime_g:0, timer:0, duration:30, stacktime:5, stacks:1, arp:0.04, uptime:0},
     faeriefire: {uptime_g:0, timer:0, duration:300, arp:0.05, uptime:0},
@@ -479,7 +479,7 @@ function onUseSpellCheck(){
         //trinketOnUseTrigger('trink2')
     }
 
-    if (!!auras.readiness && (auras.readiness.cd === 0) && auras.rapid.cd > 0) {
+    if (!!auras.readiness && (auras.readiness.cd === 0) && auras.rapid?.cd > 0) {
         if (USED_SPELLS.chimerashot?.cd > 3 || USED_SPELLS.aimedshot?.cd > 3 || USED_SPELLS.multishot?.cd > 3) {
             queueReadiness = true;
         }
@@ -505,9 +505,9 @@ function trinketOnUseTrigger(slot) {
     }
 }
 
-function dotHandler(spellname, source, apply, type, crit_dmg) {
+function dotHandler(dotname, source, apply, type, crit_dmg) {
 
-    //console.log("dot handler "+ spellname + " - "+ apply)
+    //console.log("dot handler "+ dotname + " - "+ apply)
     let result = 0;
     let dmg = 0;
     let done = 0;
@@ -515,48 +515,65 @@ function dotHandler(spellname, source, apply, type, crit_dmg) {
     let timeapplied = (source === 'player') ? playertimeend : nextpetspell;
     // handle starting the spell damage over time, with apply for using to overwrite
     if (!!apply) {
-        //console.log(auras[spellname])
-        auras[spellname].timer = auras[spellname].effect.duration; // 10
-        auras[spellname].apply_time = timeapplied; // 5
-        auras[spellname].next_tick = auras[spellname].effect.tick_rate + auras[spellname].apply_time; // 7
-        auras[spellname].ticks = auras[spellname].effect.duration / auras[spellname].effect.tick_rate;
-        auras[spellname].damage = (crit_dmg !== undefined) ? crit_dmg * 0.3 : auras[spellname].damage;
-        if (spellname === 'pierce_shot') {
-            auras.pierce_shot.damage *= (type !== 'nature') ? (1 - PlyrArmorReduc) : 1;
+        //console.log(auras[dotname])
+        if (dotname === 'pierce_shot') {
+
+            let maxticks = auras[dotname].effect.duration / auras[dotname].effect.tick_rate;
+            let dmg_per_tick = auras[dotname].damage / maxticks;
+            let ticks_counted = maxticks - auras[dotname].ticks;
+            let remainingdmg = auras[dotname].damage - dmg_per_tick * ticks_counted;
+
+            auras[dotname].damage = crit_dmg * talents.pierce_shot + remainingdmg;
+            auras[dotname].damage *= (type !== 'nature') ? (1 - PlyrArmorReduc) : 1;
         }
+
+        auras[dotname].timer = auras[dotname].effect.duration;
+        auras[dotname].apply_time = timeapplied;
+        auras[dotname].next_tick = auras[dotname].effect.tick_rate + auras[dotname].apply_time;
+        auras[dotname].ticks = auras[dotname].effect.duration / auras[dotname].effect.tick_rate;
+        
     }
-    // timer = 6, ticks 4, dot time = 9
     // if tick ready, roll damage
-    if (next_dot_time === auras[spellname].next_tick && auras[spellname].ticks !== 0) { // 9
-        //console.log(auras[spellname].ticks)
+    if (next_dot_time === auras[dotname].next_tick && auras[dotname].ticks !== 0) {
+        //console.log(auras[dotname].ticks)
         if (dottype === 'bleed' || dottype === 'physical') {
-            updateDmgMod();
+            updateDmgMod(dotname);
             result = 0;
-            let ticks = auras[spellname].effect.duration / auras[spellname].effect.tick_rate;
-            dmg = auras[spellname].damage / ticks * bleeddmgmod;
+            let ticks = auras[dotname].effect.duration / auras[dotname].effect.tick_rate;
+            dmg = auras[dotname].damage / ticks * bleeddmgmod;
             //console.log(dottype)
         }
         else if (dottype !== 'physical') {
-            updateDmgMod();
-            let hit_type = source === 'player' ? 'physical' : 'magic'; // used for determining use range hit or spell hit
-            let hit = (source === 'player') ? RangeHitChance : pet.spellhit;
-            result = rollDamageOverTime(hit, hit_type);
-            let ticks = auras[spellname].effect.duration / auras[spellname].effect.tick_rate;
-            dmg = auras[spellname].damage / ticks * bleeddmgmod;
+            updateDmgMod(dotname);
+            let crittable = false; // todo future crits trap and serpent crit conditions
+            let ticks = auras[dotname].effect.duration / auras[dotname].effect.tick_rate;
+            result = rollDamageOverTime(crittable, dotname);
+            dmg = auras[dotname].damage / ticks * magdmgmod;
+            if (result === RESULT.PARTIAL) {
+                dmg *= 0.65; // average reduction of 35% on partial resists
+            }
+            else if (result === RESULT.CRIT) {
+                dmg *= RangeCritDamage;
+            }
+            //console.log(dmg + " " +result)
         } 
         done = dealdamage(dmg, result, dottype);
         totaldmgdone += done;
+        
+        spellresult[dotname].dmg += done;
+        spellresult[dotname].count++;
+
         if(combatlogRun) {
-            combatlogarray[combatlogindex] = next_dot_time.toFixed(3) + " - Target takes " + done + " damage from " + auras[spellname].effect_name;
+            combatlogarray[combatlogindex] = next_dot_time.toFixed(3) + " - Target takes " + done + " damage from " + auras[dotname].effect_name;
             combatlogindex++;
         }
-        auras[spellname].ticks -= 1;
-        auras[spellname].next_tick += (auras[spellname].timer > 0) ? auras[spellname].effect.tick_rate : 0; // 11
+        auras[dotname].ticks -= 1;
+        auras[dotname].next_tick += (auras[dotname].timer > 0) ? auras[dotname].effect.tick_rate : 0;
 
     }
     // set next tick to 0 for sim check
-    if (auras[spellname].ticks === 0){
-        auras[spellname].next_tick = 0;
+    if (auras[dotname].ticks === 0){
+        auras[dotname].next_tick = 0;
     }
 }
 

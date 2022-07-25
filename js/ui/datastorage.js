@@ -88,7 +88,7 @@ function fetchData(){
     // pet consumes
     petconsumes = (localStorage.getItem('pet_consumes') != null) ? JSON.parse(localStorage.getItem('pet_consumes')):petconsumes;
     // debuffs
-    debuffs = (localStorage.getItem('debuffs') != null) ? JSON.parse(localStorage.getItem('debuffs')):debuffs;
+    //debuffs = (localStorage.getItem('debuffs') != null) ? JSON.parse(localStorage.getItem('debuffs')):debuffs;
     // statweights
     statweights = (localStorage.getItem('statweights') != null) ? JSON.parse(localStorage.getItem('statweights')):statweights;
     displayStatWeights();

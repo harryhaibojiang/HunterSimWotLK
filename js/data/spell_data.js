@@ -242,7 +242,7 @@ const SCATTER_SHOT = {
         base_cd: 30,
         gcd: true,
         spell_name: 'Scatter Shot',
-        type: ''
+        type: 'physical'
     },
 }
 const STEADY_SHOT = {
@@ -334,8 +334,8 @@ function generateSpellData(){
         autoshot: { cast:0, cd:0 },
 
     }
-    console.log(level);
-    for (spell in SPELL_DATA_MAPPER) {
+    
+    for (let spell in SPELL_DATA_MAPPER) {
         let spellname = SPELL_DATA_MAPPER[spell];
         SPELLS[spell] = spellname.base;
         if(!!spellname['2']) {
@@ -355,6 +355,7 @@ settings = {
     steadyshot: true,
     arcaneshot: true,
     serpentsting: true,
+    silencingshot: true,
 
 }
 function buildSpellsObj() {
@@ -367,6 +368,7 @@ function buildSpellsObj() {
             USED_SPELLS[spell] = SPELLS[spell];
         }
     }
+    spell = '';
 }
 
 SPELL_DATA_MAPPER = {
@@ -383,6 +385,7 @@ SPELL_DATA_MAPPER = {
     raptorstrike: RAPTOR_STRIKE,
     serpentsting: SERPENT_STING,
     silencingshot: SILENCING_SHOT,
+    scattershot: SCATTER_SHOT,
     steadyshot: STEADY_SHOT,
     volley: VOLLEY,
     frosttrap: FROST_TRAP,

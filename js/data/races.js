@@ -1,5 +1,5 @@
 const races = [
-   {
+   {  // level 80 base stats
       80: {
          name: 'Night Elf',
          str: 71,
@@ -9,7 +9,7 @@ const races = [
          spi: 97,
          mAP: 140,
          rAP: 150,
-      },
+      },// level 70 base stats
       70:{
          name: 'Night Elf',
          str: 61,

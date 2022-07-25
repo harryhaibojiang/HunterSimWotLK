@@ -465,6 +465,13 @@ const PET_PROCS = {
             dmgbonus: 3
         },
         effect_name: 'Monstrous Bite'
+    },
+    savagery: {
+        effect: {
+            duration: 30,
+            dmgbonus: 10
+        },
+        effect_name: 'Savagery'
     }
 }
 // todo DBW, rest should work
@@ -1444,7 +1451,7 @@ function updateUsableCDs() {
     usable_CDs.recovery.enable = (pet_talents.roar_recovery > 0) ? true : false;
     usable_CDs.callofwild.enable = (pet_talents.call_of_wild > 0) ? true : false;
     usable_CDs.rabid.enable = (pet_talents.rabid > 0) ? true : false;
-
+    usable_CDs.rune.enable = true;
     usable_CDs.potion.potion_type = 'Crit'
     
 }
@@ -1610,7 +1617,7 @@ function buildAurasObj(){
         let checkaura = false;
         if (((aura_ === 'cullingherd') && (pet_talents.cull_herd > 1)) ||
             ((aura_ === 'frenzy') && (talents.frenzy > 0)) ||
-            ((aura_ === 'savagerend') && (selectedPet === 2)) ||
+            ((aura_ === 'savagery') && (selectedPet === 2)) ||
             ((aura_ === 'monstrousbite') && (selectedPet === 24))) { 
             checkaura = true;
         }
@@ -1653,6 +1660,7 @@ function buildAurasObj(){
             auras[aura_].next_tick = 0;
             auras[aura_].ticks = 0;
             auras[aura_].damage = 0;
+            auras[aura_].mod_snapshot = 1;
         }
     }
     

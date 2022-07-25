@@ -33,11 +33,8 @@ var pet = {
 };
 var petconsumestats = {};
 var petdmgdone = 0;
-var petautodmg = 0;
 var petduration = 0;
 var petsteptime = 0;
-var pet_special = 0;
-var pet_focus_dump = 0;
 var pet_special_mod = 1;
 var beast_tame_weight = false;
 
@@ -83,12 +80,6 @@ var pet_talents = {
 };
 
 var selectedPet = 0;
-
-var petdmg = {
-    attackdmg:0,
-    specialdmg:0,
-    focusdumpdmg: 0
-}
 
 function petStatsCalc(){
     if (talents.beast_mast === 0) {
@@ -150,6 +141,7 @@ function petUpdateDmgMod(){
     if((debuffs.curseofele.timer > 0) && !debuffs.curseofele.inactive) { magdmgmod *= 1.13 } // curse of ele
     if(auras.killcommand?.timer > 0) pet_special_mod = (1 + auras.killcommand.stacks * auras.killcommand.effect.dmgmod / 100);
     if(debuffs.hm.timer > 0 && talents.mark_death > 0) pet_special_mod *= (1 + talents.mark_death);
+    if(auras.savagery?.timer > 0) pet.combatdmgmod *= (1 + auras.savagery.effect.dmgbonus / 100); // savage rend crit
 
     return;
 }
@@ -282,8 +274,8 @@ function petAttack(){
     petsteptime = nextpetattack;
     nextpetattack += pet.combatspeed;
 
-    petautocount++;
-    petdmg.attackdmg += done;
+    spellresult.petattack.dmg += done;
+    spellresult.petattack.count++;
 
     if(combatlogRun) {
         combatlogarray[combatlogindex] = petsteptime.toFixed(3) + " - Pet Auto " + RESULTARRAY[result] + " for " + done;
@@ -293,7 +285,9 @@ function petAttack(){
 }
 
 function petSpell(petspell){
-
+    if (petspell !== 'pet_special' && petspell !== 'pet_focus_dump') {
+        throw new Error(`Invalid pet spell ${petspell}`);
+    }
     petUpdateStats();
     petUpdateDmgMod();
     let dmg = 0;
@@ -379,17 +373,11 @@ function petSpell(petspell){
     petsteptime = nextpetspell; // since pet steps don't change time (all instants) set time to current time
     nextpetspell = (PET_SPELLS[petspell].gcd) ? nextpetspell + 1.5 : nextpetspell; // set next available spell time by 1.5
     
-    
     let done = petdealdamage(dmg,result,spelltype); // need special case for magic spells pet or player
 
     petdmgdone += done;
-    if (petspell === 'pet_special'){
-        petdmg.specialdmg += done;
-        petspecialcount++;
-    } else if (petspell === 'pet_focus_dump') {
-        petdmg.focusdumpdmg += done;
-        petfocuscount++;
-    }
+    spellresult[petspell].dmg += done;
+    spellresult[petspell].count++;
     
     if(auras.killcommand?.timer > 0 && (result === RESULT.HIT || result === RESULT.CRIT || result === RESULT.PARTIAL)) {
         auras.killcommand.stacks = Math.max(0, auras.killcommand.stacks - 1);
@@ -434,6 +422,13 @@ function petdealdamage(dmg, result, spelltype) {
 function petCrit(petspell){
 
     let check_spell = (petspell !== undefined) ? petspell : '';
+    if (PET_SPELLS.pet_special.spell_name === 'Savage Rend' && petspell === 'pet_special') {
+        auras.savagery.timer = auras.savagery.effect.duration;
+        if (combatlogRun){
+            combatlogarray[combatlogindex] = nextpetspell.toFixed(3) + " - Pet gains Savagery";
+            combatlogindex++;
+        }
+    }
     if (check_spell === 'pet_focus_dump') {
         if(!!auras.cullingherd) {
             auras.cullingherd.timer = auras.cullingherd.effect.duration;
