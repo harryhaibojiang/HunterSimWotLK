@@ -343,7 +343,7 @@ const PET_FURIOUS_HOWL = {
     base: {
         cost: 20,
         base_cd: 40,
-        gcd: true,
+        gcd: false,
         spell_name: 'Furious Howl',
         type: 'AP'
     },
@@ -440,7 +440,7 @@ const PET_NETHER_SHOCK = {
     base: {
         cost: 0,
         base_cd: 40,
-        gcd: true,
+        gcd: false,
         spell_name: 'Nether Shock',
         ap_mod: 4.9,
         type: 'shadow'

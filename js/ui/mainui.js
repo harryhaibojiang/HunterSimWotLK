@@ -13,11 +13,10 @@ var dpscompare = document.getElementById("dpscompare");
 document.getElementById("playeruptime").disabled = true;
 document.getElementById("petuptime").disabled = true;
 document.getElementById("weavepercent").disabled = true;
-document.getElementById("shoutbonus2").disabled = true;
 
 // show the stats on the HTML
 function displayStats(){
-    
+    let BasePlayer = BASE_PLAYER[level];
     document.getElementById("str").innerHTML = Str;
     document.getElementById("agi").innerHTML = Agi;
     document.getElementById("stam").innerHTML = Stam;
@@ -26,8 +25,8 @@ function displayStats(){
     document.getElementById("rap").innerHTML = Math.floor(BaseRAP);
     document.getElementById("rangehit").innerHTML = RangeHitRating + " ("+RangeHitChance.toFixed(2)+"%)";
     document.getElementById("rangecrit").innerHTML = RangeCritRating + " ("+RangeCritChance.toFixed(2)+"%)";
-    document.getElementById("haste").innerHTML = HasteRating + " (" + (HasteRating / HasteRatingRatio).toFixed(2)+"%)";
-    document.getElementById("arp").innerHTML = ArPRating + " (" + (ArPRating / ArPRatingRatio).toFixed(2)+"%)";
+    document.getElementById("haste").innerHTML = HasteRating + " (" + (HasteRating / BasePlayer.HasteRatingRatio).toFixed(2)+"%)";
+    document.getElementById("arp").innerHTML = ArPRating + " (" + (ArPRating / BasePlayer.ArPRatingRatio).toFixed(2)+"%)";
     document.getElementById("map").innerHTML = Math.floor(BaseMAP);
     document.getElementById("meleehit").innerHTML = MeleeHitRating + " ("+MeleeHitChance.toFixed(2)+"%)";
     document.getElementById("meleecrit").innerHTML = MeleeCritRating + " ("+MeleeCritChance.toFixed(2)+"%)";
@@ -449,8 +448,13 @@ function selectGearlist() {
 }
 
 gearSlotsDisplay();
-
+initializeFoodDropdown();
+initializePetFoodDropdown();
+initializeFlaskDropdown()
+initializeBattleDropdown();
+initializeGuardDropdown();
 fetchData();
 initializeTargetDropdown('start');
 initializeImportSets();
 initializeSavedSets();
+initializePetDropdown();

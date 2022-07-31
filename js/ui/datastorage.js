@@ -20,11 +20,8 @@ function storeData(){
     localStorage.setItem('flask',document.getElementById("flask").value);
     localStorage.setItem('battle',document.getElementById("battle").value);
     localStorage.setItem('guardian',document.getElementById("guardian").value);
-    localStorage.setItem('scrollagi',document.getElementById("scrollagi").value);
-    localStorage.setItem('scrollstr',document.getElementById("scrollstr").value);
+    console.log(document.getElementById("food").value)
     localStorage.setItem('food',document.getElementById("food").value);
-    localStorage.setItem('petscrollagi',document.getElementById("petscrollagi").value);
-    localStorage.setItem('petscrollstr',document.getElementById("petscrollstr").value);
     localStorage.setItem('petfood',document.getElementById("petfood").value);
     // saves each value below as a string - fight settings
     localStorage.setItem('iterations',iterations);
@@ -36,6 +33,7 @@ function storeData(){
     localStorage.setItem('weavetime',JSON.stringify(weavetime));
     localStorage.setItem('petselect',selectedPet);
     localStorage.setItem('raceselect',selectedRace);
+    localStorage.setItem('levelSelect',level);
     localStorage.setItem('target',JSON.stringify(target));
     // talents
     localStorage.setItem('talentindex',talentindex);
@@ -103,6 +101,7 @@ function fetchData(){
     weavetime = (localStorage.getItem('weavetime') != null) ? JSON.parse(localStorage.getItem('weavetime')):weavetime;
     selectedPet = (localStorage.getItem('petselect') != null) ? parseInt(localStorage.getItem('petselect')):selectedPet;
     selectedRace = (localStorage.getItem('raceselect') != null) ? parseInt(localStorage.getItem('raceselect')):selectedRace;
+    level = (localStorage.getItem('levelSelect') != null) ? parseInt(localStorage.getItem('levelSelect')):level;
 
     target = (localStorage.getItem('target') != null) ? JSON.parse(localStorage.getItem('target')):target;
     // talents
@@ -171,8 +170,9 @@ function fetchData(){
     document.getElementById("playeruptime").value = playeruptime;
     document.getElementById("petuptime").value = petuptime;
     document.getElementById("weavetime").value = weavetime.toFixed(1);
-    document.getElementById("pet").value = selectedPet;
+    document.getElementById("petSelect").value = selectedPet;
     document.getElementById("race").value = selectedRace;
+    document.getElementById("levelSelect").value = level;
     document.getElementById("racedisplay").innerHTML = races[selectedRace][level].name;
     let targets = targetData.getNameKeyTargetPairs();
     let findtarget = targets.find(key => key.name == target.name);
@@ -184,34 +184,33 @@ function fetchData(){
     document.getElementById("flask").value = (localStorage.getItem("flask") != null) ?  localStorage.getItem('flask') : document.getElementById("flask").value;
     document.getElementById("battle").value = (localStorage.getItem("battle") != null) ?  localStorage.getItem('battle') : document.getElementById("battle").value;
     document.getElementById("guardian").value = (localStorage.getItem("guardian") != null) ?  localStorage.getItem('guardian') : document.getElementById("guardian").value;
-    document.getElementById("scrollagi").value = (localStorage.getItem("scrollagi") != null) ?  localStorage.getItem('scrollagi') : document.getElementById("scrollagi").value;
-    document.getElementById("scrollstr").value = (localStorage.getItem("scrollstr") != null) ?  localStorage.getItem('scrollstr') : document.getElementById("scrollstr").value;
-    document.getElementById("food").value = (localStorage.getItem("food") != null) ?  localStorage.getItem('food') : document.getElementById("food").value;
-    document.getElementById("petscrollagi").value = (localStorage.getItem("petscrollagi") != null) ?  localStorage.getItem('petscrollagi') : document.getElementById("petscrollagi").value;
-    document.getElementById("petscrollstr").value = (localStorage.getItem("petscrollstr") != null) ?  localStorage.getItem('petscrollstr') : document.getElementById("petscrollstr").value;
+    console.log(document.getElementById("food").value)
+    console.log(localStorage.getItem("food"))
+    //document.getElementById("food").value = 1;
+    console.log(document.getElementById("food").value)
+    //console.log(localStorage.getItem("food"))
     document.getElementById("petfood").value = (localStorage.getItem("petfood") != null) ?  localStorage.getItem('petfood') : document.getElementById("petfood").value;
-
+    
     // buffs visual initialization
-    document.getElementById("kings").checked = (buffslist[0] == 25898) ? true : false;
-    document.getElementById("might").checked = (buffslist[1].id == 27141) ? true : false;
-    document.getElementById("mightmod").selected = (buffslist[1].talented) ? true : false;
-    document.getElementById("wisdom").checked = (buffslist[2].id == 27143) ? true : false;
-    document.getElementById("wisdommod").selected = (buffslist[2].talented) ? true : false;
-    document.getElementById("lotp").checked = (buffslist[3] == 17007) ? true : false;
-    document.getElementById("soe").checked = (buffslist[5].id == 25528) ? true : false;
-    document.getElementById("imptotem").selected = (buffslist[4].talented) ? true : false;
-    document.getElementById("manaspring").checked = (buffslist[6] == 25570) ? true : false;
-    document.getElementById("ai").checked = (buffslist[7] == 27127) ? true : false;
+    document.getElementById("apbuff").checked = (buffslist[0].id == 2048) ? true : false;
+    document.getElementById("apbuffmod").selected = (buffslist[0].talented) ? true : false;
+    document.getElementById("heroicpres").checked = (buffslist[1] == 6562) ? true : false;
+    document.getElementById("critbuff").checked = (buffslist[2] == 17007) ? true : false;
+    document.getElementById("agistrbuff").checked = (buffslist[3].id == 25528) ? true : false;
+    document.getElementById("imptotem").selected = (buffslist[3].talented) ? true : false;
+    document.getElementById("appercent").checked = (buffslist[4] == 27066) ? true : false;
+    document.getElementById("minorhaste").checked = (buffslist[5] == 53648) ? true : false;
+    document.getElementById("minordmg").checked = (buffslist[6] == 75447) ? true : false;
+    document.getElementById("meleehaste").checked = (buffslist[7] == 25587) ? true : false;
     document.getElementById("gotw").checked = (buffslist[8].id == 26991) ? true : false;
     document.getElementById("gotwmod").selected = (buffslist[8].talented) ? true : false;
-    document.getElementById("fort").checked = (buffslist[9].id == 25392) ? true : false;
-    document.getElementById("fortmod").selected = (buffslist[9].talented) ? true : false;
-    document.getElementById("windfury").checked = (buffslist[11].id == 25587) ? true : false;
-    document.getElementById("windfurymod").selected = (buffslist[11].talented) ? true : false;
-    document.getElementById("heroicpres").checked = (buffslist[12] == 6562) ? true : false;
-    document.getElementById("shout").checked = (buffslist[13].id == 2048) ? true : false;
-    document.getElementById("shoutmod").selected = (buffslist[13].talented) ? true : false;
-    document.getElementById("tsa").checked = (buffslist[14] == 27066) ? true : false;
+    document.getElementById("kings").checked = (buffslist[9] == 25898) ? true : false;
+    document.getElementById("mp5buff").checked = (buffslist[10].id == 27143) ? true : false;
+    document.getElementById("mp5buffmod").selected = (buffslist[10].talented) ? true : false;
+    document.getElementById("ai").checked = (buffslist[11] == 27127) ? true : false;
+    document.getElementById("felintel").checked = (buffslist[12] == 57567) ? true : false;
+    document.getElementById("fort").checked = (buffslist[13].id == 25392) ? true : false;
+    document.getElementById("fortmod").selected = (buffslist[13].talented) ? true : false;
 
     document.getElementById("talentselect").value = talentindex;
     document.getElementById("customtalent").value = whtalentlink;

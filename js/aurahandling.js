@@ -126,7 +126,18 @@ function stepauras(steptime) {
     if(sharedtrinketcd > 0) { sharedtrinketcd = Math.max(sharedtrinketcd - steptime,0); }
 
     // reset stacks
-    //if(auras.naarusliver.timer === 0){ auras.naarusliver.stacks = 0;}
+    if (auras.trink1.effect_name === TRINK_PROCS.naarusliver.effect_name && auras.trink1.timer === 0){
+        auras.trink1.stacks = 0;
+    }
+    if (auras.trink2.effect_name === TRINK_PROCS.naarusliver.effect_name && auras.trink2.timer === 0){
+        auras.trink2.stacks = 0;
+    }
+    if (auras.trink1.effect_name === TRINKET_CDS.swarmguard.effect_name && auras.trink1.timer === 0){
+        auras.trink1.stacks = 0;
+    }
+    if (auras.trink2.effect_name === TRINKET_CDS.swarmguard.effect_name && auras.trink2.timer === 0){
+        auras.trink2.stacks = 0;
+    }
 
     return;
 }
@@ -371,6 +382,7 @@ function IntervalAuraSetTime(name){
 
 /**Check for on use spells ready and usable, if ready and usable, set the duration and cooldown timers. */
 function onUseSpellCheck(){
+    let BasePlayer = BASE_PLAYER[level];
     
     if (!!auras.killcommand && (auras.killcommand.cd === 0)) {
         auras.killcommand.stacks = 3;
@@ -410,7 +422,7 @@ function onUseSpellCheck(){
     }
 
     if (!!auras.rapid && (auras.rapid.cd === 0) && auras.rapid.timer == 0) {
-        let rapidcost = Math.floor((MAIN_CDS.rapid.cost / 100) * BaseMana * beastwithinreduc);
+        let rapidcost = Math.floor((MAIN_CDS.rapid.cost / 100) * BasePlayer.BaseMana * beastwithinreduc);
         if ((currentMana >= rapidcost)) {
             auras.rapid.timer = auras.rapid.effect.duration; // set timer
             auras.rapid.cd = auras.rapid.effect.base_cd - talents.rapid_killing; // set cd
@@ -424,7 +436,7 @@ function onUseSpellCheck(){
         beastwithinreduc = 1;
     }
     if (!!auras.beastwithin && (auras.beastwithin.cd === 0)) {
-        let beastcost = Math.floor((MAIN_CDS.beastwithin.cost / 100) * BaseMana);
+        let beastcost = Math.floor((MAIN_CDS.beastwithin.cost / 100) * BasePlayer.BaseMana);
         if ((currentMana >= beastcost) && auras.beastwithin.timer == 0) {
             auras.beastwithin.timer = auras.beastwithin.effect.duration; // set timer
             auras.beastwithin.cd = auras.beastwithin.effect.base_cd * (1 - talents.longevity); // set cd
@@ -455,7 +467,7 @@ function onUseSpellCheck(){
     else if (!!auras.arcanetorrent && (auras.arcanetorrent.cd === 0)) {
         
         auras.arcanetorrent.cd = auras.arcanetorrent.effect.base_cd; // set cd
-        currentMana = Math.min(Mana, CurrentMana + Math.floor((auras.arcanetorrent.effect.mana / 100) * BaseMana))
+        currentMana = Math.min(Mana, CurrentMana + Math.floor((auras.arcanetorrent.effect.mana / 100) * BasePlayer.BaseMana))
         if(combatlogRun) {
             combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player gains " + auras.arcanetorrent.effect_name;
             combatlogindex++;
@@ -473,10 +485,10 @@ function onUseSpellCheck(){
 // trinkets on use, if's for non-shared CDs, if-else if's for shared CDs
 
     if(!!auras.trink1) {
-        //trinketOnUseTrigger('trink1')
+        trinketOnUseTrigger('trink1')
     }
     if(!!auras.trink2) {
-        //trinketOnUseTrigger('trink2')
+        trinketOnUseTrigger('trink2')
     }
 
     if (!!auras.readiness && (auras.readiness.cd === 0) && auras.rapid?.cd > 0) {
@@ -526,12 +538,21 @@ function dotHandler(dotname, source, apply, type, crit_dmg) {
             auras[dotname].damage = crit_dmg * talents.pierce_shot + remainingdmg;
             auras[dotname].damage *= (type !== 'nature') ? (1 - PlyrArmorReduc) : 1;
         }
-
-        auras[dotname].timer = auras[dotname].effect.duration;
-        auras[dotname].apply_time = timeapplied;
-        auras[dotname].next_tick = auras[dotname].effect.tick_rate + auras[dotname].apply_time;
-        auras[dotname].ticks = auras[dotname].effect.duration / auras[dotname].effect.tick_rate;
+        // check serpent sting due to duration difference and possible mid-cycle refresh
+        if (dotname === 'serpentsting') {
         
+            auras[dotname].apply_time = (auras.serpentsting.timer > 0) ? auras.serpentsting.next_tick - auras.serpentsting.effect.tick_rate : timeapplied;
+            auras[dotname].timer = auras[dotname].effect.duration;
+            auras[dotname].next_tick = auras[dotname].effect.tick_rate + auras[dotname].apply_time;
+            auras[dotname].ticks = (auras[dotname].effect.duration + (glyphs.serpentsting || 0)) / auras[dotname].effect.tick_rate;
+        }
+        else {
+            auras[dotname].apply_time = timeapplied;
+            auras[dotname].timer = auras[dotname].effect.duration;
+            auras[dotname].next_tick = auras[dotname].effect.tick_rate + auras[dotname].apply_time;
+            auras[dotname].ticks = auras[dotname].effect.duration / auras[dotname].effect.tick_rate;
+        }
+        return;
     }
     // if tick ready, roll damage
     if (next_dot_time === auras[dotname].next_tick && auras[dotname].ticks !== 0) {

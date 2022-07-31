@@ -279,10 +279,8 @@ function runSim() {
         nextEvent(playertimestart);
         
         //console.log("time end => "+(Math.round(steptimeend * 1000) / 1000));
-        if (steptimeend > 5 * Math.ceil(prevtimeend / 5)) {
-            petUpdateFocus();
-            updateMana();
-        }
+        petUpdateFocus();
+        updateMana();
         if((combatlogRun) && (playertimeend != prevtimeend)) {
             manalogarray[manalogindex] = [playertimeend, currentMana];
             manalogindex++;
@@ -358,10 +356,8 @@ function startStepOnly(){
     nextEvent(playertimestart);
     
     //console.log("time end => "+(Math.round(steptimeend * 1000) / 1000));
-    if (steptimeend > 5 * Math.ceil(prevtimeend / 5)) {
-        petUpdateFocus();
-        updateMana();
-    }
+    petUpdateFocus();
+    updateMana();
     //console.log("step "+ steptime);
     prevtimeend = (steptimeend);
     totalduration = Math.min(maxfighttimer, steptimeend);
@@ -601,19 +597,19 @@ function spellNextCast(){
 
 function petSpellChoice(){
 
-    let t_ready_special = PET_SPELLS.pet_special.cd;
+    let t_ready_special = (!!PET_SPELLS.pet_special) ? PET_SPELLS.pet_special.cd : fightduration * 2;
     let t_ready_focus_dump = PET_SPELLS.pet_focus_dump.cd;
     
     // check for if petspecial matters for dps or not, ignored for certain pets
     let invalidpetspecial = (selectedPet == 9 || selectedPet == 10 || selectedPet == 11 
                             || selectedPet == 16 || selectedPet == 22 || selectedPet == 25)
-    let special_use = (PET_SPELLS.pet_special.cost <= pet.focus) && !invalidpetspecial; // check if cost is usable or not
+    let special_use = (PET_SPELLS.pet_special?.cost <= pet.focus) && !invalidpetspecial; // check if cost is usable or not
     let focus_dump_use = (PET_SPELLS.pet_focus_dump.cost <= pet.focus);
 
-    if (t_ready_special <= t_ready_focus_dump && special_use) {
+    if (special_use && t_ready_special <= t_ready_focus_dump) {
         return 'pet_special'
     }
-    else if (t_ready_focus_dump < t_ready_special && focus_dump_use) {
+    else if (focus_dump_use && t_ready_focus_dump < t_ready_special) {
         return 'pet_focus_dump'
     } else return ''
 }
@@ -661,7 +657,8 @@ function dotNextTick(){
 
 /** attempt at creating spell choices based on a ratio of speed and damage */
 function playerSpellChoice(){
-
+    let BasePlayer = BASE_PLAYER[level];
+    
     exp_update()
 	let t_ready_steady = USED_SPELLS.steadyshot.cd;
 	let t_ready_multi = USED_SPELLS.multishot.cd;
@@ -669,13 +666,13 @@ function playerSpellChoice(){
 	let t_ready_arcane = USED_SPELLS.arcaneshot.cd;
     let t_ready_chimera = USED_SPELLS.chimerashot.cd;
 	
-    let steadyuse = settings.steadyshot && (USED_SPELLS.steadyshot.cost / 100 * BaseMana <= currentMana); // check if cost is usable or not
-    let aimeduse = settings.aimedshot && (USED_SPELLS.aimedshot.cost / 100 * BaseMana <= currentMana);
-    let multiuse = settings.multishot && !aimeduse &&(USED_SPELLS.multishot.cost / 100 * BaseMana <= currentMana);
-    let arcaneuse = settings.arcaneshot && (USED_SPELLS.arcaneshot.cost / 100 * BaseMana <= currentMana);
-    let chimerause = settings.chimerashot && (USED_SPELLS.chimerashot.cost / 100 * BaseMana <= currentMana);
-    let serpentuse = settings.serpentsting && (auras.serpentsting?.timer === 0) && (USED_SPELLS.serpentsting.cost / 100 * BaseMana <= currentMana);
-    let silenceuse = settings.silencingshot && (USED_SPELLS.silencingshot.cd === 0) && (USED_SPELLS.silencingshot.cost / 100 * BaseMana <= currentMana);
+    let steadyuse = settings.steadyshot && (USED_SPELLS.steadyshot.cost / 100 * BasePlayer.BaseMana <= currentMana); // check if cost is usable or not
+    let aimeduse = settings.aimedshot && (USED_SPELLS.aimedshot.cost / 100 * BasePlayer.BaseMana <= currentMana);
+    let multiuse = settings.multishot && !aimeduse &&(USED_SPELLS.multishot.cost / 100 * BasePlayer.BaseMana <= currentMana);
+    let arcaneuse = settings.arcaneshot && (USED_SPELLS.arcaneshot.cost / 100 * BasePlayer.BaseMana <= currentMana);
+    let chimerause = settings.chimerashot && (USED_SPELLS.chimerashot.cost / 100 * BasePlayer.BaseMana <= currentMana);
+    let serpentuse = settings.serpentsting && (auras.serpentsting?.timer === 0) && (USED_SPELLS.serpentsting.cost / 100 * BasePlayer.BaseMana <= currentMana);
+    let silenceuse = settings.silencingshot && (USED_SPELLS.silencingshot.cd === 0) && (USED_SPELLS.silencingshot.cost / 100 * BasePlayer.BaseMana <= currentMana);
     //console.log(currentMana)
 	let h = rangespeed / range_wep.speed;
 

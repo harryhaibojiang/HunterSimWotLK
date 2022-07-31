@@ -1,35 +1,42 @@
 const BUFFS = {
-  27141: {
-    name: 'Greater Blessing of Might',
-    icon: 'spell_holy_greaterblessingofkings',
-    talented_ratio: 1.25,
-    stats: {
-      MAP: 550,
-      RAP: 550,
-    }
-  },
   2048: {
     name: 'Battle Shout',
     icon: 'ability_warrior_battleshout',
     t2_3p_bonus: 30,
     talented_ratio: 1.25,
     stats: {
-      MAP: 550,
-      RAP: 550
+      70: {
+        MAP: 306,
+        RAP: 306,
+      },
+      80: {
+        MAP: 550,
+        RAP: 550,
+      }
     }
   },
   6562: {
     name: 'Heroic Presence',
     icon: 'inv_helmet_21',
     stats: {
-      HitChance: 1
+      70: {
+        HitChance: 1
+      },
+      80: {
+        HitChance: 1
+      }
     }
   },
   17007: {
     name: 'Leader of the Pack',
     icon: 'spell_nature_unyeildingstamina',
     stats: {
-      CritChance: 5
+      70: {
+        CritChance: 5
+      },
+      80: {
+        CritChance: 5
+      }
     }
   },
   25528: {
@@ -37,8 +44,14 @@ const BUFFS = {
     icon: 'spell_nature_earthbindtotem',
     talented_ratio: 1.15,
     stats: {
-      Str: 155,
-      Agi: 155
+      70: {
+        Str: 86,
+        Agi: 86
+      },
+      80: {
+        Str: 155,
+        Agi: 155
+      }
     }
   },
   27066: {
@@ -66,11 +79,20 @@ const BUFFS = {
     icon: 'spell_nature_giftofthewild',
     talented_ratio: 1.4,
     stats: {
-      Str: 37,
-      Agi: 37,
-      Stam: 37,
-      Int: 37,
-      Spi: 37
+      70: {
+        Str: 14,
+        Agi: 14,
+        Stam: 14,
+        Int: 14,
+        Spi: 14
+      },
+      80: {
+        Str: 37,
+        Agi: 37,
+        Stam: 37,
+        Int: 37,
+        Spi: 37
+      }
     }
   },
   25898: {
@@ -83,30 +105,38 @@ const BUFFS = {
     icon: 'spell_holy_greaterblessingofwisdom',
     talented_ratio: 1.2,
     stats: {
-      MP5: 91
-    }
-  },
-  25570: {
-    name: 'Mana Spring Totem',
-    icon: 'spell_nature_manaregentotem',
-    talented_ratio: 1.2,
-    stats: {
-      MP5: 91
+      70: {
+        MP5: 41
+      },
+      80: {
+        MP5: 91
+      }
     }
   },
   27127: {
     name: 'Arcane Brilliance',
     icon: 'spell_holy_arcaneintellect',
     stats: {
-      Int: 60
+      70: {
+        Int: 40
+      },
+      80: {
+        Int: 60
+      }
     }
   },
   57567: {
     name: 'Fel Intelligence',
     icon: 'spell_shadow_brainwash',
     stats: {
-      Int: 48,
-      Spi: 64
+      70: {
+        Int: 32,
+        Spi: 40
+      },
+      80: {
+        Int: 48,
+        Spi: 64
+      }
     }
   },
   25392: {
@@ -114,7 +144,12 @@ const BUFFS = {
     icon: 'spell_holy_prayeroffortitude',
     talented_ratio: 1.3,
     stats: {
-      Stam: 165
+      70: {
+        Stam: 79
+      },
+      80: {
+        Stam: 165
+      }
     }
   }
 };

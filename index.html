@@ -35,7 +35,7 @@
     <script class="u-script" type="text/javascript" src="js/player.js"></script>
     <script class="u-script" type="text/javascript" src="js/expected_dmg.js"></script>
 
-    <!--<script class="u-script" type="text/javascript">
+    <!-- <script class="u-script" type="text/javascript">
       // Global error reporting to popup.
       window.onerror = function(message, source, lineno, colno, error){
         alert(`Message: ${JSON.stringify(message)}\nSource: ${source}\nLineNo: ${lineno}\nColNo: ${colno}\nError: ${error}`);
@@ -46,7 +46,7 @@
       window.onrejectionhandled = function(e) {
         console.log(`Rejection Handled: ${JSON.stringify(e)}`);
       };
-    </script>-->
+    </script> -->
     
     <meta name="generator" content="Nicepage 3.28.7, nicepage.com">
     <!--<script>const whTooltips = {colorLinks: false, iconizeLinks: false, renameLinks: false};</script>-->
@@ -94,11 +94,9 @@
           </div>
           <div class="u-custom-menu u-nav-container">
             <ul class="u-custom-font u-nav u-text-font u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-custom-color-2 u-nav-link u-text-active-custom-color-3 u-text-hover-custom-color-5" href="index.html" style="padding: 10px 20px;">Main</a>
-</li><li class="u-nav-item"><a class="u-button-style u-custom-color-2 u-nav-link u-text-active-custom-color-3 u-text-hover-custom-color-5" href="" style="padding: 10px 20px;">Coming Soon!</a>
-</li><li class="u-nav-item"><a class="u-button-style u-custom-color-2 u-nav-link u-text-active-custom-color-3 u-text-hover-custom-color-5" href="" style="padding: 10px 20px;">Coming Soon!</a>
 </li></ul>
           </div>
-          <div class="u-custom-menu u-nav-container-collapse">
+          <!-- <div class="u-custom-menu u-nav-container-collapse">
             <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
               <div class="u-inner-container-layout u-sidenav-overflow">
                 <div class="u-menu-close"></div>
@@ -109,7 +107,7 @@
               </div>
             </div>
             <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
-          </div>
+          </div> -->
         </nav>
       </div></header>
     <section class="u-align-center u-clearfix u-custom-color-1 u-section-1" id="sec-0813">
@@ -616,55 +614,59 @@
     <span class="close">&times;</span>
     <h3 class="header-1">Settings</h3>
     <div class="settings">
-    <label class="settings-header-1">Party Buffs</label>
+    <label class="settings-header-1">Raid Buffs</label>
     <ul>
       <div class="relative-wrapper">
         <img class="settings-image-buffs" src="https://wow.zamimg.com/images/wow/icons/large/spell_magic_greaterblessingofkings.jpg" alt="">
         <li><label class="container container-1">Blessing of Kings<input type="checkbox" id="kings" onclick="kingsCheck()"><span class="checkmark"></span></label></li>
       </div>
       <div class="relative-wrapper">
-        <img class="settings-image-buffs" src="https://wow.zamimg.com/images/wow/icons/large/spell_holy_greaterblessingofkings.jpg" alt="">
-        <li><label class="container container-2">Blessing of Might<input type="checkbox" id="might" onclick="mightCheck()"><span class="checkmark"></span>
-        <select onchange="mightCheck()" class="select hover-grey select-1">
-          <option value="improved" id="mightmod">Improved</option>
+        <img class="settings-image-buffs" src="https://wow.zamimg.com/images/wow/icons/large/ability_warrior_battleshout.jpg" alt="">
+        <li><label class="container container-2">Attack Power<input type="checkbox" id="apbuff" onclick="apCheck()"><span class="checkmark"></span>
+        <select onchange="apCheck()" class="select hover-grey select-1">
+          <option value="improved" id="apbuffmod">Improved</option>
           <option selected value="base">Base</option>
+        </select>
+        <select onchange="apCheck()" class="select hover-grey select-wide">
+          <option value="improved" id="apbuffbonus">T2 3pc</option>
+          <option selected value="base">No Bonus</option>
         </select></label></li>
       </div>
       <div class="relative-wrapper">
         <img class="settings-image-buffs" src="https://wow.zamimg.com/images/wow/icons/large/spell_holy_greaterblessingofwisdom.jpg" alt="">
-        <li><label class="container container-2">Blessing of Wisdom<input type="checkbox" id="wisdom" onclick="wisdomCheck()"><span class="checkmark"></span>
-        <select onchange="wisdomCheck()" class="select hover-grey select-2">
-          <option value="improved" id="wisdommod">Improved</option>
+        <li><label class="container container-2">Mana Per 5<input type="checkbox" id="mp5buff" onclick="manaRegenCheck()"><span class="checkmark"></span>
+        <select onchange="manaRegenCheck()" class="select hover-grey select-2">
+          <option value="improved" id="mp5buffmod">Improved</option>
           <option selected value="base">Base</option>
         </select></label></li>
       </div>
       <div class="relative-wrapper">
         <img class="settings-image-buffs" src="https://wow.zamimg.com/images/wow/icons/large/spell_nature_unyeildingstamina.jpg" alt="">
-        <li><label class="container container-2">Leader of the Pack<input type="checkbox" id="lotp" onclick="lotpCheck()"><span class="checkmark"></span>
-        <select onchange="lotpCheck()" class="select hover-grey select-10">
-          <option value="idol" id="lotpidol">Crit Idol</option>
-          <option selected value="none">None</option>
-        </select></label></li>
+        <li><label class="container container-1">Crit Chance<input type="checkbox" id="critbuff" onclick="critCheck()"><span class="checkmark"></span>
       </div>
       <div class="relative-wrapper">
-        <img class="settings-image-buffs" src="https://wow.zamimg.com/images/wow/icons/large/spell_nature_invisibilitytotem.jpg" alt="">
-        <li><label class="container container-2">Grace of Air Totem<input type="checkbox" id="goa" onclick="totemCheck()"><span class="checkmark"></span></label></li>
+        <img class="settings-image-buffs" src="https://wow.zamimg.com/images/wow/icons/large/ability_hunter_ferociousinspiration.jpg" alt="">
+        <li><label class="container container-1">Minor Damage<input type="checkbox" id="minordmg" onclick="minorDmgCheck()"><span class="checkmark"></span></label></li>
+      </div>
+      <div class="relative-wrapper">
+        <img class="settings-image-buffs" src="https://wow.zamimg.com/images/wow/icons/large/ability_paladin_swiftretribution.jpg" alt="">
+        <li><label class="container container-1">Minor Haste<input type="checkbox" id="minorhaste" onclick="minorHasteCheck()"><span class="checkmark"></span></label></li>
       </div>
       <div class="relative-wrapper">
         <img class="settings-image-buffs" src="https://wow.zamimg.com/images/wow/icons/large/spell_nature_earthbindtotem.jpg" alt="">
-        <li><label class="container container-2">Strength of Earth Totem<input type="checkbox" id="soe" onclick="totemCheck()"><span class="checkmark"></span></label></li>
-        <select onchange="totemCheck()" class="select hover-grey select-3">
+        <li><label class="container container-2">Agility and Strength<input type="checkbox" id="agistrbuff" onclick="agiStrCheck()"><span class="checkmark"></span>
+        <select onchange="agiStrCheck()" class="select hover-grey select-2">
           <option value="improved" id="imptotem">Improved</option>
           <option selected value="base">Base</option>
-        </select>
-      </div>
-      <div class="relative-wrapper">
-        <img class="settings-image-buffs" src="https://wow.zamimg.com/images/wow/icons/large/spell_nature_manaregentotem.jpg" alt="">
-        <li><label class="container container-1">Mana Spring Totem<input type="checkbox" id="manaspring" onclick="manaspringCheck()"><span class="checkmark"></span></label></li>
+        </select></label></li>
       </div>
       <div class="relative-wrapper">
         <img class="settings-image-buffs" src="https://wow.zamimg.com/images/wow/icons/large/spell_holy_arcaneintellect.jpg" alt="">
         <li><label class="container container-1">Arcane Brilliance<input type="checkbox" id="ai" onclick="aiCheck()"><span class="checkmark"></span></label></li>
+      </div>
+      <div class="relative-wrapper">
+        <img class="settings-image-buffs" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_brainwash.jpg" alt="">
+        <li><label class="container container-1">Fel Intelligence<input type="checkbox" id="felintel" onclick="felIntelCheck()"><span class="checkmark"></span></label></li>
       </div>
       <div class="relative-wrapper">
         <img class="settings-image-buffs" src="https://wow.zamimg.com/images/wow/icons/large/spell_nature_giftofthewild.jpg" alt="">
@@ -683,149 +685,49 @@
           </select></label></li>
       </div>
       <div class="relative-wrapper">
-        <img class="settings-image-buffs" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_bloodboil.jpg" alt="">
-        <li><label class="container container-2">Blood Pact<input type="checkbox" id="pact" onclick="pactCheck()"><span class="checkmark"></span>
-          <select onchange="pactCheck()" class="select hover-grey select-6">
-            <option value="improved" id="pactmod">Improved</option>
-            <option selected value="base">Base</option>
-          </select></label></li>
-      </div>
-      <div class="relative-wrapper">
-        <img class="settings-image-buffs" src="https://wow.zamimg.com/images/wow/icons/large/spell_nature_windfury.jpg" alt="">
-        <li><label class="container container-2">Windfury Totem<input type="checkbox" id="windfury" onclick="windfuryCheck()"><span class="checkmark"></span>
-          <select onchange="windfuryCheck()" class="select hover-grey select-7">
-            <option value="improved" id="windfurymod">Improved</option>
-            <option selected value="base">Base</option>
-          </select></label></li>
+        <img class="settings-image-buffs" src="https://wow.zamimg.com/images/wow/icons/large/spell_deathknight_icytalons.jpg" alt="">
+        <li><label class="container container-1">Melee Haste<input type="checkbox" id="meleehaste" onclick="meleeHasteCheck()"><span class="checkmark"></span>
       </div>
       <div class="relative-wrapper">
         <img class="settings-image-buffs" src="https://wow.zamimg.com/images/wow/icons/large/inv_helmet_21.jpg" alt="">
-        <li><label class="container container-1">Heroic Presence (not you)<input type="checkbox" id="heroicpres" onclick="heroicpresCheck()"><span class="checkmark"></span></label></li>
-      </div>
-      <div class="relative-wrapper">  
-        <img class="settings-image-buffs" src="https://wow.zamimg.com/images/wow/icons/large/ability_warrior_battleshout.jpg" alt="">
-        <li><label class="container container-2">Battle Shout<input type="checkbox" id="shout" onclick="shoutCheck()"><span class="checkmark"></span>
-          <select onchange="shoutCheck()" class="select hover-grey select-8">
-            <option value="improved" id="shoutmod">Improved</option>
-            <option selected value="base">Base</option>
-          </select>
-          <select id="shoutbonus2" onchange="shoutCheck()" class="select hover-grey select-wide">
-            <option value="t2solarian">T2 3pc+Solarian</option>
-            <option value="t2">T2 3pc</option>
-            <option value="solarian">Solarian</option>
-            <option selected value="base">No Bonus</option>
-          </select></label></li>
+        <li><label class="container container-1">Heroic Presence<input type="checkbox" id="heroicpres" onclick="heroicpresCheck()"><span class="checkmark"></span></label></li>
       </div>
       <div class="relative-wrapper">
         <img class="settings-image-buffs" src="https://wow.zamimg.com/images/wow/icons/large/ability_trueshot.jpg" alt="">
-        <li><label class="container container-1">Trueshot Aura (not you)<input type="checkbox" id="tsa" onclick="tsaCheck()"><span class="checkmark"></span></label></li>
+        <li><label class="container container-1">Attack Power Percentage<input type="checkbox" id="appercent" onclick="apPercentCheck()"><span class="checkmark"></span></label></li>
       </div>
       <div class="relative-wrapper">
-        <img class="settings-image-buffs" src="https://wow.zamimg.com/images/wow/icons/large/inv_jewelry_necklace_07.jpg" alt="">
-        <li><label class="container container-2">Braided Eternium Chain (not you)<input type="checkbox" id="braided" onclick="braidedCheck()"><span class="checkmark"></span></label></li>
-      </div>
-      <div class="relative-wrapper">
-        <img class="settings-image-buffs" src="https://wow.zamimg.com/images/wow/icons/large/spell_holy_mindvision.jpg" alt="">
-        <li><label class="container container-1">Improved Sanctity Aura<input type="checkbox" id="sanct" onclick="sanctCheck()"><span class="checkmark"></span></label></li>
+        <img class="settings-image-buffs" src="https://wow.zamimg.com/images/wow/icons/large/spell_magic_managain.jpg" alt="">
+        <li><label class="container container-1">Replenishment<input type="checkbox" id="replenish" onclick="replenishCheck()"><span class="checkmark"></span></label></li>
       </div>
     </ul>
 
     </div>
     <div class="settings settings-small">
       <div class="settings-consumes">
-      <label class="settings-header-1">Consumables</label>
-      <ul>
-        <li><Label class="label-1">Flask</Label></li>
-        <select onchange="flaskSelection()" class="select hover-grey select-relative" id="flask">
-          <option value="wisdom">Flask of Distilled Wisdom</option>
-          <option value="assault">Flask of Relentless Assault</option>
-          <option value="restoration">Flask of Restoration</option>
-          <option value="fortification">Flask of Fortification</option>
-          <option value="bandit">Unstable Flask of the Bandit</option>
-          <option value="titans">Flask of the Titans</option>
-          <option selected value="none">No Flask</option>
-        </select>
-        <li><Label class="label-1">Battle Elixir</Label></li>
-        <select onchange="battleSelection()" class="select hover-grey select-relative" id="battle">
-          <option selected value="majoragi">Elixir of Major Agility</option>
-          <option value="mongoose">Elixir of the Mongoose</option>
-          <option value="demonslaying">Elixir of Demonslaying</option>
-          <option value="felstrength">Fel Strength Elixir</option>
-          <option value="onslaught">Onslaught Elixir</option>
-          <option value="greatagi">Elixir of Greater Agility</option>
-          <option value="agility">Elixir of Agility</option>
-          <option value="mastery">Elixir of Mastery</option>
-          <option value="none">No Battle Elixir</option>
-        </select>
-        <li><Label class="label-1">Guardian Elixir</Label></li>
-        <select onchange="guardSelection()" class="select hover-grey select-relative" id="guardian">
-          <option selected value="majormageblood">Elixir of Major Mageblood</option>
-          <option value="draenicwisdom">Elixir of Draenic Wisdom</option>
-          <option value="mageblood">Mageblood Potion</option>
-          <option value="intellect">Elixir of Greater Intellect</option>
-          <option value="fortitude">Elixir of Fortitude</option>
-          <option value="none">No Guardian Elixir</option>
-        </select>
-        <li><Label class="label-1">Scroll of Agility</Label></li>
-        <select onchange="scrollagiSelection()" class="select hover-grey select-relative" id="scrollagi">
-          <option selected value="agi5">Scroll of Agility V</option>
-          <option value="agi4">Scroll of Agility IV</option>
-          <option value="agi3">Scroll of Agility III</option>
-          <option value="agi2">Scroll of Agility II</option>
-          <option value="agi1">Scroll of Agility I</option>
-          <option value="none">No Agility Scroll</option>
-        </select>
-        <li><Label class="label-1">Scroll of Strength</Label></li>
-        <select onchange="scrollstrSelection()" class="select hover-grey select-relative" id="scrollstr">
-          <option value="str5">Scroll of Strength V</option>
-          <option value="str4">Scroll of Strength IV</option>
-          <option value="str3">Scroll of Strength III</option>
-          <option value="str2">Scroll of Strength II</option>
-          <option value="str1">Scroll of Strength I</option>
-          <option selected value="none">No Strength Scroll</option>
-        </select>
-        <li><Label class="label-1">Food</Label></li>
-        <select onchange="foodSelection()" class="select hover-grey select-relative" id="food">
-          <option value="sporefish">Blackened Sporefish</option>
-          <option selected value="mudfish">Grilled Mudfish</option>
-          <option value="squid">Grilled Squid</option>
-          <option value="ravager">Ravager Dog</option>
-          <option value="crawdad">Spicy Crawdad</option>
-          <option value="spicytalbuk">Spicy Hot Talbuk</option>
-          <option value="talbuk">Talbuk Steak</option>
-          <option value="warp">Warp Burger</option>
-          <option value="none">No Food</option>
-        </select>
-      </ul>
-      <label class="settings-header-2">Pet Consumables</label>
+        <label class="settings-header-1">Consumables</label>
+        <ul>
+          <li><Label class="label-1">Flask</Label></li>
+          <select onchange="flaskSelection(this.value)" class="select hover-grey select-relative" id="flask">
+          </select>
+          <li><Label class="label-1">Battle Elixir</Label></li>
+          <select onchange="battleSelection(this.value)" class="select hover-grey select-relative" id="battle">
+          </select>
+          <li><Label class="label-1">Guardian Elixir</Label></li>
+          <select onchange="guardSelection(this.value)" class="select hover-grey select-relative" id="guardian">
+          </select>
+          <li><Label class="label-1">Food</Label></li>
+          <select onchange="foodSelection(this.value)" class="select hover-grey select-relative" id="food">
+          </select>
+        </ul>
      </div>
      <div class="settings-petconsumes">
-       <ul>
-        <li><Label class="label-1">Scroll of Agility</Label></li>
-        <select onchange="petscrollagiSelection()" class="select hover-grey select-relative" id="petscrollagi">
-          <option value="agi5">Scroll of Agility V</option>
-          <option value="agi4">Scroll of Agility IV</option>
-          <option value="agi3">Scroll of Agility III</option>
-          <option value="agi2">Scroll of Agility II</option>
-          <option value="agi1">Scroll of Agility I</option>
-          <option selected value="none">No Agility Scroll</option>
-        </select>
-        <li><Label class="label-1">Scroll of Strength</Label></li>
-        <select onchange="petscrollstrSelection()" class="select hover-grey select-relative" id="petscrollstr">
-          <option selected value="str5">Scroll of Strength V</option>
-          <option value="str4">Scroll of Strength IV</option>
-          <option value="str3">Scroll of Strength III</option>
-          <option value="str2">Scroll of Strength II</option>
-          <option value="str1">Scroll of Strength I</option>
-          <option value="none">No Strength Scroll</option>
-        </select>
+      <label class="settings-header-2">Pet Consumables</label>
+      <ul>
         <li><Label class="label-1">Food</Label></li>
-        <select onchange="petfoodSelection()" class="select hover-grey select-relative" id="petfood">
-          <option selected value="kiblers">Kibler's Bits</option>
-          <option value="sporeling">Sporeling Snack</option>
-          <option value="none">No Pet Food</option>
+        <select onchange="petFoodSelection(this.value)" class="select hover-grey select-relative" id="petfood">
         </select>
-       </ul>
+      </ul>
 
      </div>
     </div>
@@ -847,13 +749,14 @@
           </li>
           <li>
             <label class="label-2">Pet</label>
-            <select id="pet" onchange="getPet()" class="select hover-grey fight-setting-input-1">
-              <option selected value="0">Ravager</option>
-              <option value="1">Cat</option>
-              <option value="2">Raptor</option>
-              <option value="3">Owl</option>
-              <option value="4">Bat</option>
-              <option value="5">Wind Serpent</option>
+            <select id="petSelect" onchange="getPet()" class="select hover-grey fight-setting-input-1">
+            </select>
+          </li>
+          <li>
+            <label class="label-2">Level</label>
+            <select id="levelSelect" onchange="getLevel()" class="select hover-grey fight-setting-input-2">
+              <option value="80">80</option>
+              <option selected value="70">70</option>
             </select>
           </li><br>
           <li><label class="label-2">Simulations</label><input type="number" step="1000" min="0" max="100000" class="number-input hover-grey fight-setting-input-3" id="simulations" onchange=fightSettings() value="10000"></li>
@@ -864,8 +767,6 @@
           <li><label class="label-2">Pet Uptime (%)</label><input type="number" step="1" min="0" max="100" class="number-input hover-grey fight-setting-input-3" id="petuptime" onchange=fightSettings() value="100"> %</li>
           <li><label class="label-2">Weave Time (s)</label><input type="number" step="0.1" min="0" max="2" class="number-input hover-grey fight-setting-input-3" id="weavetime" onchange=fightSettings() value="0.6"></li>
           <li><label class="label-2">% of Fight Weaved</label><input type="number" step="1" min="0" max="100" class="number-input hover-grey fight-setting-input-3" id="weavepercent" onchange=fightSettings() value="100"> %</li>
-          <li><label class="label-2">Hunters in Raid</label><input type="number" step="1" min="0" max="20" class="number-input hover-grey fight-setting-input-3" id="huntersinraid" onchange=fightSettings() value="4"></li>
-          <li><label class="label-2">Berserking Start HP</label><input type="number" step="1" min="0" max="100" class="number-input hover-grey fight-setting-input-3" id="berserkinghp" onchange=fightSettings() value="100"> %</li>
           <br>
           <li>
             <label class="label-2">Target</label>
@@ -899,48 +800,23 @@
         <ul>
           <li><img class="settings-image-auras" src="https://wow.zamimg.com/images/wow/icons/large/ability_hunter_snipershot.jpg" alt=""><label class="label-4">Hunter's Mark</label>
             <input type="number" step="1" min="0" max="100" class="number-input hover-grey debuff-setting-input-1" id="hmuptime" onchange=auraUptimeSettings() value="100"> %</li>
-            <li><label class="label-5">HM - Bonus</label><select onchange=auraUptimeSettings() class="select hover-grey select-imp-auras-2">
-              <option id="hmbonus" value="improved">Improved</option>
+            <li><label class="label-5">HM - Bonus</label><select id="hmbonus" onchange=auraUptimeSettings() class="select hover-grey select-imp-auras-2">
+              <option value="glyph">Glyph & Talented</option>
+              <option value="talent">Talented</option>
               <option selected value="base">Base</option>
             </select>
-            
-          <li><img class="settings-image-auras" src="https://wow.zamimg.com/images/wow/icons/large/ability_rogue_findweakness.jpg" alt=""><label class="label-4">Expose Weakness (Others)</label>
-            <input type="number" step="1" min="0" max="100" class="number-input hover-grey debuff-setting-input-1" id="ewuptime" onchange=auraUptimeSettings() value="94"> %</li>
-          <li><label class="label-5">EW - Agility</label><input type="number" step="1" min="500" max="2000" class="number-input hover-grey debuff-setting-input-1" id="ewagil" onchange=auraUptimeSettings() value="1000"></li>
           <li><img class="settings-image-auras" src="https://wow.zamimg.com/images/wow/icons/large/spell_holy_righteousnessaura.jpg" alt=""><label class="label-4">Judgement of Wisdom</label>
             <input type="number" step="1" min="0" max="100" class="number-input hover-grey debuff-setting-input-1" id="jowuptime" onchange=auraUptimeSettings() value="98"> %</li>
-          <li><img class="settings-image-auras" src="https://wow.zamimg.com/images/wow/icons/large/spell_holy_holysmite.jpg" alt=""><label class="label-4">Judgement of the Crusader</label>
+          <li><img class="settings-image-auras" src="https://wow.zamimg.com/images/wow/icons/large/spell_holy_holysmite.jpg" alt=""><label class="label-4">3% Crit Chance</label>
             <input type="number" step="1" min="0" max="100" class="number-input hover-grey debuff-setting-input-1" id="jocuptime" onchange=auraUptimeSettings() value="98"> %</li>
-          <li><img class="settings-image-auras" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_unholystrength.jpg" alt=""><label class="label-4">Curse of Recklessness</label>
-            <input type="number" step="1" min="0" max="100" class="number-input hover-grey debuff-setting-input-1" id="coruptime" onchange=auraUptimeSettings() value="98"> %</li>
-          <li><img class="settings-image-auras" src="https://wow.zamimg.com/images/wow/icons/large/spell_nature_faeriefire.jpg" alt=""><label class="label-4">Faerie Fire</label>
+          <li><img class="settings-image-auras" src="https://wow.zamimg.com/images/wow/icons/large/spell_nature_faeriefire.jpg" alt=""><label class="label-4">5% Armor Reduction</label>
             <input type="number" step="1" min="0" max="100" class="number-input hover-grey debuff-setting-input-1" id="ffuptime" onchange=auraUptimeSettings() value="98"> %</li>
-          <div class="relative-wrapper">  
-            <select onchange=auraUptimeSettings() class="select hover-grey select-imp-auras">
-              <option id="ffbonus" value="improved">Improved</option>
-              <option selected value="base">Base</option>
-            </select>
-          </div>
           <li><img class="settings-image-auras" src="https://wow.zamimg.com/images/wow/icons/large/ability_warrior_sunder.jpg" alt=""><label class="label-6">Sunder Armor</label><input type="number" step="1" min="0" max="100" class="number-input hover-grey debuff-setting-input-1" id="sauptime" onchange=auraUptimeSettings() value="98"> %</li>
           <li><label class="label-8">SA - Stack time</label><input type="number" step="1" min="0" max="20" class="number-input hover-grey debuff-setting-input-1" id="sunderapp" onchange=auraUptimeSettings() value="5">sec</li>
           <li><img class="settings-image-auras" src="https://wow.zamimg.com/images/wow/icons/large/ability_warrior_riposte.jpg" alt=""><label class="label-6">Improved Expose Armor</label><input type="number" step="1" min="0" max="100" class="number-input hover-grey debuff-setting-input-1" id="ieuptime" onchange=auraUptimeSettings() value="90"> %</li>
-          <li><img class="settings-image-auras" src="https://wow.zamimg.com/images/wow/icons/large/ability_warrior_bloodfrenzy.jpg" alt=""><label class="label-6">Blood Frenzy</label><input type="number" step="1" min="0" max="100" class="number-input hover-grey debuff-setting-input-1" id="bfuptime" onchange=auraUptimeSettings() value="98"> %</li>
-          <li><img class="settings-image-auras" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_misery.jpg" alt=""><label class="label-6">Misery</label><input type="number" step="1" min="0" max="100" class="number-input hover-grey debuff-setting-input-1" id="misuptime" onchange=auraUptimeSettings() value="95"> %</li>
-          <li><img class="settings-image-auras" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_chilltouch.jpg" alt=""><label class="label-6">Curse of Ele.</label><input type="number" step="1" min="0" max="100" class="number-input hover-grey debuff-setting-input-1" id="coeuptime" onchange=auraUptimeSettings() value="98"> %</li>
-          <div class="relative-wrapper">
-            <select onchange=auraUptimeSettings() class="select hover-grey select-imp-auras">
-              <option id="coebonus" value="improved">Improved</option>
-              <option selected value="base">Base</option>
-            </select>
-          </div>
-          <li><img class="settings-image-auras" src="https://wow.zamimg.com/images/wow/icons/large/spell_nature_unleashedrage.jpg" alt=""><label class="label-6">Unleashed Rage</label><input type="number" step="1" min="0" max="100" class="number-input hover-grey debuff-setting-input-1" id="unlrageuptime" onchange=auraUptimeSettings() value="0"> %</li>
-          <li><img class="settings-image-auras" src="https://wow.zamimg.com/images/wow/icons/large/ability_hunter_ferociousinspiration.jpg" alt=""><label class="label-6">Ferocious Insp. (Others)</label><input type="number" step="1" min="0" max="100" class="number-input hover-grey debuff-setting-input-1" id="ferocuptime" onchange=auraUptimeSettings() value="98"> %</li>
-          <li><label class="label-5"># of BMs</label><select id="ferocstacks" onchange=auraUptimeSettings() class="select hover-grey select-imp-auras-2">
-            <option value="4">4</option>
-            <option value="3">3</option>
-            <option value="2">2</option>
-            <option selected value="1">1</option>
-          </select></li>
+          <li><img class="settings-image-auras" src="https://wow.zamimg.com/images/wow/icons/large/ability_warrior_bloodfrenzy.jpg" alt=""><label class="label-6">4% Physical Damage</label><input type="number" step="1" min="0" max="100" class="number-input hover-grey debuff-setting-input-1" id="bfuptime" onchange=auraUptimeSettings() value="98"> %</li>
+          <li><img class="settings-image-auras" src="https://wow.zamimg.com/images/wow/icons/large/spell_shadow_chilltouch.jpg" alt=""><label class="label-6">13% Magic Damage</label><input type="number" step="1" min="0" max="100" class="number-input hover-grey debuff-setting-input-1" id="coeuptime" onchange=auraUptimeSettings() value="98"> %</li>
+          <li><img class="settings-image-auras" src="https://wow.zamimg.com/images/wow/icons/large/ability_druid_mangle2.jpg" alt=""><label class="label-6">30% Bleed Damage</label><input type="number" step="1" min="0" max="100" class="number-input hover-grey debuff-setting-input-1" id="mangleuptime" onchange=auraUptimeSettings() value="98"> %</li>
         </ul>
       </div>
     </div>
@@ -966,24 +842,8 @@
           <div class="relative-wrapper-spells">
             <img class="spells-image" src="https://wow.zamimg.com/images/wow/icons/large/spell_nature_bloodlust.jpg" alt="">
             <li><label class="container container-2 container-adjust-top">Bloodlust<input id="lustcheck" type="checkbox" onclick="spellEnableCheck()"><span class="checkmark"></span>
-              <select id="lustoption" onchange="spellOptions()" class="select hover-grey select-spell-option-1">
-                <option value="4">4 Lusts</option>
-                <option value="3">3 Lusts</option>
-                <option value="2">2 Lusts</option>
-                <option selected value="1">1 Lust</option>
-              </select></label>
             </li>
             <input id="lustoffset" type="number" step="1" min="0" max="500" class="number-input hover-grey spells-input" value="0" onchange="spellOffsets()">
-          </div>
-          <div class="relative-wrapper-spells">
-            <img class="spells-image" src="https://wow.zamimg.com/images/wow/icons/large/inv_misc_drum_02.jpg" alt="">
-            <li><label class="container container-2 container-adjust-top">Drums<input id="drumcheck" type="checkbox" onclick="spellEnableCheck()"><span class="checkmark"></span>
-              <select id="drumoption" onchange="spellOptions()" class="select hover-grey select-spell-option-2">
-                <option selected value="battle">Battle</option>
-                <option value="war">War</option>
-              </select></label>
-            </li>
-            <input id="drumoffset" type="number" step="1" min="0" max="500" class="number-input hover-grey spells-input" value="0" onchange="spellOffsets()">
           </div>
           <div class="relative-wrapper-spells">
             <img class="spells-image" src="https://wow.zamimg.com/images/wow/icons/large/inv_misc_monsterscales_15.jpg" alt="">

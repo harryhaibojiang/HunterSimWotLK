@@ -647,15 +647,16 @@ function textColorDisplay(slot,array){
 
 // used for gear lists calculating hit, ArP in gear and caps
 function getStatsCapData(){
+    let BasePlayer = BASE_PLAYER[level];
     // hit
     if (talents.focus_aim > 0) {
-       hitCap = 142 - (HitRatingRatio * talents.focus_aim);
+       hitCap = 126 - (HitRatingRatio * talents.focus_aim);
     }
 
-    else hitCap = 142;
+    else hitCap = 126;
 
     // ARP cap calculation
-    ArPRatingCap = 100 * ArPRatingRatio;
+    ArPRatingCap = 100 * BasePlayer.ArPRatingRatio;
     
     for (let slot in equippedStats) {
         let SLOT_DATA = GEAR_MAP[slot];

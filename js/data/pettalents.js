@@ -365,6 +365,7 @@ const FEROCITY_TREE = [
             name: 'Wild Hunt',
             abrv: 'wild_hunt',
             max: 2,
+            is_modifier: true,
             per_point: 15 / 100
         }
     ]

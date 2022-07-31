@@ -70,11 +70,11 @@ function getStatsFromBuffs(buffs) {
     if (!BUFFS[buffId]) throw Error(`Detected invalid buff id ${id}`)
     const buff = BUFFS[buffId]
 
-    if (buff.stats) sumStats(buff.stats, stats, buildStatModifier(props, buff))
+    if (buff.stats) sumStats(buff.stats[level], stats, buildStatModifier(props, buff))
     if (buff.special) addSpecial(buff.special, special)
 
     return { stats, special }
-  }, { stats: {}, special: { impSancAura: 1, kingsMod: 1, windfury: false } })
+  }, { stats: {}, special: { percentAPMod: 1, swiftRetAura: 1, FerociousInsp: 1, melee_haste: 1, kingsMod: 1 } })
 }
 
 /* --------------------------------------------------------------------------------

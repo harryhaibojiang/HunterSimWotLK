@@ -69,7 +69,7 @@ const races = [
          agi: 178,
          sta: 130,
          int: 87,
-         spi: 100,
+         spi: 99,
          mAP: 140,
          rAP: 150,
       },

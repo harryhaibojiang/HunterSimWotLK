@@ -1,8 +1,7 @@
 // default buffs for settings go here
 var buffslist = [
     
-    { id: 0, talented: false }, // might 27141
-    { id: 0, talented: false }, // shout 2048
+    { id: 0, talented: false, t2_3p: false }, // shout 2048
     0, // heroic presence
     0, // lotp/rampage 17007
     { id: 0, talented: false }, // SoE/Horn 25528
@@ -13,7 +12,6 @@ var buffslist = [
     { id: 0, talented: false }, // GotW 26991
     0, // bok 25898
     { id: 0, talented: true }, // bow 27143
-    { id: 0, talented: false }, // ms totem 25570
     0, // AI 27127
     0, // fel intel 57567
     { id: 0, talented: true }, // PW:F 25392
@@ -103,75 +101,66 @@ function fightSettings(){
 
 }
 
-// check for might toggle and modifier
-function mightCheck() {
-    let isChecked = document.getElementById("might").checked;
-    let isTalented = document.getElementById("mightmod").selected;
-    buffslist[0].id = isChecked ? 27141 : 0;
+// check for AP stat buff toggle and modifier
+function apCheck() {
+    let isChecked = document.getElementById("apbuff").checked;
+    let isTalented = document.getElementById("apbuffmod").selected;
+    let isBonus = document.getElementById("apbuffbonus").selected;
+    buffslist[0].id = isChecked ? 2048 : 0;
     buffslist[0].talented = isTalented ? true : false;
-    selectedOptionsResults();
-
-}
-// check for battle shout toggle and modifier
-function shoutCheck() {
-    let isChecked = document.getElementById("shout").checked;
-    let isTalented = document.getElementById("shoutmod").selected;
-    buffslist[1].id = isChecked ? 2048 : 0;
-    buffslist[1].talented = isTalented ? true : false;
+    buffslist[0].t2_3p = isBonus ? true : false;
     selectedOptionsResults();
 
 }
 // check for Heroic Presence toggle
 function heroicpresCheck() {
     let isChecked = document.getElementById("heroicpres").checked; 
-    buffslist[2] = isChecked ? 6562 : 0;
+    buffslist[1] = isChecked ? 6562 : 0;
     selectedOptionsResults();
 
 }
 
-// check for leader of the pack toggle
-function lotpCheck() {
-    let isChecked = document.getElementById("lotp").checked; 
-    buffslist[3] = isChecked ? 17007 : 0;
+// check for crit buff toggle
+function critCheck() {
+    let isChecked = document.getElementById("critbuff").checked; 
+    buffslist[2] = isChecked ? 17007 : 0;
     selectedOptionsResults();
 
 }
-// check for grace of air and strength of earth toggle and modifier
-function totemCheck() {
-    let soeIsChecked = document.getElementById("soe").checked;
+// check for agi/str buff toggle and modifier
+function agiStrCheck() {
+    let isChecked = document.getElementById("agistrbuff").checked;
     let isTalented = document.getElementById("imptotem").selected;
-    buffslist[4].id = soeIsChecked ? 25528 : 0;
-    buffslist[4].talented = isTalented ? true : false;
+    buffslist[3].id = isChecked ? 25528 : 0;
+    buffslist[3].talented = isTalented ? true : false;
     selectedOptionsResults();
 
 }
-// check for Trueshot Aura toggle
-function tsaCheck() {
-    let isChecked = document.getElementById("tsa").checked; 
-    buffslist[5] = isChecked ? 27066 : 0;
+// check for % AP toggle
+function apPercentCheck() {
+    let isChecked = document.getElementById("appercent").checked; 
+    buffslist[4] = isChecked ? 27066 : 0;
     selectedOptionsResults();
 
 }
-// check for Braided Eternium Chain toggle
-function swiftretCheck() {
-    let isChecked = document.getElementById("swiftret").checked; 
-    buffslist[6] = isChecked ? 53648 : 0;
+// check for minor haste buff toggle
+function minorHasteCheck() {
+    let isChecked = document.getElementById("minorhaste").checked; 
+    buffslist[5] = isChecked ? 53648 : 0;
     selectedOptionsResults();
 
 }
-// check for ferocious insp Aura toggle
-function ferocinspCheck() {
-    let isChecked = document.getElementById("ferocinsp").checked; 
-    buffslist[7] = isChecked ? 75447 : 0;
+// check for minor damage buff toggle
+function minorDmgCheck() {
+    let isChecked = document.getElementById("minordmg").checked; 
+    buffslist[6] = isChecked ? 75447 : 0;
     selectedOptionsResults();
 
 }
-// check for Windfury Totem toggle and modifier
-function windfuryCheck() {
-    let isChecked = document.getElementById("windfury").checked;
-    let isTalented = document.getElementById("windfurymod").selected;
-    buffslist[8].id = isChecked ? 25587 : 0;
-    buffslist[8].talented = isTalented ? true : false;
+// check for melee haste toggle and modifier
+function meleeHasteCheck() {
+    let isChecked = document.getElementById("meleehaste").checked;
+    buffslist[7] = isChecked ? 25587 : 0;
     selectedOptionsResults();
 
 }
@@ -179,47 +168,42 @@ function windfuryCheck() {
 function gotwCheck() {
     let isChecked = document.getElementById("gotw").checked;
     let isTalented = document.getElementById("gotwmod").selected;
-    buffslist[9].id = isChecked ? 26991 : 0;
-    buffslist[9].talented = isTalented ? true : false;
+    buffslist[8].id = isChecked ? 26991 : 0;
+    buffslist[8].talented = isTalented ? true : false;
     selectedOptionsResults();
 
 }
 // check for kings toggle
 function kingsCheck() {
     let isChecked = document.getElementById("kings").checked;
-    buffslist[10] = isChecked ? 25898 : 0;
+    buffslist[9] = isChecked ? 25898 : 0;
     selectedOptionsResults();
 
 }
-// check for wisdom toggle and modifier
-function wisdomCheck() {
-    let isChecked = document.getElementById("wisdom").checked;
-    let isTalented = document.getElementById("wisdommod").selected;
-    buffslist[11].id = isChecked ? 27143 : 0;
-    buffslist[11].talented = isTalented ? true : false;
-    selectedOptionsResults();
-
-}
-// check for mana spring toggle
-function manaspringCheck() {
-    let isChecked = document.getElementById("manaspring").checked; 
-    let isTalented = document.getElementById("springmod").selected;
-    buffslist[12] = isChecked ? 25570 : 0;
-    buffslist[12].talented = isTalented ? true : false;
+// check for mp5 buff toggle and modifier
+function manaRegenCheck() {
+    let isChecked = document.getElementById("mp5buff").checked;
+    let isTalented = document.getElementById("mp5buffmod").selected;
+    buffslist[10].id = isChecked ? 27143 : 0;
+    buffslist[10].talented = isTalented ? true : false;
     selectedOptionsResults();
 
 }
 // check for Arcane Brilliance toggle
 function aiCheck() {
     let isChecked = document.getElementById("ai").checked; 
-    buffslist[13] = isChecked ? 27127 : 0;
+    buffslist[11] = isChecked ? 27127 : 0;
+    buffslist[12] = isChecked ? 0 : buffslist[12];
+    document.getElementById("felintel").checked = false;
     selectedOptionsResults();
 
 }
 // check for Fel Intelligence toggle
-function felintelCheck() {
+function felIntelCheck() {
     let isChecked = document.getElementById("felintel").checked;
-    buffslist[14].id = isChecked ? 57567 : 0;
+    buffslist[12] = isChecked ? 57567 : 0;
+    buffslist[11] = isChecked ? 0 : buffslist[11];
+    document.getElementById("ai").checked = false; 
     selectedOptionsResults();
 
 }
@@ -227,250 +211,185 @@ function felintelCheck() {
 function fortCheck() {
     let isChecked = document.getElementById("fort").checked;
     let isTalented = document.getElementById("fortmod").selected;
-    buffslist[15].id = isChecked ? 25392 : 0;
-    buffslist[15].talented = isTalented ? true : false;
+    buffslist[13].id = isChecked ? 25392 : 0;
+    buffslist[13].talented = isTalented ? true : false;
     selectedOptionsResults();
 
 }
 
+// check for kings toggle
+function replenishCheck() {
+    let isChecked = document.getElementById("replenish").checked;
+    replenishment = isChecked;
+    selectedOptionsResults();
+
+}
 // below functions check if selected check the list of items then call the update
-function flaskSelection() {
-    let isSelected = document.getElementById("flask").value;
-    let flasks = Object.entries(FLASKS)
-    switch (isSelected) {
-        case "assault":
-            playerconsumes.flask = flasks[0];
-        break;
-        case "wisdom":
-            playerconsumes.flask = flasks[1];
-        break;
-        case "bandit":
-            playerconsumes.flask = flasks[2];
-        break;
-        case "fortification":
-            playerconsumes.flask = flasks[3];
-        break;
-        case "titans":
-            playerconsumes.flask = flasks[4];
-        break;
-        case "none":
-            delete playerconsumes.flask;
-        break;
+function initializeFlaskDropdown() {
+
+    let initial_flask = '';
+    
+    if (localStorage.getItem('flask') !== null){
+        let savedflask = localStorage.getItem('flask');
+
+        initial_flask = savedflask;
+    } else {
+        initial_flask = '0';
     }
-    if ((document.getElementById("battle").value != "none" || document.getElementById("guardian").value != "none") && document.getElementById("flask").value != "none") {
-        document.getElementById("battle").value = "none";
-        document.getElementById("guardian").value = "none";
+    
+    var flaskOptions = "";
+    for (let id in FLASKS) {
+        flaskOptions += "<option value= "+id+" >" + FLASKS[id].name + "</option>";
+      }   
+    document.getElementById('flask').innerHTML = flaskOptions;
+    document.getElementById('flask').value = initial_flask;
+}
+
+function flaskSelection(value) {
+    
+    console.log(value)
+    if (value == '0') {
+        delete playerconsumes.flask;
+    } else {
+        playerconsumes.flask = value;
+    }
+    if ((document.getElementById("battle").value != "0" || document.getElementById("guardian").value != "0") && document.getElementById("flask").value != "0") {
+        document.getElementById("battle").value = "0";
+        document.getElementById("guardian").value = "0";
         delete playerconsumes.battle_elixir;
         delete playerconsumes.guardian_elixir;
     }
     selectedOptionsResults();
 }
-function battleSelection() {
-    let isSelected = document.getElementById("battle").value;
-    switch (isSelected) {
-        case "majoragi":
-            playerconsumes.battle_elixir = 22831;
-        break;
-        case "mongoose":
-            playerconsumes.battle_elixir = 13452;
-        break;
-        case "demonslaying":
-            playerconsumes.battle_elixir = 9224;
-        break;
-        case "felstrength":
-            playerconsumes.battle_elixir = 31679;
-        break;
-        case "onslaught":
-            playerconsumes.battle_elixir = 28102;
-        break;
-        case "greatagi":
-            playerconsumes.battle_elixir = 9187;
-        break;
-        case "agility":
-            playerconsumes.battle_elixir = 8949;
-        break;
-        case "mastery":
-            playerconsumes.battle_elixir = 28104;
-        break;
-        case "none":
-            delete playerconsumes.battle_elixir;
-        break;
+
+function initializeBattleDropdown() {
+
+    let initial_battle = '';
+    
+    if (localStorage.getItem('battle') !== null){
+        let savedbattle = localStorage.getItem('battle');
+
+        initial_battle = savedbattle;
+    } else {
+        initial_battle = '0';
     }
-    if (document.getElementById("flask").value != "none" && document.getElementById("battle").value != "none") {
-        document.getElementById("flask").value = "none";
+    
+    var battleOptions = "";
+    for (let id in BATTLE_ELIXIRS) {
+        battleOptions += "<option value= "+id+" >" + BATTLE_ELIXIRS[id].name + "</option>";
+      }   
+    document.getElementById('battle').innerHTML = battleOptions;
+    document.getElementById('battle').value = initial_battle;
+}
+
+function battleSelection(value) {
+    
+    console.log(value)
+    if (value == '0') {
+        delete playerconsumes.battle_elixir;
+    } else {
+        playerconsumes.battle_elixir = value;
+    }
+    if (document.getElementById("flask").value != "0" && document.getElementById("battle").value != "0") {
+        document.getElementById("flask").value = "0";
         delete playerconsumes.flask;
     }
     selectedOptionsResults();
 }
-function guardSelection() {
-    let isSelected = document.getElementById("guardian").value;
-    switch (isSelected) {
-        case "majormageblood":
-            playerconsumes.guardian_elixir = 22840;
-        break;
-        case "draenicwisdom":
-            playerconsumes.guardian_elixir = 32067;
-        break;
-        case "mageblood":
-            playerconsumes.guardian_elixir = 20007;
-        break;
-        case "intellect":
-            playerconsumes.guardian_elixir = 9179;
-        break;
-        case "fortitude":
-            playerconsumes.guardian_elixir = 32062;
-        break;
-        case "none":
-            delete playerconsumes.guardian_elixir;
-        break;
+
+function initializeGuardDropdown() {
+
+    let initial_guardian = '';
+    
+    if (localStorage.getItem('guardian') !== null){
+        let savedguardian = localStorage.getItem('guardian');
+        console.log(savedguardian)
+        initial_guardian = savedguardian;
+    } else {
+        initial_guardian = '0';
     }
-    if (document.getElementById("flask").value != "none" && document.getElementById("guardian").value != "none") {
-        document.getElementById("flask").value = "none";
+    
+    var guardOptions = "";
+    for (let id in GUARDIAN_ELIXIRS) {
+        guardOptions += "<option value= "+id+" >" + GUARDIAN_ELIXIRS[id].name + "</option>";
+      }   
+    document.getElementById('guardian').innerHTML = guardOptions;
+    document.getElementById('guardian').value = initial_guardian;
+}
+
+function guardSelection(value) {
+    
+    console.log(value)
+    if (value == '0') {
+        delete playerconsumes.guardian_elixir;
+    } else {
+        playerconsumes.guardian_elixir = value;
+    }
+    if (document.getElementById("flask").value != "0" && document.getElementById("guardian").value != "0") {
+        document.getElementById("flask").value = "0";
         delete playerconsumes.flask;
     }
     selectedOptionsResults();
 }
-function scrollagiSelection() {
-    let isSelected = document.getElementById("scrollagi").value;
-    switch (isSelected) {
-        case "agi5":
-            playerconsumes.agi_scroll = 27498;
-        break;
-        case "agi4":
-            playerconsumes.agi_scroll = 10309;
-        break;
-        case "agi3":
-            playerconsumes.agi_scroll = 4425;
-        break;
-        case "agi2":
-            playerconsumes.agi_scroll = 1477;
-        break;
-        case "agi1":
-            playerconsumes.agi_scroll = 3012;
-        break;
-        case "none":
-            delete playerconsumes.agi_scroll;
-        break;
+
+function initializeFoodDropdown() {
+
+    let initial_food = '';
+    
+    if (localStorage.getItem('food') !== null){
+        let savedfood = localStorage.getItem('food');
+
+        initial_food = savedfood;
+    } else {
+        initial_food = '0';
+    }
+    
+    var foodOptions = "";
+    for (let id in FOODS) {
+        foodOptions += "<option value= "+id+" >" + FOODS[id].name + "</option>";
+      }   
+    document.getElementById("food").innerHTML = foodOptions;
+    document.getElementById('food').value = initial_food;
+}
+
+function foodSelection(value) {
+    
+    console.log(value)
+    if (value == '0') {
+        delete playerconsumes.food;
+    } else {
+        playerconsumes.food = value;
     }
     selectedOptionsResults();
 }
-function scrollstrSelection() {
-    let isSelected = document.getElementById("scrollstr").value;
-    switch (isSelected) {
-        case "str5":
-            playerconsumes.str_scroll = 27503;
-        break;
-        case "str4":
-            playerconsumes.str_scroll = 10310;
-        break;
-        case "str3":
-            playerconsumes.str_scroll = 4426;
-        break;
-        case "str2":
-            playerconsumes.str_scroll = 2289;
-        break;
-        case "str1":
-            playerconsumes.str_scroll = 954;
-        break;
-        case "none":
-            delete playerconsumes.str_scroll;
-        break;
+
+function initializePetFoodDropdown() {
+
+    let initial_petfood = '';
+    
+    if (localStorage.getItem('petfood') !== null){
+        let savedpetfood = localStorage.getItem('petfood');
+
+        initial_petfood = savedpetfood;
+    } else {
+        initial_petfood = '0';
     }
-    selectedOptionsResults();
+    
+    var petfoodOptions = "";
+    for (let id in PET_FOODS) {
+        petfoodOptions += "<option value= "+id+" >" + PET_FOODS[id].name + "</option>";
+      }   
+    document.getElementById("petfood").innerHTML = petfoodOptions;
+    document.getElementById('petfood').value = initial_petfood;
 }
-function foodSelection() {
-    let isSelected = document.getElementById("food").value;
-    switch (isSelected) {
-        case "sporefish":
-            playerconsumes.food = 33292;
-        break;
-        case "mudfish":
-            playerconsumes.food = 27664;
-        break;
-        case "squid":
-            playerconsumes.food = 13928;
-        break;
-        case "ravager":
-            playerconsumes.food = 27655;
-        break;
-        case "crawdad":
-            playerconsumes.food = 27677;
-        break;
-        case "spicytalbuk":
-            playerconsumes.food = 33872;
-        break;
-        case "talbuk":
-            playerconsumes.food = 27660;
-        break;
-        case "warp":
-            playerconsumes.food = 27659;
-        break;
-        case "none":
-            delete playerconsumes.food;
-        break;
-    }
-    selectedOptionsResults();
-}
-function petscrollagiSelection() {
-    let isSelected = document.getElementById("petscrollagi").value;
-    switch (isSelected) {
-        case "agi5":
-            petconsumes.agi_scroll = 27498;
-        break;
-        case "agi4":
-            petconsumes.agi_scroll = 10309;
-        break;
-        case "agi3":
-            petconsumes.agi_scroll = 4425;
-        break;
-        case "agi2":
-            petconsumes.agi_scroll = 1477;
-        break;
-        case "agi1":
-            petconsumes.agi_scroll = 3012;
-        break;
-        case "none":
-            delete petconsumes.agi_scroll;
-        break;
-    }
-    selectedOptionsResults();
-}
-function petscrollstrSelection() {
-    let isSelected = document.getElementById("petscrollstr").value;
-    switch (isSelected) {
-        case "str5":
-            petconsumes.str_scroll = 27503;
-        break;
-        case "str4":
-            petconsumes.str_scroll = 10310;
-        break;
-        case "str3":
-            petconsumes.str_scroll = 4426;
-        break;
-        case "str2":
-            petconsumes.str_scroll = 2289;
-        break;
-        case "str1":
-            petconsumes.str_scroll = 954;
-        break;
-        case "none":
-            delete petconsumes.str_scroll;
-        break;
-    }
-    selectedOptionsResults();
-}
-function petfoodSelection() {
-    let isSelected = document.getElementById("petfood").value;
-    switch (isSelected) {
-        case "kiblers":
-            petconsumes.pet_food = 33874;
-        break;
-        case "sporeling":
-            petconsumes.pet_food = 27656;
-        break;
-        case "none":
-            delete petconsumes.pet_food;
-        break;
+
+function petFoodSelection(value) {
+    
+    console.log(value)
+    if (value == '0') {
+        delete petconsumes.pet_food;
+    } else {
+        petconsumes.pet_food = value;
     }
     selectedOptionsResults();
 }
@@ -482,12 +401,38 @@ function getRace() {
     selectedOptionsResults();
 }
 
+function initializePetDropdown() {
+
+    let pets_length = PET_FAMILY.length;
+    let initial_pet = '';
+
+    if (localStorage.getItem('petselect') !== null){
+        let savedpet = JSON.parse(localStorage.getItem('petselect'));
+        initial_pet = savedpet;
+    } else {
+        initial_pet = 0;
+    }
+    
+    var petOptions = "";
+    for (let i=0; i < pets_length; i++) {
+        petOptions += "<option value= "+i+" >" + PET_FAMILY[i].name + "</option>";
+      }   
+    document.getElementById("petSelect").innerHTML = petOptions;
+    document.getElementById('petSelect').value = initial_pet;
+}
+
 function getPet() {
-    selectedPet = parseInt(document.getElementById("pet").value);
+
+    selectedPet = parseInt(document.getElementById("petSelect").value);
     //document.getElementById("petdisplay").innerHTML
     selectedOptionsResults();
 }
 
+function getLevel() {
+    
+    level = parseInt(document.getElementById('levelSelect').value);
+    selectedOptionsResults();
+}
 
 function selectTalents(talent){
 

@@ -26,7 +26,7 @@ function initializeSpells(){
     if(!!USED_SPELLS.silencingshot) USED_SPELLS.silencingshot.cd = 0;
     if(!!USED_SPELLS.scattershot) USED_SPELLS.scattershot.cd = 0;
     // set pet spell CDs to 0
-    PET_SPELLS.pet_special.cd = 0;
+    if(!!PET_SPELLS.pet_special) PET_SPELLS.pet_special.cd = 0;
     PET_SPELLS.pet_focus_dump.cd = 0;
 
 }
@@ -57,7 +57,9 @@ function readinessCDUpdate() {
 function updateSpellCDs(spell) {
 
     // pet spells
-    PET_SPELLS.pet_special.cd = (spell === 'pet_special' && !!PET_SPELLS.pet_special.base_cd) ? PET_SPELLS.pet_special.base_cd * (1 - talents.longevity) : Math.max(PET_SPELLS.pet_special.cd - steptime, 0);
+    if(!!PET_SPELLS.pet_special) {
+        PET_SPELLS.pet_special.cd = (spell === 'pet_special' && !!PET_SPELLS.pet_special.base_cd) ? PET_SPELLS.pet_special.base_cd * (1 - talents.longevity) : Math.max(PET_SPELLS.pet_special.cd - steptime, 0);
+    }
     PET_SPELLS.pet_focus_dump.cd = (spell === 'pet_focus_dump' && !!PET_SPELLS.pet_focus_dump.base_cd) ? PET_SPELLS.pet_focus_dump.base_cd : Math.max(PET_SPELLS.pet_focus_dump.cd - steptime, 0);
 
     // player spells
@@ -264,7 +266,7 @@ function mongooseBiteCalc(combatMAP) {
 function blackArrowCalc(combatRAP) {
 
     let sniper_training = (auras.sniper_training?.timer > 0) ? talents.sniper_training * 2 : 0;
-    let specials_mod = 1 + talents.t_n_t + sniper_training;
+    let specials_mod = 1 + talents.t_n_t + sniper_training + talents.trap_mastery;
     let shotDmg = (combatRAP * 0.1 + SPELLS.blackarrow.ranks.rankdmg) * range_wep.basedmgmod * specials_mod * combatdmgmod * physdmgmod;
     return shotDmg;
 }
@@ -301,19 +303,21 @@ function explosiveTrapCalc(combatRAP, dotcheck) {
     let dmg = 0;
     let dotDmg = 0;
     let trapDmg = 0;
+    let specialmod = (1 + talents.t_n_t + talents.trap_mastery);
     if(dotcheck) {
-        dotDmg = (SPELLS.explosivetrap.tickdmg * 10 + combatRAP) * combatdmgmod;
+        dotDmg = (SPELLS.explosivetrap.tickdmg * 10 + combatRAP) * combatdmgmod * specialmod;
         return dotDmg;
     } else {
         dmg = (useAverages) ? (SPELLS.explosivetrap.mindmg + SPELLS.explosivetrap.maxdmg) * avgConst : rng(SPELLS.explosivetrap.mindmg,SPELLS.explosivetrap.maxdmg);
-        trapDmg = (combatRAP * 0.10 + dmg) * combatdmgmod * magdmgmod;
+        trapDmg = (combatRAP * 0.10 + dmg) * specialmod * combatdmgmod * magdmgmod;
         return trapDmg;
     }
 }
     // Immolation Trap
 function immolateTrapCalc(combatRAP) {
     let ticks = auras.immolatetrap.effect.duration / auras.immolatetrap.effect.tick_rate;
-    let dmg = (combatRAP * 0.02 + SPELLS.immolatetrap.ranks.rankdmg * ticks) * combatdmgmod;
+    let specialmod = (1 + talents.t_n_t + talents.trap_mastery);
+    let dmg = (combatRAP * 0.02 + SPELLS.immolatetrap.ranks.rankdmg * ticks) * combatdmgmod * specialmod;
     return dmg;
 }
     // Volley
@@ -342,7 +346,8 @@ function ScatterSilenceShotCalc(range_wep, combatRAP) {
 }
 
 function petAutoCalc(){
-    let dmg = (useAverages) ? (PetMinDmg + PetMaxDmg) * avgConst : rng(PetMinDmg,PetMaxDmg);
+    let BasePet = BASE_PET[level];
+    let dmg = (useAverages) ? (BasePet.MinDmg + BasePet.MaxDmg) * avgConst : rng(BasePet.MinDmg,BasePet.MaxDmg);
     let basedmgmod = pet.dmgmod * pet.combatdmgmod * PetFamilyMod;
     let apbonus = pet.combatap * PetBaseSpeed / DmgAPRatio;
     let autoDmg = (dmg + apbonus) * basedmgmod * physdmgmod * PetFamilyMod * CobraReflexesPenalty;
@@ -370,7 +375,7 @@ function spellPetCalc(petspell){
 
     }
     else if ((PET_SPELLS[petspell].type === 'nature' || PET_SPELLS[petspell].type === 'fire' 
-    || PET_SPELLS[petspell].type === 'frost' || PET_SPELLS[petspell].type === 'arcane')) {
+    || PET_SPELLS[petspell].type === 'frost' || PET_SPELLS[petspell].type === 'arcane' || PET_SPELLS[petspell].type === 'shadow')) {
         mindmg = PET_SPELLS[petspell].ranks.mindmg; 
         maxdmg = PET_SPELLS[petspell].ranks.maxdmg; 
         dmg = (useAverages) ? (mindmg + maxdmg) * avgConst : rng(mindmg,maxdmg);

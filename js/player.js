@@ -2,22 +2,39 @@
 /* this script contains relevant calculations for stats and damage of player */
 /*****************************************************************************/
 // initialize constants
-const HitRatingRatio = 15.77; // 32.79 at 80
-const CritRatingRatio = 22.08; // 45.91 at 80
-const HasteRatingRatio = 15.77; // 32.79 at 80
-const ArPRatingRatio = 7; // 14 at 80
-const AgiToCrit = 40; // 83.33 at 80
-const IntToCrit = 80; // 166.6667 at 80
+const BASE_PLAYER = {
+   70: {
+      HitRatingRatio: 15.77,
+      CritRatingRatio: 22.08,
+      HasteRatingRatio: 15.77,
+      ArPRatingRatio: 6.73,
+      ExpertiseRatio: 3.9423081875, 
+      AgiToCrit: 40,
+      IntToCrit: 80,
+      BaseMana: 3383,
+      BaseRegen: 0.009327,
+   },
+   80: {
+      HitRatingRatio: 32.79,
+      CritRatingRatio: 45.91,
+      HasteRatingRatio: 32.79,
+      ArPRatingRatio: 14,
+      ExpertiseRatio: 8.1974973675, 
+      AgiToCrit: 83.33,
+      IntToCrit: 166.6667,
+      BaseMana: 5046,
+      BaseRegen: 0.005575,
+   },
+}
+
 const BaseCritChance = -1.53;
 const BaseHitChance = 0;
 const CritPenalty = -3;
 const CritAuraPenalty = -1.8;
-const ExpertiseRatio = 3.9423081875; // 8.1974973675 at 80 
+
 const GlanceDmgReduction = 0.75;
 const GlanceChance = 24;
 const QuiverSpeed = 1.15;
-const BaseRegen = 0.009327;
-const BaseMana = 3383; // 5046 at 80
 const ExpertiseReduction = 0.25;
 const BaseMagicMiss = 17;
 const BasePhysicalMiss = 8;
@@ -54,6 +71,7 @@ var MeleeCritDamage = 2;
 var RangeCritDamage = 2;
 var SpecialCritDamage = 2;
 var fiveSecRulemp5 = 0;
+var replenishment = false;
 var pet_special_crit = 0;
 
 var currentMana = 0;
@@ -156,7 +174,7 @@ var gear = {
 // initialize variables for use
 var selectedbuffs = {
    stats: { MAP:0, RAP:0, Str:0, Agi:0 },
-   special: { kingsMod: 1, windfury: false }
+   special: { percentAPMod: 1, swiftRetAura: 1, FerociousInsp: 1, melee_haste: 1, kingsMod: 1 } 
 };
 var glyphs = {}
 var talents = {
@@ -218,28 +236,28 @@ var talents = {
    savage_strikes: 0, //
    surefooted: 0,// -
    entrapment: 0,// -
-   trap_mastery: 0,
-   surv_instincts: 0,
-   survivalist: 1,
+   trap_mastery: 0,//
+   surv_instincts: 0,//
+   survivalist: 1,//
    scatter_shot: 0,
    deflection: 0,// -
    surv_tactics: 0,// -
-   t_n_t: 1,
+   t_n_t: 1, //
    lock_load: 0,
-   hunt_vs_wild: 0,
-   killer_instinct: 0,
+   hunt_vs_wild: 0,//
+   killer_instinct: 0,//
    counterattack: 0,// -
-   light_reflexes: 1,
-   resourcefulness: 0,
-   exp_weakness: 0,
-   wyvern_sting: 0,
-   TotH: 0,
-   master_tact: 0,
+   light_reflexes: 1,//
+   resourcefulness: 0,//
+   exp_weakness: 0,//
+   wyvern_sting: 0,// -
+   TotH: 0, //
+   master_tact: 0, //
    nox_stings: 0,
    no_escape: 0,
-   sniper_training: 0,
-   hunt_party: 1,
-   exp_shot: 0
+   sniper_training: 0, // except ks crit
+   hunt_party: 1, // no replenishment
+   exp_shot: 0 // coded but not in sim logic
  }
 
 /********************/
@@ -281,6 +299,7 @@ function addBuffs(){
 
 // initialize base stats - called when talents, gear/enchants, static buffs/consumes, race are changed
 function calcBaseStats() {
+   let BasePlayer = BASE_PLAYER[level];
 
   let imp_tracking = 1;
   let racialmod = 1;
@@ -290,11 +309,9 @@ function calcBaseStats() {
   } else if ((target.type !== 'Unknown') || (target.type !== 'Mechanical') || (target.type !== 'Other')){
       imp_tracking = talents.imp_tracking;
   }
-  let group_dmg_mod = (talents.ferocious_insp > 0) ? talents.ferocious_insp : 1;
+  let group_dmg_mod = (talents.ferocious_insp > 0) ? talents.ferocious_insp : selectedbuffs.special.FerociousInsp;
   dmgmod = (1 + talents.focused_fire / 100) * imp_tracking * racialmod * group_dmg_mod;
   rangedmgmod = dmgmod * (1 + Math.floor(talents.ranged_weap_spec * 100) / 100);
-
-  let tsa_ap = (talents.trueshot_aura > 1) ? 1 : 1; // fixme
 
   strmod = selectedbuffs.special.kingsMod;
   agimod = selectedbuffs.special.kingsMod * talents.combat_exp * talents.light_reflexes * (1 + talents.hunt_party);
@@ -309,21 +326,22 @@ function calcBaseStats() {
   Int  = Math.floor((GearStats.Int + BuffStats.Int + EnchantStats.Int + races[selectedRace][level].int + custom.int) * intmod);
   Spi  = Math.floor((GearStats.Spi + BuffStats.Spi + EnchantStats.Spi + races[selectedRace][level].spi) * spimod);
 
-  mapmod = (1 + Stam * talents.hunt_vs_wild) * tsa_ap;
-  rapmod = (1 + Stam * talents.hunt_vs_wild) * tsa_ap;
+  let tsa_ap = (talents.trueshot_aura > 1) ? talents.trueshot_aura : selectedbuffs.special.percentAPMod;
+  mapmod = tsa_ap;
+  rapmod = tsa_ap;
   // Attack Power
-  let hawkAP = (level == 70) ? 0 * (1 + talents.aspect_mast * 3) : 300 * (1 + talents.aspect_mast * 3);
-  BaseMAP = (GearStats.MAP + BuffStats.MAP + EnchantStats.MAP + Agi + Str + races[selectedRace][level].mAP + custom.MAP) * mapmod;
-  // flat 300 added for Aspect of the Hawk - need to change later
-  BaseRAP = (hawkAP + GearStats.RAP + BuffStats.RAP + EnchantStats.RAP + Agi + races[selectedRace][level].rAP + Int * talents.careful_aim + custom.RAP) * rapmod;
+  let hawkAP = (level == 70) ? 155 * (1 + talents.aspect_mast * 3) : 300 * (1 + talents.aspect_mast * 3);
+  let sharedAP = Agi + (Stam * talents.hunt_vs_wild);
+  BaseMAP = (GearStats.MAP + BuffStats.MAP + EnchantStats.MAP + sharedAP + Str + races[selectedRace][level].mAP + custom.MAP) * mapmod;
+  BaseRAP = (hawkAP + GearStats.RAP + BuffStats.RAP + EnchantStats.RAP + sharedAP + races[selectedRace][level].rAP + (Int * talents.careful_aim) + custom.RAP) * rapmod;
   // Crit rating and crit chance
    let critrating = GearStats.Crit + BuffStats.Crit + EnchantStats.Crit;
    MeleeCritRating = critrating + (currentgear.stats.MeleeCrit || 0) + custom.meleecrit;
    RangeCritRating = critrating + (currentgear.stats.RangeCrit || 0) + custom.rangecrit;
-   let crit = BaseCritChance + Agi / AgiToCrit + BuffStats.CritChance + talents.killer_instinct + talents.master_marksman * 100;
+   let crit = BaseCritChance + Agi / BasePlayer.AgiToCrit + BuffStats.CritChance + talents.killer_instinct + talents.master_marksman * 100;
 
-  MeleeCritChance = crit + MeleeCritRating / CritRatingRatio;
-  RangeCritChance = crit + RangeCritRating / CritRatingRatio + talents.lethal_shots + races[selectedRace][level].critchance;
+  MeleeCritChance = crit + MeleeCritRating / BasePlayer.CritRatingRatio;
+  RangeCritChance = crit + RangeCritRating / BasePlayer.CritRatingRatio + talents.lethal_shots + races[selectedRace][level].critchance;
   
   MeleeCritDamage = 1 + (2 * currentgear.special.relentless_metagem_crit_dmg_inc - 1);
   RangeCritDamage = 1 + (talents.mortal_shots) * (2 * currentgear.special.relentless_metagem_crit_dmg_inc - 1);
@@ -336,9 +354,9 @@ function calcBaseStats() {
    RangeHitRating = hitrating + (currentgear.stats.RangeHit || 0) + custom.rangehit;
    let racialhit = (selectedRace == 2 && buffslist[12] == 0) ? 1 : 0;
 
-   let hit = BaseHitChance + talents.focus_aim + BuffStats.HitChance + racialhit;
-  MeleeHitChance = hit + MeleeHitRating / HitRatingRatio; // need dual wield condition
-  RangeHitChance = hit + RangeHitRating / HitRatingRatio;
+   let hit = talents.focus_aim + BuffStats.HitChance + racialhit;
+  MeleeHitChance = hit + MeleeHitRating / BasePlayer.HitRatingRatio; // need dual wield condition
+  RangeHitChance = hit + RangeHitRating / BasePlayer.HitRatingRatio;
 
 
    let dw_penalty = 0;
@@ -347,27 +365,27 @@ function calcBaseStats() {
    } else { dw_penalty = 0; }
 
   MeleeMissChance = Math.max(BasePhysicalMiss - MeleeHitChance - dw_penalty,0);
-  RaptorMissChance = Math.max(BasePhysicalMiss - MeleeHitChance,0);
+  RaptorMissChance = Math.max(BasePhysicalMiss - MeleeHitChance,0); // yellow melee miss
   RangeMissChance = Math.max(BasePhysicalMiss - RangeHitChance,0);
 
   // Expertise and Dodge - every 8.19 rating is 1 expertise, 1 expertise = 0.25% reduction rounded down to nearest integer
-  Expertise = Math.floor(GearStats.Exp / ExpertiseRatio + races[selectedRace][level].expertise + custom.expertise);
+  Expertise = Math.floor(GearStats.Exp / BasePlayer.ExpertiseRatio + races[selectedRace][level].expertise + custom.expertise);
   DodgeChance = 6.5 - Expertise * ExpertiseReduction;
 
   ArPRating = GearStats.ArP + custom.arp;
   ManaPer5 = Math.floor(BuffStats.MP5 + GearStats.MP5 + EnchantStats.MP5 + custom.mp5);
   // formula for spirit regen -> (5 * sqrt(intellect) * spirit * 0.009327) for hunters
-  fiveSecRulemp5 = Math.floor(5 * (Math.sqrt(Int) * Spi * BaseRegen));
+  fiveSecRulemp5 = Math.floor(5 * (Math.sqrt(Int) * Spi * BasePlayer.BaseRegen));
 
   // base mana by level then add int
-  Mana = BaseMana + (Int - 20) * 15 + 20;
+  Mana = BasePlayer.BaseMana + (Int - 20) * 15 + 20;
   // initialize current Mana to Max mana
   currentMana = Mana;
   
   HasteRating = BuffStats.Haste + GearStats.Haste + EnchantStats.Haste + custom.haste;
-  
-  BaseRangeSpeed = RANGED_WEAPONS[gear.range.id].speed / QuiverSpeed / talents.serp_swift;
-  BaseMeleeSpeed = MELEE_WEAPONS[gear.mainhand.id].speed;
+
+  BaseRangeSpeed = RANGED_WEAPONS[gear.range.id].speed / QuiverSpeed / talents.serp_swift / selectedbuffs.special.swiftRetAura;
+  BaseMeleeSpeed = MELEE_WEAPONS[gear.mainhand.id].speed / selectedbuffs.special.swiftRetAura / selectedbuffs.special.melee_haste;
 
 
 }
@@ -412,6 +430,7 @@ function update() {
 
 // handling for mana changes per gain/loss
 function procMana(attack,result){
+   let BasePlayer = BASE_PLAYER[level];
    let tmp = 0;
    let roll = 0;
    // judgement of wisdom gain if active
@@ -421,7 +440,7 @@ function procMana(attack,result){
             tmp = 5000; // 50% chance
             roll = rng10k();
             if (tmp < roll) {
-               let gain = Math.floor(2 / 100 * BaseMana)
+               let gain = Math.floor(2 / 100 * BasePlayer.BaseMana)
                currentMana += gain;
                if(combatlogRun) {
                   combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player gains " + gain + " Mana from Judgement of Wisdom";
@@ -430,9 +449,9 @@ function procMana(attack,result){
             }
          }
          else { // adds 50 every time instead of 100 and rolls it when average is selected
-            currentMana += Math.floor(1 / 100 * BaseMana);
+            currentMana += Math.floor(1 / 100 * BasePlayer.BaseMana);
             if(combatlogRun) {
-               combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player gains " + Math.floor(1 / 100 * BaseMana) + " Mana from Judgement of Wisdom";
+               combatlogarray[combatlogindex] = playertimeend.toFixed(3) + " - Player gains " + Math.floor(1 / 100 * BasePlayer.BaseMana) + " Mana from Judgement of Wisdom";
                combatlogindex++;
             }
          }
@@ -466,6 +485,7 @@ function procMana(attack,result){
 
    return;
 }
+var manatotal = 0
 function updateMana() {
    // spirit tick gain (if no casting condition)
    let spiregen = 0;
@@ -476,9 +496,13 @@ function updateMana() {
    }
 
    // mp5 tick gain
-   currentMana += ManaPer5 + spiregen;
+   let replenish_mana = (replenishment) ? Mana * 0.01 : 0;
+   let managain = (ManaPer5 + spiregen + replenish_mana) / 5 * steptime;
+   currentMana += managain;
+   manatotal += managain;
+   //console.log(manatotal)
    if(combatlogRun) {
-      //combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player regens " + (ManaPer5 + spiregen) + " Mana";
+      //combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player regens " + (managain) + " Mana";
       //combatlogindex++;
    }
 
@@ -498,6 +522,7 @@ function updateMana() {
 // handling for dynamic armor reduction 
 function updateArmorReduction() {
    let arp = ArPRating;
+   let BasePlayer = BASE_PLAYER[level];
    let debuffarp = 1;
    let armorPenReduc = 0;
    // formula consts for level 60 or higher
@@ -515,7 +540,7 @@ function updateArmorReduction() {
       }, 0)
    }
    arp = Math.min(ArPRatingCap, arp);
-   armorPenReduc = arp / ArPRatingRatio / 100;
+   armorPenReduc = arp / BasePlayer.ArPRatingRatio / 100;
 
    // armor debuffs
    debuffarp *= (debuffs.faeriefire.timer > 0 && !debuffs.faeriefire.inactive) ? ( 1 - debuffs.faeriefire.arp ) : 1;
@@ -565,7 +590,7 @@ function updateAP() {
 
    // demonslaying AP
    if (target.type === 'Demon'){
-      targetAP += (playerconsumes.battle_elixir === 9224) ? 265 : 0;
+      targetAP += (playerconsumes.battle_elixir === 9224) ? 105 : 0;
    }
    // Hunter's mark
    let HM_rap = (debuffs.hm.timer > 0 && !debuffs.hm.inactive) ? debuffs.hm.rap : 0;
@@ -607,7 +632,9 @@ function updateAgi() {
 }
 // handling for updating speed
 function updateHaste() {
-   hasted_speed = 1;
+   let BasePlayer = BASE_PLAYER[level];
+
+   let hasted_speed = 1;
    rangespeed = BaseRangeSpeed;
    meleespeed = BaseMeleeSpeed;
    let hasterating = HasteRating;
@@ -625,7 +652,7 @@ function updateHaste() {
    hasted_speed = (auras.berserk?.timer > 0) ? hasted_speed * 1.2 : hasted_speed;  // troll berserking (20% in wotlk)
    hasted_speed = (auras.lust?.timer > 0) ? hasted_speed * 1.3 : hasted_speed; // lust
 
-   let hasteRatingSpeed = (hasterating / HasteRatingRatio / 100) + 1;
+   let hasteRatingSpeed = (hasterating / BasePlayer.HasteRatingRatio / 100) + 1;
    hasted_speed *= hasteRatingSpeed;
 
    // ranged only
@@ -662,6 +689,8 @@ function updateDmgMod(spell) {
 
 // handling for crit changes
 function updateCritChance(attack) {
+   let BasePlayer = BASE_PLAYER[level];
+
    let critsuppression = CritPenalty + CritAuraPenalty;
    let attackcrit = (attack === 'melee') ? MeleeCritChance : RangeCritChance; 
    let combatCrit = attackcrit + critsuppression;
@@ -677,12 +706,12 @@ function updateCritChance(attack) {
          }
          return acc + critval
       }, 0)
-      combatCrit += (critrating / CritRatingRatio);
+      combatCrit += (critrating / BasePlayer.CritRatingRatio);
    }
    if(!!auras.master_tact && auras.master_tact.timer > 0) { combatCrit += talents.master_tact; } // master tactician
    
    // from agi changes
-   combatCrit += combatAgi / AgiToCrit;
+   combatCrit += combatAgi / BasePlayer.AgiToCrit;
    if(debuffs.judgecrusader.timer > 0 && !debuffs.judgecrusader.inactive) { 
       combatCrit += debuffs.judgecrusader.crit; 
    } // imp crusader debuff
@@ -748,10 +777,11 @@ function rollSpell(attack,combatCrit,specialcrit, spell) {
    }
 }
 function rollMagicSpell(){
+   let BasePlayer = BASE_PLAYER[level];
    let tmp = 0;
    let roll = rng10k();
    let miss = BaseMagicMiss;
-   let crit = BaseSpellCrit + (Int / IntToCrit); // spell crit
+   let crit = BaseSpellCrit + (Int / BasePlayer.IntToCrit); // spell crit
    tmp += miss * 100;
    if (roll < tmp) return RESULT.MISS;
    tmp += PartialResistRate * 100; // partial resist rate approx. 14.5% based on log data at 0 resistance
@@ -1182,7 +1212,7 @@ function attackSpell(spell,spellcost) {
 }
 /** cast spell (possibly add individual spells) */
 function cast(spell) {
-
+   let BasePlayer = BASE_PLAYER[level];
    let spellcost = 0;
    updateAgi();
    updateAP();
@@ -1190,14 +1220,14 @@ function cast(spell) {
    let dot_check = (spell === 'immolatetrap' || spell === 'serpentsting' || spell === 'blackarrow' || spell === 'explosivetrap' || spell === 'explosiveshot');
 
    if (spell === 'raptorstrike'){
-      spellcost = USED_SPELLS.raptorstrike.cost / 100 * BaseMana;
+      spellcost = USED_SPELLS.raptorstrike.cost / 100 * BasePlayer.BaseMana;
       attackSpell(spell,spellcost);
    }
    else if (spell === 'melee'){
       attackMainhand(combatMAP);
    } 
    else if (dot_check) {
-      spellcost = USED_SPELLS[spell].cost / 100 * BaseMana;
+      spellcost = USED_SPELLS[spell].cost / 100 * BasePlayer.BaseMana;
       attackDoT(spell,spellcost);
       //console.log("gcd => " + (Math.round(currentgcd * 1000) / 1000));
    }
@@ -1206,7 +1236,7 @@ function cast(spell) {
    }
    else {
       
-      spellcost = USED_SPELLS[spell].cost / 100 * BaseMana;
+      spellcost = USED_SPELLS[spell].cost / 100 * BasePlayer.BaseMana;
       attackSpell(spell,spellcost);
       recentcast = true;
       //console.log("gcd => " + (Math.round(currentgcd * 1000) / 1000));

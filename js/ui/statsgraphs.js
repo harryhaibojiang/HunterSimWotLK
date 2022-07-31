@@ -484,8 +484,11 @@ function buildTable(results){
 	
 	let actions = {};
 	for (let spell in simresults) {
-		if (spell === 'pet_special' || spell === 'pet_focus_dump') {
-			actions[spell] = PET_SPELLS[spell].spell_name;
+		if (spell === 'pet_special'){
+			actions.pet_special = PET_SPELLS.pet_special?.spell_name;
+		} 
+		else if (spell === 'pet_focus_dump') {
+			actions.pet_focus_dump = PET_SPELLS.pet_focus_dump.spell_name;
 		}
 		else if (spell === 'petattack') {
 			actions[spell] = 'Auto Attack (Pet)';
@@ -558,7 +561,7 @@ function resultCountInitialize() {
 		spellresult[spellname].count = 0;
 		spellresult[spellname].dmg = 0;
 		
-		if (spellname === 'pet_special' || spellname === 'wild_quiver') {
+		if (spellname === 'pet_special' || spellname === 'wild_quiver' || spellname === 'arcaneshot' || spellname === 'chimera_serpent') {
 			spellresult[spellname].Partial = 0;
 		}
 		if (spellname === 'pet_focus_dump' || spellname === 'petattack' || spellname === 'raptorstrike' || spellname === 'melee') {
