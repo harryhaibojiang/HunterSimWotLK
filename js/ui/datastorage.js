@@ -8,6 +8,7 @@ function storeData(){
     localStorage.setItem('gear',JSON.stringify(gear));
     // buffs
     localStorage.setItem('buffs',JSON.stringify(buffslist));
+    localStorage.setItem('replenish', replenishment);
     // player consumes
     localStorage.setItem('pla_consumes',JSON.stringify(playerconsumes));
     // pet consumes
@@ -20,11 +21,8 @@ function storeData(){
     localStorage.setItem('flask',document.getElementById("flask").value);
     localStorage.setItem('battle',document.getElementById("battle").value);
     localStorage.setItem('guardian',document.getElementById("guardian").value);
-    localStorage.setItem('scrollagi',document.getElementById("scrollagi").value);
-    localStorage.setItem('scrollstr',document.getElementById("scrollstr").value);
+
     localStorage.setItem('food',document.getElementById("food").value);
-    localStorage.setItem('petscrollagi',document.getElementById("petscrollagi").value);
-    localStorage.setItem('petscrollstr',document.getElementById("petscrollstr").value);
     localStorage.setItem('petfood',document.getElementById("petfood").value);
     // saves each value below as a string - fight settings
     localStorage.setItem('iterations',iterations);
@@ -36,11 +34,13 @@ function storeData(){
     localStorage.setItem('weavetime',JSON.stringify(weavetime));
     localStorage.setItem('petselect',selectedPet);
     localStorage.setItem('raceselect',selectedRace);
+    localStorage.setItem('levelSelect',level);
     localStorage.setItem('target',JSON.stringify(target));
     // talents
     localStorage.setItem('talentindex',talentindex);
     localStorage.setItem('talents',JSON.stringify(talents));
     localStorage.setItem('whtalentlink',whtalentlink);
+    localStorage.setItem('glyphs', JSON.stringify(selected_glyphs));
     // spell enables
     localStorage.setItem("rapidcheck", document.getElementById("rapidcheck").checked);
     localStorage.setItem("beastcheck", document.getElementById("beastcheck").checked);
@@ -48,10 +48,6 @@ function storeData(){
     localStorage.setItem("lustcheck", document.getElementById("lustcheck").checked);
     localStorage.setItem("runecheck", document.getElementById("runecheck").checked);
 
-    localStorage.setItem("multicheck", document.getElementById("multicheck").checked);
-    localStorage.setItem("arcanecheck", document.getElementById("arcanecheck").checked);
-    localStorage.setItem("raptorcheck", document.getElementById("raptorcheck").checked);
-    localStorage.setItem("meleecheck", document.getElementById("meleecheck").checked);
     // spell offsets
     localStorage.setItem("rapidoffset", document.getElementById("rapidoffset").value);
     localStorage.setItem("beastoffset", document.getElementById("beastoffset").value);
@@ -83,12 +79,13 @@ function fetchData(){
     gear = (localStorage.getItem('gear') != null) ? JSON.parse(localStorage.getItem('gear')) : gear;
     // buffs
     buffslist = (localStorage.getItem('buffs') != null) ? JSON.parse(localStorage.getItem('buffs')) : buffslist;
+    replenishment = (localStorage.getItem('replenish') != null) ? JSON.parse(localStorage.getItem('replenish')) : replenishment;
     // player consumes
     playerconsumes = (localStorage.getItem('pla_consumes') != null) ? JSON.parse(localStorage.getItem('pla_consumes')):playerconsumes;
     // pet consumes
     petconsumes = (localStorage.getItem('pet_consumes') != null) ? JSON.parse(localStorage.getItem('pet_consumes')):petconsumes;
     // debuffs
-    //debuffs = (localStorage.getItem('debuffs') != null) ? JSON.parse(localStorage.getItem('debuffs')):debuffs;
+    debuffs = (localStorage.getItem('debuffs') != null) ? JSON.parse(localStorage.getItem('debuffs')):debuffs;
     // statweights
     statweights = (localStorage.getItem('statweights') != null) ? JSON.parse(localStorage.getItem('statweights')):statweights;
     displayStatWeights();
@@ -103,6 +100,7 @@ function fetchData(){
     weavetime = (localStorage.getItem('weavetime') != null) ? JSON.parse(localStorage.getItem('weavetime')):weavetime;
     selectedPet = (localStorage.getItem('petselect') != null) ? parseInt(localStorage.getItem('petselect')):selectedPet;
     selectedRace = (localStorage.getItem('raceselect') != null) ? parseInt(localStorage.getItem('raceselect')):selectedRace;
+    level = (localStorage.getItem('levelSelect') != null) ? parseInt(localStorage.getItem('levelSelect')):level;
 
     target = (localStorage.getItem('target') != null) ? JSON.parse(localStorage.getItem('target')):target;
     // talents
@@ -114,10 +112,6 @@ function fetchData(){
     usable_CDs.lust.enable = (localStorage.getItem('lustcheck') != null) ? JSON.parse(localStorage.getItem('lustcheck')):usable_CDs.lust.enable;
 
     usable_CDs.rune.enable = (localStorage.getItem('runecheck') != null) ? JSON.parse(localStorage.getItem('runecheck')):usable_CDs.rune.enable;
-    SPELLS.multishot.enable = (localStorage.getItem('multicheck') != null) ? JSON.parse(localStorage.getItem('multicheck')):SPELLS.multishot.enable;
-    SPELLS.arcaneshot.enable = (localStorage.getItem('arcanecheck') != null) ? JSON.parse(localStorage.getItem('arcanecheck')):SPELLS.arcaneshot.enable;
-    SPELLS.raptorstrike.enable = (localStorage.getItem('raptorcheck') != null) ? JSON.parse(localStorage.getItem('raptorcheck')):SPELLS.raptorstrike.enable;
-    SPELLS.melee.enable = (localStorage.getItem('meleecheck') != null) ? JSON.parse(localStorage.getItem('meleecheck')):SPELLS.melee.enable;
 
     // spell offsets
     usable_CDs.rapid.offset = (localStorage.getItem('rapidoffset') != null) ? parseInt(localStorage.getItem('rapidoffset')) : usable_CDs.rapid.offset;
@@ -128,6 +122,8 @@ function fetchData(){
     }
     usable_CDs.lust.offset = (localStorage.getItem('lustoffset') != null) ? parseInt(localStorage.getItem('lustoffset')):usable_CDs.lust.offset;
     usable_CDs.potion.offset = (localStorage.getItem('startpotoffset') != null) ? parseInt(localStorage.getItem('startpotoffset')):usable_CDs.potion.offset;
+
+    selected_glyphs = (localStorage.getItem('glyphs') != null) ? JSON.parse(localStorage.getItem('glyphs')) : selected_glyphs;
 
     // spell option
     let spellcdoption = '';
@@ -171,8 +167,9 @@ function fetchData(){
     document.getElementById("playeruptime").value = playeruptime;
     document.getElementById("petuptime").value = petuptime;
     document.getElementById("weavetime").value = weavetime.toFixed(1);
-    document.getElementById("pet").value = selectedPet;
+    document.getElementById("petSelect").value = selectedPet;
     document.getElementById("race").value = selectedRace;
+    document.getElementById("levelSelect").value = level;
     document.getElementById("racedisplay").innerHTML = races[selectedRace][level].name;
     let targets = targetData.getNameKeyTargetPairs();
     let findtarget = targets.find(key => key.name == target.name);
@@ -181,42 +178,49 @@ function fetchData(){
     document.getElementById("typeSelect").value = target.type;
     document.getElementById("level").value = target.level;
 
+    document.getElementById("replenish").checked = replenishment;
+
     document.getElementById("flask").value = (localStorage.getItem("flask") != null) ?  localStorage.getItem('flask') : document.getElementById("flask").value;
     document.getElementById("battle").value = (localStorage.getItem("battle") != null) ?  localStorage.getItem('battle') : document.getElementById("battle").value;
     document.getElementById("guardian").value = (localStorage.getItem("guardian") != null) ?  localStorage.getItem('guardian') : document.getElementById("guardian").value;
-    document.getElementById("scrollagi").value = (localStorage.getItem("scrollagi") != null) ?  localStorage.getItem('scrollagi') : document.getElementById("scrollagi").value;
-    document.getElementById("scrollstr").value = (localStorage.getItem("scrollstr") != null) ?  localStorage.getItem('scrollstr') : document.getElementById("scrollstr").value;
     document.getElementById("food").value = (localStorage.getItem("food") != null) ?  localStorage.getItem('food') : document.getElementById("food").value;
-    document.getElementById("petscrollagi").value = (localStorage.getItem("petscrollagi") != null) ?  localStorage.getItem('petscrollagi') : document.getElementById("petscrollagi").value;
-    document.getElementById("petscrollstr").value = (localStorage.getItem("petscrollstr") != null) ?  localStorage.getItem('petscrollstr') : document.getElementById("petscrollstr").value;
+    //console.log(localStorage.getItem("food"))
     document.getElementById("petfood").value = (localStorage.getItem("petfood") != null) ?  localStorage.getItem('petfood') : document.getElementById("petfood").value;
-
+    
     // buffs visual initialization
-    document.getElementById("kings").checked = (buffslist[0] == 25898) ? true : false;
-    document.getElementById("might").checked = (buffslist[1].id == 27141) ? true : false;
-    document.getElementById("mightmod").selected = (buffslist[1].talented) ? true : false;
-    document.getElementById("wisdom").checked = (buffslist[2].id == 27143) ? true : false;
-    document.getElementById("wisdommod").selected = (buffslist[2].talented) ? true : false;
-    document.getElementById("lotp").checked = (buffslist[3] == 17007) ? true : false;
-    document.getElementById("soe").checked = (buffslist[5].id == 25528) ? true : false;
-    document.getElementById("imptotem").selected = (buffslist[4].talented) ? true : false;
-    document.getElementById("manaspring").checked = (buffslist[6] == 25570) ? true : false;
-    document.getElementById("ai").checked = (buffslist[7] == 27127) ? true : false;
+    document.getElementById("apbuff").checked = (buffslist[0].id == 2048) ? true : false;
+    document.getElementById("apbuffmod").selected = (buffslist[0].talented) ? true : false;
+    document.getElementById("heroicpres").checked = (buffslist[1] == 6562) ? true : false;
+    document.getElementById("critbuff").checked = (buffslist[2] == 17007) ? true : false;
+    document.getElementById("agistrbuff").checked = (buffslist[3].id == 25528) ? true : false;
+    document.getElementById("imptotem").selected = (buffslist[3].talented) ? true : false;
+    document.getElementById("appercent").checked = (buffslist[4] == 27066) ? true : false;
+    document.getElementById("minorhaste").checked = (buffslist[5] == 53648) ? true : false;
+    document.getElementById("minordmg").checked = (buffslist[6] == 75447) ? true : false;
+    document.getElementById("meleehaste").checked = (buffslist[7] == 25587) ? true : false;
     document.getElementById("gotw").checked = (buffslist[8].id == 26991) ? true : false;
     document.getElementById("gotwmod").selected = (buffslist[8].talented) ? true : false;
-    document.getElementById("fort").checked = (buffslist[9].id == 25392) ? true : false;
-    document.getElementById("fortmod").selected = (buffslist[9].talented) ? true : false;
-    document.getElementById("windfury").checked = (buffslist[11].id == 25587) ? true : false;
-    document.getElementById("windfurymod").selected = (buffslist[11].talented) ? true : false;
-    document.getElementById("heroicpres").checked = (buffslist[12] == 6562) ? true : false;
-    document.getElementById("shout").checked = (buffslist[13].id == 2048) ? true : false;
-    document.getElementById("shoutmod").selected = (buffslist[13].talented) ? true : false;
-    document.getElementById("tsa").checked = (buffslist[14] == 27066) ? true : false;
+    document.getElementById("kings").checked = (buffslist[9] == 25898) ? true : false;
+    document.getElementById("mp5buff").checked = (buffslist[10].id == 27143) ? true : false;
+    document.getElementById("mp5buffmod").selected = (buffslist[10].talented) ? true : false;
+    document.getElementById("ai").checked = (buffslist[11] == 27127) ? true : false;
+    document.getElementById("felintel").checked = (buffslist[12] == 57567) ? true : false;
+    document.getElementById("fort").checked = (buffslist[13].id == 25392) ? true : false;
+    document.getElementById("fortmod").selected = (buffslist[13].talented) ? true : false;
 
     document.getElementById("talentselect").value = talentindex;
     document.getElementById("customtalent").value = whtalentlink;
     selectTalents(talentindex);
-
+    if (selected_glyphs.length >= 1) {
+        document.getElementById('glyphSelect1').value = selected_glyphs[0];
+    }
+    if (selected_glyphs.length >= 2) {
+        document.getElementById('glyphSelect2').value = selected_glyphs[1];
+    }
+    if (selected_glyphs.length >= 3) {
+        document.getElementById('glyphSelect3').value = selected_glyphs[2];
+    }
+    
     // initialize saved debuffs visuals
     document.getElementById("hmuptime").value = debuffs.hm.uptime_g;
     document.getElementById("hmbonus").selected = debuffs.hm.improved ? true : false;
@@ -228,15 +232,13 @@ function fetchData(){
     document.getElementById("ieuptime").value = debuffs.expose.uptime_g;
     document.getElementById("bfuptime").value = debuffs.bloodfrenzy.uptime_g;
     document.getElementById("coeuptime").value = debuffs.curseofele.uptime_g;
+    document.getElementById("mangleuptime").value = debuffs.mangle.uptime_g;
 
     // spell enables
     document.getElementById("rapidcheck").checked = usable_CDs.rapid.enable;
     document.getElementById("lustcheck").checked = usable_CDs.lust.enable;
     document.getElementById("runecheck").checked = usable_CDs.rune.enable;
-    document.getElementById("multicheck").checked = SPELLS.multishot.enable;
-    document.getElementById("arcanecheck").checked = SPELLS.arcaneshot.enable;
-    document.getElementById("raptorcheck").checked = SPELLS.raptorstrike.enable;
-    document.getElementById("meleecheck").checked = SPELLS.melee.enable;
+
     // // spell offsets
     document.getElementById("rapidoffset").value = usable_CDs.rapid.offset;
     document.getElementById("beastoffset").value = usable_CDs.beastwithin.offset;

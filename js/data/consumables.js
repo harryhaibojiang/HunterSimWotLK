@@ -1,6 +1,6 @@
 const FOODS = {
   27664: {
-    name: 'Grilled Mudfish',
+    name: 'Grilled Mudfish (+20 Agi)',
     icon: 'inv_misc_food_78',
     stats: {
       Spi: 20,
@@ -8,7 +8,7 @@ const FOODS = {
     }
   },
   27655: {
-    name: 'Ravager Dog',
+    name: 'Ravager Dog (+40 AP)',
     icon: 'inv_misc_food_53',
     stats: {
       Spi: 20,
@@ -17,7 +17,7 @@ const FOODS = {
     }
   },
   27667: {
-    name: 'Spicy Crawdad',
+    name: 'Spicy Crawdad (+30 Stam)',
     icon: 'inv_misc_fish_16',
     stats: {
       Sta: 30,
@@ -25,7 +25,7 @@ const FOODS = {
     }
   },
   33872: {
-    name: 'Spicy Hot Talbuk',
+    name: 'Spicy Hot Talbuk (+20 Hit)',
     icon: 'inv_misc_food_84_roastclefthoof',
     stats: {
       Spi: 20,
@@ -33,7 +33,7 @@ const FOODS = {
     }
   },
   27659: {
-    name: 'Warp Burger',
+    name: 'Warp Burger (+20 Agi)',
     icon: 'inv_misc_food_65',
     stats: {
       Spi: 20,
@@ -41,7 +41,7 @@ const FOODS = {
     }
   },
   42999: {
-    name: 'Blackened Dragonfin',
+    name: 'Blackened Dragonfin (+40 Agi)',
     icon: '',
     stats: {
       Agi: 40,
@@ -49,7 +49,7 @@ const FOODS = {
     }
   },
   43015: {
-    name: 'Fish Feast',
+    name: 'Fish Feast (+80 AP)',
     icon: '',
     stats: {
       RAP: 80,
@@ -58,7 +58,7 @@ const FOODS = {
     }
   },
   34753: {
-    name: 'Great Feast',
+    name: 'Great Feast (+60 AP)',
     icon: '',
     stats: {
       RAP: 60,
@@ -67,7 +67,7 @@ const FOODS = {
     }
   },
   42995: {
-    name: 'Hearty Rhino',
+    name: 'Hearty Rhino (+40 ArP)',
     icon: '',
     stats: {
       ArP: 40,
@@ -75,7 +75,7 @@ const FOODS = {
     }
   },
   34769: {
-    name: 'Imperial Manta Steak',
+    name: 'Imperial Manta Steak (+40 Haste)',
     icon: '',
     stats: {
       Haste: 40,
@@ -83,7 +83,7 @@ const FOODS = {
     }
   },
   34748: {
-    name: 'Mammoth Meal',
+    name: 'Mammoth Meal (+60 AP)',
     icon: '',
     stats: {
       RAP: 60,
@@ -92,7 +92,7 @@ const FOODS = {
     }
   },
   34754: {
-    name: 'Mega Mammoth Meal',
+    name: 'Mega Mammoth Meal (+80 AP)',
     icon: '',
     stats: {
       RAP: 80,
@@ -101,7 +101,7 @@ const FOODS = {
     }
   },
   34766: {
-    name: 'Poached Northern Sculpin',
+    name: 'Poached Northern Sculpin (+80 AP)',
     icon: '',
     stats: {
       RAP: 80,
@@ -110,7 +110,7 @@ const FOODS = {
     }
   },
   42996: {
-    name: 'Snapper Extreme',
+    name: 'Snapper Extreme (+40 Hit)',
     icon: '',
     stats: {
       Hit: 40,
@@ -118,7 +118,7 @@ const FOODS = {
     }
   },
   34768: {
-    name: 'Spicy Blue Nettlefish',
+    name: 'Spicy Blue Nettlefish (+40 Crit)',
     icon: '',
     stats: {
       Crit: 40,
@@ -126,7 +126,7 @@ const FOODS = {
     }
   },
   42993: {
-    name: 'Spicy Fried Herring',
+    name: 'Spicy Fried Herring (+16 Mp5)',
     icon: '',
     stats: {
       MP5: 16,
@@ -134,33 +134,29 @@ const FOODS = {
     }
   },
   34756: {
-    name: 'Spiced Worm Burger',
+    name: 'Spiced Worm Burger (+40 Crit)',
     icon: '',
     stats: {
       Crit: 40,
       Stam: 40
     }
   },
-  44953: {
-    name: 'Worg Tartare',
-    icon: '',
-    stats: {
-      Hit: 40
-    }
-  },
   34750: {
-    name: 'Worm Delight',
+    name: 'Worm Delight (+30 Crit)',
     icon: '',
     stats: {
       Crit: 30,
       Stam: 30
     }
   },
+  0: {
+    name: 'None'
+  }
 }
 
 const BATTLE_ELIXIRS = {
   9224: {
-    name: 'Elixir of Demonslaying',
+    name: 'Demonslaying (+105 AP)',
     icon: 'inv_potion_27',
     stats: {
       MAP: 0, // change to target AP data only - returns 0 AP, but will check if selected in AP update data based on target
@@ -168,50 +164,50 @@ const BATTLE_ELIXIRS = {
     }
   },
   22831: {
-    name: 'Elixir of Major Agility',
+    name: 'Major Agility (+30 Agi, +12 Crit)',
     icon: 'inv_potion_127',
     stats: {
-      Agi: 35,
-      Crit: 20
+      Agi: 30,
+      Crit: 12
     }
   },
   44325: {
-    name: 'Elixir of Accuracy',
+    name: 'Accuracy (+45 Hit)',
     icon: '',
     stats: {
       Hit: 45
     }
   },
   44330: {
-    name: 'Elixir of Armor Piercing',
+    name: 'Armor Piercing (+45 ArP)',
     icon: '',
     stats: {
       ArP: 45
     }
   },
   44327: {
-    name: 'Elixir of Deadly Strikes',
+    name: 'Deadly Strikes (+45 Crit)',
     icon: '',
     stats: {
       Crit: 45
     }
   },
   44331: {
-    name: 'Elixir of Lightning Speed',
+    name: 'Lightning Speed (+45 Haste)',
     icon: '',
     stats: {
       Haste: 45
     }
   },
   39666: {
-    name: 'Elixir of Mighty Agility',
+    name: 'Mighty Agility (+45 Agi)',
     icon: '',
     stats: {
       Agi: 45
     }
   },
   40068: {
-    name: 'Wrath Elixir',
+    name: 'Wrath Elixir (+90 AP)',
     icon: '',
     stats: {
       RAP: 90,
@@ -219,7 +215,7 @@ const BATTLE_ELIXIRS = {
     }
   },
   40076: {
-    name: 'Guru\'s Elixir',
+    name: 'Guru\'s Elixir (+20 Stats)',
     icon: '',
     stats: {
       Str: 20,
@@ -228,43 +224,56 @@ const BATTLE_ELIXIRS = {
       Int: 20,
       Spi: 20
     }
+  },
+  0: {
+    name: 'None'
   }
 }
 
 const GUARDIAN_ELIXIRS = {
   40109: {
-    name: 'Elixir of Mighty Mageblood',
+    name: 'Mighty Mageblood (+30 Mp5)',
     icon: '',
     stats: {
       MP5: 30
     }
   },
   9179: {
-    name: 'Elixir of Mighty Thoughts',
+    name: 'Mighty Thoughts (+45 Int)',
     icon: '',
     stats: {
       Int: 45
     }
+  },
+  22840: {
+    name: 'Major Mageblood (+20 Mp5)',
+    icon: '',
+    stats: {
+      Mp5: 20
+    }
+  },
+  0: {
+    name: 'None'
   }
 }
 
 const FLASKS = {
   13511: {
-    name: 'Flask of Distilled Wisdom',
+    name: 'Distilled Wisdom (+65 Int)',
     icon: 'inv_potion_97',
     stats: {
       Int: 65
     }
   },
   22853: {
-    name: 'Flask of Mighty Restoration',
+    name: 'Mighty Restoration (+25 Mp5)',
     icon: 'inv_potion_118',
     stats: {
       MP5: 25
     }
   },
   22854: {
-    name: 'Flask of Relentless Assault',
+    name: 'Relentless Assault (+120 AP)',
     icon: 'inv_potion_117',
     stats: {
       MAP: 120,
@@ -272,7 +281,7 @@ const FLASKS = {
     }
   },
   47499: {
-    name: 'Flask of the North',
+    name: 'the North (+80 AP)',
     icon: '',
     stats: {
       MAP: 80,
@@ -280,12 +289,15 @@ const FLASKS = {
     }
   },
   46377: {
-    name: 'Flask of Endless Rage',
+    name: 'Flask of Endless Rage (+180 AP)',
     icon: '',
     stats: {
       MAP: 180,
       RAP: 180
     }
+  },
+  0: {
+    name: 'None'
   }
 }
 
@@ -367,7 +379,7 @@ const SCROLLS_OF_STRENGTH = {
 
 const PET_FOODS = {
   33874: {
-    name: "Kibler's Bits",
+    name: "Kibler's Bits (+20 Str)",
     icon: 'inv_misc_food_49',
     stats: {
       Str: 20,
@@ -375,7 +387,7 @@ const PET_FOODS = {
     }
   },
   43005: {
-    name: "Spiced Mammoth Treats",
+    name: "Spiced Mammoth Treats (+30 Str)",
     icon: 'inv_misc_food_123_roast',
     stats: {
       Str: 30,
@@ -383,12 +395,15 @@ const PET_FOODS = {
     }
   },
   27656: {
-    name: 'Sporeling Snack',
+    name: 'Sporeling Snack (+20 Stam)',
     icon: 'inv_misc_food_87_sporelingsnack',
     stats: {
       Stam: 20,
       Spi: 20
     }
+  },
+  0: {
+    name: 'None'
   }
 }
 

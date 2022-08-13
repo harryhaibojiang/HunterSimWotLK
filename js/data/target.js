@@ -49,8 +49,8 @@ var targetData = (function() {
         level: 73
       },
       4: {
-        name: 'Level 70 6792',
-        armor: 6792,
+        name: 'Level 70 6719',
+        armor: 6719,
         phase: 1,
         resilience: 0,
         type: Target_Types.MECHANICAL,

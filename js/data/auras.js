@@ -31,7 +31,7 @@ const MAIN_CDS = { // todo
         },
         effect_name: 'Potion'
     },
-    rune: { // todo
+    rune: { 
         effect: {
             minMana: 900,
             maxMana: 1500,
@@ -412,18 +412,22 @@ const PET_CDS = {
     rabid: {
         effect: {
             duration: 20,
-            base_cd: 45
+            base_cd: 45,
+            stacks: 5,
+            apmod: 5,
+            proc_chance: 20,
         },
         effect_name: 'Rabid'
     },
     callofwild: {
         effect: {
             duration: 20,
-            base_cd: 300
+            base_cd: 300,
+            apmod: 10
         },
         effect_name: 'Call of the Wild'
     },
-    furioushowl: {
+    furious_howl: {
         stat_type: 'AP',
         effect: {
             duration: 20,
@@ -438,7 +442,8 @@ const PET_CDS = {
     serenitydust: {
         effect: {
             duration: 15,
-            base_cd: 60
+            base_cd: 60,
+            apmod: 10
         },
         effect_name: 'Serenity Dust'
     },
@@ -1297,7 +1302,8 @@ const TALENT_PROCS = {
             is_proc: true,
             proc_type: 'Special',
             duration: 12,
-            base_cd: 22
+            base_cd: 22,
+            stacks: 2
         },
         effect_name: 'Lock and Load'
     },
@@ -1326,7 +1332,8 @@ const AURA_DOTS = {
         type: 'shadow',
         effect: {
             tick_rate: 3,
-            duration: 15
+            duration: 15,
+            dmgmod: 6,
         },
         effect_name: 'Black Arrow'
     },
@@ -1396,7 +1403,7 @@ var usable_CDs = {
     rabid: { enable: false, offset: 0, type: 'pet' },
     recovery: { enable: true, offset: 0, type: 'pet' },
     callofwild: { enable: true, offset: 0, type: 'pet' },
-    furioushowl: { enable: false, offset: 0, type: 'pet' },
+    furious_howl: { enable: false, offset: 0, type: 'pet' },
     serenitydust: { enable: false, offset: 0, type: 'pet' },
 
 }
@@ -1407,7 +1414,7 @@ function updateUsableCDs() {
     let profession_2 = 'Leatherworking';
 
     if (selectedRace == 3) { // orc
-        usable_CDs.bloodfury.enable = false; // fixme
+        usable_CDs.bloodfury.enable = true; // fixme
         usable_CDs.berserking.enable = false;
         usable_CDs.arcanetorrent.enable = false;
 
@@ -1435,15 +1442,15 @@ function updateUsableCDs() {
         usable_CDs.engthermalsapper.enable = false;
     }
 
-    if (selectedPet === 7) {
-        usable_CDs.furioushowl.enable = true;
+    if (selectedPet === 6) {
+        usable_CDs.furious_howl.enable = true;
         usable_CDs.serenitydust.enable = false;
     }
-    if (selectedPet === 8) {
-        usable_CDs.furioushowl.enable = false;
+    else if (selectedPet === 20) {
+        usable_CDs.furious_howl.enable = false;
         usable_CDs.serenitydust.enable = true;
     } else {
-        usable_CDs.furioushowl.enable = false;
+        usable_CDs.furious_howl.enable = false;
         usable_CDs.serenitydust.enable = false;
     }
 
@@ -1452,6 +1459,9 @@ function updateUsableCDs() {
     usable_CDs.callofwild.enable = (pet_talents.call_of_wild > 0) ? true : false;
     usable_CDs.rabid.enable = (pet_talents.rabid > 0) ? true : false;
     usable_CDs.rune.enable = true;
+    usable_CDs.rapid.enable = true;
+    usable_CDs.lust.enable = true;
+    usable_CDs.beastwithin.enable = (talents.beastwithin > 0) ? true : false;
     usable_CDs.potion.potion_type = 'Crit'
     
 }
@@ -1590,8 +1600,12 @@ function buildAurasObj(){
             auras[aura_].effect = cd_obj[aura_].effect;
             auras[aura_].offset = usable_CDs[aura_].offset;
             auras[aura_].effect_name = cd_obj[aura_].effect_name;
-            if (aura_ === 'killcommand') {
+            if (aura_ === 'killcommand' || aura_ === 'rabid') {
                 auras[aura_].stacks = 0;
+            }
+            if (aura_ === 'furious_howl') {
+                auras[aura_].effect.stats.RAP = PET_SPELLS.pet_special.ranks.AP;
+                auras[aura_].effect.stats.MAP = PET_SPELLS.pet_special.ranks.AP;
             }
         }
     }
@@ -1609,6 +1623,9 @@ function buildAurasObj(){
                 auras[talent_].ticks = 0;
                 auras[talent_].type = TALENT_PROCS[talent_].type;
                 auras[talent_].damage = 0;
+            }
+            if (talent_ === 'lock_load') {
+                auras[talent_].stacks = 0;
             }
         }
     }
@@ -1664,7 +1681,7 @@ function buildAurasObj(){
         }
     }
     
-    if (!!PET_SPELLS.pet_special.tick_rate) {
+    if (!!PET_SPELLS.pet_special?.tick_rate) {
         auras.pet_special = JSON.parse(JSON.stringify(aura_template));
         auras.pet_special.effect = {};
         auras.pet_special.effect.duration = PET_SPELLS.pet_special.duration;

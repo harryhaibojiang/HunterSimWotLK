@@ -9,7 +9,7 @@ const GLYPHS_DATA = {
     42898:{
         name: 'Glyph of Arcane Shot',
         abrv:'arcane_shot',
-        bonus: 20,
+        bonus: 0.2,
         icon: 'inv_glyph_majorhunter'
     },
     42901:{
@@ -64,8 +64,7 @@ const GLYPHS_DATA = {
     42907:{
         name: 'Glyph of Hunter\'s Mark',
         abrv:'hunters_mark',
-        bonus: 20,
-        is_modifier: true,
+        bonus: 1.2,
         icon: 'inv_glyph_majorhunter'
     },
     42908:{
@@ -157,9 +156,7 @@ const GLYPHS_DATA = {
 }
 
 var selected_glyphs = [
-    42915,
-    42912,
-    45731
+    
 ]
 
 function selectGlyphs(glyphs_array) {

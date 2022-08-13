@@ -2,14 +2,27 @@
 const PetBaseDodge = 6.5;
 const PetBaseCrit  = 3.2;
 const PetBaseSpeed = 2;
-const PetMinDmg = 44;
-const PetMaxDmg = 68;
-const PetBaseAgi = 54;
-const PetBaseStr = 162;
+
+const BASE_PET = {
+    70: {
+        MinDmg: 44,
+        MaxDmg: 68,
+        BaseAgi: 54,
+        BaseStr: 162,
+        AgiToCrit: 30,
+    },
+    80: {
+        MinDmg: 59,
+        MaxDmg: 87,
+        BaseAgi: 113,
+        BaseStr: 331,
+        AgiToCrit: 62.77
+    }
+}
+
 const PetHappiness = 1.25;
 const PetFamilyMod = 1.05; // WotLK all pets have same family dmg mod of 5% idk why
 const PetHunterAPRatio = 0.22;
-const PetAgiToCrit = 30;
 const CobraReflexesPenalty = 0.85;
 const BaseFocusRegen = 25;
 // initial pet object - trying something different from how I did player 1 global object instead of a bunch of variables
@@ -82,9 +95,29 @@ var pet_talents = {
 var selectedPet = 0;
 
 function petStatsCalc(){
+    let BasePet = BASE_PET[level];
+
     if (talents.beast_mast === 0) {
         if(PET_FAMILY[selectedPet].family === 'Ferocity'){
-            pet_talents = Ferocitypet;
+            if (level === 70) {
+                pet_talents = Ferocity70_NonBM2;
+            } else {
+                pet_talents = Ferocity80_NonBM1;
+            }
+        }
+        else if(PET_FAMILY[selectedPet].family === 'Cunning'){
+            pet_talents = Cunningpet;
+        }
+        else if(PET_FAMILY[selectedPet].family === 'Tenacity'){
+            pet_talents = Tenacitypet;
+        }
+    } else {
+        if(PET_FAMILY[selectedPet].family === 'Ferocity'){
+            if (level === 70) {
+                pet_talents = Ferocity70_BM2;
+            } else {
+                pet_talents = Ferocity80_BM; 
+            }
         }
         else if(PET_FAMILY[selectedPet].family === 'Cunning'){
             pet_talents = Cunningpet;
@@ -100,20 +133,20 @@ function petStatsCalc(){
         beasttamers_dmg = 1.02;
         beasttamers_crit = 2;
     };
-    let group_dmg_mod = (talents.ferocious_insp > 0) ? talents.ferocious_insp : 1;
+    let group_dmg_mod = (talents.ferocious_insp > 0) ? talents.ferocious_insp : selectedbuffs.special.FerociousInsp;
     pet.dmgmod = PetHappiness * talents.unleash_fury * racialmod * beasttamers_dmg * group_dmg_mod * pet_talents.spike_collar * talents.kindred_spirit * pet_talents.shark_attack;
 
-    pet.str = Math.floor((PetBaseStr + (selectedbuffs.stats.Str || 0) + (petconsumestats.Str || 0)) * selectedbuffs.special.kingsMod);
-    pet.agi = Math.floor((PetBaseAgi + (selectedbuffs.stats.Agi || 0) + (petconsumestats.Agi || 0)) * selectedbuffs.special.kingsMod);
+    pet.str = Math.floor((BasePet.BaseStr + (selectedbuffs.stats.Str || 0) + (petconsumestats.Str || 0)) * selectedbuffs.special.kingsMod);
+    pet.agi = Math.floor((BasePet.BaseAgi + (selectedbuffs.stats.Agi || 0) + (petconsumestats.Agi || 0)) * selectedbuffs.special.kingsMod);
 
     //ap
-    let petAPfromplayer = BaseRAP * PetHunterAPRatio;
-    let tsa_ap = (talents.trueshot_aura > 1) ? 1 : 1; // fixme
-    let apmod = (talents.animal_handler) * (1 + Stam * talents.hunt_vs_wild) * tsa_ap;
+    let petAPfromplayer = BaseRAP * PetHunterAPRatio * pet_talents.wild_hunt;
+    let tsa_ap = (talents.trueshot_aura > 1) ? talents.trueshot_aura : selectedbuffs.special.percentAPMod;
+    let apmod = talents.animal_handler * tsa_ap;
     
-    pet.ap = ((pet.str - 10) * 2 + (selectedbuffs.stats.MAP || 0) + petAPfromplayer) * apmod;
+    pet.ap = ((pet.str - 10) * 2 + (selectedbuffs.stats.MAP || 0) + (Stam * talents.hunt_vs_wild) + petAPfromplayer) * apmod;
     //crit
-    pet.crit = PetBaseCrit + pet.agi / PetAgiToCrit + talents.ferocity + (selectedbuffs.stats.CritChance || 0) + beasttamers_crit + CritPenalty + pet_talents.spider_bite * 100; // need to add special gear items w/ pet crit
+    pet.crit = PetBaseCrit + pet.agi / BasePet.AgiToCrit + talents.ferocity + (selectedbuffs.stats.CritChance || 0) + beasttamers_crit + 0 + pet_talents.spider_bite; // need to add special gear items w/ pet crit
     //hit
     pet.hit = Math.floor(RangeHitChance);
     pet.miss = Math.max(BasePhysicalMiss - pet.hit,0);
@@ -122,7 +155,7 @@ function petStatsCalc(){
     pet.expertise = Math.floor(pet_expertise_scale * pet.hit);
     pet.dodge = PetBaseDodge - pet.expertise * ExpertiseReduction;
     //speed
-    pet.speed = PetBaseSpeed / talents.serp_swift / pet_talents.cobra_reflex; // 1.3 for cobra reflexes
+    pet.speed = PetBaseSpeed / talents.serp_swift / pet_talents.cobra_reflex / selectedbuffs.special.swiftRetAura / selectedbuffs.special.melee_haste; // 1.3 for cobra reflexes
     
     generatePetSpellObj();
     
@@ -142,7 +175,7 @@ function petUpdateDmgMod(){
     if(auras.killcommand?.timer > 0) pet_special_mod = (1 + auras.killcommand.stacks * auras.killcommand.effect.dmgmod / 100);
     if(debuffs.hm.timer > 0 && talents.mark_death > 0) pet_special_mod *= (1 + talents.mark_death);
     if(auras.savagery?.timer > 0) pet.combatdmgmod *= (1 + auras.savagery.effect.dmgbonus / 100); // savage rend crit
-
+    //if(totalduration > totalduration * 0.65) pet.combatdmgmod *= pet_talents.feed_frenzy;
     return;
 }
 
@@ -154,16 +187,25 @@ function petUpdateHaste(){
 }
 
 function petUpdateStats(){
-
+    let BasePet = BASE_PET[level];
     pet.combatcrit = pet.crit;
     pet.combatspellcrit = Math.max(0,talents.ferocity + CritPenalty);
 
     // hunter AP
     let bonusAP = updateAP();
-    pet.combatap = bonusAP * PetHunterAPRatio + pet.ap;
+    let petAPfromplayer = bonusAP * PetHunterAPRatio * pet_talents.wild_hunt;
+    let tsa_ap = (talents.trueshot_aura > 1) ? talents.trueshot_aura : selectedbuffs.special.percentAPMod;
+    let base_apmod = talents.animal_handler * tsa_ap;
+
+    let combat_apmod = 1;
+    if (auras.rabid?.timer > 0) combat_apmod *= (1 + (auras.rabid.effect.apmod * auras.rabid.stacks / 100));
+    if (auras.serenitydust?.timer > 0) combat_apmod *= (1 + auras.serenitydust.effect.apmod / 100);
+    if (auras.callofwild?.timer > 0) combat_apmod *= (1 + auras.callofwild.effect.apmod / 100);
+
+    pet.combatap = (petAPfromplayer * base_apmod + pet.ap) * combat_apmod;
 
     // ******************** Crit *******************
-    pet.combatcrit += combatAgi / PetAgiToCrit;
+    pet.combatcrit += combatAgi / BasePet.AgiToCrit;
     // pet crit imp crusader
     if(debuffs.judgecrusader.timer > 0 && !debuffs.judgecrusader.inactive) { 
         pet.combatcrit += debuffs.judgecrusader.crit;
@@ -189,11 +231,9 @@ function procPetFocus(playercrit){
 
 function petUpdateFocus(){
     // focus regen per 5s
-    pet.focus += pet.focusregen;    
-    if(combatlogRun) {
-        combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Pet regens " + pet.focusregen + " Focus";
-        combatlogindex++;
-    }
+    let regen = pet.focusregen / 5 * steptime;
+    pet.focus += regen;
+    //console.log(regen)  
     
     // cap focus at 100, reset crit flag
     pet.focus = Math.min(100, pet.focus);
@@ -277,6 +317,8 @@ function petAttack(){
     spellresult.petattack.dmg += done;
     spellresult.petattack.count++;
 
+    petProc(result);
+
     if(combatlogRun) {
         combatlogarray[combatlogindex] = petsteptime.toFixed(3) + " - Pet Auto " + RESULTARRAY[result] + " for " + done;
         combatlogindex++;
@@ -335,6 +377,7 @@ function petSpell(petspell){
     }
     else if(spelltype === 'AP') {
 
+        auras.furious_howl.timer = auras.furious_howl.effect.duration;
     }
     else if(spelltype !== 'physical' && dot_only_check){
         
@@ -385,14 +428,19 @@ function petSpell(petspell){
     if(auras.killcommand?.timer > 0 && auras.killcommand.stacks === 0) {
         auras.killcommand.timer = 0;
     }
-    
+    petProc(result, petspell);
     petUpdateHaste();
     
     if(combatlogRun && !dot_only_check){
-        combatlogarray[combatlogindex] = petsteptime.toFixed(3) + " - Pet casts " + PET_SPELLS[petspell].spell_name + " on Target - " + RESULTARRAY[result];
+        combatlogarray[combatlogindex] = petsteptime.toFixed(3) + " - Pet casts " + spellname + " on Target - " + RESULTARRAY[result];
         combatlogindex++;
-    } else if (combatlogRun) {
-        combatlogarray[combatlogindex] = petsteptime.toFixed(3) + " - Pet " + PET_SPELLS[petspell].spell_name + " " + RESULTARRAY[result] + " for " + done;
+    } 
+    else if(combatlogRun && spellname === 'Furious Howl'){
+        combatlogarray[combatlogindex] = petsteptime.toFixed(3) + " - Pet casts " + spellname + " AP: " + PET_SPELLS.pet_special.ranks.AP;
+        combatlogindex++;
+    } 
+    else if (combatlogRun) {
+        combatlogarray[combatlogindex] = petsteptime.toFixed(3) + " - Pet " + spellname + " " + RESULTARRAY[result] + " for " + done;
         combatlogindex++;
         
     }
@@ -419,10 +467,31 @@ function petdealdamage(dmg, result, spelltype) {
     }
 }
 
+function petProc(result, petspell){
+    let roll = 0;
+    let check_spell = (petspell !== undefined) ? PET_SPELLS[petspell].spell_name : '';
+
+    if (result !== RESULT.MISS && auras.rabid?.timer > 0) {
+        roll = rng10k();
+        let procchance = auras.rabid.effect.proc_chance;
+        let curr_stacks = auras.rabid.stacks;
+        auras.rabid.stacks = (roll <= procchance * 100) ? Math.min(auras.rabid.stacks + 1, auras.rabid.effect.stacks) : auras.rabid.stacks;
+        if(curr_stacks < auras.rabid.stacks && combatlogRun) { 
+           combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Pet gains " + auras.rabid.effect_name + " stacks: " + auras.rabid.stacks;
+           combatlogindex++;
+        }
+    }
+    // activate plus refresh
+    if (check_spell === 'Monstrous Bite'){
+        auras.monstrousbite.timer = auras.monstrousbite.effect.duration;
+        auras.monstrousbite.stacks = Math.min(auras.monstrousbite.stacks + 1, auras.monstrousbite.effect.stacks);
+    }
+}
+
 function petCrit(petspell){
 
     let check_spell = (petspell !== undefined) ? petspell : '';
-    if (PET_SPELLS.pet_special.spell_name === 'Savage Rend' && petspell === 'pet_special') {
+    if (petspell === 'pet_special' && PET_SPELLS.pet_special.spell_name === 'Savage Rend') {
         auras.savagery.timer = auras.savagery.effect.duration;
         if (combatlogRun){
             combatlogarray[combatlogindex] = nextpetspell.toFixed(3) + " - Pet gains Savagery";
@@ -443,8 +512,8 @@ function petCrit(petspell){
     if (!!auras.frenzy) {
         roll = rng10k();
         let frenzychance = talents.frenzy * 2000;
-        auras.frenzy.timer = (roll <= frenzychance) ? 8 : pet.frenzy.timer; // proc check
-        if(pet.frenzy.timer === 8) { 
+        auras.frenzy.timer = (roll <= frenzychance) ? auras.frenzy.effect.duration : auras.frenzy.timer; // proc check
+        if(auras.frenzy.timer === auras.frenzy.effect.duration) { 
             if(combatlogRun && nextpetspell >= nextpetattack) {
                     combatlogarray[combatlogindex] = nextpetattack.toFixed(3) + " - Pet gains Frenzy";
                     combatlogindex++;

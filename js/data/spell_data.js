@@ -64,8 +64,7 @@ const CHIMERA_SHOT = {
         type: 'nature'
     },
     serpent: {
-        rankdmg: 40,
-        level: 70
+        dmgmod: 0.4,
     },
 }
 const EXPLOSIVE_SHOT = {
@@ -80,13 +79,13 @@ const EXPLOSIVE_SHOT = {
         type: 'fire'
     },
     1: {
-        min_rankdmg: 221,
-        max_rankdmg: 265,
+        mindmg: 221,
+        maxdmg: 265,
         level: 70
     },
     2: {
-        min_rankdmg: 386,
-        max_rankdmg: 464,
+        mindmg: 386,
+        maxdmg: 464,
         level: 80
     },
 }
@@ -102,14 +101,14 @@ const EXPLOSIVE_TRAP = {
         type: 'fire'
     },
     1: {
-        min_rankdmg: 263,
-        max_rankdmg: 337,
+        mindmg: 263,
+        maxdmg: 337,
         dot_dmg: 45,
         level: 70
     },
     2: {
-        min_rankdmg: 523,
-        max_rankdmg: 671,
+        mindmg: 523,
+        maxdmg: 671,
         dot_dmg: 90,
         level: 80
     },
@@ -304,27 +303,6 @@ const SNAKE_TRAP = {
 
 var SPELLS = {
 
-    autoshot: {cast:0.5, cd:0, dmg:0, cost:0, duration:0, gcd:false},
-    steadyshot: {enable:true, cast:1.5, cd:0, dmg:0, cost:110, duration:0, rankdmg:150, gcd:true},
-    multishot: {enable:false, cast:0.5, cd:0, dmg:0, cost:275, duration:0, rankdmg:205, gcd:true},
-    arcaneshot: {enable:false, cast:0.0001, cd:0, dmg:0, cost:230, duration:0, rankdmg:273, gcd:true},
-    aimedshot: {enable:false, cast:3, cd: 0, dmg:0, cost:370, duration:0, rankdmg:870, gcd:true},
-    raptorstrike: {enable:false, cast:0.0, cd: 0, dmg:0, cost:120, rankdmg:170,gcd:false},
-    melee: {enable:false, cast:0.0, cd:0, dmg:0, gcd:false},
-    mongoose: {enable:false, cast:0.0, cd: 0, dmg:0, cost:120, rankdmg:170,gcd:false},
-    blackarrow: {enable:false, cast:0.0001, cd: 0, dmg:0, cost:120, rankdmg:170,gcd:false},
-    chimerashot: {enable:false, cast:0.0001, cd: 0, dmg:0, cost:120, rankdmg:170,gcd:false},
-    explosiveshot: {enable:false, cast:0.0001, cd: 0, dmg:0, cost:120, rankdmg:170,gcd:false},
-    serpentsting: {enable:false, cast:0.0001, cd: 0, dmg:0, cost:120, rankdmg:170,gcd:false},
-    explosivetrap: {enable:false, cast:0.0001, cd: 0, dmg:0, cost:120, rankdmg:170,gcd:false},
-    immolatetrap: {enable:false, cast:0.0001, cd: 0, dmg:0, cost:120, rankdmg:170,gcd:false},
-    frosttrap: {enable:false, cast:0.0001, cd: 0, dmg:0, cost:120, rankdmg:170,gcd:false},
-    snaketrap: {enable:false, cast:0.0001, cd: 0, dmg:0, cost:120, rankdmg:170,gcd:false},
-    volley: {enable:false, cast:0.0001, cd: 0, dmg:0, cost:120, rankdmg:170,gcd:false},
-    killshot: {enable:false, cast:0.0001, cd: 0, dmg:0, cost:120, rankdmg:170,gcd:false},
-    silencingshot: {enable:false, cast:0.0001, cd: 0, dmg:0, cost:120, rankdmg:170,gcd:false},
-    scattershot: {enable:false, cast:0.0001, cd: 0, dmg:0, cost:120, rankdmg:170,gcd:false},
-
 };
 
 function generateSpellData(){
@@ -356,17 +334,31 @@ settings = {
     arcaneshot: true,
     serpentsting: true,
     silencingshot: true,
+    explosiveshot: true,
+    blackarrow: true,
+    killshot: true,
 
 }
+
+function updateSpellSettings() {
+    settings.chimerashot = (talents.chimera_shot === 1) ? true : false;
+    settings.aimedshot = (talents.aimed_shot === 1) ? true : false;
+    settings.silencingshot = (talents.silencing_shot === 1) ? true : false;
+    settings.explosiveshot = (talents.exp_shot === 1) ? true : false;
+    settings.blackarrow = (talents.black_arrow === 1) ? true : false;
+    settings.killshot = (level === 80) ? true : false;
+}
+
 function buildSpellsObj() {
 
     generateSpellData();
-
+    updateSpellSettings();
     for (let spell in SPELLS) {
         let enabled = settings[spell];
         if (enabled) {
             USED_SPELLS[spell] = SPELLS[spell];
         }
+        else delete USED_SPELLS[spell];
     }
     spell = '';
 }

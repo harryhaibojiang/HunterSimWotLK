@@ -120,7 +120,7 @@ const AMMOS = {
         name: "Mithril Gyro-Shot",
         ammo_dps: 15,
         Location: "Crafted - Eng",
-        Phase: 1,
+        Phase: 0,
         type: "bullet",
         icon: "inv_ammo_bullet_01",
         quality: "Uncommon"
@@ -129,7 +129,7 @@ const AMMOS = {
         name: "Jagged Arrow",
         ammo_dps: 13,
         Location: "Vendor",
-        Phase: 1,
+        Phase: 0,
         type: "arrow",
         icon: "inv_weapon_shortblade_25",
         quality: "Common"
@@ -138,7 +138,7 @@ const AMMOS = {
         name: "Doomshot",
         ammo_dps: 20,
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         type: "arrow",
         icon: "ability_hunter_criticalshot",
         quality: "Rare"
@@ -147,7 +147,7 @@ const AMMOS = {
         name: "Thorium Shells",
         ammo_dps: 17.5,
         Location: "Crafted - Eng",
-        Phase: 1,
+        Phase: 0,
         type: "bullet",
         icon: "inv_ammo_bullet_03",
         quality: "Uncommon"
@@ -156,7 +156,7 @@ const AMMOS = {
         name: "Thorium Headed Arrow",
         ammo_dps: 17.5,
         Location: "Crafted - Eng",
-        Phase: 1,
+        Phase: 0,
         type: "arrow",
         icon: "inv_ammo_arrow_02",
         quality: "Uncommon"
@@ -165,7 +165,7 @@ const AMMOS = {
         name: "Ice Threaded Arrow",
         ammo_dps: 16.5,
         Location: "Honor Reward",
-        Phase: 1,
+        Phase: 0,
         type: "arrow",
         icon: "spell_frost_iceshard",
         quality: "Uncommon"
@@ -174,7 +174,7 @@ const AMMOS = {
         name: "Ice Threaded Bullet",
         ammo_dps: 16.5,
         Location: "Honor Reward",
-        Phase: 1,
+        Phase: 0,
         type: "bullet",
         icon: "spell_frost_frostblast",
         quality: "Uncommon"
@@ -183,7 +183,7 @@ const AMMOS = {
         name: "Fel Iron Shells",
         ammo_dps: 26,
         Location: "Crafted - Eng",
-        Phase: 1,
+        Phase: 0,
         type: "bullet",
         icon: "inv_gizmo_felironshell",
         quality: "Uncommon"
@@ -192,7 +192,7 @@ const AMMOS = {
         name: "Adamantite Shells",
         ammo_dps: 43,
         Location: "Crafted - Eng",
-        Phase: 2,
+        Phase: 0,
         type: "bullet",
         icon: "inv_misc_ammo_bullet_04",
         quality: "Rare"
@@ -201,7 +201,7 @@ const AMMOS = {
         name: "Scout's Arrow",
         ammo_dps: 26,
         Location: "Cenarion Expedition - Friendly",
-        Phase: 1,
+        Phase: 0,
         type: "arrow",
         icon: "inv_misc_ammo_arrow_05",
         quality: "Uncommon"
@@ -210,7 +210,7 @@ const AMMOS = {
         name: "Wicked Arrow",
         ammo_dps: 22,
         Location: "Vendor",
-        Phase: 1,
+        Phase: 0,
         type: "arrow",
         icon: "inv_misc_ammo_arrow_03",
         quality: "Common"
@@ -219,7 +219,7 @@ const AMMOS = {
         name: "Blackflight Arrow",
         ammo_dps: 32,
         Location: "Vendor",
-        Phase: 1,
+        Phase: 0,
         type: "arrow",
         icon: "inv_misc_ammo_arrow_01",
         quality: "Common"
@@ -228,7 +228,7 @@ const AMMOS = {
         name: "Ironbite Shell",
         ammo_dps: 32,
         Location: "Vendor",
-        Phase: 1,
+        Phase: 0,
         type: "bullet",
         icon: "inv_misc_ammo_bullet_06",
         quality: "Common"
@@ -237,7 +237,7 @@ const AMMOS = {
         name: "Halaani Razorshaft",
         ammo_dps: 34,
         Location: "Halaa Vendor (if faction controlled)",
-        Phase: 1,
+        Phase: 0,
         type: "arrow",
         icon: "inv_misc_ammo_arrow_03",
         quality: "Rare"
@@ -246,7 +246,7 @@ const AMMOS = {
         name: "Halaani Grimshot",
         ammo_dps: 34,
         Location: "Vendor",
-        Phase: 1,
+        Phase: 0,
         type: "bullet",
         icon: "inv_misc_ammo_bullet_04",
         quality: "Rare"
@@ -255,7 +255,7 @@ const AMMOS = {
         name: "Timeless Shell",
         ammo_dps: 53,
         Location: "Reputation Reward",
-        Phase: 3,
+        Phase: 0,
         type: "bullet",
         icon: "inv_misc_ammo_bullet_02",
         quality: "Epic"
@@ -264,7 +264,7 @@ const AMMOS = {
         name: "Timeless Arrow",
         ammo_dps: 53,
         Location: "The Scale of the Sands - Honored",
-        Phase: 3,
+        Phase: 0,
         type: "arrow",
         icon: "inv_misc_ammo_arrow_04",
         quality: "Epic"
@@ -273,7 +273,7 @@ const AMMOS = {
         name: "Warden's Arrow",
         ammo_dps: 37,
         Location: "Cenarion Expedition - Revered",
-        Phase: 1,
+        Phase: 0,
         type: "arrow",
         icon: "inv_misc_ammo_arrow_02",
         quality: "Rare"
@@ -282,7 +282,7 @@ const AMMOS = {
         name: "Hellfire Shot",
         ammo_dps: 37,
         Location: "Reputation Reward",
-        Phase: 1,
+        Phase: 0,
         type: "bullet",
         icon: "inv_misc_ammo_bullet_02",
         quality: "Rare"
@@ -291,7 +291,7 @@ const AMMOS = {
         name: "Felbane Slugs",
         ammo_dps: 37,
         Location: "Reputation Reward",
-        Phase: 1,
+        Phase: 0,
         type: "bullet",
         icon: "inv_misc_ammo_bullet_02",
         quality: "Rare"
@@ -300,7 +300,7 @@ const AMMOS = {
         name: "Adamantite Stinger",
         ammo_dps: 43,
         Location: "Crafted - Eng",
-        Phase: 2,
+        Phase: 0,
         type: "arrow",
         icon: "inv_ammo_arrow_02",
         quality: "Rare"
@@ -309,7 +309,7 @@ const AMMOS = {
         name: "Mysterious Arrow",
         ammo_dps: 46.5,
         Location: "The Violet Eye - Revered",
-        Phase: 3,
+        Phase: 0,
         type: "arrow",
         icon: "inv_misc_ammo_arrow_02",
         quality: "Epic"
@@ -318,7 +318,7 @@ const AMMOS = {
         name: "Mysterious Shell",
         ammo_dps: 46.5,
         Location: "Reputation Reward",
-        Phase: 3,
+        Phase: 0,
         type: "bullet",
         icon: "inv_misc_ammo_bullet_02",
         quality: "Epic"
@@ -333,7 +333,7 @@ const BACKS = {
             Resil: 21
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_17",
         quality: "Rare"
     },
@@ -344,7 +344,7 @@ const BACKS = {
             Resil: 21
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_16",
         quality: "Epic"
     },
@@ -362,7 +362,7 @@ const BACKS = {
         socketBonus: {
             Hit: 2
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_18",
         quality: "Epic"
     },
@@ -375,7 +375,7 @@ const BACKS = {
             RAP: 30
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_20",
         quality: "Rare"
     },
@@ -388,7 +388,7 @@ const BACKS = {
             RAP: 28
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_20",
         quality: "Uncommon"
     },
@@ -401,7 +401,7 @@ const BACKS = {
             RAP: 30
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_20",
         quality: "Rare"
     },
@@ -414,7 +414,7 @@ const BACKS = {
             Hit: 14
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_11",
         quality: "Uncommon"
     },
@@ -428,7 +428,7 @@ const BACKS = {
             Hit: 11
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_13",
         quality: "Uncommon"
     },
@@ -441,7 +441,7 @@ const BACKS = {
             RAP: 40
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_18",
         quality: "Rare"
     },
@@ -454,7 +454,7 @@ const BACKS = {
             RAP: 38
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_06",
         quality: "Rare"
     },
@@ -468,7 +468,7 @@ const BACKS = {
             Hit: 10
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_13",
         quality: "Uncommon"
     },
@@ -482,7 +482,7 @@ const BACKS = {
             Hit: 17
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_21",
         quality: "Rare"
     },
@@ -496,7 +496,7 @@ const BACKS = {
             Hit: 16
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_08",
         quality: "Rare"
     },
@@ -510,7 +510,7 @@ const BACKS = {
             Hit: 14
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_05",
         quality: "Rare"
     },
@@ -524,7 +524,7 @@ const BACKS = {
             Resil: 19
         },
         Location: "Honor Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_07",
         quality: "Epic"
     },
@@ -538,7 +538,7 @@ const BACKS = {
             Hit: 17
         },
         Location: "Karazhan",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_10",
         quality: "Epic"
     },
@@ -550,7 +550,7 @@ const BACKS = {
             RAP: 70
         },
         Location: "Karazhan",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_17",
         quality: "Epic"
     },
@@ -563,7 +563,7 @@ const BACKS = {
             Crit: 24
         },
         Location: "Magtheridon's Lair",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_14",
         quality: "Epic"
     },
@@ -575,7 +575,7 @@ const BACKS = {
             MP5: 6
         },
         Location: "Reputation Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_06",
         quality: "Rare"
     },
@@ -588,7 +588,7 @@ const BACKS = {
             RAP: 48
         },
         Location: "Badge Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_18",
         quality: "Epic"
     },
@@ -601,7 +601,7 @@ const BACKS = {
             Hit: 9
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_22",
         quality: "Uncommon"
     },
@@ -614,7 +614,7 @@ const BACKS = {
             RAP: 68
         },
         Location: "The Eye",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_misc_cape_15",
         quality: "Epic"
     },
@@ -626,7 +626,7 @@ const BACKS = {
             Crit: 30
         },
         Location: "World Boss",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_20",
         quality: "Epic"
     },
@@ -639,7 +639,7 @@ const BACKS = {
             Hit: 13
         },
         Location: "World Drop",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_20",
         quality: "Rare"
     },
@@ -653,7 +653,7 @@ const BACKS = {
             MP5: 5
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_17",
         quality: "Uncommon"
     },
@@ -667,7 +667,7 @@ const BACKS = {
             Hit: 17
         },
         Location: "Black Temple",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_misc_cape_naxxramas_02",
         quality: "Epic"
     },
@@ -679,7 +679,7 @@ const BACKS = {
             RAP: 52
         },
         Location: "Reputation Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_08",
         quality: "Rare"
     },
@@ -692,7 +692,7 @@ const BACKS = {
             RAP: 56
         },
         Location: "World Drop",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_08",
         quality: "Epic"
     },
@@ -704,7 +704,7 @@ const BACKS = {
             Haste: 26
         },
         Location: "World Drop",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_cape_02",
         quality: "Rare"
     },
@@ -719,7 +719,7 @@ const BACKS = {
             ArP: 17
         },
         Location: "Badge Reward",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_misc_cape_20",
         quality: "Epic"
     },
@@ -733,7 +733,7 @@ const BACKS = {
             Haste: 25
         },
         Location: "Zul'Aman",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_misc_cape_20",
         quality: "Epic"
     },
@@ -754,7 +754,7 @@ const BACKS = {
             MAP: 4,
             RAP: 4
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_misc_cape_naxxramas_02",
         quality: "Epic"
     },
@@ -768,7 +768,7 @@ const BACKS = {
             Haste: 18
         },
         Location: "Dungeon",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_misc_cape_06",
         quality: "Rare"
     }
@@ -783,7 +783,7 @@ const CHESTS = {
             Crit: 14
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_17",
         quality: "Epic"
     },
@@ -801,7 +801,7 @@ const CHESTS = {
             MP5: 4
         },
         Location: "Naxx",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_15",
         quality: "Epic"
     },
@@ -815,7 +815,7 @@ const CHESTS = {
             RAP: 48
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_14",
         quality: "Uncommon"
     },
@@ -838,7 +838,7 @@ const CHESTS = {
         socketBonus: {
             Agi: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_17",
         quality: "Epic"
     },
@@ -861,7 +861,7 @@ const CHESTS = {
         socketBonus: {
             Agi: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_17",
         quality: "Epic"
     },
@@ -884,7 +884,7 @@ const CHESTS = {
         socketBonus: {
             Agi: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_17",
         quality: "Epic"
     },
@@ -906,7 +906,7 @@ const CHESTS = {
         socketBonus: {
             Agi: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_03",
         quality: "Rare"
     },
@@ -920,7 +920,7 @@ const CHESTS = {
             Hit: 19
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_06",
         quality: "Uncommon"
     },
@@ -934,7 +934,7 @@ const CHESTS = {
             RAP: 34
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_plate08",
         quality: "Uncommon"
     },
@@ -948,7 +948,7 @@ const CHESTS = {
             RAP: 42
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_plate08",
         quality: "Uncommon"
     },
@@ -961,7 +961,7 @@ const CHESTS = {
             RAP: 72
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_13",
         quality: "Uncommon"
     },
@@ -983,7 +983,7 @@ const CHESTS = {
         socketBonus: {
             Stam: 6
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_13",
         quality: "Rare"
     },
@@ -1002,7 +1002,7 @@ const CHESTS = {
         socketBonus: {
             Hit: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_leather_08",
         quality: "Rare"
     },
@@ -1015,7 +1015,7 @@ const CHESTS = {
             Crit: 21
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_plate11",
         quality: "Rare"
     },
@@ -1030,7 +1030,7 @@ const CHESTS = {
             MP5: 3
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_13",
         quality: "Rare"
     },
@@ -1045,7 +1045,7 @@ const CHESTS = {
             MP5: 4
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_plate16",
         quality: "Rare"
     },
@@ -1067,7 +1067,7 @@ const CHESTS = {
         socketBonus: {
             MP5: 2
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_leather_04",
         quality: "Rare"
     },
@@ -1086,7 +1086,7 @@ const CHESTS = {
             "Blue"
         ],
         socketBonus: {},
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_17",
         quality: "Rare"
     },
@@ -1110,7 +1110,7 @@ const CHESTS = {
         socketBonus: {
             Agi: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_03",
         quality: "Rare"
     },
@@ -1132,7 +1132,7 @@ const CHESTS = {
         socketBonus: {
             Agi: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_17",
         quality: "Rare"
     },
@@ -1157,7 +1157,7 @@ const CHESTS = {
         socketBonus: {
             Crit: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_11",
         quality: "Epic"
     },
@@ -1180,7 +1180,7 @@ const CHESTS = {
         socketBonus: {
             Crit: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_03",
         quality: "Rare"
     },
@@ -1195,7 +1195,7 @@ const CHESTS = {
             MP5: 8
         },
         Location: "Karazhan",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_07",
         quality: "Epic"
     },
@@ -1209,7 +1209,7 @@ const CHESTS = {
             Hit: 22
         },
         Location: "Karazhan",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_leather_06",
         quality: "Epic"
     },
@@ -1234,7 +1234,7 @@ const CHESTS = {
             MAP: 8,
             RAP: 8
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_15",
         quality: "Epic"
     },
@@ -1255,7 +1255,7 @@ const CHESTS = {
         socketBonus: {
             Crit: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_plate10",
         quality: "Rare"
     },
@@ -1269,7 +1269,7 @@ const CHESTS = {
             RAP: 76
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_plate08",
         quality: "Epic"
     },
@@ -1293,7 +1293,7 @@ const CHESTS = {
         socketBonus: {
             Agi: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_plate08",
         quality: "Epic"
     },
@@ -1308,7 +1308,7 @@ const CHESTS = {
             Hit: 12
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_cloth_45",
         quality: "Epic"
     },
@@ -1321,7 +1321,7 @@ const CHESTS = {
             RAP: 38
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_17",
         quality: "Uncommon"
     },
@@ -1344,7 +1344,7 @@ const CHESTS = {
         socketBonus: {
             Agi: 4
         },
-        Phase: 2,
+        Phase: 0,
         icon: "inv_chest_plate09",
         quality: "Epic"
     },
@@ -1367,7 +1367,7 @@ const CHESTS = {
         socketBonus: {
             Crit: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_17",
         quality: "Rare"
     },
@@ -1390,7 +1390,7 @@ const CHESTS = {
             MAP: 8,
             RAP: 8
         },
-        Phase: 2,
+        Phase: 0,
         icon: "inv_chest_plate08",
         quality: "Epic"
     },
@@ -1415,7 +1415,7 @@ const CHESTS = {
         socketBonus: {
             Agi: 4
         },
-        Phase: 2,
+        Phase: 0,
         icon: "inv_chest_chain_15",
         quality: "Epic"
     },
@@ -1428,7 +1428,7 @@ const CHESTS = {
             Hit: 16
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_leather_08",
         quality: "Uncommon"
     },
@@ -1449,7 +1449,7 @@ const CHESTS = {
         socketBonus: {
             Crit: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_cloth_45",
         quality: "Epic"
     },
@@ -1462,7 +1462,7 @@ const CHESTS = {
             Crit: 33
         },
         Location: "Reputation Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_plate08",
         quality: "Rare"
     },
@@ -1485,7 +1485,7 @@ const CHESTS = {
             MAP: 8,
             RAP: 8
         },
-        Phase: 3,
+        Phase: 0,
         icon: "inv_chest_plate02",
         quality: "Epic"
     },
@@ -1500,7 +1500,7 @@ const CHESTS = {
             MP5: 8
         },
         Location: "Mount Hyjal",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_chest_chain_17",
         quality: "Epic"
     },
@@ -1515,7 +1515,7 @@ const CHESTS = {
             MP5: 4
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_07",
         quality: "Uncommon"
     },
@@ -1539,7 +1539,7 @@ const CHESTS = {
         socketBonus: {
             Agi: 4
         },
-        Phase: 3,
+        Phase: 0,
         icon: "inv_chest_mail_03",
         quality: "Epic"
     },
@@ -1553,7 +1553,7 @@ const CHESTS = {
             Hit: 20
         },
         Location: "World Drop",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_plate10",
         quality: "Rare"
     },
@@ -1567,7 +1567,7 @@ const CHESTS = {
             RAP: 74
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_12",
         quality: "Uncommon"
     },
@@ -1581,7 +1581,7 @@ const CHESTS = {
             MP5: 8
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_08",
         quality: "Uncommon"
     },
@@ -1606,7 +1606,7 @@ const CHESTS = {
         socketBonus: {
             Crit: 4
         },
-        Phase: 2,
+        Phase: 0,
         icon: "inv_chest_chain_11",
         quality: "Epic"
     },
@@ -1629,7 +1629,7 @@ const CHESTS = {
             MAP: 8,
             RAP: 8
         },
-        Phase: 3,
+        Phase: 0,
         icon: "inv_chest_leather_03",
         quality: "Epic"
     },
@@ -1643,7 +1643,7 @@ const CHESTS = {
             RAP: 116
         },
         Location: "Black Temple",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_chest_samurai",
         quality: "Epic"
     },
@@ -1658,7 +1658,7 @@ const CHESTS = {
             Haste: 30
         },
         Location: "Zul'Aman",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_chest_chain_13",
         quality: "Epic"
     },
@@ -1672,7 +1672,7 @@ const CHESTS = {
             ArP: 30
         },
         Location: "Zul'Aman",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_chest_leather_06",
         quality: "Epic"
     },
@@ -1699,7 +1699,7 @@ const CHESTS = {
         socketBonus: {
             Crit: 4
         },
-        Phase: 3,
+        Phase: 0,
         icon: "inv_chest_mail_03",
         quality: "Epic"
     },
@@ -1723,7 +1723,7 @@ const CHESTS = {
             MAP: 8,
             RAP: 8
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_chest_chain_17",
         quality: "Epic"
     },
@@ -1747,7 +1747,7 @@ const CHESTS = {
             MAP: 8,
             RAP: 8
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_chest_plate02",
         quality: "Epic"
     },
@@ -1771,7 +1771,7 @@ const CHESTS = {
             MAP: 8,
             RAP: 8
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_chest_chain_17",
         quality: "Epic"
     },
@@ -1795,7 +1795,7 @@ const CHESTS = {
             MAP: 8,
             RAP: 8
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_chest_leather_16",
         quality: "Epic"
     },
@@ -1810,7 +1810,7 @@ const CHESTS = {
             Crit: 23
         },
         Location: "Dungeon",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_chest_chain_06",
         quality: "Epic"
     },
@@ -1834,7 +1834,7 @@ const CHESTS = {
             MAP: 8,
             RAP: 8
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_chest_chain_17",
         quality: "Epic"
     },
@@ -1856,7 +1856,7 @@ const CHESTS = {
             MAP: 4,
             RAP: 4
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_chest_chain_17",
         quality: "Epic"
     },
@@ -1876,7 +1876,7 @@ const CHESTS = {
         socketBonus: {
             Stam: 3
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_chest_plate02",
         quality: "Epic"
     },
@@ -1903,7 +1903,7 @@ const CHESTS = {
         socketBonus: {
             Crit: 4
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_chest_chain_07",
         quality: "Epic"
     },
@@ -1928,7 +1928,7 @@ const CHESTS = {
         socketBonus: {
             Crit: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_chest_chain_11",
         quality: "Rare"
     }
@@ -1944,7 +1944,7 @@ const FEET = {
             RAP: 32
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_plate_07",
         quality: "Epic"
     },
@@ -1960,7 +1960,7 @@ const FEET = {
             Hit: 10
         },
         Location: "Naxx",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_chain_05",
         quality: "Epic"
     },
@@ -1973,7 +1973,7 @@ const FEET = {
             RAP: 44
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_chain_08",
         quality: "Uncommon"
     },
@@ -1994,7 +1994,7 @@ const FEET = {
             MAP: 6,
             RAP: 6
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_cloth_05",
         quality: "Rare"
     },
@@ -2008,7 +2008,7 @@ const FEET = {
             RAP: 44
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_chain_03",
         quality: "Rare"
     },
@@ -2021,7 +2021,7 @@ const FEET = {
             Hit: 17
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_plate_01",
         quality: "Uncommon"
     },
@@ -2035,7 +2035,7 @@ const FEET = {
             Hit: 17
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_chain_03",
         quality: "Rare"
     },
@@ -2048,7 +2048,7 @@ const FEET = {
             RAP: 50
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_cloth_06",
         quality: "Rare"
     },
@@ -2062,7 +2062,7 @@ const FEET = {
             Hit: 12
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_chain_06",
         quality: "Rare"
     },
@@ -2077,7 +2077,7 @@ const FEET = {
             MP5: 5
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_chain_05",
         quality: "Rare"
     },
@@ -2094,7 +2094,7 @@ const FEET = {
             "Red"
         ],
         socketBonus: {},
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_chain_11",
         quality: "Rare"
     },
@@ -2108,7 +2108,7 @@ const FEET = {
             Crit: 21
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_chain_09",
         quality: "Rare"
     },
@@ -2129,7 +2129,7 @@ const FEET = {
         socketBonus: {
             Hit: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_plate_06",
         quality: "Epic"
     },
@@ -2151,7 +2151,7 @@ const FEET = {
             MAP: 6,
             RAP: 6
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_chain_04",
         quality: "Epic"
     },
@@ -2164,7 +2164,7 @@ const FEET = {
             Crit: 24
         },
         Location: "Karazhan",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_plate_06",
         quality: "Epic"
     },
@@ -2186,7 +2186,7 @@ const FEET = {
         socketBonus: {
             Agi: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_chain_05",
         quality: "Epic"
     },
@@ -2199,7 +2199,7 @@ const FEET = {
             RAP: 54
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_cloth_05",
         quality: "Epic"
     },
@@ -2214,7 +2214,7 @@ const FEET = {
             MP5: 6
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_chain_05",
         quality: "Epic"
     },
@@ -2237,7 +2237,7 @@ const FEET = {
             MAP: 6,
             RAP: 6
         },
-        Phase: 2,
+        Phase: 0,
         icon: "inv_boots_chain_04",
         quality: "Epic"
     },
@@ -2251,7 +2251,7 @@ const FEET = {
             Hit: 23
         },
         Location: "Crafting",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_boots_05",
         quality: "Epic"
     },
@@ -2266,7 +2266,7 @@ const FEET = {
             Crit: 19
         },
         Location: "Crafting",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_boots_chain_07",
         quality: "Epic"
     },
@@ -2279,7 +2279,7 @@ const FEET = {
             RAP: 58
         },
         Location: "Serpentshrine Cavern",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_boots_plate_06",
         quality: "Epic"
     },
@@ -2300,7 +2300,7 @@ const FEET = {
         socketBonus: {
             Agi: 3
         },
-        Phase: 2,
+        Phase: 0,
         icon: "inv_boots_chain_12",
         quality: "Epic"
     },
@@ -2314,7 +2314,7 @@ const FEET = {
             MP5: 10
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_plate_03",
         quality: "Uncommon"
     },
@@ -2328,7 +2328,7 @@ const FEET = {
             MP5: 9
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_chain_04",
         quality: "Uncommon"
     },
@@ -2350,7 +2350,7 @@ const FEET = {
         socketBonus: {
             Agi: 3
         },
-        Phase: 3,
+        Phase: 0,
         icon: "inv_boots_chain_09",
         quality: "Epic"
     },
@@ -2363,7 +2363,7 @@ const FEET = {
             Hit: 34
         },
         Location: "Mount Hyjal",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_boots_cloth_05",
         quality: "Epic"
     },
@@ -2377,7 +2377,7 @@ const FEET = {
             Hit: 9
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_chain_11",
         quality: "Rare"
     },
@@ -2391,7 +2391,7 @@ const FEET = {
             RAP: 48
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_02",
         quality: "Uncommon"
     },
@@ -2404,7 +2404,7 @@ const FEET = {
             Crit: 19
         },
         Location: "World Drop",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_chain_11",
         quality: "Rare"
     },
@@ -2417,7 +2417,7 @@ const FEET = {
             RAP: 52
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_chain_02",
         quality: "Uncommon"
     },
@@ -2438,7 +2438,7 @@ const FEET = {
         socketBonus: {
             Crit: 3
         },
-        Phase: 3,
+        Phase: 0,
         icon: "inv_boots_cloth_02",
         quality: "Epic"
     },
@@ -2453,7 +2453,7 @@ const FEET = {
             Hit: 17
         },
         Location: "Black Temple",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_boots_chain_01",
         quality: "Epic"
     },
@@ -2469,7 +2469,7 @@ const FEET = {
             Resil: 21
         },
         Location: "Honor Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_plate_06",
         quality: "Epic"
     },
@@ -2484,7 +2484,7 @@ const FEET = {
             Resil: 30
         },
         Location: "Honor Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_boots_08",
         quality: "Epic"
     },
@@ -2505,7 +2505,7 @@ const FEET = {
         socketBonus: {
             Hit: 3
         },
-        Phase: 4,
+        Phase: 0,
         icon: "inv_boots_07",
         quality: "Epic"
     },
@@ -2520,7 +2520,7 @@ const FEET = {
             ArP: 15
         },
         Location: "Zul'Aman",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_boots_chain_08",
         quality: "Epic"
     },
@@ -2536,7 +2536,7 @@ const FEET = {
             Resil: 21
         },
         Location: "Honor Reward",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_boots_plate_06",
         quality: "Epic"
     },
@@ -2560,7 +2560,7 @@ const FEET = {
         socketBonus: {
             Agi: 2
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_boots_chain_08",
         quality: "Epic"
     },
@@ -2580,7 +2580,7 @@ const FEET = {
         socketBonus: {
             Stam: 3
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_boots_07",
         quality: "Epic"
     }
@@ -2600,7 +2600,7 @@ const HANDS = {
             MP5: 4
         },
         Location: "Naxx",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_25",
         quality: "Epic"
     },
@@ -2614,7 +2614,7 @@ const HANDS = {
             RAP: 34
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_11",
         quality: "Uncommon"
     },
@@ -2633,7 +2633,7 @@ const HANDS = {
         socketBonus: {
             Agi: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_17",
         quality: "Rare"
     },
@@ -2653,7 +2653,7 @@ const HANDS = {
         socketBonus: {
             Hit: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_26",
         quality: "Epic"
     },
@@ -2674,7 +2674,7 @@ const HANDS = {
         socketBonus: {
             Int: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_10",
         quality: "Rare"
     },
@@ -2688,7 +2688,7 @@ const HANDS = {
             RAP: 32
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_26",
         quality: "Uncommon"
     },
@@ -2701,7 +2701,7 @@ const HANDS = {
             RAP: 40
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_04",
         quality: "Uncommon"
     },
@@ -2722,7 +2722,7 @@ const HANDS = {
             MAP: 6,
             RAP: 6
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_22",
         quality: "Rare"
     },
@@ -2735,7 +2735,7 @@ const HANDS = {
             RAP: 38
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_10",
         quality: "Rare"
     },
@@ -2757,7 +2757,7 @@ const HANDS = {
         socketBonus: {
             Hit: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_10",
         quality: "Rare"
     },
@@ -2771,7 +2771,7 @@ const HANDS = {
             Hit: 17
         },
         Location: "Badge Reward",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_gauntlets_01",
         quality: "Rare"
     },
@@ -2791,7 +2791,7 @@ const HANDS = {
             "Red"
         ],
         socketBonus: {},
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_10",
         quality: "Rare"
     },
@@ -2810,7 +2810,7 @@ const HANDS = {
             "Yellow"
         ],
         socketBonus: {},
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_25",
         quality: "Rare"
     },
@@ -2823,7 +2823,7 @@ const HANDS = {
             Hit: 16
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_12",
         quality: "Uncommon"
     },
@@ -2837,7 +2837,7 @@ const HANDS = {
             RAP: 44
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_11",
         quality: "Rare"
     },
@@ -2851,7 +2851,7 @@ const HANDS = {
             Hit: 19
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_15",
         quality: "Rare"
     },
@@ -2871,7 +2871,7 @@ const HANDS = {
             Resil: 18
         },
         Location: "Honor Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_11",
         quality: "Epic"
     },
@@ -2889,7 +2889,7 @@ const HANDS = {
             "Blue"
         ],
         socketBonus: {},
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_22",
         quality: "Rare"
     },
@@ -2909,7 +2909,7 @@ const HANDS = {
         socketBonus: {
             Crit: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_28",
         quality: "Epic"
     },
@@ -2931,7 +2931,7 @@ const HANDS = {
         socketBonus: {
             Agi: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_25",
         quality: "Epic"
     },
@@ -2951,7 +2951,7 @@ const HANDS = {
         socketBonus: {
             Crit: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_19",
         quality: "Epic"
     },
@@ -2972,7 +2972,7 @@ const HANDS = {
         socketBonus: {
             Int: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_25",
         quality: "Epic"
     },
@@ -2988,7 +2988,7 @@ const HANDS = {
             MP5: 6
         },
         Location: "Karazhan",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_25",
         quality: "Epic"
     },
@@ -3002,7 +3002,7 @@ const HANDS = {
             RAP: 50
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_05",
         quality: "Epic"
     },
@@ -3016,7 +3016,7 @@ const HANDS = {
             MP5: 6
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_25",
         quality: "Uncommon"
     },
@@ -3032,7 +3032,7 @@ const HANDS = {
             Hit: 19
         },
         Location: "Serpentshrine Cavern",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_gauntlets_25",
         quality: "Epic"
     },
@@ -3047,7 +3047,7 @@ const HANDS = {
             MP5: 5
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_25",
         quality: "Uncommon"
     },
@@ -3061,7 +3061,7 @@ const HANDS = {
             RAP: 48
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_10",
         quality: "Rare"
     },
@@ -3075,7 +3075,7 @@ const HANDS = {
             MP5: 3
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_26",
         quality: "Rare"
     },
@@ -3098,7 +3098,7 @@ const HANDS = {
         socketBonus: {
             Crit: 2
         },
-        Phase: 3,
+        Phase: 0,
         icon: "inv_gauntlets_59",
         quality: "Epic"
     },
@@ -3112,7 +3112,7 @@ const HANDS = {
             MP5: 6
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_03",
         quality: "Uncommon"
     },
@@ -3133,7 +3133,7 @@ const HANDS = {
         socketBonus: {
             Agi: 3
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_gauntlets_28",
         quality: "Epic"
     },
@@ -3153,7 +3153,7 @@ const HANDS = {
             Resil: 21
         },
         Location: "Arena Reward",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_gauntlets_11",
         quality: "Epic"
     },
@@ -3167,7 +3167,7 @@ const HANDS = {
             RAP: 54
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_31",
         quality: "Epic"
     },
@@ -3182,7 +3182,7 @@ const HANDS = {
             Haste: 37
         },
         Location: "Black Temple",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_gauntlets_59",
         quality: "Epic"
     },
@@ -3196,7 +3196,7 @@ const HANDS = {
             Haste: 37
         },
         Location: "Black Temple",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_gauntlets_65",
         quality: "Epic"
     },
@@ -3216,7 +3216,7 @@ const HANDS = {
         socketBonus: {
             Int: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_09",
         quality: "Epic"
     },
@@ -3239,7 +3239,7 @@ const HANDS = {
             MAP: 6,
             RAP: 6
         },
-        Phase: 3,
+        Phase: 0,
         icon: "inv_gauntlets_25",
         quality: "Epic"
     },
@@ -3253,7 +3253,7 @@ const HANDS = {
             Haste: 25
         },
         Location: "Badge Reward",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_gauntlets_50",
         quality: "Epic"
     },
@@ -3273,7 +3273,7 @@ const HANDS = {
             Resil: 21
         },
         Location: "Arena Reward",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_gauntlets_59",
         quality: "Epic"
     },
@@ -3287,7 +3287,7 @@ const HANDS = {
             MP5: 8
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_14",
         quality: "Uncommon"
     },
@@ -3310,7 +3310,7 @@ const HANDS = {
         socketBonus: {
             Agi: 3
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_gauntlets_51",
         quality: "Epic"
     },
@@ -3332,7 +3332,7 @@ const HANDS = {
         socketBonus: {
             Crit: 3
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_gauntlets_28",
         quality: "Epic"
     },
@@ -3355,7 +3355,7 @@ const HANDS = {
             MAP: 6,
             RAP: 6
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_gauntlets_59",
         quality: "Epic"
     },
@@ -3376,7 +3376,7 @@ const HANDS = {
         socketBonus: {
             Agi: 2
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_gauntlets_25",
         quality: "Epic"
     },
@@ -3396,7 +3396,7 @@ const HANDS = {
             Resil: 21
         },
         Location: "Arena Reward",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_gauntlets_65",
         quality: "Epic"
     },
@@ -3416,7 +3416,7 @@ const HANDS = {
             Resil: 14
         },
         Location: "Reputation Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_11",
         quality: "Rare"
     }
@@ -3436,7 +3436,7 @@ const HEADS = {
             MP5: 3
         },
         Location: "Naxx",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_15",
         quality: "Epic"
     },
@@ -3450,7 +3450,7 @@ const HEADS = {
             RAP: 42
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_35",
         quality: "Uncommon"
     },
@@ -3472,7 +3472,7 @@ const HEADS = {
         socketBonus: {
             Stam: 6
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_29",
         quality: "Epic"
     },
@@ -3485,7 +3485,7 @@ const HEADS = {
             RAP: 62
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_60",
         quality: "Epic"
     },
@@ -3498,7 +3498,7 @@ const HEADS = {
             RAP: 44
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_08",
         quality: "Uncommon"
     },
@@ -3510,7 +3510,7 @@ const HEADS = {
             RAP: 96
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_50",
         quality: "Rare"
     },
@@ -3531,7 +3531,7 @@ const HEADS = {
         socketBonus: {
             Stam: 6
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_18",
         quality: "Uncommon"
     },
@@ -3544,7 +3544,7 @@ const HEADS = {
             RAP: 46
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_15",
         quality: "Uncommon"
     },
@@ -3566,7 +3566,7 @@ const HEADS = {
         socketBonus: {
             MP5: 2
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_19",
         quality: "Rare"
     },
@@ -3582,7 +3582,7 @@ const HEADS = {
             MP5: 6
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_21",
         quality: "Rare"
     },
@@ -3604,7 +3604,7 @@ const HEADS = {
         socketBonus: {
             Agi: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_38",
         quality: "Rare"
     },
@@ -3626,7 +3626,7 @@ const HEADS = {
         socketBonus: {
             Hit: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_18",
         quality: "Rare"
     },
@@ -3641,7 +3641,7 @@ const HEADS = {
             Hit: 19
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_72",
         quality: "Rare"
     },
@@ -3664,7 +3664,7 @@ const HEADS = {
             MAP: 8,
             RAP: 8
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_15",
         quality: "Rare"
     },
@@ -3686,7 +3686,7 @@ const HEADS = {
         socketBonus: {
             MP5: 2
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_19",
         quality: "Rare"
     },
@@ -3710,7 +3710,7 @@ const HEADS = {
         socketBonus: {
             Resil: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_09",
         quality: "Epic"
     },
@@ -3728,7 +3728,7 @@ const HEADS = {
             "Meta"
         ],
         socketBonus: {},
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_15",
         quality: "Rare"
     },
@@ -3750,7 +3750,7 @@ const HEADS = {
         socketBonus: {
             Agi: 2
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_09",
         quality: "Rare"
     },
@@ -3765,7 +3765,7 @@ const HEADS = {
             MP5: 9
         },
         Location: "Karazhan",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_05",
         quality: "Epic"
     },
@@ -3779,7 +3779,7 @@ const HEADS = {
             Hit: 24
         },
         Location: "Karazhan",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_58",
         quality: "Epic"
     },
@@ -3793,7 +3793,7 @@ const HEADS = {
             Hit: 31
         },
         Location: "Gruul's Lair",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_58",
         quality: "Epic"
     },
@@ -3807,7 +3807,7 @@ const HEADS = {
             Crit: 42
         },
         Location: "Gruul's Lair",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_23",
         quality: "Epic"
     },
@@ -3829,7 +3829,7 @@ const HEADS = {
         socketBonus: {
             Agi: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_15",
         quality: "Epic"
     },
@@ -3843,7 +3843,7 @@ const HEADS = {
             Hit: 18
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_38",
         quality: "Epic"
     },
@@ -3858,7 +3858,7 @@ const HEADS = {
             MP5: 12
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_06",
         quality: "Epic"
     },
@@ -3872,7 +3872,7 @@ const HEADS = {
             MP5: 10
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_03",
         quality: "Rare"
     },
@@ -3895,7 +3895,7 @@ const HEADS = {
         socketBonus: {
             Stam: 6
         },
-        Phase: 2,
+        Phase: 0,
         icon: "inv_helmet_15",
         quality: "Epic"
     },
@@ -3909,7 +3909,7 @@ const HEADS = {
             MP5: 8
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_35",
         quality: "Uncommon"
     },
@@ -3924,7 +3924,7 @@ const HEADS = {
             MP5: 8
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_08",
         quality: "Uncommon"
     },
@@ -3947,7 +3947,7 @@ const HEADS = {
         socketBonus: {
             Crit: 4
         },
-        Phase: 3,
+        Phase: 0,
         icon: "inv_helmet_95",
         quality: "Epic"
     },
@@ -3971,7 +3971,7 @@ const HEADS = {
             MAP: 8,
             RAP: 8
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_01",
         quality: "Rare"
     },
@@ -3984,7 +3984,7 @@ const HEADS = {
             MP5: 8
         },
         Location: "World Drop",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_57",
         quality: "Rare"
     },
@@ -3997,7 +3997,7 @@ const HEADS = {
             RAP: 72
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_08",
         quality: "Uncommon"
     },
@@ -4010,7 +4010,7 @@ const HEADS = {
             RAP: 70
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_08",
         quality: "Uncommon"
     },
@@ -4025,7 +4025,7 @@ const HEADS = {
             MP5: 7
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_45",
         quality: "Rare"
     },
@@ -4049,7 +4049,7 @@ const HEADS = {
         socketBonus: {
             Resil: 4
         },
-        Phase: 2,
+        Phase: 0,
         icon: "inv_helmet_09",
         quality: "Epic"
     },
@@ -4068,7 +4068,7 @@ const HEADS = {
             "Meta"
         ],
         socketBonus: {},
-        Phase: 3,
+        Phase: 0,
         icon: "inv_helmet_72",
         quality: "Epic"
     },
@@ -4087,7 +4087,7 @@ const HEADS = {
             "Meta"
         ],
         socketBonus: {},
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_73",
         quality: "Epic"
     },
@@ -4109,7 +4109,7 @@ const HEADS = {
         socketBonus: {
             Stam: 6
         },
-        Phase: 3,
+        Phase: 0,
         icon: "inv_misc_bandana_03",
         quality: "Epic"
     },
@@ -4131,7 +4131,7 @@ const HEADS = {
         socketBonus: {
             MP5: 2
         },
-        Phase: 3,
+        Phase: 0,
         icon: "inv_helmet_95",
         quality: "Epic"
     },
@@ -4152,7 +4152,7 @@ const HEADS = {
         socketBonus: {
             Agi: 4
         },
-        Phase: 2,
+        Phase: 0,
         icon: "inv_gizmo_newgoggles",
         quality: "Epic"
     },
@@ -4176,7 +4176,7 @@ const HEADS = {
             MAP: 8,
             RAP: 8
         },
-        Phase: 4,
+        Phase: 0,
         icon: "inv_helmet_113",
         quality: "Epic"
     },
@@ -4199,7 +4199,7 @@ const HEADS = {
             MAP: 8,
             RAP: 8
         },
-        Phase: 4,
+        Phase: 0,
         icon: "inv_helmet_116",
         quality: "Epic"
     },
@@ -4225,7 +4225,7 @@ const HEADS = {
         socketBonus: {
             Resil: 4
         },
-        Phase: 3,
+        Phase: 0,
         icon: "inv_helmet_95",
         quality: "Epic"
     },
@@ -4247,7 +4247,7 @@ const HEADS = {
         socketBonus: {
             Hit: 4
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_helmet_126",
         quality: "Epic"
     },
@@ -4270,7 +4270,7 @@ const HEADS = {
         socketBonus: {
             Agi: 4
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_helmet128",
         quality: "Epic"
     },
@@ -4291,7 +4291,7 @@ const HEADS = {
         socketBonus: {
             Agi: 4
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_gizmo_newgoggles",
         quality: "Epic"
     },
@@ -4317,7 +4317,7 @@ const HEADS = {
         socketBonus: {
             Resil: 4
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_helmet128",
         quality: "Epic"
     },
@@ -4341,7 +4341,7 @@ const HEADS = {
         socketBonus: {
             Resil: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_09",
         quality: "Rare"
     }
@@ -4361,7 +4361,7 @@ const LEGS = {
             MP5: 6
         },
         Location: "Naxx",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_mail_15",
         quality: "Epic"
     },
@@ -4384,7 +4384,7 @@ const LEGS = {
         socketBonus: {
             MP5: 2
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_leather_15",
         quality: "Rare"
     },
@@ -4397,7 +4397,7 @@ const LEGS = {
             RAP: 60
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_mail_08",
         quality: "Uncommon"
     },
@@ -4419,7 +4419,7 @@ const LEGS = {
             MAP: 8,
             RAP: 8
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_leather_03",
         quality: "Rare"
     },
@@ -4432,7 +4432,7 @@ const LEGS = {
             Hit: 23
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_mail_04",
         quality: "Uncommon"
     },
@@ -4453,7 +4453,7 @@ const LEGS = {
             "Blue"
         ],
         socketBonus: {},
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_plate_21",
         quality: "Rare"
     },
@@ -4472,7 +4472,7 @@ const LEGS = {
             "Red"
         ],
         socketBonus: {},
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_mail_05",
         quality: "Rare"
     },
@@ -4492,7 +4492,7 @@ const LEGS = {
             "Yellow"
         ],
         socketBonus: {},
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_mail_04",
         quality: "Rare"
     },
@@ -4513,7 +4513,7 @@ const LEGS = {
         socketBonus: {
             Resil: 2
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_leather_03",
         quality: "Rare"
     },
@@ -4535,7 +4535,7 @@ const LEGS = {
         socketBonus: {
             Crit: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_03",
         quality: "Uncommon"
     },
@@ -4558,7 +4558,7 @@ const LEGS = {
         socketBonus: {
             Int: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_leather_06",
         quality: "Rare"
     },
@@ -4581,7 +4581,7 @@ const LEGS = {
         socketBonus: {
             Resil: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_mail_04",
         quality: "Rare"
     },
@@ -4597,7 +4597,7 @@ const LEGS = {
             MP5: 7
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_03",
         quality: "Rare"
     },
@@ -4611,7 +4611,7 @@ const LEGS = {
             Hit: 22
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_leather_03",
         quality: "Rare"
     },
@@ -4627,7 +4627,7 @@ const LEGS = {
             Hit: 12
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_cloth_20",
         quality: "Rare"
     },
@@ -4642,7 +4642,7 @@ const LEGS = {
             Hit: 15
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_mail_09",
         quality: "Rare"
     },
@@ -4665,7 +4665,7 @@ const LEGS = {
             MAP: 8,
             RAP: 8
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_mail_16",
         quality: "Rare"
     },
@@ -4682,7 +4682,7 @@ const LEGS = {
             Resil: 31
         },
         Location: "Honor Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_mail_15",
         quality: "Epic"
     },
@@ -4705,7 +4705,7 @@ const LEGS = {
         socketBonus: {
             Stam: 6
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_plate_02",
         quality: "Epic"
     },
@@ -4725,7 +4725,7 @@ const LEGS = {
             "Blue"
         ],
         socketBonus: {},
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_leather_13",
         quality: "Epic"
     },
@@ -4741,7 +4741,7 @@ const LEGS = {
             Hit: 15
         },
         Location: "Gruul's Lair",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_mail_15",
         quality: "Epic"
     },
@@ -4754,7 +4754,7 @@ const LEGS = {
             RAP: 66
         },
         Location: "Reputation Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_02",
         quality: "Rare"
     },
@@ -4767,7 +4767,7 @@ const LEGS = {
             RAP: 76
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_02",
         quality: "Uncommon"
     },
@@ -4780,7 +4780,7 @@ const LEGS = {
             RAP: 38
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_mail_01",
         quality: "Uncommon"
     },
@@ -4793,7 +4793,7 @@ const LEGS = {
             Hit: 17
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_03",
         quality: "Uncommon"
     },
@@ -4815,7 +4815,7 @@ const LEGS = {
         socketBonus: {
             Agi: 4
         },
-        Phase: 2,
+        Phase: 0,
         icon: "inv_pants_mail_15",
         quality: "Epic"
     },
@@ -4829,7 +4829,7 @@ const LEGS = {
             Crit: 37
         },
         Location: "The Eye",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_pants_leather_03",
         quality: "Epic"
     },
@@ -4852,7 +4852,7 @@ const LEGS = {
         socketBonus: {
             Crit: 2
         },
-        Phase: 2,
+        Phase: 0,
         icon: "inv_pants_mail_15",
         quality: "Epic"
     },
@@ -4875,7 +4875,7 @@ const LEGS = {
             MAP: 8,
             RAP: 8
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_mail_16",
         quality: "Epic"
     },
@@ -4897,7 +4897,7 @@ const LEGS = {
         socketBonus: {
             Hit: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_leather_09",
         quality: "Epic"
     },
@@ -4918,7 +4918,7 @@ const LEGS = {
         socketBonus: {
             Agi: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_mail_11",
         quality: "Epic"
     },
@@ -4932,7 +4932,7 @@ const LEGS = {
             ArP: 25
         },
         Location: "Mount Hyjal",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_pants_leather_25",
         quality: "Epic"
     },
@@ -4955,7 +4955,7 @@ const LEGS = {
         socketBonus: {
             Crit: 4
         },
-        Phase: 3,
+        Phase: 0,
         icon: "inv_pants_mail_15",
         quality: "Epic"
     },
@@ -4969,7 +4969,7 @@ const LEGS = {
             MP5: 5
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_plate_21",
         quality: "Rare"
     },
@@ -4992,7 +4992,7 @@ const LEGS = {
         socketBonus: {
             Agi: 2
         },
-        Phase: 3,
+        Phase: 0,
         icon: "inv_pants_mail_24",
         quality: "Epic"
     },
@@ -5006,7 +5006,7 @@ const LEGS = {
             RAP: 60
         },
         Location: "World Drop",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_mail_03",
         quality: "Rare"
     },
@@ -5017,7 +5017,7 @@ const LEGS = {
             Stam: 45
         },
         Location: "World Drop",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_mail_16",
         quality: "Epic"
     },
@@ -5031,7 +5031,7 @@ const LEGS = {
             MP5: 4
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_mail_15",
         quality: "Uncommon"
     },
@@ -5045,7 +5045,7 @@ const LEGS = {
             MP5: 4
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_mail_01",
         quality: "Uncommon"
     },
@@ -5062,7 +5062,7 @@ const LEGS = {
             Resil: 33
         },
         Location: "Arena Reward",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_pants_mail_15",
         quality: "Epic"
     },
@@ -5077,7 +5077,7 @@ const LEGS = {
             ArP: 25
         },
         Location: "Badge Reward",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_pants_leather_23",
         quality: "Epic"
     },
@@ -5091,7 +5091,7 @@ const LEGS = {
             Haste: 30
         },
         Location: "Badge Reward",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_pants_leather_09",
         quality: "Epic"
     },
@@ -5110,7 +5110,7 @@ const LEGS = {
             ArP: 12
         },
         Location: "Arena Reward",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_pants_mail_24",
         quality: "Epic"
     },
@@ -5134,7 +5134,7 @@ const LEGS = {
             MAP: 8,
             RAP: 8
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_pants_mail_16",
         quality: "Epic"
     },
@@ -5157,7 +5157,7 @@ const LEGS = {
         socketBonus: {
             Agi: 4
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_pants_leather_27",
         quality: "Epic"
     },
@@ -5179,7 +5179,7 @@ const LEGS = {
         socketBonus: {
             Haste: 4
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_pants_06",
         quality: "Rare"
     },
@@ -5201,7 +5201,7 @@ const LEGS = {
         socketBonus: {
             Agi: 3
         },
-        Phase: 4,
+        Phase: 0,
         icon: "inv_pants_mail_05",
         quality: "Epic"
     },
@@ -5222,7 +5222,7 @@ const LEGS = {
         socketBonus: {
             Hit: 3
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_pants_leather_03",
         quality: "Epic"
     },
@@ -5241,7 +5241,7 @@ const LEGS = {
             ArP: 12
         },
         Location: "Arena Reward",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_pants_mail_20",
         quality: "Epic"
     },
@@ -5258,7 +5258,7 @@ const LEGS = {
             Resil: 25
         },
         Location: "Reputation Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pants_mail_15",
         quality: "Rare"
     }
@@ -5280,7 +5280,7 @@ const MELEE_WEAPONS = {
         mindmg: 132,
         maxdmg: 199,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_halberd_04",
         quality: "Epic"
     },
@@ -5297,7 +5297,7 @@ const MELEE_WEAPONS = {
         mindmg: 172,
         maxdmg: 259,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_26",
         quality: "Uncommon"
     },
@@ -5315,7 +5315,7 @@ const MELEE_WEAPONS = {
         mindmg: 203,
         maxdmg: 305,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_09",
         quality: "Uncommon"
     },
@@ -5331,7 +5331,7 @@ const MELEE_WEAPONS = {
         mindmg: 74,
         maxdmg: 138,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_12",
         quality: "Uncommon"
     },
@@ -5347,7 +5347,7 @@ const MELEE_WEAPONS = {
         mindmg: 128,
         maxdmg: 239,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_59",
         quality: "Epic"
     },
@@ -5369,7 +5369,7 @@ const MELEE_WEAPONS = {
         mindmg: 128,
         maxdmg: 239,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_15",
         quality: "Epic"
     },
@@ -5386,7 +5386,7 @@ const MELEE_WEAPONS = {
         mindmg: 295,
         maxdmg: 443,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_02",
         quality: "Epic"
     },
@@ -5403,7 +5403,7 @@ const MELEE_WEAPONS = {
         mindmg: 81,
         maxdmg: 152,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_05",
         quality: "Epic"
     },
@@ -5421,7 +5421,7 @@ const MELEE_WEAPONS = {
         mindmg: 96,
         maxdmg: 179,
         hand: "Main",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_63",
         quality: "Rare"
     },
@@ -5439,7 +5439,7 @@ const MELEE_WEAPONS = {
         mindmg: 69,
         maxdmg: 130,
         hand: "Main",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_33",
         quality: "Rare"
     },
@@ -5456,7 +5456,7 @@ const MELEE_WEAPONS = {
         mindmg: 174,
         maxdmg: 262,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_61",
         quality: "Rare"
     },
@@ -5474,7 +5474,7 @@ const MELEE_WEAPONS = {
         mindmg: 71,
         maxdmg: 133,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_53",
         quality: "Rare"
     },
@@ -5492,7 +5492,7 @@ const MELEE_WEAPONS = {
         mindmg: 61,
         maxdmg: 115,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_03",
         quality: "Uncommon"
     },
@@ -5510,7 +5510,7 @@ const MELEE_WEAPONS = {
         mindmg: 99,
         maxdmg: 184,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gauntlets_11",
         quality: "Rare"
     },
@@ -5527,7 +5527,7 @@ const MELEE_WEAPONS = {
         mindmg: 70,
         maxdmg: 131,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_03",
         quality: "Uncommon"
     },
@@ -5545,7 +5545,7 @@ const MELEE_WEAPONS = {
         mindmg: 74,
         maxdmg: 139,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_05",
         quality: "Rare"
     },
@@ -5565,7 +5565,7 @@ const MELEE_WEAPONS = {
         mindmg: 189,
         maxdmg: 285,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_11",
         quality: "Rare"
     },
@@ -5583,7 +5583,7 @@ const MELEE_WEAPONS = {
         mindmg: 77,
         maxdmg: 145,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_20",
         quality: "Rare"
     },
@@ -5601,7 +5601,7 @@ const MELEE_WEAPONS = {
         mindmg: 90,
         maxdmg: 169,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_03",
         quality: "Uncommon"
     },
@@ -5617,7 +5617,7 @@ const MELEE_WEAPONS = {
         mindmg: 45,
         maxdmg: 84,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_15",
         quality: "Uncommon"
     },
@@ -5635,7 +5635,7 @@ const MELEE_WEAPONS = {
         mindmg: 106,
         maxdmg: 197,
         hand: "Main",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_16",
         quality: "Rare"
     },
@@ -5652,7 +5652,7 @@ const MELEE_WEAPONS = {
         mindmg: 61,
         maxdmg: 114,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_09",
         quality: "Rare"
     },
@@ -5670,7 +5670,7 @@ const MELEE_WEAPONS = {
         mindmg: 101,
         maxdmg: 188,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_15",
         quality: "Rare"
     },
@@ -5688,7 +5688,7 @@ const MELEE_WEAPONS = {
         mindmg: 120,
         maxdmg: 224,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_27",
         quality: "Rare"
     },
@@ -5707,7 +5707,7 @@ const MELEE_WEAPONS = {
         mindmg: 172,
         maxdmg: 259,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_spear_02",
         quality: "Uncommon"
     },
@@ -5725,7 +5725,7 @@ const MELEE_WEAPONS = {
         mindmg: 103,
         maxdmg: 155,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_36",
         quality: "Uncommon"
     },
@@ -5742,7 +5742,7 @@ const MELEE_WEAPONS = {
         mindmg: 51,
         maxdmg: 96,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_14",
         quality: "Uncommon"
     },
@@ -5760,7 +5760,7 @@ const MELEE_WEAPONS = {
         mindmg: 85,
         maxdmg: 159,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_55",
         quality: "Rare"
     },
@@ -5784,7 +5784,7 @@ const MELEE_WEAPONS = {
         mindmg: 125,
         maxdmg: 233,
         hand: "Main",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_hand_07",
         quality: "Rare"
     },
@@ -5803,7 +5803,7 @@ const MELEE_WEAPONS = {
         mindmg: 261,
         maxdmg: 392,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_spear_08",
         quality: "Rare"
     },
@@ -5820,7 +5820,7 @@ const MELEE_WEAPONS = {
         mindmg: 70,
         maxdmg: 131,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_76",
         quality: "Rare"
     },
@@ -5846,7 +5846,7 @@ const MELEE_WEAPONS = {
         mindmg: 268,
         maxdmg: 403,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_71",
         quality: "Rare"
     },
@@ -5863,7 +5863,7 @@ const MELEE_WEAPONS = {
         mindmg: 80,
         maxdmg: 121,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_51",
         quality: "Rare"
     },
@@ -5881,7 +5881,7 @@ const MELEE_WEAPONS = {
         mindmg: 95,
         maxdmg: 177,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_63",
         quality: "Rare"
     },
@@ -5899,7 +5899,7 @@ const MELEE_WEAPONS = {
         mindmg: 130,
         maxdmg: 243,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_77",
         quality: "Rare"
     },
@@ -5919,7 +5919,7 @@ const MELEE_WEAPONS = {
         mindmg: 131,
         maxdmg: 197,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_71",
         quality: "Epic"
     },
@@ -5939,7 +5939,7 @@ const MELEE_WEAPONS = {
         mindmg: 341,
         maxdmg: 513,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_68",
         quality: "Epic"
     },
@@ -5958,7 +5958,7 @@ const MELEE_WEAPONS = {
         mindmg: 208,
         maxdmg: 313,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_halberd15",
         quality: "Epic"
     },
@@ -5978,7 +5978,7 @@ const MELEE_WEAPONS = {
         mindmg: 95,
         maxdmg: 175,
         hand: "Off",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_71",
         quality: "Epic"
     },
@@ -5998,7 +5998,7 @@ const MELEE_WEAPONS = {
         mindmg: 166,
         maxdmg: 309,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_54",
         quality: "Epic"
     },
@@ -6018,7 +6018,7 @@ const MELEE_WEAPONS = {
         mindmg: 95,
         maxdmg: 175,
         hand: "Off",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_54",
         quality: "Epic"
     },
@@ -6038,7 +6038,7 @@ const MELEE_WEAPONS = {
         mindmg: 89,
         maxdmg: 166,
         hand: "Off",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_45",
         quality: "Epic"
     },
@@ -6058,7 +6058,7 @@ const MELEE_WEAPONS = {
         mindmg: 166,
         maxdmg: 309,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_45",
         quality: "Epic"
     },
@@ -6078,7 +6078,7 @@ const MELEE_WEAPONS = {
         mindmg: 166,
         maxdmg: 309,
         hand: "Main",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_hand_13",
         quality: "Epic"
     },
@@ -6098,7 +6098,7 @@ const MELEE_WEAPONS = {
         mindmg: 95,
         maxdmg: 178,
         hand: "Off",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_hand_13",
         quality: "Epic"
     },
@@ -6116,7 +6116,7 @@ const MELEE_WEAPONS = {
         mindmg: 80,
         maxdmg: 149,
         hand: "Off",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_hand_08",
         quality: "Rare"
     },
@@ -6133,7 +6133,7 @@ const MELEE_WEAPONS = {
         mindmg: 74,
         maxdmg: 112,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_57",
         quality: "Rare"
     },
@@ -6149,7 +6149,7 @@ const MELEE_WEAPONS = {
         mindmg: 163,
         maxdmg: 304,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_35",
         quality: "Rare"
     },
@@ -6166,7 +6166,7 @@ const MELEE_WEAPONS = {
         mindmg: 94,
         maxdmg: 176,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_1h_blacksmithing_01",
         quality: "Epic"
     },
@@ -6183,7 +6183,7 @@ const MELEE_WEAPONS = {
         mindmg: 102,
         maxdmg: 190,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_1h_blacksmithing_02",
         quality: "Epic"
     },
@@ -6200,7 +6200,7 @@ const MELEE_WEAPONS = {
         mindmg: 109,
         maxdmg: 203,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_1h_blacksmithing_03",
         quality: "Epic"
     },
@@ -6217,7 +6217,7 @@ const MELEE_WEAPONS = {
         mindmg: 159,
         maxdmg: 296,
         hand: "Main",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_1h_blacksmithing_01",
         quality: "Epic"
     },
@@ -6234,7 +6234,7 @@ const MELEE_WEAPONS = {
         mindmg: 172,
         maxdmg: 320,
         hand: "Main",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_1h_blacksmithing_02",
         quality: "Epic"
     },
@@ -6251,7 +6251,7 @@ const MELEE_WEAPONS = {
         mindmg: 184,
         maxdmg: 343,
         hand: "Main",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_1h_blacksmithing_03",
         quality: "Epic"
     },
@@ -6268,7 +6268,7 @@ const MELEE_WEAPONS = {
         mindmg: 324,
         maxdmg: 487,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_50",
         quality: "Epic"
     },
@@ -6285,7 +6285,7 @@ const MELEE_WEAPONS = {
         mindmg: 351,
         maxdmg: 527,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_51",
         quality: "Epic"
     },
@@ -6302,7 +6302,7 @@ const MELEE_WEAPONS = {
         mindmg: 375,
         maxdmg: 564,
         hand: "Two",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_axe_52",
         quality: "Epic"
     },
@@ -6320,7 +6320,7 @@ const MELEE_WEAPONS = {
         mindmg: 126,
         maxdmg: 189,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_38",
         quality: "Epic"
     },
@@ -6342,7 +6342,7 @@ const MELEE_WEAPONS = {
         mindmg: 112,
         maxdmg: 168,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_39",
         quality: "Epic"
     },
@@ -6359,7 +6359,7 @@ const MELEE_WEAPONS = {
         mindmg: 153,
         maxdmg: 285,
         hand: "Main",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_monsterclaw_04",
         quality: "Epic"
     },
@@ -6378,7 +6378,7 @@ const MELEE_WEAPONS = {
         mindmg: 319,
         maxdmg: 479,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_46",
         quality: "Epic"
     },
@@ -6396,7 +6396,7 @@ const MELEE_WEAPONS = {
         mindmg: 165,
         maxdmg: 308,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_74",
         quality: "Epic"
     },
@@ -6414,7 +6414,7 @@ const MELEE_WEAPONS = {
         mindmg: 132,
         maxdmg: 199,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_40",
         quality: "Epic"
     },
@@ -6431,7 +6431,7 @@ const MELEE_WEAPONS = {
         mindmg: 345,
         maxdmg: 518,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_60",
         quality: "Epic"
     },
@@ -6448,7 +6448,7 @@ const MELEE_WEAPONS = {
         mindmg: 345,
         maxdmg: 518,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_64",
         quality: "Epic"
     },
@@ -6467,7 +6467,7 @@ const MELEE_WEAPONS = {
         mindmg: 78,
         maxdmg: 146,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_23",
         quality: "Uncommon"
     },
@@ -6485,7 +6485,7 @@ const MELEE_WEAPONS = {
         mindmg: 70,
         maxdmg: 131,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_31",
         quality: "Epic"
     },
@@ -6502,7 +6502,7 @@ const MELEE_WEAPONS = {
         mindmg: 147,
         maxdmg: 275,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_draenei_01",
         quality: "Epic"
     },
@@ -6518,7 +6518,7 @@ const MELEE_WEAPONS = {
         mindmg: 97,
         maxdmg: 146,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_29",
         quality: "Epic"
     },
@@ -6535,7 +6535,7 @@ const MELEE_WEAPONS = {
         mindmg: 261,
         maxdmg: 392,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_44",
         quality: "Rare"
     },
@@ -6552,7 +6552,7 @@ const MELEE_WEAPONS = {
         mindmg: 104,
         maxdmg: 156,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_08",
         quality: "Rare"
     },
@@ -6570,7 +6570,7 @@ const MELEE_WEAPONS = {
         mindmg: 261,
         maxdmg: 392,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_halberd_12",
         quality: "Rare"
     },
@@ -6588,7 +6588,7 @@ const MELEE_WEAPONS = {
         mindmg: 261,
         maxdmg: 392,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_spear_03",
         quality: "Rare"
     },
@@ -6605,7 +6605,7 @@ const MELEE_WEAPONS = {
         mindmg: 117,
         maxdmg: 176,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_26",
         quality: "Epic"
     },
@@ -6621,7 +6621,7 @@ const MELEE_WEAPONS = {
         mindmg: 77,
         maxdmg: 145,
         hand: "Off",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_knife_1h_stratholme_d_03",
         quality: "Epic"
     },
@@ -6637,7 +6637,7 @@ const MELEE_WEAPONS = {
         mindmg: 246,
         maxdmg: 370,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_spear_08",
         quality: "Rare"
     },
@@ -6654,7 +6654,7 @@ const MELEE_WEAPONS = {
         mindmg: 83,
         maxdmg: 156,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_38",
         quality: "Epic"
     },
@@ -6672,7 +6672,7 @@ const MELEE_WEAPONS = {
         mindmg: 304,
         maxdmg: 456,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_81",
         quality: "Epic"
     },
@@ -6688,7 +6688,7 @@ const MELEE_WEAPONS = {
         mindmg: 120,
         maxdmg: 181,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_33",
         quality: "Epic"
     },
@@ -6705,7 +6705,7 @@ const MELEE_WEAPONS = {
         mindmg: 78,
         maxdmg: 146,
         hand: "Off",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_hand_01",
         quality: "Uncommon"
     },
@@ -6720,7 +6720,7 @@ const MELEE_WEAPONS = {
         mindmg: 52,
         maxdmg: 95,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_07",
         quality: "Uncommon"
     },
@@ -6738,7 +6738,7 @@ const MELEE_WEAPONS = {
         mindmg: 79,
         maxdmg: 147,
         hand: "Main",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_draenei_01",
         quality: "Rare"
     },
@@ -6756,7 +6756,7 @@ const MELEE_WEAPONS = {
         mindmg: 167,
         maxdmg: 251,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_12",
         quality: "Uncommon"
     },
@@ -6774,7 +6774,7 @@ const MELEE_WEAPONS = {
         mindmg: 56,
         maxdmg: 105,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_03",
         quality: "Uncommon"
     },
@@ -6793,7 +6793,7 @@ const MELEE_WEAPONS = {
         mindmg: 43,
         maxdmg: 81,
         hand: "Off",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_15",
         quality: "Uncommon"
     },
@@ -6811,7 +6811,7 @@ const MELEE_WEAPONS = {
         mindmg: 175,
         maxdmg: 327,
         hand: "One",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_axe_62",
         quality: "Epic"
     },
@@ -6829,7 +6829,7 @@ const MELEE_WEAPONS = {
         mindmg: 101,
         maxdmg: 189,
         hand: "Off",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_weapon_hand_12",
         quality: "Epic"
     },
@@ -6847,7 +6847,7 @@ const MELEE_WEAPONS = {
         mindmg: 174,
         maxdmg: 323,
         hand: "One",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_weapon_shortblade_46",
         quality: "Epic"
     },
@@ -6874,7 +6874,7 @@ const MELEE_WEAPONS = {
         mindmg: 375,
         maxdmg: 564,
         hand: "Two",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_sword_2h_blood_c_01",
         quality: "Epic"
     },
@@ -6893,7 +6893,7 @@ const MELEE_WEAPONS = {
         mindmg: 84,
         maxdmg: 157,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_15",
         quality: "Rare"
     },
@@ -6908,7 +6908,7 @@ const MELEE_WEAPONS = {
         mindmg: 72,
         maxdmg: 134,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_30",
         quality: "Rare"
     },
@@ -6926,7 +6926,7 @@ const MELEE_WEAPONS = {
         mindmg: 182,
         maxdmg: 339,
         hand: "One",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_sword_50",
         quality: "Epic"
     },
@@ -6941,7 +6941,7 @@ const MELEE_WEAPONS = {
         mindmg: 110,
         maxdmg: 205,
         hand: "Main",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_39",
         quality: "Rare"
     },
@@ -6958,7 +6958,7 @@ const MELEE_WEAPONS = {
         mindmg: 213,
         maxdmg: 321,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_46",
         quality: "Rare"
     },
@@ -6975,7 +6975,7 @@ const MELEE_WEAPONS = {
         mindmg: 144,
         maxdmg: 217,
         hand: "One",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_weapon_shortblade_39",
         quality: "Epic"
     },
@@ -6992,7 +6992,7 @@ const MELEE_WEAPONS = {
         mindmg: 113,
         maxdmg: 211,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_40",
         quality: "Uncommon"
     },
@@ -7009,7 +7009,7 @@ const MELEE_WEAPONS = {
         mindmg: 135,
         maxdmg: 285,
         hand: "Two",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_staff_12",
         quality: "Epic"
     },
@@ -7027,7 +7027,7 @@ const MELEE_WEAPONS = {
         mindmg: 173,
         maxdmg: 260,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_spear_05",
         quality: "Uncommon"
     },
@@ -7044,7 +7044,7 @@ const MELEE_WEAPONS = {
         mindmg: 67,
         maxdmg: 126,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_74",
         quality: "Epic"
     },
@@ -7062,7 +7062,7 @@ const MELEE_WEAPONS = {
         mindmg: 57,
         maxdmg: 107,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_pick_01",
         quality: "Uncommon"
     },
@@ -7080,7 +7080,7 @@ const MELEE_WEAPONS = {
         mindmg: 105,
         maxdmg: 196,
         hand: "One",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_weapon_shortblade_59",
         quality: "Epic"
     },
@@ -7097,7 +7097,7 @@ const MELEE_WEAPONS = {
         mindmg: 182,
         maxdmg: 339,
         hand: "One",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_sword_85",
         quality: "Epic"
     },
@@ -7113,7 +7113,7 @@ const MELEE_WEAPONS = {
         mindmg: 144,
         maxdmg: 217,
         hand: "One",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_weapon_shortblade_59",
         quality: "Epic"
     },
@@ -7130,7 +7130,7 @@ const MELEE_WEAPONS = {
         mindmg: 386,
         maxdmg: 580,
         hand: "Two",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_sword_68",
         quality: "Epic"
     },
@@ -7148,7 +7148,7 @@ const MELEE_WEAPONS = {
         mindmg: 65,
         maxdmg: 122,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_29",
         quality: "Rare"
     },
@@ -7166,7 +7166,7 @@ const MELEE_WEAPONS = {
         mindmg: 84,
         maxdmg: 157,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_14",
         quality: "Rare"
     },
@@ -7184,7 +7184,7 @@ const MELEE_WEAPONS = {
         mindmg: 253,
         maxdmg: 380,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_40",
         quality: "Rare"
     },
@@ -7202,7 +7202,7 @@ const MELEE_WEAPONS = {
         mindmg: 103,
         maxdmg: 155,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_03",
         quality: "Rare"
     },
@@ -7218,7 +7218,7 @@ const MELEE_WEAPONS = {
         mindmg: 121,
         maxdmg: 226,
         hand: "One",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_weapon_shortblade_03",
         quality: "Uncommon"
     },
@@ -7235,7 +7235,7 @@ const MELEE_WEAPONS = {
         mindmg: 70,
         maxdmg: 131,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_16",
         quality: "Uncommon"
     },
@@ -7253,7 +7253,7 @@ const MELEE_WEAPONS = {
         mindmg: 83,
         maxdmg: 156,
         hand: "One",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_weapon_shortblade_38",
         quality: "Rare"
     },
@@ -7271,7 +7271,7 @@ const MELEE_WEAPONS = {
         mindmg: 64,
         maxdmg: 120,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_33",
         quality: "Uncommon"
     },
@@ -7289,7 +7289,7 @@ const MELEE_WEAPONS = {
         mindmg: 192,
         maxdmg: 289,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_44",
         quality: "Uncommon"
     },
@@ -7309,7 +7309,7 @@ const MELEE_WEAPONS = {
         mindmg: 198,
         maxdmg: 298,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_18",
         quality: "Uncommon"
     },
@@ -7326,7 +7326,7 @@ const MELEE_WEAPONS = {
         mindmg: 72,
         maxdmg: 135,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_12",
         quality: "Uncommon"
     },
@@ -7343,7 +7343,7 @@ const MELEE_WEAPONS = {
         mindmg: 48,
         maxdmg: 91,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_15",
         quality: "Uncommon"
     },
@@ -7361,7 +7361,7 @@ const MELEE_WEAPONS = {
         mindmg: 69,
         maxdmg: 128,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_05",
         quality: "Uncommon"
     },
@@ -7378,7 +7378,7 @@ const MELEE_WEAPONS = {
         mindmg: 55,
         maxdmg: 103,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_15",
         quality: "Rare"
     },
@@ -7395,7 +7395,7 @@ const MELEE_WEAPONS = {
         mindmg: 71,
         maxdmg: 133,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_15",
         quality: "Rare"
     },
@@ -7415,7 +7415,7 @@ const MELEE_WEAPONS = {
         mindmg: 177,
         maxdmg: 330,
         hand: "One",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_axe_54",
         quality: "Epic"
     },
@@ -7435,7 +7435,7 @@ const MELEE_WEAPONS = {
         mindmg: 365,
         maxdmg: 549,
         hand: "Two",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_axe_68",
         quality: "Epic"
     },
@@ -7455,7 +7455,7 @@ const MELEE_WEAPONS = {
         mindmg: 102,
         maxdmg: 191,
         hand: "Off",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_axe_54",
         quality: "Epic"
     },
@@ -7475,7 +7475,7 @@ const MELEE_WEAPONS = {
         mindmg: 102,
         maxdmg: 191,
         hand: "Off",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_weapon_hand_13",
         quality: "Epic"
     },
@@ -7494,7 +7494,7 @@ const MELEE_WEAPONS = {
         mindmg: 223,
         maxdmg: 335,
         hand: "Two",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_weapon_halberd15",
         quality: "Epic"
     },
@@ -7514,7 +7514,7 @@ const MELEE_WEAPONS = {
         mindmg: 102,
         maxdmg: 191,
         hand: "Off",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_sword_71",
         quality: "Epic"
     },
@@ -7534,7 +7534,7 @@ const MELEE_WEAPONS = {
         mindmg: 177,
         maxdmg: 330,
         hand: "Main",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_weapon_hand_13",
         quality: "Epic"
     },
@@ -7554,7 +7554,7 @@ const MELEE_WEAPONS = {
         mindmg: 140,
         maxdmg: 211,
         hand: "One",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_weapon_shortblade_45",
         quality: "Epic"
     },
@@ -7574,7 +7574,7 @@ const MELEE_WEAPONS = {
         mindmg: 95,
         maxdmg: 175,
         hand: "Off",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_weapon_shortblade_45",
         quality: "Epic"
     },
@@ -7594,7 +7594,7 @@ const MELEE_WEAPONS = {
         mindmg: 203,
         maxdmg: 305,
         hand: "One",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_sword_71",
         quality: "Epic"
     },
@@ -7612,7 +7612,7 @@ const MELEE_WEAPONS = {
         mindmg: 208,
         maxdmg: 313,
         hand: "One",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_axe_56",
         quality: "Epic"
     },
@@ -7631,7 +7631,7 @@ const MELEE_WEAPONS = {
         mindmg: 365,
         maxdmg: 548,
         hand: "Two",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_weapon_halberd_20",
         quality: "Epic"
     },
@@ -7649,7 +7649,7 @@ const MELEE_WEAPONS = {
         mindmg: 112,
         maxdmg: 169,
         hand: "One",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_weapon_shortblade_63",
         quality: "Epic"
     },
@@ -7668,7 +7668,7 @@ const MELEE_WEAPONS = {
         mindmg: 98,
         maxdmg: 183,
         hand: "One",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_sword_87",
         quality: "Epic"
     },
@@ -7691,7 +7691,7 @@ const MELEE_WEAPONS = {
         mindmg: 75,
         maxdmg: 140,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_16",
         quality: "Rare"
     },
@@ -7708,7 +7708,7 @@ const MELEE_WEAPONS = {
         mindmg: 237,
         maxdmg: 357,
         hand: "Two",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_spear_05",
         quality: "Rare"
     },
@@ -7726,7 +7726,7 @@ const MELEE_WEAPONS = {
         mindmg: 182,
         maxdmg: 339,
         hand: "Main",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_weapon_hand_12",
         quality: "Epic"
     },
@@ -7744,7 +7744,7 @@ const MELEE_WEAPONS = {
         mindmg: 120,
         maxdmg: 181,
         hand: "Off",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_weapon_hand_14",
         quality: "Epic"
     },
@@ -7762,7 +7762,7 @@ const MELEE_WEAPONS = {
         mindmg: 216,
         maxdmg: 325,
         hand: "Main",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_weapon_hand_14",
         quality: "Epic"
     },
@@ -7780,7 +7780,7 @@ const MELEE_WEAPONS = {
         mindmg: 100,
         maxdmg: 187,
         hand: "One",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_sword_108",
         quality: "Epic"
     },
@@ -7798,7 +7798,7 @@ const MELEE_WEAPONS = {
         mindmg: 100,
         maxdmg: 187,
         hand: "One",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_weapon_shortblade_65",
         quality: "Epic"
     },
@@ -7816,7 +7816,7 @@ const MELEE_WEAPONS = {
         mindmg: 79,
         maxdmg: 120,
         hand: "One",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_sword_107",
         quality: "Epic"
     },
@@ -7834,7 +7834,7 @@ const MELEE_WEAPONS = {
         mindmg: 137,
         maxdmg: 207,
         hand: "One",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_weapon_shortblade_60",
         quality: "Epic"
     },
@@ -7852,7 +7852,7 @@ const MELEE_WEAPONS = {
         mindmg: 380,
         maxdmg: 570,
         hand: "Two",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_sword_108",
         quality: "Epic"
     },
@@ -7878,7 +7878,7 @@ const MELEE_WEAPONS = {
         mindmg: 358,
         maxdmg: 537,
         hand: "Two",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_axe_85",
         quality: "Epic"
     },
@@ -7903,7 +7903,7 @@ const MELEE_WEAPONS = {
         mindmg: 137,
         maxdmg: 207,
         hand: "One",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_weapon_shortblade_66",
         quality: "Epic"
     },
@@ -7927,7 +7927,7 @@ const MELEE_WEAPONS = {
         mindmg: 174,
         maxdmg: 323,
         hand: "Main",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_weapon_hand_15",
         quality: "Epic"
     },
@@ -7952,7 +7952,7 @@ const MELEE_WEAPONS = {
         mindmg: 174,
         maxdmg: 323,
         hand: "Off",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_weapon_hand_15",
         quality: "Epic"
     },
@@ -7973,7 +7973,7 @@ const MELEE_WEAPONS = {
         mindmg: 187,
         maxdmg: 349,
         hand: "One",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_axe_84",
         quality: "Epic"
     },
@@ -7992,7 +7992,7 @@ const MELEE_WEAPONS = {
         mindmg: 386,
         maxdmg: 580,
         hand: "Two",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_axe_60",
         quality: "Epic"
     },
@@ -8011,7 +8011,7 @@ const MELEE_WEAPONS = {
         mindmg: 386,
         maxdmg: 580,
         hand: "Two",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_sword_108",
         quality: "Epic"
     },
@@ -8032,7 +8032,7 @@ const MELEE_WEAPONS = {
         mindmg: 108,
         maxdmg: 201,
         hand: "Off",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_axe_84",
         quality: "Epic"
     },
@@ -8053,7 +8053,7 @@ const MELEE_WEAPONS = {
         mindmg: 108,
         maxdmg: 201,
         hand: "Off",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_weapon_hand_13",
         quality: "Epic"
     },
@@ -8072,7 +8072,7 @@ const MELEE_WEAPONS = {
         mindmg: 236,
         maxdmg: 354,
         hand: "Two",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_weapon_halberd15",
         quality: "Epic"
     },
@@ -8093,7 +8093,7 @@ const MELEE_WEAPONS = {
         mindmg: 108,
         maxdmg: 201,
         hand: "Off",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_sword_89",
         quality: "Epic"
     },
@@ -8114,7 +8114,7 @@ const MELEE_WEAPONS = {
         mindmg: 187,
         maxdmg: 349,
         hand: "Main",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_weapon_hand_13",
         quality: "Epic"
     },
@@ -8135,7 +8135,7 @@ const MELEE_WEAPONS = {
         mindmg: 148,
         maxdmg: 223,
         hand: "One",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_weapon_shortblade_62",
         quality: "Epic"
     },
@@ -8156,7 +8156,7 @@ const MELEE_WEAPONS = {
         mindmg: 101,
         maxdmg: 188,
         hand: "Off",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_weapon_shortblade_62",
         quality: "Epic"
     },
@@ -8177,7 +8177,7 @@ const MELEE_WEAPONS = {
         mindmg: 214,
         maxdmg: 322,
         hand: "One",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_sword_89",
         quality: "Epic"
     },
@@ -8198,7 +8198,7 @@ const MELEE_WEAPONS = {
         mindmg: 130,
         maxdmg: 241,
         hand: "Off",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_weapon_shortblade_62",
         quality: "Epic"
     },
@@ -8219,7 +8219,7 @@ const MELEE_WEAPONS = {
         mindmg: 321,
         maxdmg: 483,
         hand: "Two",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_axe_61",
         quality: "Epic"
     },
@@ -8240,7 +8240,7 @@ const MELEE_WEAPONS = {
         mindmg: 187,
         maxdmg: 349,
         hand: "Off",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_axe_84",
         quality: "Epic"
     },
@@ -8261,7 +8261,7 @@ const MELEE_WEAPONS = {
         mindmg: 187,
         maxdmg: 349,
         hand: "Off",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_weapon_hand_13",
         quality: "Epic"
     },
@@ -8279,7 +8279,7 @@ const MELEE_WEAPONS = {
         mindmg: 113,
         maxdmg: 211,
         hand: "One",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_shortblade_74",
         quality: "Epic"
     },
@@ -8304,7 +8304,7 @@ const MELEE_WEAPONS = {
         mindmg: 393,
         maxdmg: 590,
         hand: "Two",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_halberd_20",
         quality: "Epic"
     },
@@ -8322,7 +8322,7 @@ const MELEE_WEAPONS = {
         mindmg: 113,
         maxdmg: 211,
         hand: "Off",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_hand_15",
         quality: "Epic"
     },
@@ -8340,7 +8340,7 @@ const MELEE_WEAPONS = {
         mindmg: 136,
         maxdmg: 253,
         hand: "One",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_shortblade_75",
         quality: "Epic"
     },
@@ -8357,7 +8357,7 @@ const MELEE_WEAPONS = {
         mindmg: 196,
         maxdmg: 365,
         hand: "One",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_sword_114",
         quality: "Epic"
     },
@@ -8383,7 +8383,7 @@ const MELEE_WEAPONS = {
         mindmg: 164,
         maxdmg: 247,
         hand: "One",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_shortblade_75",
         quality: "Epic"
     },
@@ -8409,7 +8409,7 @@ const MELEE_WEAPONS = {
         mindmg: 238,
         maxdmg: 357,
         hand: "Main",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_hand_15",
         quality: "Epic"
     },
@@ -8434,7 +8434,7 @@ const MELEE_WEAPONS = {
         mindmg: 196,
         maxdmg: 365,
         hand: "Off",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_hand_13",
         quality: "Epic"
     },
@@ -8452,7 +8452,7 @@ const MELEE_WEAPONS = {
         mindmg: 79,
         maxdmg: 148,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_knife_1h_stratholme_d_03",
         quality: "Epic"
     },
@@ -8477,7 +8477,7 @@ const MELEE_WEAPONS = {
         mindmg: 167,
         maxdmg: 312,
         hand: "One",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_axe_62",
         quality: "Epic"
     },
@@ -8496,7 +8496,7 @@ const MELEE_WEAPONS = {
         mindmg: 90,
         maxdmg: 168,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_shortblade_14",
         quality: "Rare"
     },
@@ -8515,7 +8515,7 @@ const MELEE_WEAPONS = {
         mindmg: 155,
         maxdmg: 233,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_91",
         quality: "Rare"
     },
@@ -8533,7 +8533,7 @@ const MELEE_WEAPONS = {
         mindmg: 130,
         maxdmg: 243,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_axe_02",
         quality: "Rare"
     },
@@ -8551,7 +8551,7 @@ const MELEE_WEAPONS = {
         mindmg: 130,
         maxdmg: 243,
         hand: "One",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_sword_76",
         quality: "Rare"
     },
@@ -8569,7 +8569,7 @@ const MELEE_WEAPONS = {
         mindmg: 375,
         maxdmg: 563,
         hand: "Two",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_axe_04",
         quality: "Epic"
     },
@@ -8587,7 +8587,7 @@ const MELEE_WEAPONS = {
         mindmg: 180,
         maxdmg: 335,
         hand: "Main",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_hand_16",
         quality: "Epic"
     },
@@ -8605,7 +8605,7 @@ const MELEE_WEAPONS = {
         mindmg: 130,
         maxdmg: 241,
         hand: "One",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_shortblade_78",
         quality: "Epic"
     },
@@ -8623,7 +8623,7 @@ const MELEE_WEAPONS = {
         mindmg: 108,
         maxdmg: 201,
         hand: "Off",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_shortblade_78",
         quality: "Epic"
     },
@@ -8641,7 +8641,7 @@ const MELEE_WEAPONS = {
         mindmg: 108,
         maxdmg: 201,
         hand: "Off",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_hand_16",
         quality: "Epic"
     },
@@ -8659,7 +8659,7 @@ const MELEE_WEAPONS = {
         mindmg: 180,
         maxdmg: 335,
         hand: "Off",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_hand_16",
         quality: "Epic"
     },
@@ -8686,7 +8686,7 @@ const MELEE_WEAPONS = {
         mindmg: 404,
         maxdmg: 607,
         hand: "Two",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_sword_116",
         quality: "Epic"
     },
@@ -8704,7 +8704,7 @@ const MELEE_WEAPONS = {
         mindmg: 137,
         maxdmg: 306,
         hand: "Two",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_staff_12",
         quality: "Epic"
     },
@@ -8722,7 +8722,7 @@ const MELEE_WEAPONS = {
         mindmg: 130,
         maxdmg: 241,
         hand: "Off",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_shortblade_78",
         quality: "Epic"
     },
@@ -8743,7 +8743,7 @@ const MELEE_WEAPONS = {
         mindmg: 196,
         maxdmg: 365,
         hand: "One",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_axe_1h_blacksmithing_02",
         quality: "Epic"
     },
@@ -8764,7 +8764,7 @@ const MELEE_WEAPONS = {
         mindmg: 404,
         maxdmg: 606,
         hand: "Two",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_axe_73",
         quality: "Epic"
     },
@@ -8784,7 +8784,7 @@ const MELEE_WEAPONS = {
         mindmg: 404,
         maxdmg: 606,
         hand: "Two",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_sword_116",
         quality: "Epic"
     },
@@ -8805,7 +8805,7 @@ const MELEE_WEAPONS = {
         mindmg: 113,
         maxdmg: 211,
         hand: "Off",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_axe_1h_blacksmithing_02",
         quality: "Epic"
     },
@@ -8826,7 +8826,7 @@ const MELEE_WEAPONS = {
         mindmg: 113,
         maxdmg: 211,
         hand: "Off",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_hand_15",
         quality: "Epic"
     },
@@ -8845,7 +8845,7 @@ const MELEE_WEAPONS = {
         mindmg: 247,
         maxdmg: 371,
         hand: "Two",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_halberd_20",
         quality: "Epic"
     },
@@ -8866,7 +8866,7 @@ const MELEE_WEAPONS = {
         mindmg: 113,
         maxdmg: 211,
         hand: "Off",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_sword_114",
         quality: "Epic"
     },
@@ -8887,7 +8887,7 @@ const MELEE_WEAPONS = {
         mindmg: 196,
         maxdmg: 365,
         hand: "Main",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_hand_15",
         quality: "Epic"
     },
@@ -8908,7 +8908,7 @@ const MELEE_WEAPONS = {
         mindmg: 155,
         maxdmg: 233,
         hand: "One",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_shortblade_75",
         quality: "Epic"
     },
@@ -8929,7 +8929,7 @@ const MELEE_WEAPONS = {
         mindmg: 105,
         maxdmg: 197,
         hand: "Off",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_shortblade_75",
         quality: "Epic"
     },
@@ -8950,7 +8950,7 @@ const MELEE_WEAPONS = {
         mindmg: 224,
         maxdmg: 337,
         hand: "One",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_sword_114",
         quality: "Epic"
     },
@@ -8971,7 +8971,7 @@ const MELEE_WEAPONS = {
         mindmg: 136,
         maxdmg: 253,
         hand: "Off",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_shortblade_75",
         quality: "Epic"
     },
@@ -8992,7 +8992,7 @@ const MELEE_WEAPONS = {
         mindmg: 196,
         maxdmg: 365,
         hand: "Main",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_axe_1h_blacksmithing_02",
         quality: "Epic"
     },
@@ -9013,7 +9013,7 @@ const MELEE_WEAPONS = {
         mindmg: 196,
         maxdmg: 365,
         hand: "Off",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_axe_1h_blacksmithing_02",
         quality: "Epic"
     },
@@ -9034,7 +9034,7 @@ const MELEE_WEAPONS = {
         mindmg: 196,
         maxdmg: 365,
         hand: "Off",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_hand_15",
         quality: "Epic"
     },
@@ -9070,7 +9070,7 @@ const NECKS = {
             Crit: 14
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_22",
         quality: "Rare"
     },
@@ -9081,7 +9081,7 @@ const NECKS = {
             Resil: 23
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_17",
         quality: "Rare"
     },
@@ -9092,7 +9092,7 @@ const NECKS = {
             Hit: 21
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_07",
         quality: "Rare"
     },
@@ -9105,7 +9105,7 @@ const NECKS = {
             RAP: 26
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_22",
         quality: "Uncommon"
     },
@@ -9118,7 +9118,7 @@ const NECKS = {
             Hit: 13
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_06",
         quality: "Rare"
     },
@@ -9130,7 +9130,7 @@ const NECKS = {
             Hit: 15
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_11",
         quality: "Uncommon"
     },
@@ -9144,7 +9144,7 @@ const NECKS = {
             Hit: 12
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_noose_01",
         quality: "Rare"
     },
@@ -9158,7 +9158,7 @@ const NECKS = {
             Hit: 13
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_04",
         quality: "Rare"
     },
@@ -9172,7 +9172,7 @@ const NECKS = {
             Hit: 14
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_34",
         quality: "Rare"
     },
@@ -9183,7 +9183,7 @@ const NECKS = {
             Resil: 24
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_trinket_honorhold",
         quality: "Rare"
     },
@@ -9203,7 +9203,7 @@ const NECKS = {
         socketBonus: {
             Hit: 2
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_36",
         quality: "Epic"
     },
@@ -9216,7 +9216,7 @@ const NECKS = {
             RAP: 30
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_17",
         quality: "Rare"
     },
@@ -9230,7 +9230,7 @@ const NECKS = {
             Hit: 17
         },
         Location: "Karazhan",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_22",
         quality: "Epic"
     },
@@ -9243,7 +9243,7 @@ const NECKS = {
             RAP: 46
         },
         Location: "Karazhan",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_34",
         quality: "Epic"
     },
@@ -9254,7 +9254,7 @@ const NECKS = {
             Agi: 24
         },
         Location: "Reputation Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_29naxxramas",
         quality: "Epic"
     },
@@ -9267,7 +9267,7 @@ const NECKS = {
             Hit: 21
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_04",
         quality: "Rare"
     },
@@ -9280,7 +9280,7 @@ const NECKS = {
             Crit: 30
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_06",
         quality: "Epic"
     },
@@ -9294,7 +9294,7 @@ const NECKS = {
             Hit: 18
         },
         Location: "Badge Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_04",
         quality: "Epic"
     },
@@ -9306,7 +9306,7 @@ const NECKS = {
             Stam: 25
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_04",
         quality: "Rare"
     },
@@ -9319,7 +9319,7 @@ const NECKS = {
             RAP: 70
         },
         Location: "The Eye",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_jewelry_necklace_30naxxramas",
         quality: "Epic"
     },
@@ -9332,7 +9332,7 @@ const NECKS = {
             Crit: 23
         },
         Location: "Serpentshrine Cavern",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_jewelry_necklace_ahnqiraj_03",
         quality: "Epic"
     },
@@ -9345,7 +9345,7 @@ const NECKS = {
             RAP: 32
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_29naxxramas",
         quality: "Uncommon"
     },
@@ -9357,7 +9357,7 @@ const NECKS = {
             RAP: 40
         },
         Location: "World Drop",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_06",
         quality: "Rare"
     },
@@ -9368,7 +9368,7 @@ const NECKS = {
             Agi: 15
         },
         Location: "World Drop",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_19",
         quality: "Rare"
     },
@@ -9381,7 +9381,7 @@ const NECKS = {
             Hit: 10
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_34",
         quality: "Rare"
     },
@@ -9394,7 +9394,7 @@ const NECKS = {
             RAP: 32
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_20",
         quality: "Rare"
     },
@@ -9406,7 +9406,7 @@ const NECKS = {
             Resil: 24
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_12",
         quality: "Rare"
     },
@@ -9419,7 +9419,7 @@ const NECKS = {
             RAP: 42
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_necklace_01",
         quality: "Uncommon"
     },
@@ -9432,7 +9432,7 @@ const NECKS = {
             Hit: 21
         },
         Location: "Black Temple",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_jewelry_necklace_35",
         quality: "Epic"
     },
@@ -9450,7 +9450,7 @@ const NECKS = {
         socketBonus: {
             Hit: 3
         },
-        Phase: 2,
+        Phase: 0,
         icon: "inv_jewelry_necklace_03",
         quality: "Rare"
     },
@@ -9463,7 +9463,7 @@ const NECKS = {
             ArP: 25
         },
         Location: "MH/BT",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_jewelry_necklace_34",
         quality: "Epic"
     },
@@ -9483,7 +9483,7 @@ const NECKS = {
         socketBonus: {
             Stam: 3
         },
-        Phase: 2,
+        Phase: 0,
         icon: "inv_jewelry_necklace_36",
         quality: "Epic"
     },
@@ -9496,7 +9496,7 @@ const NECKS = {
             Haste: 25
         },
         Location: "Zul'Aman",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_jewelry_necklace_19",
         quality: "Epic"
     },
@@ -9516,7 +9516,7 @@ const NECKS = {
         socketBonus: {
             Stam: 3
         },
-        Phase: 3,
+        Phase: 0,
         icon: "inv_jewelry_necklace_36",
         quality: "Epic"
     },
@@ -9530,7 +9530,7 @@ const NECKS = {
             Haste: 30
         },
         Location: "Sunwell",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_jewelry_necklace_43",
         quality: "Epic"
     },
@@ -9551,7 +9551,7 @@ const NECKS = {
             MAP: 4,
             RAP: 4
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_jewelry_necklace_35",
         quality: "Epic"
     },
@@ -9564,7 +9564,7 @@ const NECKS = {
             RAP: 64
         },
         Location: "Reputation Reward",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_jewelry_necklace_38",
         quality: "Epic"
     },
@@ -9585,7 +9585,7 @@ const NECKS = {
             MAP: 4,
             RAP: 4
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_jewelry_necklace_36",
         quality: "Epic"
     }
@@ -9663,7 +9663,7 @@ const RANGED_WEAPONS = {
         maxdmg: 29,
         stats: {},
         speed: 2.7,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_crossbow_02",
         quality: "Common",
         Location: "Vendor"
@@ -9678,7 +9678,7 @@ const RANGED_WEAPONS = {
         mindmg: 149,
         maxdmg: 225,
         speed: 3.4,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_crossbow_09",
         quality: "Epic",
         Location: "BWL"
@@ -9694,7 +9694,7 @@ const RANGED_WEAPONS = {
         mindmg: 151,
         maxdmg: 281,
         speed: 3.2,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_crossbow_12",
         quality: "Epic",
         Location: "Naxx"
@@ -9710,7 +9710,7 @@ const RANGED_WEAPONS = {
         mindmg: 126,
         maxdmg: 234,
         speed: 3,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_rifle_04",
         quality: "Uncommon",
         Location: "Crafted"
@@ -9725,7 +9725,7 @@ const RANGED_WEAPONS = {
         mindmg: 104,
         maxdmg: 194,
         speed: 2.4,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_rifle_04",
         quality: "Rare",
         Location: "Crafted"
@@ -9740,7 +9740,7 @@ const RANGED_WEAPONS = {
         mindmg: 144,
         maxdmg: 268,
         speed: 3.1,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_rifle_03",
         quality: "Rare",
         Location: "Crafted"
@@ -9756,7 +9756,7 @@ const RANGED_WEAPONS = {
         mindmg: 124,
         maxdmg: 187,
         speed: 2.9,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_crossbow_11",
         quality: "Rare",
         Location: "Dungeon"
@@ -9767,7 +9767,7 @@ const RANGED_WEAPONS = {
         mindmg: 102,
         maxdmg: 190,
         speed: 2.7,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_bow_16",
         quality: "Uncommon",
         Location: "World Drop"
@@ -9778,7 +9778,7 @@ const RANGED_WEAPONS = {
         mindmg: 104,
         maxdmg: 195,
         speed: 2.7,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_bow_05",
         quality: "Uncommon",
         Location: "World Drop"
@@ -9789,7 +9789,7 @@ const RANGED_WEAPONS = {
         mindmg: 96,
         maxdmg: 179,
         speed: 2.7,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_crossbow_02",
         quality: "Uncommon",
         Location: "World Drop"
@@ -9800,7 +9800,7 @@ const RANGED_WEAPONS = {
         mindmg: 102,
         maxdmg: 190,
         speed: 2.7,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_crossbow_02",
         quality: "Uncommon",
         Location: "World Drop"
@@ -9811,7 +9811,7 @@ const RANGED_WEAPONS = {
         mindmg: 104,
         maxdmg: 195,
         speed: 2.7,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_crossbow_02",
         quality: "Uncommon",
         Location: "World Drop"
@@ -9822,7 +9822,7 @@ const RANGED_WEAPONS = {
         mindmg: 115,
         maxdmg: 215,
         speed: 2.7,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_crossbow_02",
         quality: "Uncommon",
         Location: "World Drop"
@@ -9833,7 +9833,7 @@ const RANGED_WEAPONS = {
         mindmg: 107,
         maxdmg: 200,
         speed: 2.7,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_rifle_03",
         quality: "Uncommon",
         Location: "World Drop"
@@ -9849,7 +9849,7 @@ const RANGED_WEAPONS = {
         mindmg: 103,
         maxdmg: 193,
         speed: 2.5,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_rifle_05",
         quality: "Rare",
         Location: "Quest Reward"
@@ -9864,7 +9864,7 @@ const RANGED_WEAPONS = {
         mindmg: 120,
         maxdmg: 181,
         speed: 2.7,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_bow_20",
         quality: "Rare",
         Location: "Dungeon"
@@ -9879,7 +9879,7 @@ const RANGED_WEAPONS = {
         mindmg: 159,
         maxdmg: 239,
         speed: 3,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_crossbow_15",
         quality: "Rare",
         Location: "Dungeon"
@@ -9895,7 +9895,7 @@ const RANGED_WEAPONS = {
         mindmg: 108,
         maxdmg: 202,
         speed: 2.4,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_bow_17",
         quality: "Rare",
         Location: "Dungeon"
@@ -9910,7 +9910,7 @@ const RANGED_WEAPONS = {
         mindmg: 131,
         maxdmg: 244,
         speed: 2.9,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_rifle_19",
         quality: "Rare",
         Location: "Dungeon"
@@ -9925,7 +9925,7 @@ const RANGED_WEAPONS = {
         mindmg: 130,
         maxdmg: 242,
         speed: 2.8,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_bow_06",
         quality: "Rare",
         Location: "Dungeon"
@@ -9941,7 +9941,7 @@ const RANGED_WEAPONS = {
         mindmg: 90,
         maxdmg: 168,
         speed: 2,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_rifle_20",
         quality: "Rare",
         Location: "Dungeon"
@@ -9958,7 +9958,7 @@ const RANGED_WEAPONS = {
         mindmg: 93,
         maxdmg: 175,
         speed: 2.5,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_bow_04",
         quality: "Rare",
         Location: "Vendor"
@@ -9974,7 +9974,7 @@ const RANGED_WEAPONS = {
         mindmg: 135,
         maxdmg: 252,
         speed: 3,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_bow_19",
         quality: "Rare",
         Location: "Dungeon"
@@ -9990,7 +9990,7 @@ const RANGED_WEAPONS = {
         mindmg: 139,
         maxdmg: 259,
         speed: 3,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_rifle_22",
         quality: "Rare",
         Location: "Dungeon"
@@ -10007,7 +10007,7 @@ const RANGED_WEAPONS = {
         mindmg: 204,
         maxdmg: 307,
         speed: 3.1,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_crossbow_10",
         quality: "Epic",
         Location: "Arena Reward"
@@ -10023,7 +10023,7 @@ const RANGED_WEAPONS = {
         mindmg: 159,
         maxdmg: 239,
         speed: 3,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_crossbow_17",
         quality: "Rare",
         Location: "Dungeon"
@@ -10039,7 +10039,7 @@ const RANGED_WEAPONS = {
         mindmg: 155,
         maxdmg: 288,
         speed: 2.8,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_crossbow_18",
         quality: "Epic",
         Location: "Karazhan"
@@ -10055,7 +10055,7 @@ const RANGED_WEAPONS = {
         mindmg: 149,
         maxdmg: 278,
         speed: 2.7,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_rifle_23",
         quality: "Epic",
         Location: "Karazhan"
@@ -10071,7 +10071,7 @@ const RANGED_WEAPONS = {
         mindmg: 169,
         maxdmg: 314,
         speed: 2.9,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_bow_18",
         quality: "Epic",
         Location: "Karazhan"
@@ -10088,7 +10088,7 @@ const RANGED_WEAPONS = {
         mindmg: 111,
         maxdmg: 207,
         speed: 2.4,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_rifle_07",
         quality: "Rare",
         Location: "Reputation Reward"
@@ -10105,7 +10105,7 @@ const RANGED_WEAPONS = {
         mindmg: 139,
         maxdmg: 259,
         speed: 2.7,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_rifle_02",
         quality: "Epic",
         Location: "Reputation Reward"
@@ -10122,7 +10122,7 @@ const RANGED_WEAPONS = {
         mindmg: 144,
         maxdmg: 269,
         speed: 2.8,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_bow_08",
         quality: "Epic",
         Location: "Reputation Reward"
@@ -10138,7 +10138,7 @@ const RANGED_WEAPONS = {
         mindmg: 158,
         maxdmg: 295,
         speed: 3,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_crossbow_16",
         quality: "Epic",
         Location: "Dungeon"
@@ -10153,7 +10153,7 @@ const RANGED_WEAPONS = {
         mindmg: 177,
         maxdmg: 329,
         speed: 2.9,
-        Phase: 2,
+        Phase: 0,
         icon: "inv_weapon_rifle_18",
         quality: "Epic",
         Location: "Serpentshrine Cavern"
@@ -10170,7 +10170,7 @@ const RANGED_WEAPONS = {
         mindmg: 217,
         maxdmg: 327,
         speed: 3,
-        Phase: 2,
+        Phase: 0,
         icon: "inv_weapon_bow_08",
         quality: "Epic",
         Location: "Serpentshrine Cavern"
@@ -10188,7 +10188,7 @@ const RANGED_WEAPONS = {
         mindmg: 97,
         maxdmg: 181,
         speed: 2.5,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_bow_03",
         quality: "Uncommon",
         Location: "Quest Reward"
@@ -10205,7 +10205,7 @@ const RANGED_WEAPONS = {
         mindmg: 87,
         maxdmg: 163,
         speed: 2.2,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_rifle_06",
         quality: "Uncommon",
         Location: "Quest Reward"
@@ -10222,7 +10222,7 @@ const RANGED_WEAPONS = {
         mindmg: 104,
         maxdmg: 195,
         speed: 2.7,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_crossbow_14",
         quality: "Uncommon",
         Location: "Quest Reward"
@@ -10243,7 +10243,7 @@ const RANGED_WEAPONS = {
         mindmg: 147,
         maxdmg: 275,
         speed: 2.6,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_rifle_22",
         quality: "Epic",
         Location: "World Boss"
@@ -10258,7 +10258,7 @@ const RANGED_WEAPONS = {
         mindmg: 201,
         maxdmg: 374,
         speed: 3,
-        Phase: 3,
+        Phase: 0,
         icon: "inv_weapon_bow_30",
         quality: "Epic",
         Location: "Mount Hyjal"
@@ -10275,7 +10275,7 @@ const RANGED_WEAPONS = {
         mindmg: 114,
         maxdmg: 213,
         speed: 2.6,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_rifle_07",
         quality: "Rare",
         Location: "Quest Reward"
@@ -10291,7 +10291,7 @@ const RANGED_WEAPONS = {
         mindmg: 114,
         maxdmg: 213,
         speed: 2.6,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_bow_16",
         quality: "Rare",
         Location: "Quest Reward"
@@ -10306,7 +10306,7 @@ const RANGED_WEAPONS = {
         mindmg: 112,
         maxdmg: 210,
         speed: 2.8,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_rifle_07",
         quality: "Rare",
         Location: "World Drop"
@@ -10323,7 +10323,7 @@ const RANGED_WEAPONS = {
         mindmg: 130,
         maxdmg: 242,
         speed: 2.8,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_bow_04",
         quality: "Rare",
         Location: "World Drop"
@@ -10344,7 +10344,7 @@ const RANGED_WEAPONS = {
             proc_type: 2,
             proc_chance: 0.05
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_rifle_21",
         quality: "Epic",
         Location: "World Drop"
@@ -10361,7 +10361,7 @@ const RANGED_WEAPONS = {
         mindmg: 85,
         maxdmg: 159,
         speed: 2.2,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_bow_08",
         quality: "Uncommon",
         Location: "Quest Reward"
@@ -10378,7 +10378,7 @@ const RANGED_WEAPONS = {
         mindmg: 211,
         maxdmg: 318,
         speed: 3,
-        Phase: 2,
+        Phase: 0,
         icon: "inv_weapon_crossbow_10",
         quality: "Epic",
         Location: "Arena Reward"
@@ -10393,7 +10393,7 @@ const RANGED_WEAPONS = {
         mindmg: 184,
         maxdmg: 342,
         speed: 2.9,
-        Phase: 3,
+        Phase: 0,
         icon: "inv_weapon_crossbow_20",
         quality: "Epic",
         Location: "Black Temple"
@@ -10407,7 +10407,7 @@ const RANGED_WEAPONS = {
         mindmg: 120,
         maxdmg: 224,
         speed: 1.9,
-        Phase: 3,
+        Phase: 0,
         icon: "inv_weapon_rifle_21",
         quality: "Epic",
         Location: "Black Temple"
@@ -10422,7 +10422,7 @@ const RANGED_WEAPONS = {
         mindmg: 201,
         maxdmg: 374,
         speed: 3,
-        Phase: 3,
+        Phase: 0,
         icon: "inv_weapon_bow_31",
         quality: "Epic",
         Location: "Black Temple"
@@ -10438,7 +10438,7 @@ const RANGED_WEAPONS = {
         mindmg: 144,
         maxdmg: 269,
         speed: 2.8,
-        Phase: 3,
+        Phase: 0,
         icon: "inv_weapon_crossbow_14",
         quality: "Epic",
         Location: "Reputation Reward"
@@ -10458,7 +10458,7 @@ const RANGED_WEAPONS = {
         mindmg: 148,
         maxdmg: 275,
         speed: 2.8,
-        Phase: 3,
+        Phase: 0,
         icon: "inv_weapon_rifle_13",
         quality: "Epic",
         Location: "Crafted"
@@ -10475,7 +10475,7 @@ const RANGED_WEAPONS = {
         mindmg: 223,
         maxdmg: 336,
         speed: 3,
-        Phase: 3,
+        Phase: 0,
         icon: "inv_weapon_crossbow_19",
         quality: "Epic",
         Location: "Arena Reward"
@@ -10491,7 +10491,7 @@ const RANGED_WEAPONS = {
         mindmg: 181,
         maxdmg: 337,
         speed: 3,
-        Phase: 4,
+        Phase: 0,
         icon: "inv_weapon_bow_32",
         quality: "Epic",
         Location: "Zul'Aman"
@@ -10507,7 +10507,7 @@ const RANGED_WEAPONS = {
         mindmg: 175,
         maxdmg: 326,
         speed: 2.9,
-        Phase: 4,
+        Phase: 0,
         icon: "inv_weapon_rifle_24",
         quality: "Epic",
         Location: "Zul'Aman"
@@ -10524,7 +10524,7 @@ const RANGED_WEAPONS = {
         mindmg: 204,
         maxdmg: 380,
         speed: 3,
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_bow_38",
         quality: "Epic",
         Location: "Sunwell"
@@ -10542,7 +10542,7 @@ const RANGED_WEAPONS = {
         mindmg: 356,
         maxdmg: 524,
         speed: 2.7,
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_bow_39",
         quality: "Legendary",
         Location: "Sunwell"
@@ -10559,7 +10559,7 @@ const RANGED_WEAPONS = {
         mindmg: 223,
         maxdmg: 336,
         speed: 3,
-        Phase: 3,
+        Phase: 0,
         icon: "inv_weapon_bow_20",
         quality: "Epic",
         Location: "Arena Reward"
@@ -10576,7 +10576,7 @@ const RANGED_WEAPONS = {
         mindmg: 223,
         maxdmg: 336,
         speed: 3,
-        Phase: 3,
+        Phase: 0,
         icon: "inv_weapon_rifle_15",
         quality: "Epic",
         Location: "Arena Reward"
@@ -10594,7 +10594,7 @@ const RANGED_WEAPONS = {
         mindmg: 138,
         maxdmg: 207,
         speed: 2.6,
-        Phase: 1,
+        Phase: 0,
         icon: "inv_weapon_crossbow_14",
         quality: "Rare",
         Location: "Reputation Reward"
@@ -10611,7 +10611,7 @@ const RANGED_WEAPONS = {
         mindmg: 182,
         maxdmg: 339,
         speed: 2.8,
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_crossbow_26",
         quality: "Epic",
         Location: "Badge Reward"
@@ -10628,7 +10628,7 @@ const RANGED_WEAPONS = {
         mindmg: 234,
         maxdmg: 351,
         speed: 3,
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_crossbow_26",
         quality: "Epic",
         Location: "Arena Reward"
@@ -10645,7 +10645,7 @@ const RANGED_WEAPONS = {
         mindmg: 234,
         maxdmg: 351,
         speed: 3,
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_bow_31",
         quality: "Epic",
         Location: "Arena Reward"
@@ -10662,7 +10662,7 @@ const RANGED_WEAPONS = {
         mindmg: 234,
         maxdmg: 351,
         speed: 3,
-        Phase: 5,
+        Phase: 0,
         icon: "inv_weapon_rifle_21",
         quality: "Epic",
         Location: "Arena Reward"
@@ -10678,7 +10678,7 @@ const RINGS = {
             RAP: 46
         },
         Location: "Naxx",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_49naxxramas",
         quality: "Epic"
     },
@@ -10692,7 +10692,7 @@ const RINGS = {
             MP5: 6
         },
         Location: "Naxx",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_51naxxramas",
         quality: "Epic"
     },
@@ -10703,7 +10703,7 @@ const RINGS = {
             RAP: 48
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_39",
         quality: "Uncommon"
     },
@@ -10714,7 +10714,7 @@ const RINGS = {
             Stam: 15
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_65",
         quality: "Rare"
     },
@@ -10726,7 +10726,7 @@ const RINGS = {
             MP5: 8
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_55",
         quality: "Rare"
     },
@@ -10737,7 +10737,7 @@ const RINGS = {
             Resil: 14
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_17",
         quality: "Rare"
     },
@@ -10750,7 +10750,7 @@ const RINGS = {
             RAP: 26
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_04",
         quality: "Uncommon"
     },
@@ -10763,7 +10763,7 @@ const RINGS = {
             Crit: 14
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_19",
         quality: "Uncommon"
     },
@@ -10776,7 +10776,7 @@ const RINGS = {
             Crit: 18
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_16",
         quality: "Rare"
     },
@@ -10790,7 +10790,7 @@ const RINGS = {
             Hit: 11
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_44",
         quality: "Rare"
     },
@@ -10803,7 +10803,7 @@ const RINGS = {
             RAP: 34
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_34",
         quality: "Rare"
     },
@@ -10816,7 +10816,7 @@ const RINGS = {
             RAP: 38
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_38",
         quality: "Rare"
     },
@@ -10829,7 +10829,7 @@ const RINGS = {
             Hit: 12
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_43",
         quality: "Uncommon"
     },
@@ -10843,7 +10843,7 @@ const RINGS = {
             Hit: 13
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_ahnqiraj_01",
         quality: "Rare"
     },
@@ -10861,7 +10861,7 @@ const RINGS = {
             MAP: 4,
             RAP: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_36",
         quality: "Rare"
     },
@@ -10872,7 +10872,7 @@ const RINGS = {
             Resil: 24
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_38",
         quality: "Rare"
     },
@@ -10886,7 +10886,7 @@ const RINGS = {
             Hit: 13
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_16",
         quality: "Rare"
     },
@@ -10900,7 +10900,7 @@ const RINGS = {
             Resil: 16
         },
         Location: "Honor Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_60",
         quality: "Rare"
     },
@@ -10913,7 +10913,7 @@ const RINGS = {
             Crit: 20
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_16",
         quality: "Rare"
     },
@@ -10928,7 +10928,7 @@ const RINGS = {
             Resil: 11
         },
         Location: "Reputation",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_60",
         quality: "Epic"
     },
@@ -10942,7 +10942,7 @@ const RINGS = {
             Hit: 18
         },
         Location: "Karazhan",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_47",
         quality: "Epic"
     },
@@ -10956,7 +10956,7 @@ const RINGS = {
             Hit: 19
         },
         Location: "Karazhan",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_ahnqiraj_05",
         quality: "Epic"
     },
@@ -10969,7 +10969,7 @@ const RINGS = {
             RAP: 54
         },
         Location: "Magtheridon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_71",
         quality: "Epic"
     },
@@ -10982,7 +10982,7 @@ const RINGS = {
             RAP: 38
         },
         Location: "Reputation",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_48naxxramas",
         quality: "Rare"
     },
@@ -10995,7 +10995,7 @@ const RINGS = {
             Hit: 18
         },
         Location: "Karazhan",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_62",
         quality: "Rare"
     },
@@ -11008,7 +11008,7 @@ const RINGS = {
             Hit: 22
         },
         Location: "Karazhan",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_62",
         quality: "Epic"
     },
@@ -11021,7 +11021,7 @@ const RINGS = {
             Hit: 24
         },
         Location: "Karazhan",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_62",
         quality: "Epic"
     },
@@ -11034,7 +11034,7 @@ const RINGS = {
             Hit: 25
         },
         Location: "Karazhan",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_62",
         quality: "Epic"
     },
@@ -11047,7 +11047,7 @@ const RINGS = {
             RAP: 50
         },
         Location: "Mount Hyjal",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_jewelry_ring_54",
         quality: "Epic"
     },
@@ -11060,7 +11060,7 @@ const RINGS = {
             RAP: 56
         },
         Location: "Mount Hyjal",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_jewelry_ring_54",
         quality: "Epic"
     },
@@ -11073,7 +11073,7 @@ const RINGS = {
             RAP: 60
         },
         Location: "Mount Hyjal",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_jewelry_ring_54",
         quality: "Epic"
     },
@@ -11096,7 +11096,7 @@ const RINGS = {
             duration: 10
         },
         Location: "Mount Hyjal",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_jewelry_ring_55",
         quality: "Epic"
     },
@@ -11109,7 +11109,7 @@ const RINGS = {
             Crit: 23
         },
         Location: "Badge Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_ahnqiraj_01",
         quality: "Epic"
     },
@@ -11123,7 +11123,7 @@ const RINGS = {
             Hit: 18
         },
         Location: "The Eye",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_jewelry_ring_55",
         quality: "Epic"
     },
@@ -11137,7 +11137,7 @@ const RINGS = {
             Hit: 19
         },
         Location: "Serpentshrine Cavern",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_jewelry_ring_51naxxramas",
         quality: "Epic"
     },
@@ -11150,7 +11150,7 @@ const RINGS = {
             Hit: 12
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_03",
         quality: "Uncommon"
     },
@@ -11162,7 +11162,7 @@ const RINGS = {
             Hit: 15
         },
         Location: "Outdoor Boss",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_04",
         quality: "Epic"
     },
@@ -11175,7 +11175,7 @@ const RINGS = {
             Hit: 10
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_34",
         quality: "Rare"
     },
@@ -11188,7 +11188,7 @@ const RINGS = {
             Hit: 10
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_44",
         quality: "Rare"
     },
@@ -11201,7 +11201,7 @@ const RINGS = {
             Hit: 10
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_39",
         quality: "Rare"
     },
@@ -11213,7 +11213,7 @@ const RINGS = {
             RAP: 34
         },
         Location: "World Drop",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_ahnqiraj_01",
         quality: "Rare"
     },
@@ -11226,7 +11226,7 @@ const RINGS = {
             MP5: 7
         },
         Location: "World Drop",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_58",
         quality: "Epic"
     },
@@ -11238,7 +11238,7 @@ const RINGS = {
             Crit: 29
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_65",
         quality: "Rare"
     },
@@ -11251,7 +11251,7 @@ const RINGS = {
             Hit: 12
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_37",
         quality: "Uncommon"
     },
@@ -11264,7 +11264,7 @@ const RINGS = {
             RAP: 40
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_10",
         quality: "Uncommon"
     },
@@ -11277,7 +11277,7 @@ const RINGS = {
             Hit: 19
         },
         Location: "Dungeon",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_jewelry_ring_51naxxramas",
         quality: "Epic"
     },
@@ -11289,7 +11289,7 @@ const RINGS = {
             RAP: 60
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_45",
         quality: "Epic"
     },
@@ -11303,7 +11303,7 @@ const RINGS = {
             Hit: 19
         },
         Location: "Black Temple",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_jewelry_ring_68",
         quality: "Epic"
     },
@@ -11317,7 +11317,7 @@ const RINGS = {
             ArP: 18
         },
         Location: "Black Temple",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_jewelry_ring_67",
         quality: "Epic"
     },
@@ -11330,7 +11330,7 @@ const RINGS = {
             Haste: 31
         },
         Location: "Black Temple",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_jewelry_ring_35",
         quality: "Epic"
     },
@@ -11343,7 +11343,7 @@ const RINGS = {
             Hit: 12
         },
         Location: "Outdoor Boss",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_22",
         quality: "Epic"
     },
@@ -11356,7 +11356,7 @@ const RINGS = {
             Resil: 25
         },
         Location: "Serpentshrine Cavern",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_jewelry_ring_71",
         quality: "Epic"
     },
@@ -11370,7 +11370,7 @@ const RINGS = {
             Resil: 22
         },
         Location: "Honor Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_60",
         quality: "Epic"
     },
@@ -11384,7 +11384,7 @@ const RINGS = {
             ArP: 18
         },
         Location: "Zul'Aman",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_jewelry_ring_44",
         quality: "Epic"
     },
@@ -11395,7 +11395,7 @@ const RINGS = {
             Resil: 37
         },
         Location: "Zul'Aman",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_jewelry_ring_61",
         quality: "Epic"
     },
@@ -11410,7 +11410,7 @@ const RINGS = {
             ArP: 8
         },
         Location: "Honor Reward",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_jewelry_ring_60",
         quality: "Epic"
     },
@@ -11422,7 +11422,7 @@ const RINGS = {
             RAP: 60
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_bag_28_halloween",
         quality: "Epic"
     },
@@ -11436,7 +11436,7 @@ const RINGS = {
             ArP: 23
         },
         Location: "Sunwell",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_jewelry_ring_36",
         quality: "Epic"
     },
@@ -11450,7 +11450,7 @@ const RINGS = {
             Haste: 28
         },
         Location: "Crafting",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_jewelry_ring_55",
         quality: "Epic"
     },
@@ -11463,7 +11463,7 @@ const RINGS = {
             Haste: 18
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_16",
         quality: "Rare"
     },
@@ -11477,7 +11477,7 @@ const RINGS = {
             ArP: 18
         },
         Location: "Badge Reward",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_jewelry_ring_79",
         quality: "Epic"
     }
@@ -11496,7 +11496,7 @@ const SHOULDERS = {
             Crit: 14
         },
         Location: "Naxx",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_14",
         quality: "Epic"
     },
@@ -11517,7 +11517,7 @@ const SHOULDERS = {
         socketBonus: {
             Int: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_03",
         quality: "Rare"
     },
@@ -11531,7 +11531,7 @@ const SHOULDERS = {
             Hit: 13
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_12",
         quality: "Rare"
     },
@@ -11545,7 +11545,7 @@ const SHOULDERS = {
             RAP: 24
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_07",
         quality: "Uncommon"
     },
@@ -11564,7 +11564,7 @@ const SHOULDERS = {
             "Red"
         ],
         socketBonus: {},
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_35",
         quality: "Rare"
     },
@@ -11585,7 +11585,7 @@ const SHOULDERS = {
         socketBonus: {
             Hit: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_20",
         quality: "Rare"
     },
@@ -11605,7 +11605,7 @@ const SHOULDERS = {
         socketBonus: {
             Stam: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_24",
         quality: "Rare"
     },
@@ -11627,7 +11627,7 @@ const SHOULDERS = {
         socketBonus: {
             Crit: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_15",
         quality: "Rare"
     },
@@ -11649,7 +11649,7 @@ const SHOULDERS = {
         socketBonus: {
             Stam: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_23",
         quality: "Rare"
     },
@@ -11663,7 +11663,7 @@ const SHOULDERS = {
             Hit: 15
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_08",
         quality: "Rare"
     },
@@ -11677,7 +11677,7 @@ const SHOULDERS = {
             Crit: 21
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_11",
         quality: "Rare"
     },
@@ -11701,7 +11701,7 @@ const SHOULDERS = {
         socketBonus: {
             Resil: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_29",
         quality: "Epic"
     },
@@ -11715,7 +11715,7 @@ const SHOULDERS = {
             RAP: 50
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_18",
         quality: "Rare"
     },
@@ -11728,7 +11728,7 @@ const SHOULDERS = {
             RAP: 78
         },
         Location: "Mount Hyjal",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_shoulder_59",
         quality: "Epic"
     },
@@ -11749,7 +11749,7 @@ const SHOULDERS = {
         socketBonus: {
             Hit: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_29",
         quality: "Epic"
     },
@@ -11772,7 +11772,7 @@ const SHOULDERS = {
         socketBonus: {
             Int: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_14",
         quality: "Epic"
     },
@@ -11785,7 +11785,7 @@ const SHOULDERS = {
             Hit: 15
         },
         Location: "Reputation Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_07",
         quality: "Rare"
     },
@@ -11798,7 +11798,7 @@ const SHOULDERS = {
             Hit: 15
         },
         Location: "Reputation Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_25",
         quality: "Rare"
     },
@@ -11811,7 +11811,7 @@ const SHOULDERS = {
             MP5: 9
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_03",
         quality: "Rare"
     },
@@ -11831,7 +11831,7 @@ const SHOULDERS = {
         socketBonus: {
             Agi: 2
         },
-        Phase: 2,
+        Phase: 0,
         icon: "inv_shoulder_23",
         quality: "Epic"
     },
@@ -11845,7 +11845,7 @@ const SHOULDERS = {
             Crit: 33
         },
         Location: "Serpentshrine Cavern",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_shoulder_27",
         quality: "Epic"
     },
@@ -11868,7 +11868,7 @@ const SHOULDERS = {
         socketBonus: {
             Stam: 4
         },
-        Phase: 2,
+        Phase: 0,
         icon: "inv_shoulder_14",
         quality: "Epic"
     },
@@ -11881,7 +11881,7 @@ const SHOULDERS = {
             RAP: 32
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_18",
         quality: "Uncommon"
     },
@@ -11895,7 +11895,7 @@ const SHOULDERS = {
             MP5: 5
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_18",
         quality: "Uncommon"
     },
@@ -11910,7 +11910,7 @@ const SHOULDERS = {
             MP5: 8
         },
         Location: "Karazhan",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_36",
         quality: "Epic"
     },
@@ -11924,7 +11924,7 @@ const SHOULDERS = {
             Crit: 23
         },
         Location: "Mount Hyjal",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_shoulder_67",
         quality: "Epic"
     },
@@ -11938,7 +11938,7 @@ const SHOULDERS = {
             RAP: 60
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_23",
         quality: "Uncommon"
     },
@@ -11961,7 +11961,7 @@ const SHOULDERS = {
         socketBonus: {
             Crit: 3
         },
-        Phase: 3,
+        Phase: 0,
         icon: "inv_shoulder_59",
         quality: "Epic"
     },
@@ -11974,7 +11974,7 @@ const SHOULDERS = {
             MP5: 4
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_24",
         quality: "Uncommon"
     },
@@ -11987,7 +11987,7 @@ const SHOULDERS = {
             RAP: 32
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_25",
         quality: "Uncommon"
     },
@@ -12001,7 +12001,7 @@ const SHOULDERS = {
             MP5: 4
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_04",
         quality: "Uncommon"
     },
@@ -12025,7 +12025,7 @@ const SHOULDERS = {
         socketBonus: {
             Resil: 3
         },
-        Phase: 2,
+        Phase: 0,
         icon: "inv_shoulder_29",
         quality: "Epic"
     },
@@ -12038,7 +12038,7 @@ const SHOULDERS = {
             RAP: 34
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_25",
         quality: "Epic"
     },
@@ -12052,7 +12052,7 @@ const SHOULDERS = {
             Crit: 26
         },
         Location: "Black Temple",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_shoulder_59",
         quality: "Epic"
     },
@@ -12066,7 +12066,7 @@ const SHOULDERS = {
             Hit: 22
         },
         Location: "Black Temple",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_shoulder_67",
         quality: "Epic"
     },
@@ -12081,7 +12081,7 @@ const SHOULDERS = {
             Haste: 37
         },
         Location: "Crafting",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_shoulder_66",
         quality: "Epic"
     },
@@ -12095,7 +12095,7 @@ const SHOULDERS = {
             Haste: 38
         },
         Location: "Crafting",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_shoulder_23",
         quality: "Epic"
     },
@@ -12116,7 +12116,7 @@ const SHOULDERS = {
         socketBonus: {
             Stam: 4
         },
-        Phase: 4,
+        Phase: 0,
         icon: "inv_shoulder_85",
         quality: "Epic"
     },
@@ -12130,7 +12130,7 @@ const SHOULDERS = {
             Hit: 16
         },
         Location: "Zul'Aman",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_shoulder_24",
         quality: "Epic"
     },
@@ -12154,7 +12154,7 @@ const SHOULDERS = {
         socketBonus: {
             Resil: 3
         },
-        Phase: 3,
+        Phase: 0,
         icon: "inv_shoulder_59",
         quality: "Epic"
     },
@@ -12175,7 +12175,7 @@ const SHOULDERS = {
         socketBonus: {
             Agi: 3
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_shoulder_90",
         quality: "Epic"
     },
@@ -12190,7 +12190,7 @@ const SHOULDERS = {
             Haste: 30
         },
         Location: "Sunwell",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_shoulder_88",
         quality: "Epic"
     },
@@ -12204,7 +12204,7 @@ const SHOULDERS = {
             Hit: 23
         },
         Location: "Dungeon",
-        Phase: 5,
+        Phase: 0,
         icon: "inv_shoulder_07",
         quality: "Epic"
     },
@@ -12228,7 +12228,7 @@ const SHOULDERS = {
         socketBonus: {
             Resil: 3
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_shoulder_90",
         quality: "Epic"
     },
@@ -12252,7 +12252,7 @@ const SHOULDERS = {
         socketBonus: {
             Resil: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_shoulder_29",
         quality: "Rare"
     }
@@ -12268,7 +12268,7 @@ const TRINKETS = {
             Int: 15
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "spell_holy_pureofheart",
         quality: "Epic"
     },
@@ -12278,7 +12278,7 @@ const TRINKETS = {
             Resil: 20
         },
         Location: "Honor Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_trinketpvp_02",
         quality: "Rare"
     },
@@ -12292,7 +12292,7 @@ const TRINKETS = {
             PPM: 12,
             proc_type: 2
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_ahnqirajtrinket_04",
         quality: "Epic"
     },
@@ -12302,7 +12302,7 @@ const TRINKETS = {
             Agi: 9
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "ability_hunter_pet_crab",
         quality: "Rare"
     },
@@ -12322,14 +12322,14 @@ const TRINKETS = {
             duration: 20,
             cd: 120
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_trinket_naxxramas03",
         quality: "Epic"
     },
     23206: {
         name: "Mark of the Champion",
         Location: "Naxx",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_token_argentdawn2",
         quality: "Epic"
     },
@@ -12339,7 +12339,7 @@ const TRINKETS = {
             Stam: 45
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_enggizmos_06",
         quality: "Rare"
     },
@@ -12349,7 +12349,7 @@ const TRINKETS = {
             Stam: 45
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gizmo_rocketlauncher",
         quality: "Rare"
     },
@@ -12360,7 +12360,7 @@ const TRINKETS = {
             RAP: 68
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelcrafting_truesilverboar",
         quality: "Rare"
     },
@@ -12380,7 +12380,7 @@ const TRINKETS = {
             duration: 12,
             cd: 180
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelcrafting_blackpearlpanther",
         quality: "Rare"
     },
@@ -12400,7 +12400,7 @@ const TRINKETS = {
             duration: 15,
             cd: 120
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_talisman_04",
         quality: "Uncommon"
     },
@@ -12420,7 +12420,7 @@ const TRINKETS = {
             duration: 15,
             cd: 90
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_talisman_04",
         quality: "Uncommon"
     },
@@ -12439,7 +12439,7 @@ const TRINKETS = {
             duration: 15,
             cd: 90
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_stonetablet_11",
         quality: "Uncommon"
     },
@@ -12450,7 +12450,7 @@ const TRINKETS = {
             RAP: 56
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_helmet_45",
         quality: "Rare"
     },
@@ -12466,7 +12466,7 @@ const TRINKETS = {
             proc_chance: 0.13,
             proc_type: 2
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_armorkit_12",
         quality: "Rare"
     },
@@ -12487,7 +12487,7 @@ const TRINKETS = {
             proc_chance: 0.1,
             proc_type: 1
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_gizmo_khoriumpowercore",
         quality: "Rare"
     },
@@ -12506,7 +12506,7 @@ const TRINKETS = {
             duration: 15,
             cd: 90
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_datacrystal06",
         quality: "Rare"
     },
@@ -12524,7 +12524,7 @@ const TRINKETS = {
             }
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_brd_banner",
         quality: "Rare"
     },
@@ -12534,7 +12534,7 @@ const TRINKETS = {
             Resil: 20
         },
         Location: "Honor Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_trinketpvp_01",
         quality: "Rare"
     },
@@ -12544,7 +12544,7 @@ const TRINKETS = {
             Resil: 20
         },
         Location: "Honor Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_trinketpvp_02",
         quality: "Rare"
     },
@@ -12563,7 +12563,7 @@ const TRINKETS = {
             duration: 10,
             cd: 120
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_enggizmos_18",
         quality: "Rare"
     },
@@ -12578,7 +12578,7 @@ const TRINKETS = {
             PPM: 1,
             proc_type: 2
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_poison_mindnumbing",
         quality: "Epic"
     },
@@ -12599,7 +12599,7 @@ const TRINKETS = {
             PPM: 1,
             proc_type: 2
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_bone_03",
         quality: "Epic"
     },
@@ -12610,7 +12610,7 @@ const TRINKETS = {
             Resil: 24
         },
         Location: "Reputation Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_datacrystal02",
         quality: "Epic"
     },
@@ -12630,7 +12630,7 @@ const TRINKETS = {
             duration: 20,
             cd: 120
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_monsterscales_15",
         quality: "Epic"
     },
@@ -12650,7 +12650,7 @@ const TRINKETS = {
             duration: 20,
             cd: 120
         },
-        Phase: 1,
+        Phase: 0,
         icon: "spell_nature_abolishmagic",
         quality: "Uncommon"
     },
@@ -12660,7 +12660,7 @@ const TRINKETS = {
         aura: {
             is_proc: true
         },
-        Phase: 2,
+        Phase: 0,
         icon: "spell_fire_soulburn",
         quality: "Epic"
     },
@@ -12670,7 +12670,7 @@ const TRINKETS = {
             Stam: 40
         },
         Location: "Serpentshrine Cavern",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_misc_spyglass_02",
         quality: "Epic"
     },
@@ -12692,7 +12692,7 @@ const TRINKETS = {
             proc_chance: 0.1,
             proc_type: 1
         },
-        Phase: 2,
+        Phase: 0,
         icon: "spell_nature_unrelentingstorm",
         quality: "Epic"
     },
@@ -12702,7 +12702,7 @@ const TRINKETS = {
             Stam: 36
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "spell_holy_mindsooth",
         quality: "Epic"
     },
@@ -12721,7 +12721,7 @@ const TRINKETS = {
             duration: 15,
             cd: 90
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_talisman_14",
         quality: "Uncommon"
     },
@@ -12733,7 +12733,7 @@ const TRINKETS = {
             duration: 10,
             proc_type: 2
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_ticket_tarot_crusade",
         quality: "Epic"
     },
@@ -12743,7 +12743,7 @@ const TRINKETS = {
         aura: {
             is_proc: true
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_ticket_tarot_wrath",
         quality: "Epic"
     },
@@ -12756,7 +12756,7 @@ const TRINKETS = {
         aura: {
             is_proc: true
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_ticket_tarot_vengeance",
         quality: "Epic"
     },
@@ -12769,7 +12769,7 @@ const TRINKETS = {
         aura: {
             is_proc: true
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_ticket_tarot_madness",
         quality: "Epic"
     },
@@ -12787,7 +12787,7 @@ const TRINKETS = {
             proc_chance: 0.15,
             proc_type: 3
         },
-        Phase: 3,
+        Phase: 0,
         icon: "inv_jewelry_talisman_09",
         quality: "Epic"
     },
@@ -12805,7 +12805,7 @@ const TRINKETS = {
             PPM: 1,
             proc_type: 2
         },
-        Phase: 3,
+        Phase: 0,
         icon: "spell_shadow_charm",
         quality: "Epic"
     },
@@ -12824,7 +12824,7 @@ const TRINKETS = {
         stats: {
             dmgbonus: 7
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_datacrystal01",
         quality: "Rare"
     },
@@ -12836,7 +12836,7 @@ const TRINKETS = {
             duration: 20,
             cd: 120
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_armorkit_12",
         quality: "Rare"
     },
@@ -12846,7 +12846,7 @@ const TRINKETS = {
             Crit: 34
         },
         Location: "Reputation Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_talisman_06",
         quality: "Epic"
     },
@@ -12856,7 +12856,7 @@ const TRINKETS = {
             Stam: 45
         },
         Location: "Reputation Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_misc_gem_sapphire_01",
         quality: "Rare"
     },
@@ -12876,7 +12876,7 @@ const TRINKETS = {
             duration: 20,
             cd: 120
         },
-        Phase: 4,
+        Phase: 0,
         icon: "racial_troll_berserk",
         quality: "Epic"
     },
@@ -12887,7 +12887,7 @@ const TRINKETS = {
             RAP: 80
         },
         Location: "Honor Reward",
-        Phase: 2,
+        Phase: 0,
         icon: "ability_warrior_endlessrage",
         quality: "Epic"
     },
@@ -12897,7 +12897,7 @@ const TRINKETS = {
             Crit: 40
         },
         Location: "Honor Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "ability_warrior_focusedrage",
         quality: "Epic"
     },
@@ -12914,7 +12914,7 @@ const TRINKETS = {
             proc_chance: 0.1,
             proc_type: 2
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_jewelry_talisman_16",
         quality: "Epic"
     },
@@ -12925,7 +12925,7 @@ const TRINKETS = {
             RAP: 84
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelcrafting_truesilverboar",
         quality: "Epic"
     },
@@ -12945,7 +12945,7 @@ const TRINKETS = {
             duration: 15,
             cd: 90
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_jewelcrafting_blackpearlpanther",
         quality: "Epic"
     },
@@ -12956,7 +12956,7 @@ const TRINKETS = {
             RAP: 108
         },
         Location: "Crafting",
-        Phase: 5,
+        Phase: 0,
         icon: "classic_spell_nature_healingway",
         quality: "Epic"
     },
@@ -12976,7 +12976,7 @@ const TRINKETS = {
             duration: 20,
             cd: 120
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_drink_03",
         quality: "Epic"
     }
@@ -12997,7 +12997,7 @@ const WAISTS = {
             MP5: 3
         },
         Location: "Naxx",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_22",
         quality: "Epic"
     },
@@ -13011,7 +13011,7 @@ const WAISTS = {
             Hit: 14
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_11",
         quality: "Rare"
     },
@@ -13045,7 +13045,7 @@ const WAISTS = {
         socketBonus: {
             Stam: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_13",
         quality: "Rare"
     },
@@ -13058,7 +13058,7 @@ const WAISTS = {
             Hit: 24
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_35",
         quality: "Rare"
     },
@@ -13071,7 +13071,7 @@ const WAISTS = {
             RAP: 32
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_35",
         quality: "Uncommon"
     },
@@ -13092,7 +13092,7 @@ const WAISTS = {
         socketBonus: {
             Int: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_09",
         quality: "Rare"
     },
@@ -13106,7 +13106,7 @@ const WAISTS = {
             MP5: 6
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_09",
         quality: "Rare"
     },
@@ -13120,7 +13120,7 @@ const WAISTS = {
             Crit: 18
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_25",
         quality: "Rare"
     },
@@ -13134,7 +13134,7 @@ const WAISTS = {
             Haste: 37
         },
         Location: "Black Temple",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_belt_26",
         quality: "Epic"
     },
@@ -13150,7 +13150,7 @@ const WAISTS = {
             Resil: 13
         },
         Location: "PvP Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_20",
         quality: "Rare"
     },
@@ -13164,7 +13164,7 @@ const WAISTS = {
             RAP: 28
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_26",
         quality: "Uncommon"
     },
@@ -13184,7 +13184,7 @@ const WAISTS = {
         socketBonus: {
             Agi: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_24",
         quality: "Rare"
     },
@@ -13200,7 +13200,7 @@ const WAISTS = {
             MP5: 6
         },
         Location: "Karazhan",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_22",
         quality: "Epic"
     },
@@ -13220,7 +13220,7 @@ const WAISTS = {
         socketBonus: {
             Agi: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_26",
         quality: "Epic"
     },
@@ -13242,7 +13242,7 @@ const WAISTS = {
         socketBonus: {
             Stam: 4
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_20",
         quality: "Epic"
     },
@@ -13262,7 +13262,7 @@ const WAISTS = {
         socketBonus: {
             Crit: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_26",
         quality: "Epic"
     },
@@ -13275,7 +13275,7 @@ const WAISTS = {
             RAP: 70
         },
         Location: "Reputation Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_08",
         quality: "Rare"
     },
@@ -13289,7 +13289,7 @@ const WAISTS = {
             Hit: 20
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_26",
         quality: "Epic"
     },
@@ -13304,7 +13304,7 @@ const WAISTS = {
             Hit: 14
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_30",
         quality: "Epic"
     },
@@ -13327,7 +13327,7 @@ const WAISTS = {
         socketBonus: {
             Agi: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_29",
         quality: "Epic"
     },
@@ -13341,7 +13341,7 @@ const WAISTS = {
             RAP: 84
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_03",
         quality: "Epic"
     },
@@ -13355,7 +13355,7 @@ const WAISTS = {
             MP5: 3
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_03",
         quality: "Uncommon"
     },
@@ -13376,7 +13376,7 @@ const WAISTS = {
         socketBonus: {
             Agi: 3
         },
-        Phase: 2,
+        Phase: 0,
         icon: "inv_belt_29",
         quality: "Epic"
     },
@@ -13398,7 +13398,7 @@ const WAISTS = {
         socketBonus: {
             Agi: 3
         },
-        Phase: 2,
+        Phase: 0,
         icon: "inv_belt_03",
         quality: "Epic"
     },
@@ -13418,7 +13418,7 @@ const WAISTS = {
         socketBonus: {
             Agi: 3
         },
-        Phase: 2,
+        Phase: 0,
         icon: "inv_belt_26",
         quality: "Epic"
     },
@@ -13431,7 +13431,7 @@ const WAISTS = {
             MP5: 15
         },
         Location: "Karazhan",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_22",
         quality: "Epic"
     },
@@ -13452,7 +13452,7 @@ const WAISTS = {
         socketBonus: {
             Stam: 4
         },
-        Phase: 3,
+        Phase: 0,
         icon: "inv_belt_26",
         quality: "Epic"
     },
@@ -13467,7 +13467,7 @@ const WAISTS = {
             Haste: 36
         },
         Location: "Mount Hyjal",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_belt_22",
         quality: "Epic"
     },
@@ -13482,7 +13482,7 @@ const WAISTS = {
             MP5: 4
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_13",
         quality: "Uncommon"
     },
@@ -13496,7 +13496,7 @@ const WAISTS = {
             MP5: 6
         },
         Location: "World Drop",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_31",
         quality: "Rare"
     },
@@ -13509,7 +13509,7 @@ const WAISTS = {
             MP5: 4
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_13",
         quality: "Uncommon"
     },
@@ -13523,7 +13523,7 @@ const WAISTS = {
             Hit: 15
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_11",
         quality: "Rare"
     },
@@ -13536,7 +13536,7 @@ const WAISTS = {
             MP5: 4
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_23",
         quality: "Uncommon"
     },
@@ -13551,7 +13551,7 @@ const WAISTS = {
             Resil: 16
         },
         Location: "PvP Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_15",
         quality: "Rare"
     },
@@ -13566,7 +13566,7 @@ const WAISTS = {
             Hit: 17
         },
         Location: "Black Temple",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_belt_14",
         quality: "Epic"
     },
@@ -13582,7 +13582,7 @@ const WAISTS = {
             Resil: 21
         },
         Location: "Honor Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_20",
         quality: "Epic"
     },
@@ -13597,7 +13597,7 @@ const WAISTS = {
             Resil: 30
         },
         Location: "Honor Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_belt_17",
         quality: "Epic"
     },
@@ -13619,7 +13619,7 @@ const WAISTS = {
             MAP: 4,
             RAP: 4
         },
-        Phase: 4,
+        Phase: 0,
         icon: "inv_belt_14",
         quality: "Epic"
     },
@@ -13634,7 +13634,7 @@ const WAISTS = {
             ArP: 10
         },
         Location: "Badge Reward",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_belt_22",
         quality: "Epic"
     },
@@ -13650,7 +13650,7 @@ const WAISTS = {
             Resil: 21
         },
         Location: "Honor Reward",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_belt_20",
         quality: "Epic"
     },
@@ -13674,7 +13674,7 @@ const WAISTS = {
         socketBonus: {
             Crit: 2
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_belt_14",
         quality: "Epic"
     },
@@ -13694,7 +13694,7 @@ const WAISTS = {
         socketBonus: {
             Agi: 2
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_belt_03",
         quality: "Epic"
     }
@@ -13712,7 +13712,7 @@ const WRISTS = {
             Hit: 10
         },
         Location: "Naxx",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_bracer_02",
         quality: "Epic"
     },
@@ -13726,7 +13726,7 @@ const WRISTS = {
             RAP: 26
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_bracer_13",
         quality: "Uncommon"
     },
@@ -13739,7 +13739,7 @@ const WRISTS = {
             RAP: 30
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_jewelry_ring_ahnqiraj_01",
         quality: "Rare"
     },
@@ -13752,7 +13752,7 @@ const WRISTS = {
             RAP: 24
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_bracer_06",
         quality: "Uncommon"
     },
@@ -13765,7 +13765,7 @@ const WRISTS = {
             RAP: 24
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_bracer_06",
         quality: "Uncommon"
     },
@@ -13785,7 +13785,7 @@ const WRISTS = {
         socketBonus: {
             Stam: 3
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_bracer_14",
         quality: "Rare"
     },
@@ -13798,7 +13798,7 @@ const WRISTS = {
             RAP: 26
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_bracer_16",
         quality: "Uncommon"
     },
@@ -13812,7 +13812,7 @@ const WRISTS = {
             MP5: 5
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_bracer_16",
         quality: "Rare"
     },
@@ -13826,7 +13826,7 @@ const WRISTS = {
             MP5: 5
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_bracer_16",
         quality: "Rare"
     },
@@ -13845,7 +13845,7 @@ const WRISTS = {
         socketBonus: {
             MP5: 1
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_bracer_16",
         quality: "Rare"
     },
@@ -13859,7 +13859,7 @@ const WRISTS = {
             RAP: 44
         },
         Location: "Karazhan",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_bracer_02",
         quality: "Epic"
     },
@@ -13872,7 +13872,7 @@ const WRISTS = {
             Crit: 22
         },
         Location: "Karazhan",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_bracer_15",
         quality: "Epic"
     },
@@ -13885,7 +13885,7 @@ const WRISTS = {
             RAP: 46
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_bracer_15",
         quality: "Epic"
     },
@@ -13900,7 +13900,7 @@ const WRISTS = {
             MP5: 4
         },
         Location: "Dungeon",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_bracer_02",
         quality: "Epic"
     },
@@ -13922,7 +13922,7 @@ const WRISTS = {
         socketBonus: {
             Agi: 2
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_bracer_19",
         quality: "Epic"
     },
@@ -13936,7 +13936,7 @@ const WRISTS = {
             RAP: 64
         },
         Location: "Crafting",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_bracer_07",
         quality: "Epic"
     },
@@ -13950,7 +13950,7 @@ const WRISTS = {
             MP5: 5
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_bracer_10",
         quality: "Uncommon"
     },
@@ -13964,7 +13964,7 @@ const WRISTS = {
             MP5: 7
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_bracer_19",
         quality: "Uncommon"
     },
@@ -13984,7 +13984,7 @@ const WRISTS = {
             MAP: 4,
             RAP: 4
         },
-        Phase: 2,
+        Phase: 0,
         icon: "inv_bracer_15",
         quality: "Epic"
     },
@@ -13998,7 +13998,7 @@ const WRISTS = {
             Crit: 17
         },
         Location: "The Eye",
-        Phase: 2,
+        Phase: 0,
         icon: "inv_bracer_17",
         quality: "Epic"
     },
@@ -14018,7 +14018,7 @@ const WRISTS = {
         socketBonus: {
             Stam: 3
         },
-        Phase: 2,
+        Phase: 0,
         icon: "inv_bracer_15",
         quality: "Epic"
     },
@@ -14038,7 +14038,7 @@ const WRISTS = {
         socketBonus: {
             Stam: 3
         },
-        Phase: 3,
+        Phase: 0,
         icon: "inv_bracer_09",
         quality: "Epic"
     },
@@ -14058,7 +14058,7 @@ const WRISTS = {
         socketBonus: {
             Crit: 2
         },
-        Phase: 3,
+        Phase: 0,
         icon: "inv_bracer_02",
         quality: "Epic"
     },
@@ -14073,7 +14073,7 @@ const WRISTS = {
             MP5: 5
         },
         Location: "Quest Reward",
-        Phase: 1,
+        Phase: 0,
         icon: "inv_bracer_18",
         quality: "Uncommon"
     },
@@ -14088,7 +14088,7 @@ const WRISTS = {
             Crit: 19
         },
         Location: "Black Temple",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_bracer_06",
         quality: "Epic"
     },
@@ -14108,7 +14108,7 @@ const WRISTS = {
         socketBonus: {
             Agi: 2
         },
-        Phase: 3,
+        Phase: 0,
         icon: "inv_bracer_04",
         quality: "Epic"
     },
@@ -14123,7 +14123,7 @@ const WRISTS = {
             Haste: 27
         },
         Location: "Crafting",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_bracer_02",
         quality: "Epic"
     },
@@ -14137,7 +14137,7 @@ const WRISTS = {
             Haste: 27
         },
         Location: "Crafting",
-        Phase: 3,
+        Phase: 0,
         icon: "inv_bracer_15",
         quality: "Epic"
     },
@@ -14157,7 +14157,7 @@ const WRISTS = {
             MAP: 4,
             RAP: 4
         },
-        Phase: 3,
+        Phase: 0,
         icon: "inv_bracer_13",
         quality: "Epic"
     },
@@ -14179,7 +14179,7 @@ const WRISTS = {
         socketBonus: {
             Resil: 2
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_bracer_16",
         quality: "Epic"
     },
@@ -14200,7 +14200,7 @@ const WRISTS = {
         socketBonus: {
             Resil: 2
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_bracer_07",
         quality: "Epic"
     },
@@ -14215,7 +14215,7 @@ const WRISTS = {
             ArP: 15
         },
         Location: "Badge Reward",
-        Phase: 4,
+        Phase: 0,
         icon: "inv_bracer_02",
         quality: "Epic"
     },
@@ -14235,7 +14235,7 @@ const WRISTS = {
         socketBonus: {
             Crit: 2
         },
-        Phase: 4,
+        Phase: 0,
         icon: "inv_bracer_07",
         quality: "Epic"
     },
@@ -14257,7 +14257,7 @@ const WRISTS = {
         socketBonus: {
             Resil: 2
         },
-        Phase: 1,
+        Phase: 0,
         icon: "inv_bracer_16",
         quality: "Epic"
     },
@@ -14280,7 +14280,7 @@ const WRISTS = {
         socketBonus: {
             Agi: 2
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_bracer_02",
         quality: "Epic"
     },
@@ -14302,7 +14302,7 @@ const WRISTS = {
             MAP: 4,
             RAP: 4
         },
-        Phase: 5,
+        Phase: 0,
         icon: "inv_bracer_16",
         quality: "Rare"
     }

@@ -16,7 +16,7 @@ ul {
     padding: 5px;
     box-sizing: border-box;
     width: 380px;
-    height: 550px;
+    height: 500px;
 }
 .settings-gearfilter {
   color: white;
@@ -74,9 +74,9 @@ ul {
     font-size: 16px;
 }
 .settings-header-2 {
-    position: absolute;
+    position: relative;
     left: 12px;
-    top: 350px;
+    top: 15px;
     font-weight: 700;
     display: inline-block;
     background: #272727;
@@ -86,7 +86,7 @@ ul {
 }
 .settings-consumes {
     top: 0px;
-    height: 328px;
+    height: 220px;
 }
 .settings-petconsumes {
     position:relative;
@@ -303,7 +303,8 @@ ul {
 
 .container {
     padding-left: 0px;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
+    margin-top: 2px;
     cursor: pointer;
     font-size: 14px;
     -webkit-user-select: none;
@@ -312,7 +313,6 @@ ul {
     user-select: none;
     width: 99%;
     position: relative;
-    top: 15px;
     left: 5px;
     display: inline-block;
     vertical-align: middle;
@@ -477,8 +477,8 @@ ul {
 }
 .select-wide {
   /* Reset */
-  width: 120px;
-  left: 3px;
+  width: 100px;
+  left: 15px;
   z-index: 1;
 }
 .select-1 {
@@ -565,7 +565,7 @@ ul {
 .settings-image-buffs {
   position: absolute;
   left: -22px;
-  top: 16px;
+  top: 3px;
   width: 22px;
   height: auto;
 }

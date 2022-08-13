@@ -118,6 +118,7 @@ const CUNNING_TREE = [
             name: 'Wild Hunt',
             abrv: 'wild_hunt',
             max: 2,
+            is_modifier: true,
             per_point: 15 / 100
         },
         {
@@ -245,6 +246,7 @@ const TENACITY_TREE = [
             name: 'Wild Hunt',
             abrv: 'wild_hunt',
             max: 2,
+            is_modifier: true,
             per_point: 15 / 100
         }
     ]
@@ -328,7 +330,7 @@ const FEROCITY_TREE = [
             name: 'Spider\'s Bite',
             abrv: 'spider_bite',
             max: 3,
-            per_point: 3 / 100
+            per_point: 3
         },
         {
             name: 'Great Resistance',
@@ -365,6 +367,7 @@ const FEROCITY_TREE = [
             name: 'Wild Hunt',
             abrv: 'wild_hunt',
             max: 2,
+            is_modifier: true,
             per_point: 15 / 100
         }
     ]
@@ -378,7 +381,7 @@ function loadPetTalent(obj, talent, points) {
   obj[talent.abrv] = (talent.is_modifier ? 1 : 0) + val
 }
 
-function parsePetTalents(talentString) {
+function parsePetTalents(talentString, max_points) {
     const talents = {}
     let talentIdx = 0
     let total_points = 0
@@ -403,14 +406,20 @@ function parsePetTalents(talentString) {
             
         loadPetTalent(talents, PET_TREES[treeIdx][talentIdx++], points)
         total_points += points
-        if (total_points > MAX_PET_POINTS) throw new Error(`Too many talent points used! Max is ${MAX_PET_POINTS}`)
+        if (total_points > max_points) throw new Error(`Too many talent points used! Max is ${max_points}`)
 
     })
 
     return talents
 }
 
-const Ferocitypet = parsePetTalents('2100013030003') //210001303000301011
+const Ferocity70_NonBM1 = parsePetTalents('21000030300030001', 13) // 70 call of the wild
+const Ferocity70_NonBM2 = parsePetTalents('210000303000301', 13) // 70 rabid
+const Ferocity70_BM1 = parsePetTalents('210001303000301012', 17) // 70 bm shark attack
+const Ferocity70_BM2 = parsePetTalents('2100013030003010102', 17) // 70 bm wild hunt
+const Ferocity80_NonBM1 = parsePetTalents('210001303000301011', 16) // 80 1/2 shark attack
+const Ferocity80_NonBM2 = parsePetTalents('2100013030003010101', 16) // 80 1/2 wild hunt
+const Ferocity80_BM = parsePetTalents('2100023030003010122', 20) // 80 bm max
 pet_tree_type = 'cunning'
 const Cunningpet = parsePetTalents('21000023300002') // 2100002330000211001
 pet_tree_type = 'tenacity'
