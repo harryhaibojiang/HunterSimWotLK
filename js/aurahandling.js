@@ -436,7 +436,8 @@ function onUseSpellCheck(){
         let beastcost = Math.floor((MAIN_CDS.beastwithin.cost / 100) * BasePlayer.BaseMana);
         if ((currentMana >= beastcost) && auras.beastwithin.timer == 0) {
             auras.beastwithin.timer = auras.beastwithin.effect.duration; // set timer
-            auras.beastwithin.cd = auras.beastwithin.effect.base_cd * (1 - talents.longevity); // set cd
+            let glyph_reduc = (!!glyphs.bestial_wrath) ? glyphs.bestial_wrath : 0;
+            auras.beastwithin.cd = (auras.beastwithin.effect.base_cd - glyph_reduc )* (1 - talents.longevity); // set cd
             beastwithinreduc = 0.8;
             if(combatlogRun) {
                 combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player gains " + auras.beastwithin.effect_name;
@@ -556,7 +557,7 @@ function dotHandler(dotname, source, apply, type, crit_dmg) {
         if (dotname === 'serpentsting') {
         
             auras[dotname].apply_time = (auras.serpentsting.timer > 0) ? auras.serpentsting.next_tick - auras.serpentsting.effect.tick_rate : timeapplied;
-            auras[dotname].timer = auras[dotname].effect.duration;
+            auras[dotname].timer = auras[dotname].effect.duration + (glyphs.serpentsting || 0);
             auras[dotname].next_tick = auras[dotname].effect.tick_rate + auras[dotname].apply_time;
             auras[dotname].ticks = (auras[dotname].effect.duration + (glyphs.serpentsting || 0)) / auras[dotname].effect.tick_rate;
         }
@@ -600,7 +601,7 @@ function dotHandler(dotname, source, apply, type, crit_dmg) {
         }
         else if (dottype !== 'physical') {
             updateDmgMod(dotname);
-            let crittable = false; // todo future crits trap and serpent crit conditions
+            let crittable = (!!glyphs.explosive_trap && dotname === 'explosivetrap') ? true : false; // todo future crits trap and serpent crit conditions
             let ticks = auras[dotname].effect.duration / auras[dotname].effect.tick_rate;
             result = rollDamageOverTime(crittable, dotname);
             dmg = auras[dotname].damage / ticks * magdmgmod;

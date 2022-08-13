@@ -8,6 +8,7 @@ function storeData(){
     localStorage.setItem('gear',JSON.stringify(gear));
     // buffs
     localStorage.setItem('buffs',JSON.stringify(buffslist));
+    localStorage.setItem('replenish', replenishment);
     // player consumes
     localStorage.setItem('pla_consumes',JSON.stringify(playerconsumes));
     // pet consumes
@@ -39,6 +40,7 @@ function storeData(){
     localStorage.setItem('talentindex',talentindex);
     localStorage.setItem('talents',JSON.stringify(talents));
     localStorage.setItem('whtalentlink',whtalentlink);
+    localStorage.setItem('glyphs', JSON.stringify(selected_glyphs));
     // spell enables
     localStorage.setItem("rapidcheck", document.getElementById("rapidcheck").checked);
     localStorage.setItem("beastcheck", document.getElementById("beastcheck").checked);
@@ -46,10 +48,6 @@ function storeData(){
     localStorage.setItem("lustcheck", document.getElementById("lustcheck").checked);
     localStorage.setItem("runecheck", document.getElementById("runecheck").checked);
 
-    localStorage.setItem("multicheck", document.getElementById("multicheck").checked);
-    localStorage.setItem("arcanecheck", document.getElementById("arcanecheck").checked);
-    localStorage.setItem("raptorcheck", document.getElementById("raptorcheck").checked);
-    localStorage.setItem("meleecheck", document.getElementById("meleecheck").checked);
     // spell offsets
     localStorage.setItem("rapidoffset", document.getElementById("rapidoffset").value);
     localStorage.setItem("beastoffset", document.getElementById("beastoffset").value);
@@ -81,12 +79,13 @@ function fetchData(){
     gear = (localStorage.getItem('gear') != null) ? JSON.parse(localStorage.getItem('gear')) : gear;
     // buffs
     buffslist = (localStorage.getItem('buffs') != null) ? JSON.parse(localStorage.getItem('buffs')) : buffslist;
+    replenishment = (localStorage.getItem('replenish') != null) ? JSON.parse(localStorage.getItem('replenish')) : replenishment;
     // player consumes
     playerconsumes = (localStorage.getItem('pla_consumes') != null) ? JSON.parse(localStorage.getItem('pla_consumes')):playerconsumes;
     // pet consumes
     petconsumes = (localStorage.getItem('pet_consumes') != null) ? JSON.parse(localStorage.getItem('pet_consumes')):petconsumes;
     // debuffs
-    //debuffs = (localStorage.getItem('debuffs') != null) ? JSON.parse(localStorage.getItem('debuffs')):debuffs;
+    debuffs = (localStorage.getItem('debuffs') != null) ? JSON.parse(localStorage.getItem('debuffs')):debuffs;
     // statweights
     statweights = (localStorage.getItem('statweights') != null) ? JSON.parse(localStorage.getItem('statweights')):statweights;
     displayStatWeights();
@@ -113,10 +112,6 @@ function fetchData(){
     usable_CDs.lust.enable = (localStorage.getItem('lustcheck') != null) ? JSON.parse(localStorage.getItem('lustcheck')):usable_CDs.lust.enable;
 
     usable_CDs.rune.enable = (localStorage.getItem('runecheck') != null) ? JSON.parse(localStorage.getItem('runecheck')):usable_CDs.rune.enable;
-    //SPELLS.multishot.enable = (localStorage.getItem('multicheck') != null) ? JSON.parse(localStorage.getItem('multicheck')):SPELLS.multishot.enable;
-    //SPELLS.arcaneshot.enable = (localStorage.getItem('arcanecheck') != null) ? JSON.parse(localStorage.getItem('arcanecheck')):SPELLS.arcaneshot.enable;
-    //SPELLS.raptorstrike.enable = (localStorage.getItem('raptorcheck') != null) ? JSON.parse(localStorage.getItem('raptorcheck')):SPELLS.raptorstrike.enable;
-    //SPELLS.melee.enable = (localStorage.getItem('meleecheck') != null) ? JSON.parse(localStorage.getItem('meleecheck')):SPELLS.melee.enable;
 
     // spell offsets
     usable_CDs.rapid.offset = (localStorage.getItem('rapidoffset') != null) ? parseInt(localStorage.getItem('rapidoffset')) : usable_CDs.rapid.offset;
@@ -127,6 +122,8 @@ function fetchData(){
     }
     usable_CDs.lust.offset = (localStorage.getItem('lustoffset') != null) ? parseInt(localStorage.getItem('lustoffset')):usable_CDs.lust.offset;
     usable_CDs.potion.offset = (localStorage.getItem('startpotoffset') != null) ? parseInt(localStorage.getItem('startpotoffset')):usable_CDs.potion.offset;
+
+    selected_glyphs = (localStorage.getItem('glyphs') != null) ? JSON.parse(localStorage.getItem('glyphs')) : selected_glyphs;
 
     // spell option
     let spellcdoption = '';
@@ -181,6 +178,8 @@ function fetchData(){
     document.getElementById("typeSelect").value = target.type;
     document.getElementById("level").value = target.level;
 
+    document.getElementById("replenish").checked = replenishment;
+
     document.getElementById("flask").value = (localStorage.getItem("flask") != null) ?  localStorage.getItem('flask') : document.getElementById("flask").value;
     document.getElementById("battle").value = (localStorage.getItem("battle") != null) ?  localStorage.getItem('battle') : document.getElementById("battle").value;
     document.getElementById("guardian").value = (localStorage.getItem("guardian") != null) ?  localStorage.getItem('guardian') : document.getElementById("guardian").value;
@@ -212,7 +211,16 @@ function fetchData(){
     document.getElementById("talentselect").value = talentindex;
     document.getElementById("customtalent").value = whtalentlink;
     selectTalents(talentindex);
-
+    if (selected_glyphs.length >= 1) {
+        document.getElementById('glyphSelect1').value = selected_glyphs[0];
+    }
+    if (selected_glyphs.length >= 2) {
+        document.getElementById('glyphSelect2').value = selected_glyphs[1];
+    }
+    if (selected_glyphs.length >= 3) {
+        document.getElementById('glyphSelect3').value = selected_glyphs[2];
+    }
+    
     // initialize saved debuffs visuals
     document.getElementById("hmuptime").value = debuffs.hm.uptime_g;
     document.getElementById("hmbonus").selected = debuffs.hm.improved ? true : false;
@@ -224,15 +232,13 @@ function fetchData(){
     document.getElementById("ieuptime").value = debuffs.expose.uptime_g;
     document.getElementById("bfuptime").value = debuffs.bloodfrenzy.uptime_g;
     document.getElementById("coeuptime").value = debuffs.curseofele.uptime_g;
+    document.getElementById("mangleuptime").value = debuffs.mangle.uptime_g;
 
     // spell enables
     document.getElementById("rapidcheck").checked = usable_CDs.rapid.enable;
     document.getElementById("lustcheck").checked = usable_CDs.lust.enable;
     document.getElementById("runecheck").checked = usable_CDs.rune.enable;
-    //document.getElementById("multicheck").checked = SPELLS.multishot.enable;
-    //document.getElementById("arcanecheck").checked = SPELLS.arcaneshot.enable;
-    //document.getElementById("raptorcheck").checked = SPELLS.raptorstrike.enable;
-    //document.getElementById("meleecheck").checked = SPELLS.melee.enable;
+
     // // spell offsets
     document.getElementById("rapidoffset").value = usable_CDs.rapid.offset;
     document.getElementById("beastoffset").value = usable_CDs.beastwithin.offset;

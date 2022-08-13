@@ -882,22 +882,21 @@
             <li><label class="container container-2 container-adjust-top">Runes<input id="runecheck" type="checkbox" onclick="spellEnableCheck()"><span class="checkmark"></span></label></li>
           </div>
           <br>
-          <div class="relative-wrapper-spells">
-            <img class="spells-image" src="https://wow.zamimg.com/images/wow/icons/large/ability_upgrademoonglaive.jpg" alt="">
-            <li><label class="container container-1 container-adjust-top">Multi-Shot<input id="multicheck" type="checkbox" onclick="spellEnableCheck()"><span class="checkmark"></span></label></li>
-          </div>
-          <div class="relative-wrapper-spells">  
-            <img class="spells-image" src="https://wow.zamimg.com/images/wow/icons/large/ability_impalingbolt.jpg" alt="">
-            <li><label class="container container-1 container-adjust-top">Arcane Shot<input id="arcanecheck" type="checkbox" onclick="spellEnableCheck()"><span class="checkmark"></span></label></li>
-          </div>  
-          <div class="relative-wrapper-spells">  
-            <img class="spells-image" src="https://wow.zamimg.com/images/wow/icons/large/ability_meleedamage.jpg" alt="">
-            <li><label class="container container-1 container-adjust-top">Raptor Strike<input id="raptorcheck" type="checkbox" onclick="spellEnableCheck()"><span class="checkmark"></span></label></li>
-          </div>  
-          <div class="relative-wrapper-spells">
-            <img class="spells-image" src="https://wow.zamimg.com/images/wow/icons/large/inv_sword_04.jpg" alt="">
-            <li><label class="container container-1 container-adjust-top">Melee Attack<input id="meleecheck" type="checkbox" onclick="spellEnableCheck()"><span class="checkmark"></span></label></li>
-          </div>
+          <li>
+            <label class="label-2">Major Glyph 1</label>
+            <select id="glyphSelect1" onchange="glyphSelection1(this.value)" class="select hover-grey fight-setting-input-1">
+            </select>
+          </li>
+          <li>
+            <label class="label-2">Major Glyph 2</label>
+            <select id="glyphSelect2" onchange="glyphSelection2(this.value)" class="select hover-grey fight-setting-input-1">
+            </select>
+          </li>
+          <li>
+            <label class="label-2">Major Glyph 3</label>
+            <select id="glyphSelect3" onchange="glyphSelection3(this.value)" class="select hover-grey fight-setting-input-1">
+            </select>
+          </li>
         </ul>
       </div>
     </div>

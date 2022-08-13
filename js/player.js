@@ -593,7 +593,8 @@ function updateAP() {
       targetAP += (playerconsumes.battle_elixir === 9224) ? 105 : 0;
    }
    // Hunter's mark
-   let HM_rap = (debuffs.hm.timer > 0 && !debuffs.hm.inactive) ? debuffs.hm.rap : 0;
+   let HM_mod = (!!glyphs.hunters_mark) ? glyphs.hunters_mark : 1;
+   let HM_rap = (debuffs.hm.timer > 0 && !debuffs.hm.inactive) ? debuffs.hm.rap * HM_mod : 0;
 
    // HM - bonus from talents
    if (debuffs.hm.timer > 0 && !debuffs.hm.inactive) {
@@ -658,8 +659,10 @@ function updateHaste() {
    hasted_speed *= hasteRatingSpeed;
 
    // ranged only
-   rangespeed = (auras.rapid?.timer > 0) ? rangespeed / (1+ auras.rapid.effect.rangespeed / 100) : rangespeed; // rapid fire
-   rangespeed = (auras.imp_hawk?.timer > 0) ? rangespeed / (1 + talents.imp_hawk) : rangespeed; // quick shots
+   let rapid_bonus = (!!glyphs.rapid_fire) ? glyphs.rapid_fire : 0;
+   rangespeed = (auras.rapid?.timer > 0) ? rangespeed / (1+ (auras.rapid.effect.rangespeed + rapid_bonus) / 100) : rangespeed; // rapid fire
+   let hawk_bonus = (!!glyphs.aspect_hawk) ? glyphs.aspect_hawk : 0;
+   rangespeed = (auras.imp_hawk?.timer > 0) ? rangespeed / (1 + talents.imp_hawk + hawk_bonus) : rangespeed; // quick shots
    // melee only
    meleespeed = (auras.mongoose?.timer > 0) ? meleespeed / 1.02 : meleespeed; // mongoose
 
@@ -1183,10 +1186,11 @@ function attackSpell(spell,spellcost) {
         attack = 'ranged';
         if (auras.lock_load?.timer > 0) {
             cost = 0;
-            auras.lock_load.stacks -= 0;
+            auras.lock_load.stacks -= 1;
         }
         else {
-            cost = Math.floor(spellcost * (1 - talents.efficiency) * beastwithinreduc * impsteadyreduc);
+            let cost_glyph = (!!glyphs.arcane_shot && auras.serpentsting?.timer > 0) ? 1 - glyphs.arcane_shot : 1;
+            cost = Math.floor(spellcost * (1 - talents.efficiency) * beastwithinreduc * impsteadyreduc * cost_glyph);
         }
         currentMana -= cost;
 

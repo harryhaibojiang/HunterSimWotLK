@@ -482,6 +482,60 @@ function selectTalents(talent){
     }
     whtalentlink = customtalentlink;
     talentindex = talent;
+    selectedOptionsResults();
+}
+function initializeglyphsDropdown() {
+
+    let initial_glyph = '';
+    
+    if (localStorage.getItem('glyphs') !== null){
+        let savedglyphs = JSON.parse(localStorage.getItem('glyphs'));
+
+        initial_glyph = savedglyphs;
+    } else {
+        initial_glyph = '0';
+    }
+    
+    var glyphOptions = "";
+    for (let id in GLYPHS_DATA) {
+        glyphOptions += "<option value= "+id+" >" + GLYPHS_DATA[id].name + "</option>";
+      }   
+    
+    document.getElementById("glyphSelect1").innerHTML = glyphOptions;
+    document.getElementById('glyphSelect1').value = initial_glyph[0];
+    document.getElementById("glyphSelect2").innerHTML = glyphOptions;
+    document.getElementById('glyphSelect2').value = initial_glyph[1];
+    document.getElementById("glyphSelect3").innerHTML = glyphOptions;
+    document.getElementById('glyphSelect3').value = initial_glyph[2];
+}
+
+function glyphSelection1(value) {
+    
+    if (value == '0') {
+        selected_glyphs[0] = '';
+    } else {
+        selected_glyphs[0] = parseInt(value);
+    }
+    glyphs = selectGlyphs(selected_glyphs);
+    selectedOptionsResults();
+}
+function glyphSelection2(value) {
+    
+    if (value == '0') {
+        selected_glyphs[1] = '';
+    } else {
+        selected_glyphs[1] = parseInt(value);
+    }
+    glyphs = selectGlyphs(selected_glyphs);
+    selectedOptionsResults();
+}
+function glyphSelection3(value) {
+    
+    if (value == '0') {
+        selected_glyphs[2] = '';
+    } else {
+        selected_glyphs[2] = parseInt(value);
+    }
     glyphs = selectGlyphs(selected_glyphs);
     selectedOptionsResults();
 }
@@ -490,19 +544,11 @@ function spellEnableCheck(){
     let rapidcheck = document.getElementById("rapidcheck").checked;
     let lustcheck = document.getElementById("lustcheck").checked;
     let runecheck = document.getElementById("runecheck").checked;
-    let multicheck = document.getElementById("multicheck").checked;
-    let arcanecheck = document.getElementById("arcanecheck").checked;
-    let raptorcheck = document.getElementById("raptorcheck").checked;
-    let meleecheck = document.getElementById("meleecheck").checked;
 
     usable_CDs.rapid.enable = rapidcheck;
     usable_CDs.lust.enable = lustcheck;
     usable_CDs.rune.enable = runecheck;
     
-    SPELLS.multishot.enable = multicheck;
-    SPELLS.arcaneshot.enable = arcanecheck;
-    SPELLS.raptorstrike.enable = raptorcheck;
-    SPELLS.melee.enable = meleecheck;
     storeData();
 
 }

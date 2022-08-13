@@ -453,6 +453,7 @@ initializePetFoodDropdown();
 initializeFlaskDropdown()
 initializeBattleDropdown();
 initializeGuardDropdown();
+initializeglyphsDropdown();
 fetchData();
 initializeTargetDropdown('start');
 initializeImportSets();
