@@ -35,7 +35,7 @@
     <script class="u-script" type="text/javascript" src="js/player.js"></script>
     <script class="u-script" type="text/javascript" src="js/expected_dmg.js"></script>
 
-    <!-- <script class="u-script" type="text/javascript">
+    <script class="u-script" type="text/javascript">
       // Global error reporting to popup.
       window.onerror = function(message, source, lineno, colno, error){
         alert(`Message: ${JSON.stringify(message)}\nSource: ${source}\nLineNo: ${lineno}\nColNo: ${colno}\nError: ${error}`);
@@ -46,7 +46,7 @@
       window.onrejectionhandled = function(e) {
         console.log(`Rejection Handled: ${JSON.stringify(e)}`);
       };
-    </script> -->
+    </script>
     
     <meta name="generator" content="Nicepage 3.28.7, nicepage.com">
     <!--<script>const whTooltips = {colorLinks: false, iconizeLinks: false, renameLinks: false};</script>-->
@@ -120,7 +120,7 @@
                   
                   <a href="javascript:;" id="settingsbtn" class="u-border-2 u-border-black u-border-hover-black u-btn u-btn-round u-button-style u-custom-color-2 u-hover-white u-radius-5 u-btn-1">Settings</a>
                   <a href="javascript:;" onclick="statWeightLoop()"class="u-border-2 u-border-black u-border-hover-black u-btn u-btn-round u-button-style u-custom-color-2 u-hover-white u-radius-5 u-btn-2">Sim EP<div class="weightloadbar" id="weightloadbar"></div></a>
-                  <a href="javascript:;" onclick="startStepOnly()" id="simdps" class="u-border-2 u-border-black u-border-hover-black u-btn u-btn-round u-button-style u-custom-color-2 u-hover-white u-radius-5 u-btn-3">Sim DPS<div class="loadbar" id="loadbar"></div></a>
+                  <a href="javascript:;" onclick="startSync()" id="simdps" class="u-border-2 u-border-black u-border-hover-black u-btn u-btn-round u-button-style u-custom-color-2 u-hover-white u-radius-5 u-btn-3">Sim DPS<div class="loadbar" id="loadbar"></div></a>
                   <a href="javascript:;" onclick="combatLogDisplay()" onmouseover="combatLogDisplay()" id="logbtn" class="u-border-2 u-border-black u-border-hover-black u-btn u-btn-round u-button-style u-custom-color-2 u-hover-white u-radius-5 u-btn-6">Combat Log</a>
                   <div class="dps-result">
                     <p class="u-align-right u-text u-text-custom-color-7 u-text-18 u-text-1819" id="dpsresult">2000.1</p>
