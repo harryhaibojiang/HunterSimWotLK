@@ -593,6 +593,22 @@ const PET_SCORPID_POISON = {
         level: 80
     }
 }
+const PET_SERENITY_DUST = {
+    base: {
+        cost: 0,
+        base_cd: 60,
+        duration: 15,
+        gcd: true,
+        spell_name: 'Serenity Dust',
+        type: 'AP Mod'
+    },
+    1: {
+        ap_mod: 10,
+    },
+    2: {
+        ap_mod: 10,
+    }
+}
 const PET_SNATCH = {
     base: {
         cost: 20,
@@ -808,7 +824,7 @@ PET_SPELLS_DATA_MAPPER = {
     stampede: PET_STAMPEDE,
     scorpid_poison: PET_SCORPID_POISON,
     nether_shock: PET_NETHER_SHOCK,
-    //serenity_dust: '',
+    serenity_dust: PET_SERENITY_DUST,
     tendon_rip: PET_TENDON_RIP,
     //pummel: '',
     fire_breath: PET_FIRE_BREATH,

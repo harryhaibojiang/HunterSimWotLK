@@ -650,7 +650,7 @@ function getStatsCapData(){
     let BasePlayer = BASE_PLAYER[level];
     // hit
     if (talents.focus_aim > 0) {
-       hitCap = 126 - (HitRatingRatio * talents.focus_aim);
+       hitCap = 126 - (BasePlayer.HitRatingRatio * talents.focus_aim);
     }
 
     else hitCap = 126;

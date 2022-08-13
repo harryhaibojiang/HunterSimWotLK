@@ -126,17 +126,14 @@ function stepauras(steptime) {
     if(sharedtrinketcd > 0) { sharedtrinketcd = Math.max(sharedtrinketcd - steptime,0); }
 
     // reset stacks
-    if (auras.trink1.effect_name === TRINK_PROCS.naarusliver.effect_name && auras.trink1.timer === 0){
+    if (!!auras.trink1.stacks && auras.trink1.timer === 0){
         auras.trink1.stacks = 0;
     }
-    if (auras.trink2.effect_name === TRINK_PROCS.naarusliver.effect_name && auras.trink2.timer === 0){
+    if (!!auras.trink2.stacks && auras.trink2.timer === 0){
         auras.trink2.stacks = 0;
     }
-    if (auras.trink1.effect_name === TRINKET_CDS.swarmguard.effect_name && auras.trink1.timer === 0){
-        auras.trink1.stacks = 0;
-    }
-    if (auras.trink2.effect_name === TRINKET_CDS.swarmguard.effect_name && auras.trink2.timer === 0){
-        auras.trink2.stacks = 0;
+    if (auras.monstrousbite?.timer === 0) {
+        auras.monstrousbite.stacks = 0;
     }
 
     return;
@@ -447,6 +444,23 @@ function onUseSpellCheck(){
             }
         }
     }
+    if (!!auras.callofwild && (auras.callofwild.cd === 0)) {
+        auras.callofwild.timer = auras.callofwild.effect.duration; // set timer
+        auras.callofwild.cd = auras.callofwild.effect.base_cd * (1 - talents.longevity); // set cd
+        if(combatlogRun) {
+            combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player/Pet gains " + auras.callofwild.effect_name;
+            combatlogindex++;
+        }
+    }
+    if (!!auras.rabid && (auras.rabid.cd === 0)) {
+        auras.rabid.stacks = 0;
+        auras.rabid.timer = auras.rabid.effect.duration; // set timer
+        auras.rabid.cd = auras.rabid.effect.base_cd * (1 - talents.longevity); // set cd
+        if(combatlogRun) {
+            combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Pet gains " + auras.rabid.effect_name;
+            combatlogindex++;
+        }
+    }
     // racials
     if (!!auras.berserking && (auras.berserking.cd === 0)) {
         auras.berserking.timer = auras.berserking.effect.duration; // set timer
@@ -564,6 +578,26 @@ function dotHandler(dotname, source, apply, type, crit_dmg) {
             dmg = auras[dotname].damage / ticks * bleeddmgmod;
             //console.log(dottype)
         }
+        else if (dotname === 'explosiveshot') { // rolled like a spell each hit
+            updateDmgMod(dotname);
+            let combatCrit = updateCritChance('ranged');
+            let exp_glyph = (!!glyphs.explosive_shot) ? glyphs.explosive_shot : 0;
+            let specialcrit = talents.surv_instincts + exp_glyph;
+
+            result = rollSpell('ranged', combatCrit, specialcrit, dotname); // check attack table
+            spellResultSum(result, dotname);
+            if (result !== RESULT.MISS) {
+                let ticks = auras.explosiveshot.effect.duration / auras.explosiveshot.effect.tick_rate;
+                dmg = auras.explosiveshot.damage / ticks * magdmgmod;
+            }
+            if (result === RESULT.CRIT) {
+                dmg *= RangeCritDamage;
+                proccrit(0, 'ranged', dotname);
+            }
+            if (result === RESULT.PARTIAL) {
+                dmg *= 0.65;
+            }
+        }
         else if (dottype !== 'physical') {
             updateDmgMod(dotname);
             let crittable = false; // todo future crits trap and serpent crit conditions
@@ -576,6 +610,10 @@ function dotHandler(dotname, source, apply, type, crit_dmg) {
             else if (result === RESULT.CRIT) {
                 dmg *= RangeCritDamage;
             }
+
+            if (dotname === 'blackarrow' || dotname === 'explosivetrap' || dotname === 'immolatetrap') {
+                procDoT();
+            }
             //console.log(dmg + " " +result)
         } 
         done = dealdamage(dmg, result, dottype);
@@ -585,7 +623,8 @@ function dotHandler(dotname, source, apply, type, crit_dmg) {
         spellresult[dotname].count++;
 
         if(combatlogRun) {
-            combatlogarray[combatlogindex] = next_dot_time.toFixed(3) + " - Target takes " + done + " damage from " + auras[dotname].effect_name;
+            let critstring = (result === RESULT.CRIT) ? " (Crit)" : "";
+            combatlogarray[combatlogindex] = next_dot_time.toFixed(3) + " - Target takes " + done + " damage from " + auras[dotname].effect_name + critstring;
             combatlogindex++;
         }
         auras[dotname].ticks -= 1;

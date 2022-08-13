@@ -20,7 +20,7 @@ function storeData(){
     localStorage.setItem('flask',document.getElementById("flask").value);
     localStorage.setItem('battle',document.getElementById("battle").value);
     localStorage.setItem('guardian',document.getElementById("guardian").value);
-    console.log(document.getElementById("food").value)
+
     localStorage.setItem('food',document.getElementById("food").value);
     localStorage.setItem('petfood',document.getElementById("petfood").value);
     // saves each value below as a string - fight settings
@@ -113,10 +113,10 @@ function fetchData(){
     usable_CDs.lust.enable = (localStorage.getItem('lustcheck') != null) ? JSON.parse(localStorage.getItem('lustcheck')):usable_CDs.lust.enable;
 
     usable_CDs.rune.enable = (localStorage.getItem('runecheck') != null) ? JSON.parse(localStorage.getItem('runecheck')):usable_CDs.rune.enable;
-    SPELLS.multishot.enable = (localStorage.getItem('multicheck') != null) ? JSON.parse(localStorage.getItem('multicheck')):SPELLS.multishot.enable;
-    SPELLS.arcaneshot.enable = (localStorage.getItem('arcanecheck') != null) ? JSON.parse(localStorage.getItem('arcanecheck')):SPELLS.arcaneshot.enable;
-    SPELLS.raptorstrike.enable = (localStorage.getItem('raptorcheck') != null) ? JSON.parse(localStorage.getItem('raptorcheck')):SPELLS.raptorstrike.enable;
-    SPELLS.melee.enable = (localStorage.getItem('meleecheck') != null) ? JSON.parse(localStorage.getItem('meleecheck')):SPELLS.melee.enable;
+    //SPELLS.multishot.enable = (localStorage.getItem('multicheck') != null) ? JSON.parse(localStorage.getItem('multicheck')):SPELLS.multishot.enable;
+    //SPELLS.arcaneshot.enable = (localStorage.getItem('arcanecheck') != null) ? JSON.parse(localStorage.getItem('arcanecheck')):SPELLS.arcaneshot.enable;
+    //SPELLS.raptorstrike.enable = (localStorage.getItem('raptorcheck') != null) ? JSON.parse(localStorage.getItem('raptorcheck')):SPELLS.raptorstrike.enable;
+    //SPELLS.melee.enable = (localStorage.getItem('meleecheck') != null) ? JSON.parse(localStorage.getItem('meleecheck')):SPELLS.melee.enable;
 
     // spell offsets
     usable_CDs.rapid.offset = (localStorage.getItem('rapidoffset') != null) ? parseInt(localStorage.getItem('rapidoffset')) : usable_CDs.rapid.offset;
@@ -184,10 +184,7 @@ function fetchData(){
     document.getElementById("flask").value = (localStorage.getItem("flask") != null) ?  localStorage.getItem('flask') : document.getElementById("flask").value;
     document.getElementById("battle").value = (localStorage.getItem("battle") != null) ?  localStorage.getItem('battle') : document.getElementById("battle").value;
     document.getElementById("guardian").value = (localStorage.getItem("guardian") != null) ?  localStorage.getItem('guardian') : document.getElementById("guardian").value;
-    console.log(document.getElementById("food").value)
-    console.log(localStorage.getItem("food"))
-    //document.getElementById("food").value = 1;
-    console.log(document.getElementById("food").value)
+    document.getElementById("food").value = (localStorage.getItem("food") != null) ?  localStorage.getItem('food') : document.getElementById("food").value;
     //console.log(localStorage.getItem("food"))
     document.getElementById("petfood").value = (localStorage.getItem("petfood") != null) ?  localStorage.getItem('petfood') : document.getElementById("petfood").value;
     
@@ -232,10 +229,10 @@ function fetchData(){
     document.getElementById("rapidcheck").checked = usable_CDs.rapid.enable;
     document.getElementById("lustcheck").checked = usable_CDs.lust.enable;
     document.getElementById("runecheck").checked = usable_CDs.rune.enable;
-    document.getElementById("multicheck").checked = SPELLS.multishot.enable;
-    document.getElementById("arcanecheck").checked = SPELLS.arcaneshot.enable;
-    document.getElementById("raptorcheck").checked = SPELLS.raptorstrike.enable;
-    document.getElementById("meleecheck").checked = SPELLS.melee.enable;
+    //document.getElementById("multicheck").checked = SPELLS.multishot.enable;
+    //document.getElementById("arcanecheck").checked = SPELLS.arcaneshot.enable;
+    //document.getElementById("raptorcheck").checked = SPELLS.raptorstrike.enable;
+    //document.getElementById("meleecheck").checked = SPELLS.melee.enable;
     // // spell offsets
     document.getElementById("rapidoffset").value = usable_CDs.rapid.offset;
     document.getElementById("beastoffset").value = usable_CDs.beastwithin.offset;

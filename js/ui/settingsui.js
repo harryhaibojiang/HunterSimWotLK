@@ -63,7 +63,7 @@ function auraUptimeSettings(){
     let sunderapp = document.getElementById("sunderapp").value;
     let ieuptime = document.getElementById("ieuptime").value;
     let bfuptime = document.getElementById("bfuptime").value;
-    let manguptime = document.getElementById("manguptime").value;
+    let manguptime = document.getElementById("mangleuptime").value;
     let coeuptime = document.getElementById("coeuptime").value;
 
     debuffs.hm.uptime_g = parseInt(hmuptime);
@@ -247,7 +247,6 @@ function initializeFlaskDropdown() {
 
 function flaskSelection(value) {
     
-    console.log(value)
     if (value == '0') {
         delete playerconsumes.flask;
     } else {
@@ -284,7 +283,6 @@ function initializeBattleDropdown() {
 
 function battleSelection(value) {
     
-    console.log(value)
     if (value == '0') {
         delete playerconsumes.battle_elixir;
     } else {
@@ -303,7 +301,6 @@ function initializeGuardDropdown() {
     
     if (localStorage.getItem('guardian') !== null){
         let savedguardian = localStorage.getItem('guardian');
-        console.log(savedguardian)
         initial_guardian = savedguardian;
     } else {
         initial_guardian = '0';
@@ -319,7 +316,6 @@ function initializeGuardDropdown() {
 
 function guardSelection(value) {
     
-    console.log(value)
     if (value == '0') {
         delete playerconsumes.guardian_elixir;
     } else {
@@ -354,7 +350,6 @@ function initializeFoodDropdown() {
 
 function foodSelection(value) {
     
-    console.log(value)
     if (value == '0') {
         delete playerconsumes.food;
     } else {
@@ -385,7 +380,6 @@ function initializePetFoodDropdown() {
 
 function petFoodSelection(value) {
     
-    console.log(value)
     if (value == '0') {
         delete petconsumes.pet_food;
     } else {

@@ -149,13 +149,27 @@ function exp_dmgMod_SpecialMagic(critbonus) {
    return range_wep.basedmgmod*magdmgmod*combatdmgmod*rangehit*((SpecialCritDamage-1)*rangecrit + 1);
 }
 
+function exp_dmgMod_PhysPierce(critbonus){
+   let rangemiss = Math.max(RangeMissChance,0)*0.01;
+   let rangehit = 1 - rangemiss;
+   let rangecrit = (_combatCritChance + critbonus)*0.01;
+   
+   return range_wep.basedmgmod*physdmgmod*combatdmgmod*rangehit*((SpecialCritDamage-1)*rangecrit*(1+talents.pierce_shot) + 1)*(1-PlyrArmorReduc);
+}
+function exp_dmgMod_MagicPierce(critbonus){
+   let rangemiss = Math.max(RangeMissChance,0)*0.01;
+   let rangehit = 1 - rangemiss;
+   let rangecrit = (_combatCritChance + critbonus)*0.01;
+
+   return range_wep.basedmgmod*magdmgmod*combatdmgmod*rangehit*((SpecialCritDamage-1)*rangecrit*(1+talents.pierce_shot) + 1);
+}
+
 function exp_update(){
    updateAgi();
    updateAP();
    updateArmorReduction();
    exp_updateDamageMod();
    _combatCritChance = updateCritChance();
-   
 	
 }
 
@@ -175,7 +189,7 @@ function exp_dmg_SteadyShot(range_wep, combatRAP) {
    let specials_mod = (steadymod_1 > 0) ? (1 + steadymod_1 + sniper_training + ferocious_insp) * (1 + steadymod_2) : (1 + steadymod_2 + sniper_training);
    let shotDmg = (combatRAP * 0.1 + range_wep.ammodps * 2.8 + dmg + SPELLS.steadyshot.ranks.rankdmg) * specials_mod;
 
-   return (shotDmg * exp_dmgMod_SpecialRange(talents.surv_instincts));
+   return (shotDmg * exp_dmgMod_PhysPierce(talents.surv_instincts));
 }
 
 function exp_dmg_MultiShot(range_wep, combatRAP) {
@@ -204,7 +218,7 @@ function exp_dmg_AimedShot(range_wep, combatRAP) {
    let sniper_training = (auras.sniper_training?.timer > 0) ? talents.sniper_training * 2 : 0;
    let specials_mod = (1 + imp_steady_shot + sniper_training + talents.barrage);
    let shotDmg = (combatRAP * 0.2 + range_wep.ammodps * range_wep.speed + dmg + range_wep.flatdmg + SPELLS.aimedshot.ranks.rankdmg) * specials_mod;
-   return (shotDmg * exp_dmgMod_SpecialRange(talents.imp_barrage * 4));
+   return (shotDmg * exp_dmgMod_PhysPierce(talents.imp_barrage * 4));
 }
 
 function exp_dmg_RaptorStrike(mainhand_wep, combatMAP) {
@@ -235,7 +249,8 @@ function exp_dmg_ChimeraShot(range_wep, combatRAP) {
    let imp_steady_shot = (auras.imp_steady_shot?.timer > 0) ? talents.imp_steady_shot : 0;
    let specials_mod = (1 + imp_steady_shot);
    let shotDmg = (combatRAP * 0.2 + range_wep.ammodps * range_wep.speed + dmg + range_wep.flatdmg) * 1.25 * specials_mod;
-   return shotDmg * exp_dmgMod_SpecialMagic(0);
+   let serpentDmg = (auras.serpentsting?.timer > 0) ? 0.4 * auras.serpentsting.damage : 0;
+   return shotDmg * exp_dmgMod_MagicPierce(0) + serpentDmg*exp_dmgMod_Magic(0)/(range_wep.basedmgmod*magdmgmod);
 }
    // Explosive Shot
 function exp_dmg_ExplosiveShot(combatRAP) {
@@ -244,7 +259,7 @@ function exp_dmg_ExplosiveShot(combatRAP) {
    let dmg = (useAverages) ? (SPELLS.explosiveshot.mindmg + SPELLS.explosiveshot.maxdmg) * avgConst : rng(SPELLS.explosiveshot.mindmg,SPELLS.explosiveshot.maxdmg);
    let specials_mod = 1 + talents.t_n_t + sniper_training;
    let shotDmg = (combatRAP * 0.14 + dmg) * specials_mod;
-   return shotDmg * exp_dmgMod_Magic(0);
+   return shotDmg * exp_dmgMod_Magic(talents.surv_instincts) * 3;
 }
    // Serpent Sting
 function exp_dmg_SerpentSting(combatRAP) {

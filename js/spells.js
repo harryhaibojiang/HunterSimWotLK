@@ -64,6 +64,8 @@ function updateSpellCDs(spell) {
 
     // player spells
     USED_SPELLS.autoshot.cd = roundFloat(Math.max(USED_SPELLS.autoshot.cd - steptime, 0));
+
+    let expl_arcane_cd = (auras.lock_load?.timer > 0) ? 2.1 : 6; 
     if (!!USED_SPELLS.steadyshot)   {
         let spell_cd = 1.5 - USED_SPELLS.steadyshot.cast; // gcd minus cast time
         USED_SPELLS.steadyshot.cd = (spell === 'steadyshot') ? Math.max(spell_cd,0) : Math.max(USED_SPELLS.steadyshot.cd - steptime, 0);
@@ -75,11 +77,11 @@ function updateSpellCDs(spell) {
         USED_SPELLS.multishot.cd = (spell === 'multishot' || spell === 'aimedshot') ? spell_cd : Math.max(USED_SPELLS.multishot.cd - steptime, 0);
     }
     if (!!USED_SPELLS.arcaneshot)   {
-        let spell_cd = USED_SPELLS.arcaneshot.base_cd;
+        let spell_cd = expl_arcane_cd;
         USED_SPELLS.arcaneshot.cd = (spell === 'arcaneshot' || spell === 'explosiveshot') ? spell_cd : Math.max(USED_SPELLS.arcaneshot.cd - steptime, 0);
     }
     if (!!USED_SPELLS.explosiveshot)   {
-        let spell_cd = USED_SPELLS.explosiveshot.base_cd;
+        let spell_cd = expl_arcane_cd;
         USED_SPELLS.explosiveshot.cd = (spell === 'arcaneshot' || spell === 'explosiveshot') ? spell_cd : Math.max(USED_SPELLS.explosiveshot.cd - steptime, 0);
     }
     if (!!USED_SPELLS.aimedshot)   {
@@ -173,6 +175,9 @@ function updateSpellCDs(spell) {
         if (!!USED_SPELLS.blackarrow) USED_SPELLS.blackarrow.cd = (remaininggcd > USED_SPELLS.blackarrow.cd) ? (remaininggcd) : USED_SPELLS.blackarrow.cd;
         //console.log("update timers w/ gcd");
     }
+    if (auras.lock_load?.timer > 0 && auras.lock_load.stacks === 0) {
+        auras.lock_load.timer = 0;
+    }
     //console.log("speed: " + rangespeed);
     //console.log("auto cd: "+USED_SPELLS.autoshot.cd);
     //console.log("steady cd: "+USED_SPELLS.steadyshot.cd);
@@ -180,7 +185,7 @@ function updateSpellCDs(spell) {
     //console.log("arcane cd: "+USED_SPELLS.arcaneshot.cd);
 }
 /*************************************************************************/
-/* All formulas below are tested and confirmed in-game as of patch 2.5.3 */
+/* All formulas below are tested and confirmed in-game as of patch 3.4.0 */
 /*************************************************************************/
 
 function autoShotCalc(range_wep, combatRAP) {
@@ -267,7 +272,7 @@ function blackArrowCalc(combatRAP) {
 
     let sniper_training = (auras.sniper_training?.timer > 0) ? talents.sniper_training * 2 : 0;
     let specials_mod = 1 + talents.t_n_t + sniper_training + talents.trap_mastery;
-    let shotDmg = (combatRAP * 0.1 + SPELLS.blackarrow.ranks.rankdmg) * range_wep.basedmgmod * specials_mod * combatdmgmod * physdmgmod;
+    let shotDmg = (combatRAP * 0.1 + SPELLS.blackarrow.ranks.rankdmg * 5) * range_wep.basedmgmod * specials_mod * combatdmgmod;
     return shotDmg;
 }
     // Chimera Shot
@@ -283,9 +288,9 @@ function chimeraShotCalc(range_wep, combatRAP) {
 function explosiveShotCalc(combatRAP) {
 
     let sniper_training = (auras.sniper_training?.timer > 0) ? talents.sniper_training * 2 : 0;
-    let dmg = (useAverages) ? (SPELLS.explosiveshot.mindmg + SPELLS.explosiveshot.maxdmg) * avgConst : rng(SPELLS.explosiveshot.mindmg,SPELLS.explosiveshot.maxdmg);
+    let dmg = (useAverages) ? (SPELLS.explosiveshot.ranks.mindmg + SPELLS.explosiveshot.ranks.maxdmg) * avgConst : rng(SPELLS.explosiveshot.ranks.mindmg,SPELLS.explosiveshot.ranks.maxdmg);
     let specials_mod = 1 + talents.t_n_t + sniper_training;
-    let shotDmg = (combatRAP * 0.14 + dmg) * range_wep.basedmgmod * specials_mod * combatdmgmod * magdmgmod;
+    let shotDmg = (combatRAP * 0.14 + dmg) * range_wep.basedmgmod * specials_mod * combatdmgmod;
     return shotDmg;
 }
     // Serpent Sting
@@ -305,10 +310,10 @@ function explosiveTrapCalc(combatRAP, dotcheck) {
     let trapDmg = 0;
     let specialmod = (1 + talents.t_n_t + talents.trap_mastery);
     if(dotcheck) {
-        dotDmg = (SPELLS.explosivetrap.tickdmg * 10 + combatRAP) * combatdmgmod * specialmod;
+        dotDmg = (SPELLS.explosivetrap.ranks.tickdmg * 10 + combatRAP) * combatdmgmod * specialmod;
         return dotDmg;
     } else {
-        dmg = (useAverages) ? (SPELLS.explosivetrap.mindmg + SPELLS.explosivetrap.maxdmg) * avgConst : rng(SPELLS.explosivetrap.mindmg,SPELLS.explosivetrap.maxdmg);
+        dmg = (useAverages) ? (SPELLS.explosivetrap.ranks.mindmg + SPELLS.explosivetrap.ranks.maxdmg) * avgConst : rng(SPELLS.explosivetrap.ranks.mindmg,SPELLS.explosivetrap.ranks.maxdmg);
         trapDmg = (combatRAP * 0.10 + dmg) * specialmod * combatdmgmod * magdmgmod;
         return trapDmg;
     }

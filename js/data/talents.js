@@ -157,7 +157,7 @@ const BM_TREE = [
       name: "Cobra Strikes",
       abrv: 'cobra_strike',
       max: 3,
-      per_point: 20 / 100
+      per_point: 20
     }
   ],
   [
@@ -404,7 +404,7 @@ const SV_TREE = [
       name: 'Survival Instincts',
       abrv: 'surv_instincts',
       max: 2,
-      per_point: 2 / 100
+      per_point: 2
     },
   ],
   [
@@ -443,7 +443,7 @@ const SV_TREE = [
       name: 'Lock and Load',
       abrv: 'lock_load',
       max: 3,
-      per_point: 2 / 100
+      per_point: 2
     }
   ],
   [
@@ -500,7 +500,8 @@ const SV_TREE = [
     {
       name: 'Master Tactician',
       abrv: 'master_tact',
-      max: 5
+      max: 5,
+      per_point: 2
     },
     {
       name: 'Noxious Stings',
@@ -516,7 +517,7 @@ const SV_TREE = [
     },
     {
       name: 'Black Arrow',
-      abrv: 'exp_weakness',
+      abrv: 'black_arrow',
       max: 1,
     },
     {
@@ -579,7 +580,7 @@ function parseTalents(talentString) {
 }
 
 const BM_ImpHM_Track = parseTalents('51200201515012243100531151-0050352-5')
-const MM_ImpHM_FA_Track = parseTalents('-035005231235010033105001351') //502-035335001230013233135031351-5
+const MM_ImpHM_FA_Track = parseTalents('-005305131130013233105031351-500003') //502-035335001230013233135031351-5
 const MM_ImpAS_FA_Track = parseTalents('502-035305131030013233135030351-5000002')
-const SV_FA_Resrc_Aimed = parseTalents('-035305001-5000032500033330533035001331')
+const SV_FA_Resrc_Aimed = parseTalents('-005005-5000032500033330503035001331') // -035305001-5000032500033330533035001331
 const BM_FA_Track = parseTalents('51200201515012243100531151-0350052-5')

@@ -416,7 +416,7 @@ function selectTarget(id,delay) {
     }
     document.getElementById("typeSelect").value = target.type;
     document.getElementById("level").value = target.level;
-    calcBaseStats();
+    initialize();
     if (delay === undefined) {
         //console.log('try store')
         storeData();

@@ -99,7 +99,25 @@ function petStatsCalc(){
 
     if (talents.beast_mast === 0) {
         if(PET_FAMILY[selectedPet].family === 'Ferocity'){
-            pet_talents = Ferocitypet;
+            if (level === 70) {
+                pet_talents = Ferocity70_NonBM2;
+            } else {
+                pet_talents = Ferocity80_NonBM1;
+            }
+        }
+        else if(PET_FAMILY[selectedPet].family === 'Cunning'){
+            pet_talents = Cunningpet;
+        }
+        else if(PET_FAMILY[selectedPet].family === 'Tenacity'){
+            pet_talents = Tenacitypet;
+        }
+    } else {
+        if(PET_FAMILY[selectedPet].family === 'Ferocity'){
+            if (level === 70) {
+                pet_talents = Ferocity70_BM2;
+            } else {
+                pet_talents = Ferocity80_BM; 
+            }
         }
         else if(PET_FAMILY[selectedPet].family === 'Cunning'){
             pet_talents = Cunningpet;
@@ -128,7 +146,7 @@ function petStatsCalc(){
     
     pet.ap = ((pet.str - 10) * 2 + (selectedbuffs.stats.MAP || 0) + (Stam * talents.hunt_vs_wild) + petAPfromplayer) * apmod;
     //crit
-    pet.crit = PetBaseCrit + pet.agi / BasePet.AgiToCrit + talents.ferocity + (selectedbuffs.stats.CritChance || 0) + beasttamers_crit + CritPenalty + pet_talents.spider_bite * 100; // need to add special gear items w/ pet crit
+    pet.crit = PetBaseCrit + pet.agi / BasePet.AgiToCrit + talents.ferocity + (selectedbuffs.stats.CritChance || 0) + beasttamers_crit + 0 + pet_talents.spider_bite; // need to add special gear items w/ pet crit
     //hit
     pet.hit = Math.floor(RangeHitChance);
     pet.miss = Math.max(BasePhysicalMiss - pet.hit,0);
@@ -157,7 +175,7 @@ function petUpdateDmgMod(){
     if(auras.killcommand?.timer > 0) pet_special_mod = (1 + auras.killcommand.stacks * auras.killcommand.effect.dmgmod / 100);
     if(debuffs.hm.timer > 0 && talents.mark_death > 0) pet_special_mod *= (1 + talents.mark_death);
     if(auras.savagery?.timer > 0) pet.combatdmgmod *= (1 + auras.savagery.effect.dmgbonus / 100); // savage rend crit
-
+    //if(totalduration > totalduration * 0.65) pet.combatdmgmod *= pet_talents.feed_frenzy;
     return;
 }
 
@@ -176,8 +194,15 @@ function petUpdateStats(){
     // hunter AP
     let bonusAP = updateAP();
     let petAPfromplayer = bonusAP * PetHunterAPRatio * pet_talents.wild_hunt;
-    let apmod = talents.animal_handler * tsa_ap;
-    pet.combatap = (petAPfromplayer * apmod + pet.ap);
+    let tsa_ap = (talents.trueshot_aura > 1) ? talents.trueshot_aura : selectedbuffs.special.percentAPMod;
+    let base_apmod = talents.animal_handler * tsa_ap;
+
+    let combat_apmod = 1;
+    if (auras.rabid?.timer > 0) combat_apmod *= (1 + (auras.rabid.effect.apmod * auras.rabid.stacks / 100));
+    if (auras.serenitydust?.timer > 0) combat_apmod *= (1 + auras.serenitydust.effect.apmod / 100);
+    if (auras.callofwild?.timer > 0) combat_apmod *= (1 + auras.callofwild.effect.apmod / 100);
+
+    pet.combatap = (petAPfromplayer * base_apmod + pet.ap) * combat_apmod;
 
     // ******************** Crit *******************
     pet.combatcrit += combatAgi / BasePet.AgiToCrit;
@@ -292,6 +317,8 @@ function petAttack(){
     spellresult.petattack.dmg += done;
     spellresult.petattack.count++;
 
+    petProc(result);
+
     if(combatlogRun) {
         combatlogarray[combatlogindex] = petsteptime.toFixed(3) + " - Pet Auto " + RESULTARRAY[result] + " for " + done;
         combatlogindex++;
@@ -401,7 +428,7 @@ function petSpell(petspell){
     if(auras.killcommand?.timer > 0 && auras.killcommand.stacks === 0) {
         auras.killcommand.timer = 0;
     }
-    
+    petProc(result, petspell);
     petUpdateHaste();
     
     if(combatlogRun && !dot_only_check){
@@ -440,6 +467,27 @@ function petdealdamage(dmg, result, spelltype) {
     }
 }
 
+function petProc(result, petspell){
+    let roll = 0;
+    let check_spell = (petspell !== undefined) ? PET_SPELLS[petspell].spell_name : '';
+
+    if (result !== RESULT.MISS && auras.rabid?.timer > 0) {
+        roll = rng10k();
+        let procchance = auras.rabid.effect.proc_chance;
+        let curr_stacks = auras.rabid.stacks;
+        auras.rabid.stacks = (roll <= procchance * 100) ? Math.min(auras.rabid.stacks + 1, auras.rabid.effect.stacks) : auras.rabid.stacks;
+        if(curr_stacks < auras.rabid.stacks && combatlogRun) { 
+           combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Pet gains " + auras.rabid.effect_name + " stacks: " + auras.rabid.stacks;
+           combatlogindex++;
+        }
+    }
+    // activate plus refresh
+    if (check_spell === 'Monstrous Bite'){
+        auras.monstrousbite.timer = auras.monstrousbite.effect.duration;
+        auras.monstrousbite.stacks = Math.min(auras.monstrousbite.stacks + 1, auras.monstrousbite.effect.stacks);
+    }
+}
+
 function petCrit(petspell){
 
     let check_spell = (petspell !== undefined) ? petspell : '';
@@ -464,8 +512,8 @@ function petCrit(petspell){
     if (!!auras.frenzy) {
         roll = rng10k();
         let frenzychance = talents.frenzy * 2000;
-        auras.frenzy.timer = (roll <= frenzychance) ? 8 : pet.frenzy.timer; // proc check
-        if(pet.frenzy.timer === 8) { 
+        auras.frenzy.timer = (roll <= frenzychance) ? auras.frenzy.effect.duration : auras.frenzy.timer; // proc check
+        if(auras.frenzy.timer === auras.frenzy.effect.duration) { 
             if(combatlogRun && nextpetspell >= nextpetattack) {
                     combatlogarray[combatlogindex] = nextpetattack.toFixed(3) + " - Pet gains Frenzy";
                     combatlogindex++;

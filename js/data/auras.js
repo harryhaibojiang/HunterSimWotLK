@@ -31,7 +31,7 @@ const MAIN_CDS = { // todo
         },
         effect_name: 'Potion'
     },
-    rune: { // todo
+    rune: { 
         effect: {
             minMana: 900,
             maxMana: 1500,
@@ -412,14 +412,18 @@ const PET_CDS = {
     rabid: {
         effect: {
             duration: 20,
-            base_cd: 45
+            base_cd: 45,
+            stacks: 5,
+            apmod: 5,
+            proc_chance: 20,
         },
         effect_name: 'Rabid'
     },
     callofwild: {
         effect: {
             duration: 20,
-            base_cd: 300
+            base_cd: 300,
+            apmod: 10
         },
         effect_name: 'Call of the Wild'
     },
@@ -438,7 +442,8 @@ const PET_CDS = {
     serenitydust: {
         effect: {
             duration: 15,
-            base_cd: 60
+            base_cd: 60,
+            apmod: 10
         },
         effect_name: 'Serenity Dust'
     },
@@ -1297,7 +1302,8 @@ const TALENT_PROCS = {
             is_proc: true,
             proc_type: 'Special',
             duration: 12,
-            base_cd: 22
+            base_cd: 22,
+            stacks: 2
         },
         effect_name: 'Lock and Load'
     },
@@ -1326,7 +1332,8 @@ const AURA_DOTS = {
         type: 'shadow',
         effect: {
             tick_rate: 3,
-            duration: 15
+            duration: 15,
+            dmgmod: 6,
         },
         effect_name: 'Black Arrow'
     },
@@ -1454,6 +1461,7 @@ function updateUsableCDs() {
     usable_CDs.rune.enable = true;
     usable_CDs.rapid.enable = true;
     usable_CDs.lust.enable = true;
+    usable_CDs.beastwithin.enable = (talents.beastwithin > 0) ? true : false;
     usable_CDs.potion.potion_type = 'Crit'
     
 }
@@ -1592,7 +1600,7 @@ function buildAurasObj(){
             auras[aura_].effect = cd_obj[aura_].effect;
             auras[aura_].offset = usable_CDs[aura_].offset;
             auras[aura_].effect_name = cd_obj[aura_].effect_name;
-            if (aura_ === 'killcommand') {
+            if (aura_ === 'killcommand' || aura_ === 'rabid') {
                 auras[aura_].stacks = 0;
             }
             if (aura_ === 'furious_howl') {
@@ -1615,6 +1623,9 @@ function buildAurasObj(){
                 auras[talent_].ticks = 0;
                 auras[talent_].type = TALENT_PROCS[talent_].type;
                 auras[talent_].damage = 0;
+            }
+            if (talent_ === 'lock_load') {
+                auras[talent_].stacks = 0;
             }
         }
     }

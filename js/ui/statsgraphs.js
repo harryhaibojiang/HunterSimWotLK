@@ -561,7 +561,7 @@ function resultCountInitialize() {
 		spellresult[spellname].count = 0;
 		spellresult[spellname].dmg = 0;
 		
-		if (spellname === 'pet_special' || spellname === 'wild_quiver' || spellname === 'arcaneshot' || spellname === 'chimera_serpent') {
+		if (spellname === 'pet_special' || spellname === 'wild_quiver' || spellname === 'arcaneshot' || spellname === 'chimera_serpent' || spellname === 'explosiveshot') {
 			spellresult[spellname].Partial = 0;
 		}
 		if (spellname === 'pet_focus_dump' || spellname === 'petattack' || spellname === 'raptorstrike' || spellname === 'melee') {
