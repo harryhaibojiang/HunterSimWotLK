@@ -556,10 +556,10 @@ function dotHandler(dotname, source, apply, type, crit_dmg) {
         // check serpent sting due to duration difference and possible mid-cycle refresh
         if (dotname === 'serpentsting') {
         
-            auras[dotname].apply_time = (auras.serpentsting.timer > 0) ? auras.serpentsting.next_tick - auras.serpentsting.effect.tick_rate : timeapplied;
-            auras[dotname].timer = auras[dotname].effect.duration + (glyphs.serpentsting || 0);
+            auras[dotname].apply_time = (auras.serpentsting?.timer > 0) ? auras.serpentsting.next_tick - auras.serpentsting.effect.tick_rate : timeapplied;
+            auras[dotname].timer = auras[dotname].effect.duration + (glyphs.serpent_sting || 0);
             auras[dotname].next_tick = auras[dotname].effect.tick_rate + auras[dotname].apply_time;
-            auras[dotname].ticks = (auras[dotname].effect.duration + (glyphs.serpentsting || 0)) / auras[dotname].effect.tick_rate;
+            auras[dotname].ticks = (auras[dotname].effect.duration + (glyphs.serpent_sting || 0)) / auras[dotname].effect.tick_rate;
         }
         else {
             auras[dotname].apply_time = timeapplied;
@@ -602,7 +602,7 @@ function dotHandler(dotname, source, apply, type, crit_dmg) {
         else if (dottype !== 'physical') {
             updateDmgMod(dotname);
             let crittable = (!!glyphs.explosive_trap && dotname === 'explosivetrap') ? true : false; // todo future crits trap and serpent crit conditions
-            let ticks = auras[dotname].effect.duration / auras[dotname].effect.tick_rate;
+            let ticks = (auras[dotname].effect.duration + (glyphs.serpent_sting || 0)) / auras[dotname].effect.tick_rate;
             result = rollDamageOverTime(crittable, dotname);
             dmg = auras[dotname].damage / ticks * magdmgmod;
             if (result === RESULT.PARTIAL) {

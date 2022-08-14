@@ -209,7 +209,7 @@ function steadyShotCalc(range_wep, combatRAP) {
     let dmg = (useAverages) ? (range_wep.mindmg + range_wep.maxdmg) * avgConst : rng(range_wep.mindmg,range_wep.maxdmg);
     let ferocious_insp = (talents.ferocious_insp - 1) * 3;
     let steadymod_1 = (!!currentgear.special.gronnstalker_4p_steady_shot_dmg_bonus) ? currentgear.special.gronnstalker_4p_steady_shot_dmg_bonus : 0;
-    let steadymod_2 = (!!glyphs.steadyshot && auras.serpentsting?.timer > 0) ? glyphs.steadyshot : 0;
+    let steadymod_2 = (!!glyphs.steady_shot && auras.serpentsting?.timer > 0) ? glyphs.steady_shot / 100 : 0;
     let sniper_training = (auras.sniper_training?.timer > 0) ? talents.sniper_training * 2 : 0;
     
     let specials_mod = (steadymod_1 > 0) ? (1 + steadymod_1 + sniper_training + ferocious_insp) * (1 + steadymod_2) : (1 + steadymod_2 + sniper_training);
