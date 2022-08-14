@@ -459,3 +459,4 @@ initializeTargetDropdown('start');
 initializeImportSets();
 initializeSavedSets();
 initializePetDropdown();
+glyphs = selectGlyphs(selected_glyphs);

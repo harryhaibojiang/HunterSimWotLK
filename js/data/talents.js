@@ -557,11 +557,11 @@ function parseTalents(talentString) {
   let treeIdx = 0
   let talentIdx = 0
   let total_points = 0
-
+  let newstring = talentString.split('_')[0]
   // Load all talents with 0 points
   TALENT_TREES.flat().forEach(talent => loadTalent(talents, talent, 0));
-
-  [...talentString].forEach(char => {
+  
+  [...newstring].forEach(char => {
     if (char === '-') { // Jump to next talent tree
       ++treeIdx
       talentIdx = 0
