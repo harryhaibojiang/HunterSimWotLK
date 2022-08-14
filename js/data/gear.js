@@ -8694,7 +8694,8 @@ const MELEE_WEAPONS = {
         name: "Stanchion of Primal Instinct",
         stats: {
             Agi: 75,
-            Str: 47,
+            MAP: 94,
+            RAP: 94,
             Stam: 50,
             ArP: 50
         },
@@ -9041,6 +9042,26 @@ const MELEE_WEAPONS = {
 }
 
 const NECKS = {
+    35135: {
+        name: "Guardian's Pendant of Triumph",
+        stats: {
+            Stam: 39,
+            MAP: 58,
+            RAP: 58,
+            Crit: 26,
+            Resil: 18
+        },
+        Location: "Honor Reward",
+        sockets: [
+            "Yellow"
+        ],
+        socketBonus: {
+            Stam: 3
+        },
+        Phase: 5,
+        icon: "inv_jewelry_necklace_36",
+        quality: "Epic"
+    },
     24073: {
         name: "Garrote-String Necklace",
         stats: {
