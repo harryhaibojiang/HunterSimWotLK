@@ -8694,7 +8694,8 @@ const MELEE_WEAPONS = {
         name: "Stanchion of Primal Instinct",
         stats: {
             Agi: 75,
-            Str: 47,
+            MAP: 94,
+            RAP: 94,
             Stam: 50,
             ArP: 50
         },
