@@ -685,6 +685,7 @@ function updateDmgMod(spell) {
    if(auras.beastwithin?.timer > 0) combatdmgmod *= 1 + auras.beastwithin.effect.dmgmod / 100; // beast within
    if(auras.cullingherd?.timer > 0) combatdmgmod *= pet_talents.cull_herd;
    if(auras.blackarrow?.timer > 0) combatdmgmod *= 1 + auras.blackarrow.effect.dmgmod / 100;
+   if(auras.serpentsting?.timer > 0) combatdmgmod *= talents.nox_stings;
 
    if((debuffs.bloodfrenzy.timer > 0) && !debuffs.bloodfrenzy.inactive) physdmgmod *= debuffs.bloodfrenzy.dmgbonus; // blood frenzy
    if((debuffs.hm.timer > 0) && !debuffs.hm.inactive && (talents.mark_death > 0) && spell_ranged_shot) combatdmgmod *= (1 + talents.mark_death);
