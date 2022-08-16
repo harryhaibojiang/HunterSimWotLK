@@ -137,7 +137,7 @@ const KILL_SHOT = {
     base: {
         cost: 7,
         base_cast: 0.0001,
-        base_cd: 20,
+        base_cd: 15,
         gcd: true,
         spell_name: 'Kill Shot',
         type: 'physical'
