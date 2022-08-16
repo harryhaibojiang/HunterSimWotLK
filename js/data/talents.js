@@ -507,6 +507,8 @@ const SV_TREE = [
       name: 'Noxious Stings',
       abrv: 'nox_stings',
       max: 3,
+      is_modifier: true,
+      per_point: 1 / 100
     }
   ],
   [
