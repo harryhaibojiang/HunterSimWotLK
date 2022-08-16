@@ -813,7 +813,8 @@ function playerSpellChoice(){
         return "serpentsting";
     }
     if(t_use_steady) {
-        if(dmg_gain_arcane > dmg_gain_steady && !explosiveuse && t_ready_arcane <= t_check) {
+        let imp_steady_shot = auras.imp_steady_shot?.timer > 0
+        if(dmg_gain_arcane > dmg_gain_steady && !explosiveuse && !imp_steady_shot && t_ready_arcane <= t_check) {
             return "arcaneshot";
         }
         else {
