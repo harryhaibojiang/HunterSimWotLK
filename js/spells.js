@@ -279,7 +279,7 @@ function blackArrowCalc(combatRAP) {
 function chimeraShotCalc(range_wep, combatRAP) {
 
     let dmg = (useAverages) ? (range_wep.mindmg + range_wep.maxdmg) * avgConst : rng(range_wep.mindmg,range_wep.maxdmg);
-    let imp_steady_shot = (auras.imp_steady_shot?.timer > 0) ? talents.imp_steady_shot : 0;
+    let imp_steady_shot = (auras.imp_steady_shot?.timer > 0) ? auras.imp_steady_shot.effect.dmgmod / 100 : 0;
     let specials_mod = (1 + imp_steady_shot);
     let shotDmg = (combatRAP * 0.2 + range_wep.ammodps * range_wep.speed + dmg + range_wep.flatdmg) * 1.25 * specials_mod * range_wep.basedmgmod * combatdmgmod * physdmgmod;
     return shotDmg;

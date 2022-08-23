@@ -1273,6 +1273,7 @@ const TALENT_PROCS = {
             is_proc: true,
             proc_type: 'Steady',
             duration: 12,
+            dmgmod: 15
         },
         effect_name: 'Improved Steady Shot'
     },

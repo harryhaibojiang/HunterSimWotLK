@@ -432,6 +432,7 @@ function selectTalents(talent){
 
     
     let customtalentlink = document.getElementById("customtalent").value;
+    talent = (talent == null) ? '0' : talent;
     let regioncheck = customtalentlink.substr(0,30);
     let customtalents = "";
     if(regioncheck !== "https://www.wowhead.com/wotlk/") {
