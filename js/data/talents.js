@@ -207,7 +207,6 @@ const MM_TREE = [
       name: "Improved Hunter's Mark",
       abrv: 'imp_hunter_mark',
       max: 3,
-      is_modifier: true,
       per_point: 10 / 100
     },
     {
