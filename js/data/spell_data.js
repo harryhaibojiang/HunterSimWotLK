@@ -37,7 +37,6 @@ const ARCANE_SHOT = {
 const BLACK_ARROW = {
     base: {
         cost: 6,
-        base_cast: 0.0001,
         duration: 15,
         ticks: 3,
         base_cd: 30,
@@ -57,7 +56,6 @@ const BLACK_ARROW = {
 const CHIMERA_SHOT = {
     base: {
         cost: 12,
-        base_cast: 0.0001,
         base_cd: 10,
         gcd: true,
         spell_name: 'Chimera Shot',
@@ -70,7 +68,6 @@ const CHIMERA_SHOT = {
 const EXPLOSIVE_SHOT = {
     base: {
         cost: 7,
-        base_cast: 0.0001,
         duration: 2,
         ticks: 1,
         base_cd: 6,
@@ -92,7 +89,6 @@ const EXPLOSIVE_SHOT = {
 const EXPLOSIVE_TRAP = {
     base: {
         cost: 19,
-        base_cast: 0.0001,
         duration: 20,
         ticks: 2,
         base_cd: 30,
@@ -116,7 +112,6 @@ const EXPLOSIVE_TRAP = {
 const IMMOLATION_TRAP = {
     base: {
         cost: 9,
-        base_cast: 0.0001,
         duration: 15,
         ticks: 3,
         base_cd: 30,
@@ -136,7 +131,6 @@ const IMMOLATION_TRAP = {
 const KILL_SHOT = {
     base: {
         cost: 7,
-        base_cast: 0.0001,
         base_cd: 15,
         gcd: true,
         spell_name: 'Kill Shot',
@@ -154,7 +148,6 @@ const KILL_SHOT = {
 const MONGOOSE_BITE = {
     base: {
         cost: 3,
-        base_cast: 0.0001,
         base_cd: 5,
         gcd: true,
         spell_name: 'Mongoose Bite',
@@ -190,7 +183,6 @@ const MULTI_SHOT = {
 const RAPTOR_STRIKE = {
     base: {
         cost: 4,
-        base_cast: 0.0001,
         base_cd: 6,
         gcd: false,
         spell_name: 'Raptor Strike',
@@ -208,7 +200,6 @@ const RAPTOR_STRIKE = {
 const SERPENT_STING = {
     base: {
         cost: 9,
-        base_cast: 0,
         duration: 15,
         ticks: 3,
         gcd: true,
@@ -227,7 +218,6 @@ const SERPENT_STING = {
 const SILENCING_SHOT = {
     base: {
         cost: 6,
-        base_cast: 0.0001,
         base_cd: 20,
         gcd: false,
         spell_name: 'Silencing Shot',
@@ -237,7 +227,6 @@ const SILENCING_SHOT = {
 const SCATTER_SHOT = {
     base: {
         cost: 8,
-        base_cast: 0.0001,
         base_cd: 30,
         gcd: true,
         spell_name: 'Scatter Shot',
@@ -264,7 +253,6 @@ const STEADY_SHOT = {
 const VOLLEY = {
     base: {
         cost: 17,
-        base_cast: 0.0001,
         duration: 6,
         ticks: 1,
         gcd: true,
@@ -283,7 +271,6 @@ const VOLLEY = {
 const FROST_TRAP = {
     base: {
         cost: 2,
-        base_cast: 0.0001,
         base_cd: 30,
         gcd: true,
         spell_name: 'Frost Trap',
@@ -293,7 +280,6 @@ const FROST_TRAP = {
 const SNAKE_TRAP = {
     base: {
         cost: 9,
-        base_cast: 0.0001,
         base_cd: 30,
         gcd: true,
         spell_name: 'Snake Trap',
@@ -337,9 +323,10 @@ settings = {
     explosiveshot: true,
     blackarrow: true,
     killshot: true,
+    explosivetrap: true,
 
 }
-
+var weaving_enabled = true;
 function updateSpellSettings() {
     settings.chimerashot = (talents.chimera_shot === 1) ? true : false;
     settings.aimedshot = (talents.aimed_shot === 1) ? true : false;
@@ -347,6 +334,7 @@ function updateSpellSettings() {
     settings.explosiveshot = (talents.exp_shot === 1) ? true : false;
     settings.blackarrow = (talents.black_arrow === 1) ? true : false;
     settings.killshot = (level === 80) ? true : false;
+    settings.explosivetrap = weaving_enabled;
 }
 
 function buildSpellsObj() {

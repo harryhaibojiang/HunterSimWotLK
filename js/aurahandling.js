@@ -390,6 +390,15 @@ function onUseSpellCheck(){
             combatlogindex++;
         }
     }
+    if (!!auras.recovery && (auras.recovery.cd === 0)) {
+
+        auras.recovery.timer = auras.recovery.effect.duration; // set timer
+        auras.recovery.cd = auras.recovery.effect.base_cd * (1 - talents.longevity); // set cd
+        if(combatlogRun) {
+            combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player gains " + auras.recovery.effect_name;
+            combatlogindex++;
+        }
+    }
     if (!!auras.lust && (auras.lust.cd === 0)) {
 
         auras.lust.timer = auras.lust.effect.duration; // set timer
@@ -440,7 +449,7 @@ function onUseSpellCheck(){
             auras.beastwithin.cd = (auras.beastwithin.effect.base_cd - glyph_reduc )* (1 - talents.longevity); // set cd
             beastwithinreduc = 0.8;
             if(combatlogRun) {
-                combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player gains " + auras.beastwithin.effect_name;
+                combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player gains " + auras.beastwithin.effect_name + ". cd: " +auras.beastwithin.cd;
                 combatlogindex++;
             }
         }
@@ -496,7 +505,9 @@ function onUseSpellCheck(){
         }
     }
     if(!!auras.rune && (auras.rune.cd === 0) && runeHandling()) {}
-    
+    if(steptimeend > 6 && talents.sniper_training > 0) {
+        auras.sniper_training.timer = auras.sniper_training.effect.duration;
+    }
 // trinkets on use, if's for non-shared CDs, if-else if's for shared CDs
 
     if(!!auras.trink1) {
@@ -507,7 +518,7 @@ function onUseSpellCheck(){
     }
 
     if (!!auras.readiness && (auras.readiness.cd === 0) && auras.rapid?.cd > 0) {
-        if (USED_SPELLS.chimerashot?.cd > 3 || USED_SPELLS.aimedshot?.cd > 3 || USED_SPELLS.multishot?.cd > 3) {
+        if ((USED_SPELLS.chimerashot?.cd > 3) && (USED_SPELLS.aimedshot?.cd > 3 || USED_SPELLS.multishot?.cd > 3)) {
             queueReadiness = true;
         }
         else { queueReadiness = false;
@@ -517,7 +528,7 @@ function onUseSpellCheck(){
 
 function trinketOnUseTrigger(slot) {
 
-    if ((!auras[slot].effect?.is_proc) && (auras[slot].cd === 0)) {
+    if (!!auras[slot].effect && (!auras[slot].effect?.is_proc) && (auras[slot].cd === 0)) {
         if ((auras[slot].shares_cd && sharedtrinketcd === 0) || (!auras[slot].shares_cd)) {
 
             sharedtrinketcd = auras[slot].effect.duration;
@@ -598,6 +609,7 @@ function dotHandler(dotname, source, apply, type, crit_dmg) {
             if (result === RESULT.PARTIAL) {
                 dmg *= 0.65;
             }
+            spellresult[dotname].count++;
         }
         else if (dottype !== 'physical') {
             updateDmgMod(dotname);
@@ -617,11 +629,16 @@ function dotHandler(dotname, source, apply, type, crit_dmg) {
             }
             //console.log(dmg + " " +result)
         } 
+
+        if (dotname === 'blackarrow') {
+            dmg *= targetdmgmod / 1.06;
+        }
+        else dmg *= targetdmgmod;
+
         done = dealdamage(dmg, result, dottype);
         totaldmgdone += done;
         
         spellresult[dotname].dmg += done;
-        spellresult[dotname].count++;
 
         if(combatlogRun) {
             let critstring = (result === RESULT.CRIT) ? " (Crit)" : "";

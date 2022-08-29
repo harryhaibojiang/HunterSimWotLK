@@ -1,4 +1,4 @@
-const MAIN_CDS = { // todo
+const MAIN_CDS = {
     beastwithin: {
         cost: 10,
         effect: {
@@ -51,7 +51,7 @@ const MAIN_CDS = { // todo
         },
         effect_name: 'Blood Fury'
     },
-    berserking: { // todo
+    berserking: {
         effect: {
             duration: 10,
             base_cd: 180,
@@ -60,7 +60,7 @@ const MAIN_CDS = { // todo
         },
         effect_name: 'Berserking'
     },
-    rapid: { // todo
+    rapid: {
         cost: 3,
         effect: {
             duration: 15,
@@ -69,7 +69,7 @@ const MAIN_CDS = { // todo
         },
         effect_name: 'Rapid Fire'
     },
-    lust: { // todo
+    lust: {
         effect: {
             duration: 40,
             base_cd: 600,
@@ -78,7 +78,7 @@ const MAIN_CDS = { // todo
         },
         effect_name: 'Blood Lust'
     },
-    arcanetorrent: { // todo
+    arcanetorrent: {
         is_aura: false,
         effect: {
             base_cd: 120,
@@ -86,7 +86,7 @@ const MAIN_CDS = { // todo
         },
         effect_name: 'Arcane Torrent'
     },
-    readiness: { // todo
+    readiness: {
         is_aura: false,
         effect: {
             base_cd: 180,
@@ -391,7 +391,7 @@ const PROFF_CDS = {
         effect_name: 'Hand-mounted Pyro Rocket'
     },
 }
- // todo
+
 const PET_CDS = {
     recovery: {
         effect: {
@@ -423,7 +423,7 @@ const PET_CDS = {
         effect: {
             duration: 20,
             base_cd: 300,
-            apmod: 10
+            apmod: 0.1
         },
         effect_name: 'Call of the Wild'
     },
@@ -448,9 +448,9 @@ const PET_CDS = {
         effect_name: 'Serenity Dust'
     },
 }
- // todo
+
 const PET_PROCS = {
-    cullingherd: { // todo
+    cullingherd: {
         effect: {
             duration: 10,
             dmgbonus: 1,
@@ -463,7 +463,7 @@ const PET_PROCS = {
         },
         effect_name: 'Frenzy'
     },
-    monstrousbite: { // todo
+    monstrousbite: {
         effect: {
             duration: 12,
             stacks: 3,
@@ -477,6 +477,12 @@ const PET_PROCS = {
             dmgbonus: 10
         },
         effect_name: 'Savagery'
+    },
+    owlfocus: {
+        effect: {
+            duration: 8,
+        },
+        effect_name: "Owl's Focus"
     }
 }
 // todo DBW, rest should work
@@ -1245,7 +1251,7 @@ const ENCHANT_AURAS = {
         effect_name: 'Swordguard Embroidery'
     }
 }
- // todo
+
 const TALENT_PROCS = {
     imp_hawk: {
         shares_cd: false,
@@ -1462,7 +1468,7 @@ function updateUsableCDs() {
     usable_CDs.rune.enable = true;
     usable_CDs.rapid.enable = true;
     usable_CDs.lust.enable = true;
-    usable_CDs.beastwithin.enable = (talents.beastwithin > 0) ? true : false;
+    usable_CDs.beastwithin.enable = (talents.beast_within > 0) ? true : false;
     usable_CDs.potion.potion_type = 'Crit'
     
 }
@@ -1636,7 +1642,8 @@ function buildAurasObj(){
         if (((aura_ === 'cullingherd') && (pet_talents.cull_herd > 1)) ||
             ((aura_ === 'frenzy') && (talents.frenzy > 0)) ||
             ((aura_ === 'savagery') && (selectedPet === 2)) ||
-            ((aura_ === 'monstrousbite') && (selectedPet === 24))) { 
+            ((aura_ === 'monstrousbite') && (selectedPet === 24)) ||
+            ((aura_ === 'owlfocus') && pet_talents.owl_focus > 0)) { 
             checkaura = true;
         }
         if (checkaura) {

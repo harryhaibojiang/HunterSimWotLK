@@ -528,7 +528,7 @@ const PET_RAKE = {
 const PET_RAVAGE = {
     base: {
         cost: 0,
-        base_cd: 10,
+        base_cd: 40,
         gcd: false,
         spell_name: 'Ravage',
         ap_mod: 7,

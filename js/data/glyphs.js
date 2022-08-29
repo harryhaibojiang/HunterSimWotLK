@@ -29,17 +29,7 @@ const GLYPHS_DATA = {
         abrv:'chimera_shot',
         bonus: 1,
         icon: 'inv_glyph_majorhunter'
-    },
-    42903:{
-        name: 'Glyph of Deterrence',
-        abrv:'deterrence',
-        icon: 'inv_glyph_majorhunter'
-    },        
-    42904:{
-        name: 'Glyph of Disengage',
-        abrv:'disengage',
-        icon: 'inv_glyph_majorhunter'
-    },
+    },       
     45731:{
         name: 'Glyph of Explosive Shot',
         abrv:'explosive_shot',
@@ -51,20 +41,10 @@ const GLYPHS_DATA = {
         abrv:'explosive_trap',
         icon: 'inv_glyph_majorhunter'
     },
-    42905:{
-        name: 'Glyph of Freezing Trap',
-        abrv:'freeze_trap',
-        icon: 'inv_glyph_majorhunter'
-    },
-    42906:{
-        name: 'Glyph of Frost Trap',
-        abrv:'frost_trap',
-        icon: 'inv_glyph_majorhunter'
-    },
     42907:{
         name: 'Glyph of Hunter\'s Mark',
         abrv:'hunters_mark',
-        bonus: 1.2,
+        bonus: 0.2,
         icon: 'inv_glyph_majorhunter'
     },
     42908:{
@@ -96,16 +76,6 @@ const GLYPHS_DATA = {
         bonus: 8,
         icon: 'inv_glyph_majorhunter'
     },
-    45735:{
-        name: 'Glyph of Raptor Strike',
-        abrv:'raptor_strike',
-        icon: 'inv_glyph_majorhunter'
-    },
-    45734:{
-        name: 'Glyph of Scatter Shot',
-        abrv:'scatter_shot',
-        icon: 'inv_glyph_majorhunter'
-    },
     42912:{
         name: 'Glyph of Serpent Sting',
         abrv:'serpent_sting',
@@ -133,7 +103,7 @@ const GLYPHS_DATA = {
     42909:{
         name: 'Glyph of the Hawk',
         abrv:'aspect_hawk',
-        bonus: 6,
+        bonus: 0.06,
         icon: 'inv_glyph_majorhunter'
     },
     42915:{
@@ -146,11 +116,6 @@ const GLYPHS_DATA = {
         name: 'Glyph of Volley',
         abrv:'volley',
         bonus: 20,
-        icon: 'inv_glyph_majorhunter'
-    },
-    42917:{
-        name: 'Glyph of Wyvern Sting',
-        abrv:'wyvern_sting',
         icon: 'inv_glyph_majorhunter'
     },
 }

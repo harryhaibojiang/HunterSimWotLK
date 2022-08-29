@@ -649,11 +649,12 @@ function textColorDisplay(slot,array){
 function getStatsCapData(){
     let BasePlayer = BASE_PLAYER[level];
     // hit
+    let basehitCap = Math.floor(BasePlayer.HitRatingRatio * 8);
     if (talents.focus_aim > 0) {
-       hitCap = 126 - (BasePlayer.HitRatingRatio * talents.focus_aim);
+       hitCap = basehitCap - (BasePlayer.HitRatingRatio * talents.focus_aim);
     }
 
-    else hitCap = 126;
+    else hitCap = basehitCap;
 
     // ARP cap calculation
     ArPRatingCap = 100 * BasePlayer.ArPRatingRatio;

@@ -101,7 +101,7 @@ const SETS = {
         name: "Stalker's Chain Battlegear",
         abrv: 'stalker_chain_battlegear',
         bonuses: {
-            2: { stats: { Resil: +35 } },
+            2: { stats: { Resil: 35 } },
             4: { conc_shot_cdr: 1 }
         }
     },
@@ -741,7 +741,7 @@ const BACKS = {
         name: "Cloak of Unforgivable Sin",
         stats: {
             Agi: 26,
-            Stam: 35,
+            Stam: 25,
             MAP: 72,
             RAP: 72,
             Haste: 32

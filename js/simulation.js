@@ -201,17 +201,17 @@ function finalResults() {
     buildManaData();
     buildData(newspread);
     createHistogram();
+    //console.log("Time =>" + sumduration/iterations);
     //console.log("*****************");
 }
 /** Main loop function for simming iterations, ran for each iteration. */
 function runSim() {
-    maxsteps = rng(minfighttimer * 1000, maxfighttimer * 1000);
+    let maxsteps = rng(minfighttimer * 1000, maxfighttimer * 1000);
     fightduration = maxsteps / 1000;
     steptime = 0;
     let playertimestart = 0;
     steptimeend = 0;
     prevtimeend = 0;
-    playertimestart = 0;
     playertimeend = 0;
     totalduration = 0;
     sunderstart = 0; // start time for sunder check initialized as 0, then steptime + 30 after first apply
@@ -219,6 +219,7 @@ function runSim() {
     DPS = 0;
     currentgcd = 0;
     currentMana = Mana;
+    pet.focus = 100;
     petdmgdone = 0;
     spell = '';
     nextpetattack = 1;
@@ -231,12 +232,13 @@ function runSim() {
     nextauto = 0;
     gcds = [];
     index1 = 0;
+    pet_special_crit = 0;
     
     initializeSpells();
     ResetAuras();
     intervalAuraInitializer();
 
-    while (totalduration < fightduration){
+    while (totalduration < (fightduration - 0.4)){
 
         // choices
         onUseSpellCheck();
@@ -257,13 +259,15 @@ function runSim() {
                 playertimestart = startTime(spell);
             } else if (spell === 'autoshot' && steptimeend > 5 * Math.ceil(prevtimeend / 5)) {
                 
-                playertimestart = steptimeend + 5;
+                playertimestart = steptimeend+5;
                 playertimeend = playertimestart;
-                spell = '';
+                spell = 'wait';
+                playerattackready = false;
             } else {
-                playertimestart = steptimeend + 2;
+                playertimestart = steptimeend+2;
                 playertimeend = playertimestart;
-                spell = '';
+                spell = 'wait';
+                playerattackready = false;
             }
         }
         if (petspell === '') {
@@ -273,7 +277,9 @@ function runSim() {
 
         if (dotCheckActive()) {
             dotspell = dotNextTick();
-            next_dot_time = auras[dotspell].next_tick;
+            if (dotspell != ''){
+                next_dot_time = auras[dotspell].next_tick;
+            }
         }
         //console.log("current dot: "+dotspell)
 
@@ -350,7 +356,9 @@ function startStepOnly(){
     
     if (dotCheckActive()) {
         dotspell = dotNextTick();
-        next_dot_time = auras[dotspell].next_tick;
+        if (dotspell != ''){
+            next_dot_time = auras[dotspell].next_tick;
+        }
     }
 
     nextEvent(playertimestart);
@@ -376,31 +384,33 @@ function startStepOnly(){
     //console.log(auras);
     //console.log(pet);
     filteredcombatlogarray = combatlogarray.filter(key => key.includes("Player"));
+    //console.log(USED_SPELLS.explosiveshot.cd)
     console.log("*****************");
 }
 /**Sets the start time for the next player event based on remaining cd's and selected spell. */
 function startTime(spell){
     
+    let remaininggcd = currentgcd - steptimeend;
     playertimestart = playertimeend;
-    playertimestart += (spell === "steadyshot") ? Math.max(USED_SPELLS.steadyshot.cd,0) + latency : 0;
-    playertimestart += (spell === "multishot") ? Math.max(USED_SPELLS.multishot.cd,0) + latency : 0;
-    playertimestart += (spell === "arcaneshot") ? Math.max(USED_SPELLS.arcaneshot.cd,0) + latency : 0;
+    playertimestart += (spell === "steadyshot") ? Math.max(USED_SPELLS.steadyshot.cd, remaininggcd,0) + latency : 0;
+    playertimestart += (spell === "multishot") ? Math.max(USED_SPELLS.multishot.cd, remaininggcd,0) + latency : 0;
+    playertimestart += (spell === "arcaneshot") ? Math.max(USED_SPELLS.arcaneshot.cd, remaininggcd,0) + latency : 0;
     playertimestart += (spell === "raptorstrike") ? Math.max(USED_SPELLS.raptorstrike.cd,0) + latency + 0.5 * weavetime: 0;
     playertimestart += (spell === "melee") ? Math.max(USED_SPELLS.melee.cd,0) + latency + 0.5 * weavetime : 0;
-    playertimestart += (spell === "mongoose") ? Math.max(USED_SPELLS.mongoose.cd,0) + latency + 0.5 * weavetime : 0;
-    playertimestart += (spell === "aimedshot") ? Math.max(USED_SPELLS.aimedshot.cd,0) + latency: 0;
-    playertimestart += (spell === "readiness") ? Math.max(currentgcd - playertimeend,0) : 0;
-    playertimestart += (spell === "serpentsting") ? Math.max(USED_SPELLS.serpentsting.cd,0) + latency: 0;
-    playertimestart += (spell === "chimerashot") ? Math.max(USED_SPELLS.chimerashot.cd,0) + latency: 0;
-    playertimestart += (spell === "explosiveshot") ? Math.max(USED_SPELLS.explosiveshot.cd,0) + latency: 0;
-    playertimestart += (spell === "explosivetrap") ? Math.max(USED_SPELLS.explosivetrap.cd,0) + latency + 0.5 * weavetime : 0;
-    playertimestart += (spell === "frosttrap") ? Math.max(USED_SPELLS.frosttrap.cd,0) + latency + 0.5 * weavetime : 0;
-    playertimestart += (spell === "snaketrap") ? Math.max(USED_SPELLS.snaketrap.cd,0) + latency + 0.5 * weavetime : 0;
-    playertimestart += (spell === "blackarrow") ? Math.max(USED_SPELLS.blackarrow.cd,0) + latency : 0;
-    playertimestart += (spell === "killshot") ? Math.max(USED_SPELLS.killshot.cd,0) + latency: 0;
-    playertimestart += (spell === "volley") ? Math.max(USED_SPELLS.volley.cd,0) + latency: 0;
-    playertimestart += (spell === "silencingshot") ? Math.max(USED_SPELLS.silencingshot.cd,0): 0;
-    playertimestart += (spell === "scattershot") ? Math.max(USED_SPELLS.scattershot.cd,0) + latency: 0;
+    playertimestart += (spell === "mongoose") ? Math.max(USED_SPELLS.mongoose.cd, remaininggcd,0) + latency + 0.5 * weavetime : 0;
+    playertimestart += (spell === "aimedshot") ? Math.max(USED_SPELLS.aimedshot.cd, remaininggcd,0) + latency: 0;
+    playertimestart += (spell === "readiness") ? Math.max(currentgcd - playertimeend, remaininggcd,0) : 0;
+    playertimestart += (spell === "serpentsting") ? Math.max(USED_SPELLS.serpentsting.cd, remaininggcd,0) + latency: 0;
+    playertimestart += (spell === "chimerashot") ? Math.max(USED_SPELLS.chimerashot.cd, remaininggcd,0) + latency: 0;
+    playertimestart += (spell === "explosiveshot") ? Math.max(USED_SPELLS.explosiveshot.cd, remaininggcd,0) + latency: 0;
+    playertimestart += (spell === "explosivetrap") ? Math.max(USED_SPELLS.explosivetrap.cd, remaininggcd,0) + latency + 0.5 * weavetime : 0;
+    playertimestart += (spell === "frosttrap") ? Math.max(USED_SPELLS.frosttrap.cd, remaininggcd,0) + latency + 0.5 * weavetime : 0;
+    playertimestart += (spell === "snaketrap") ? Math.max(USED_SPELLS.snaketrap.cd, remaininggcd,0) + latency + 0.5 * weavetime : 0;
+    playertimestart += (spell === "blackarrow") ? Math.max(USED_SPELLS.blackarrow.cd, remaininggcd,0) + latency : 0;
+    playertimestart += (spell === "killshot") ? Math.max(USED_SPELLS.killshot.cd, remaininggcd,0) + latency: 0;
+    playertimestart += (spell === "volley") ? Math.max(USED_SPELLS.volley.cd, remaininggcd,0) + latency: 0;
+    playertimestart += (spell === "silencingshot") ? Math.max(USED_SPELLS.silencingshot.cd, remaininggcd,0): 0;
+    playertimestart += (spell === "scattershot") ? Math.max(USED_SPELLS.scattershot.cd, remaininggcd,0) + latency: 0;
     //console.log("next player start: " + playertimestart)
     return (playertimestart);
 }
@@ -454,7 +464,8 @@ function nextEvent(playertimestart){
     else if (eventchecktime === nextpetspell){ // check for pet yellows
         if(petspell !== ''){
             
-            pet.focus -= PET_SPELLS[petspell].cost;
+            pet.focus -= (auras.owlfocus?.timer > 0) ? 0 : PET_SPELLS[petspell].cost;
+            if (auras.owlfocus?.timer > 0) auras.owlfocus.timer = 0;
             //console.log("cast: " + PET_SPELLS[petspell].spell_name);
             let step = petSpell(petspell);
             steptimeend = step;
@@ -478,8 +489,16 @@ function nextEvent(playertimestart){
             spellNextCast(playertimestart); // sets player time end
             //console.log("start cast: "+spell)
         }
-        if (playertimeend === playercheck) { // do player hit
-                
+        if (spell === 'wait') {
+
+            steptimeend = playertimeend;
+            steptime = (steptimeend - prevtimeend);
+            updateSpellCDs(spell);
+            playerattackready = false;
+            spell = '';
+        }
+        else if (playertimeend === playercheck) { // do player hit
+
             if (spell === 'melee' || spell === 'raptorstrike' || spell === 'explosivetrap' || spell === 'frosttrap' || spell === 'snaketrap'){
                 playertimeend += 0.5 * weavetime;
                 steptimeend = playertimeend;
@@ -497,6 +516,7 @@ function nextEvent(playertimestart){
         else if (playertimeend !== playercheck) {
             steptimeend = playercheck;
             steptime = (steptimeend - prevtimeend);
+            updateSpellCDs();
         }
     }
     else if(eventchecktime === dotcheck) {
@@ -518,7 +538,7 @@ function nextEvent(playertimestart){
 }
 var gcds = [];
 var index1 = 0;
-function spellNextCast(){
+function spellNextCast(playertimestart){
 
     let rangehastemod =  range_wep.speed / rangespeed;
     let lastgcd = currentgcd;
@@ -628,18 +648,20 @@ function spellNextCast(){
         }
         auras.readiness.cd = auras.readiness.effect.base_cd;
         auras.rapid.cd = 0;
+        auras.killcommand.cd = 0;
         queueReadiness = false;
     }
     playerattackready = true;
+
     if (spell !== 'raptor' && spell !== 'melee' && spell !== 'silencingshot') {
-        gcds[index1] = [(currentgcd - lastgcd).toFixed(3), spell];
+        gcds[index1] = [currentgcd.toFixed(3), (currentgcd - lastgcd).toFixed(3), spell];
         index1++;
         //console.log(currentgcd)
         //console.log(lastgcd)
         //console.log(spell)
     }
     //console.log("playertimeend: "+playertimeend);
-    
+
 }
 
 function petSpellChoice(){
@@ -653,10 +675,10 @@ function petSpellChoice(){
     let special_use = (PET_SPELLS.pet_special?.cost <= pet.focus) && !invalidpetspecial; // check if cost is usable or not
     let focus_dump_use = (PET_SPELLS.pet_focus_dump.cost <= pet.focus);
 
-    if (special_use && t_ready_special <= t_ready_focus_dump) {
+    if (special_use && (t_ready_special <= 2)) {
         return 'pet_special'
     }
-    else if (focus_dump_use && t_ready_focus_dump < t_ready_special) {
+    else if (focus_dump_use && t_ready_focus_dump < (t_ready_special || 0)) {
         return 'pet_focus_dump'
     } else return ''
 }
@@ -715,6 +737,7 @@ function playerSpellChoice(){
     let t_ready_explosive = settings.explosiveshot ? USED_SPELLS.explosiveshot.cd : fightduration * 2;
     let t_ready_blackarrow = settings.blackarrow ? USED_SPELLS.blackarrow.cd : fightduration * 2;
     let t_ready_kill = settings.killshot ? USED_SPELLS.killshot.cd : fightduration * 2;
+    let t_ready_serpent = settings.serpentsting ? (auras.serpentsting.timer) : fightduration * 2;
 	
     let steadyuse = settings.steadyshot && (USED_SPELLS.steadyshot.cost / 100 * BasePlayer.BaseMana <= currentMana); // check if cost is usable or not
     let aimeduse = settings.aimedshot && (USED_SPELLS.aimedshot.cost / 100 * BasePlayer.BaseMana <= currentMana);
@@ -724,7 +747,7 @@ function playerSpellChoice(){
     let arcaneuse = settings.arcaneshot && !settings.explosiveshot && (USED_SPELLS.arcaneshot.cost / 100 * BasePlayer.BaseMana <= currentMana);
     let blackarrowuse = settings.blackarrow && (USED_SPELLS.blackarrow.cost / 100 * BasePlayer.BaseMana <= currentMana);
     let killuse = settings.killshot && (steptimeend > (fightduration * 0.8)) && (USED_SPELLS.killshot.cost / 100 * BasePlayer.BaseMana <= currentMana); // temp use greater than 80% duration
-    let serpentuse = settings.serpentsting && (auras.serpentsting?.timer === 0) && (USED_SPELLS.serpentsting.cost / 100 * BasePlayer.BaseMana <= currentMana);
+    let serpentuse = settings.serpentsting && (auras.serpentsting?.timer <= 1) && (USED_SPELLS.serpentsting.cost / 100 * BasePlayer.BaseMana <= currentMana);
     let silenceuse = settings.silencingshot && (USED_SPELLS.silencingshot.cd === 0) && (USED_SPELLS.silencingshot.cost / 100 * BasePlayer.BaseMana <= currentMana);
     //console.log(currentMana)
 	let h = rangespeed / range_wep.speed;
@@ -789,33 +812,37 @@ function playerSpellChoice(){
 
     let shot_gap = rotation_const;
     let t_check = shot_gap + (currentgcd - steptimeend); // gcd and shot gap check, added to improve gcd usage
-    
-    let multi_t_check = maxresult == dmg_gain_multi && t_ready_multi >= t_check;
-    let aimed_t_check = maxresult == dmg_gain_aimed && t_ready_aimed >= t_check;
-    let arcane_t_check = maxresult == dmg_gain_arcane && t_ready_arcane >= t_check;
-    let chimera_t_check = maxresult == dmg_gain_chimera && t_ready_chimera >= t_check;
-    let explosive_t_check = maxresult == dmg_gain_explosive && t_ready_explosive >= t_check;
-    let blackarrow_t_check = maxresult == dmg_gain_blackarrow && t_ready_blackarrow >= t_check;
+    //console.log("check time: "+t_check)
+    let multi_t_check = maxresult == dmg_gain_multi && t_ready_multi > t_check;
+    let aimed_t_check = maxresult == dmg_gain_aimed && t_ready_aimed > t_check;
+    let arcane_t_check = maxresult == dmg_gain_arcane && t_ready_arcane > t_check;
+    let chimera_t_check = maxresult == dmg_gain_chimera && t_ready_chimera > t_check;
+    let explosive_t_check = maxresult == dmg_gain_explosive && t_ready_explosive > t_check;
+    let blackarrow_t_check = maxresult == dmg_gain_blackarrow && t_ready_blackarrow > t_check;
+    let serpent_t_check = maxresult == dmg_gain_serpent && t_ready_serpent > t_check;
+    let kill_t_check = maxresult == dmg_gain_kill && t_ready_kill > t_check;
 
-    let t_use_steady = (multi_t_check || aimed_t_check || arcane_t_check || chimera_t_check || explosive_t_check || blackarrow_t_check);
+    let t_use_steady = (multi_t_check || aimed_t_check || arcane_t_check || chimera_t_check || explosive_t_check || blackarrow_t_check || serpent_t_check || kill_t_check);
     //console.log("Blackarro time: "+t_ready_blackarrow)
-    
+    //console.log([dmg_gain_kill,maxresult,t_ready_kill,t_check])
     if(silenceuse) {
         return "silencingshot";
     }
-    if(maxresult == dmg_gain_kill){
+    if(maxresult == dmg_gain_kill && t_ready_kill <= t_check){
         return "killshot";
     }
     if(maxresult == dmg_gain_blackarrow && t_ready_blackarrow <= t_check){
         return "blackarrow";
     }
-    if(maxresult == dmg_gain_serpent && t_check <= 2){
+    if(maxresult == dmg_gain_serpent && t_ready_serpent <= t_check){
         return "serpentsting";
     }
     if(t_use_steady) {
-        let imp_steady_shot = auras.imp_steady_shot?.timer > 0
-        if(dmg_gain_arcane > dmg_gain_steady && !explosiveuse && !imp_steady_shot && t_ready_arcane <= t_check) {
+        if(dmg_gain_arcane > dmg_gain_steady && !explosiveuse && t_ready_arcane <= t_check) {
             return "arcaneshot";
+        }
+        else if (dmg_gain_explosive > dmg_gain_steady && t_ready_explosive <= t_check) {
+            return "explosiveshot";
         }
         else {
             return "steadyshot";
