@@ -580,8 +580,35 @@ function parseTalents(talentString) {
   return talents
 }
 
-const BM_ImpHM_Track = parseTalents('51200201515012243100531151-0050352-5')
-const MM_ImpHM_FA_Track = parseTalents('-005305131130013233105031351-500003') //502-035335001230013233135031351-5
-const MM_ImpAS_FA_Track = parseTalents('502-035305131030013233135030351-5000002')
-const SV_FA_Resrc_Aimed = parseTalents('-005005-5000032500033330503035001331') // -035305001-5000032500033330533035001331
-const BM_FA_Track = parseTalents('51200201515012243100531151-0350052-5')
+const talent_presets = [
+   '51200201515012233110531151-005005',
+   '51200201515012233110531151-035002',
+   '502-005305131030013233025131051-3',
+   '502-035305101030013233025131051-3',
+   '-005005-5000032500033230502134301321',
+   '-035002-5000032500033230502134301321',
+   '51200201515012233131531351-0053050011',
+   '51200201515012233111531251-0353050011',
+   '502-005305131130013233035131151-5000032',
+   '502-035305131130013233035131151-5000002',
+   '-005305101-5000032500033330532135301321',
+   '-035305101-5000032500033330502134301331',
+];
+
+const BM_70 = parseTalents(talent_presets[0])
+const BM_70_Hit = parseTalents(talent_presets[1])
+
+const MM_70 = parseTalents(talent_presets[2])
+const MM_70_Hit = parseTalents(talent_presets[3])
+
+const SV_70 = parseTalents(talent_presets[4])
+const SV_70_Hit = parseTalents(talent_presets[5])
+
+const BM_80 = parseTalents(talent_presets[6])
+const BM_80_Hit = parseTalents(talent_presets[7])
+
+const MM_80 = parseTalents(talent_presets[8])
+const MM_80_Hit = parseTalents(talent_presets[9])
+
+const SV_80 = parseTalents(talent_presets[10])
+const SV_80_Hit = parseTalents(talent_presets[11])

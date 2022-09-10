@@ -5,15 +5,15 @@ var beastwithinreduc = 1;
 var sharedtrinketcd = 0;
 
 var debuffs = {
-    hm: {uptime_g:100, timer:0, duration:300, improved:false, rap:110, uptime:0},
-    judgewisdom: {uptime_g:100, timer:0, duration:20, uptime:0},
-    judgecrusader: {uptime_g:0, timer:0, duration:20, crit:3, uptime:0},
-    sunder: {uptime_g:0, timer:0, duration:30, stacktime:5, stacks:1, arp:0.04, uptime:0},
-    faeriefire: {uptime_g:0, timer:0, duration:300, arp:0.05, uptime:0},
+    hm: {uptime_g:95, timer:0, duration:300, improved:0, rap:110, uptime:0},
+    judgewisdom: {uptime_g:95, timer:0, duration:20, uptime:0},
+    judgecrusader: {uptime_g:95, timer:0, duration:20, crit:3, uptime:0},
+    sunder: {uptime_g:95, timer:0, duration:30, stacktime:5, stacks:1, arp:0.04, uptime:0},
+    faeriefire: {uptime_g:95, timer:0, duration:300, arp:0.05, uptime:0},
     expose: {uptime_g:0, timer:0, duration:30, arp:0.2, uptime:0},
-    bloodfrenzy: {uptime_g:0, timer:0, duration:12, dmgbonus:1.04, uptime:0},
-    curseofele: {uptime_g:0, timer:0, duration:120, dmgbonus:1.13, uptime:0},
-    mangle: {uptime_g:0, timer:0, duration:60, dmgbonus:1.3, uptime:0}
+    bloodfrenzy: {uptime_g:95, timer:0, duration:12, dmgbonus:1.04, uptime:0},
+    curseofele: {uptime_g:95, timer:0, duration:120, dmgbonus:1.13, uptime:0},
+    mangle: {uptime_g:95, timer:0, duration:60, dmgbonus:1.3, uptime:0}
 }
 
 var buff_uptimes = {}
@@ -36,7 +36,9 @@ function initializeAuras() {
     Object.values(auras).forEach(key => key.uptime = 0);
     Object.values(debuffs).forEach(key => key.uptime = 0);
     
-    debuffs.hm.rap = (level === 70) ? 110 : 500;
+    let HM_AP_70 = 110;
+    let HM_AP_80 = 500;
+    debuffs.hm.rap = (level === 70) ? HM_AP_70 : HM_AP_80;
 
     auratimers = buildAuraTimerSteps(auras)
     auracds = buildAuraCdSteps(auras)
@@ -58,7 +60,7 @@ function initializeAuras() {
     
     aura_cd_resets(auras)
     aura_timer_resets(auras)
-    
+    if (auras.pierce_shot?.damage > 0) auras.pierce_shot.damage = 0;
     debuffs.hm.timer = 0;
     debuffs.judgewisdom.timer = 0;
     debuffs.judgecrusader.timer = 0;
@@ -587,7 +589,7 @@ function dotHandler(dotname, source, apply, type, crit_dmg) {
             updateDmgMod(dotname);
             result = 0;
             let ticks = auras[dotname].effect.duration / auras[dotname].effect.tick_rate;
-            dmg = auras[dotname].damage / ticks * bleeddmgmod;
+            dmg = auras[dotname].damage / ticks * bleeddmgmod * physdmgmod;
             //console.log(dottype)
         }
         else if (dotname === 'explosiveshot') { // rolled like a spell each hit

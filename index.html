@@ -94,7 +94,7 @@
           </div>
           <div class="u-custom-menu u-nav-container">
             <ul class="u-custom-font u-nav u-text-font u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-custom-color-2 u-nav-link u-text-active-custom-color-3 u-text-hover-custom-color-5" href="index.html" style="padding: 10px 20px;">Main</a>
-</li></ul>
+            </li></ul>
           </div>
           <!-- <div class="u-custom-menu u-nav-container-collapse">
             <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
@@ -765,8 +765,7 @@
           <li><label class="label-2">Latency (ms)</label><input type="number" step="1" min="10" max="1000" class="number-input hover-grey fight-setting-input-3" id="latency" onchange=fightSettings() value="50"></li>
           <li><label class="label-2">Player Uptime (%)</label><input type="number" step="1" min="0" max="100" class="number-input hover-grey fight-setting-input-3" id="playeruptime" onchange=fightSettings() value="100"> %</li>
           <li><label class="label-2">Pet Uptime (%)</label><input type="number" step="1" min="0" max="100" class="number-input hover-grey fight-setting-input-3" id="petuptime" onchange=fightSettings() value="100"> %</li>
-          <li><label class="label-2">Weave Time (s)</label><input type="number" step="0.1" min="0" max="2" class="number-input hover-grey fight-setting-input-3" id="weavetime" onchange=fightSettings() value="0.6"></li>
-          <li><label class="label-2">% of Fight Weaved</label><input type="number" step="1" min="0" max="100" class="number-input hover-grey fight-setting-input-3" id="weavepercent" onchange=fightSettings() value="100"> %</li>
+          <li><label class="label-2">Trap Weave Time (s)</label><input type="number" step="0.1" min="0" max="2" class="number-input hover-grey fight-setting-input-3" id="weavetime" onchange=fightSettings() value="0.6"></li>
           <br>
           <li>
             <label class="label-2">Target</label>
@@ -801,9 +800,9 @@
           <li><img class="settings-image-auras" src="https://wow.zamimg.com/images/wow/icons/large/ability_hunter_snipershot.jpg" alt=""><label class="label-4">Hunter's Mark</label>
             <input type="number" step="1" min="0" max="100" class="number-input hover-grey debuff-setting-input-1" id="hmuptime" onchange=auraUptimeSettings() value="100"> %</li>
             <li><label class="label-5">HM - Bonus</label><select id="hmbonus" onchange=auraUptimeSettings() class="select hover-grey select-imp-auras-2">
-              <option value="glyph">Glyph & Talented</option>
-              <option value="talent">Talented</option>
-              <option selected value="base">Base</option>
+              <option value="2">Glyph & Talented</option>
+              <option value="1">Talented</option>
+              <option selected value="0">Base</option>
             </select>
           <li><img class="settings-image-auras" src="https://wow.zamimg.com/images/wow/icons/large/spell_holy_righteousnessaura.jpg" alt=""><label class="label-4">Judgement of Wisdom</label>
             <input type="number" step="1" min="0" max="100" class="number-input hover-grey debuff-setting-input-1" id="jowuptime" onchange=auraUptimeSettings() value="98"> %</li>
@@ -865,7 +864,7 @@
 
           <div class="relative-wrapper-spells">
             <img class="spells-image" src="https://wow.zamimg.com/images/wow/icons/large/inv_potion_108.jpg" alt="">
-            <li><label class="container container-2 container-adjust-top">Primary Potion (Haste)<input id="hastecheck" type="checkbox" onclick="spellEnableCheck()"><span class="checkmark"></span></label></li>
+            <li><label class="container container-2 container-adjust-top">Primary Potion<input id="potioncheck" type="checkbox" onclick="spellEnableCheck()"><span class="checkmark"></span></label></li>
             <input id="startpotoffset" type="number" step="1" min="0" max="500" class="number-input hover-grey spells-input" value="0" onchange="spellOffsets()">
           </div>
           <div class="relative-wrapper-spells">
@@ -906,12 +905,18 @@
         <li>
           <label class="label-3">Preset Talent Options</label>
             <select id="talentselect" onchange="selectTalents(this.value)" class="select hover-grey select-relative">
-              <option selected value="6">BM Imp HM Tracking</option>
-              <option value="5">MM ImpHM Focused Aim</option>
-              <option value="4">MM ImpArcane Focused Aim</option>
-              <option value="3">SV Focused Aim Resrc Aimed Shot</option>
-              <option value="2">BM Focused Aim Tracking</option>
-              <option value="1">BM Focused Aim Tracking</option>
+              <option selected value="bm70">BM 70 no Hit</option>
+              <option value="bm70hit">BM 70 3% Hit</option>
+              <option value="mm70">MM 70 no Hit</option>
+              <option value="mm70hit">MM 70 3% Hit</option>
+              <option value="sv70">SV 70 no Hit</option>
+              <option value="sv70hit">SV 70 3% Hit</option>
+              <option value="bm80">BM 80 no Hit</option>
+              <option value="bm80hit">BM 80 3% Hit</option>
+              <option value="mm80">MM 80 no Hit</option>
+              <option value="mm80hit">MM 80 3% Hit</option>
+              <option value="sv80">SV 80 no Hit</option>
+              <option value="sv80hit">SV 80 3% Hit</option>
               <option value="0">Custom link (see below)</option>
             </select>
         </li>
@@ -996,11 +1001,12 @@
         <label class="container container-3">Crafted<input type="checkbox" id="craftcheck" onchange=updateGearLists()><span class="checkmark"></span></label>
       </div>
       <select class="select hover-grey select-filters" id="phasecheck" onchange=updateGearLists()>
-        <option selected value="5">Phase 5</option>
+        <option value="5">Phase 5</option>
         <option value="4">Phase 4</option>
         <option value="3">Phase 3</option>
         <option value="2">Phase 2</option>
         <option value="1">Phase 1</option>
+        <option selected value="0">Phase 0</option>
       </select>
     </div>
     <ul class="item-selector">

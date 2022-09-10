@@ -23,7 +23,7 @@ const BASE_PET = {
 const PetHappiness = 1.25;
 const PetFamilyMod = 1.05; // WotLK all pets have same family dmg mod of 5% idk why
 const PetHunterAPRatio = 0.22;
-const BaseFocusRegen = 25;
+const BaseFocusRegen = 10; // per 1 sec
 // initial pet object - trying something different from how I did player 1 global object instead of a bunch of variables
 var pet = {
     agi: 0,
@@ -31,6 +31,7 @@ var pet = {
     combatap: 0,
     crit: 0,
     combatcrit:0,
+    combatspellcrit: 0,
     dmgmod: 1,
     hit: 0,
     spellhit: 0,
@@ -248,7 +249,7 @@ function procPetFocus(playercrit){
 
 function petUpdateFocus(){
     // focus regen per 5s
-    let regen = pet.focusregen / 5 * steptime;
+    let regen = pet.focusregen * steptime;
     pet.focus += regen;
     //console.log(regen)  
     

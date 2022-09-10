@@ -7,7 +7,7 @@ const GEMS = {
           "blue"
       ],
       stats: {},
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_enchant_voidsphere"
   },
@@ -19,7 +19,7 @@ const GEMS = {
       stats: {
           Agi: 6
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Uncommon",
       icon: "inv_misc_gem_bloodgem_02"
   },
@@ -33,7 +33,7 @@ const GEMS = {
           Agi: 3,
           Hit: 3
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Uncommon",
       icon: "inv_misc_gem_flamespessarite_02"
   },
@@ -47,7 +47,7 @@ const GEMS = {
           Stam: 4,
           Crit: 3
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Uncommon",
       icon: "inv_misc_gem_deepperidot_02"
   },
@@ -61,7 +61,7 @@ const GEMS = {
           Int: 3,
           MP5: 1
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Uncommon",
       icon: "inv_misc_gem_deepperidot_02"
   },
@@ -75,7 +75,7 @@ const GEMS = {
           Agi: 3,
           Stam: 4
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Uncommon",
       icon: "inv_misc_gem_ebondraenite_02"
   },
@@ -87,7 +87,7 @@ const GEMS = {
       stats: {
           Int: 6
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Uncommon",
       icon: "inv_misc_gem_goldendraenite_02"
   },
@@ -99,7 +99,7 @@ const GEMS = {
       stats: {
           Hit: 6
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Uncommon",
       icon: "inv_misc_gem_goldendraenite_02"
   },
@@ -111,7 +111,7 @@ const GEMS = {
       stats: {
           Stam: 9
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Uncommon",
       icon: "inv_misc_gem_azuredraenite_02"
   },
@@ -123,7 +123,7 @@ const GEMS = {
       stats: {
           MP5: 2
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Uncommon",
       icon: "inv_misc_gem_azuredraenite_02"
   },
@@ -135,7 +135,7 @@ const GEMS = {
       stats: {
           Agi: 8
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_jewelcrafting_livingruby_03"
   },
@@ -148,7 +148,7 @@ const GEMS = {
           MAP: 16,
           RAP: 16
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_jewelcrafting_livingruby_03"
   },
@@ -160,7 +160,7 @@ const GEMS = {
       stats: {
           Stam: 12
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_jewelcrafting_starofelune_03"
   },
@@ -172,7 +172,7 @@ const GEMS = {
       stats: {
           MP5: 3
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_jewelcrafting_starofelune_03"
   },
@@ -184,7 +184,7 @@ const GEMS = {
       stats: {
           Int: 8
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_jewelcrafting_dawnstone_03"
   },
@@ -196,7 +196,7 @@ const GEMS = {
       stats: {
           Crit: 8
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_jewelcrafting_dawnstone_03"
   },
@@ -208,7 +208,7 @@ const GEMS = {
       stats: {
           Hit: 8
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_jewelcrafting_dawnstone_03"
   },
@@ -220,7 +220,7 @@ const GEMS = {
       stats: {
           Resil: 8
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_jewelcrafting_dawnstone_03"
   },
@@ -234,7 +234,7 @@ const GEMS = {
           Agi: 4,
           Stam: 6
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_jewelcrafting_nightseye_03"
   },
@@ -248,7 +248,7 @@ const GEMS = {
           Agi: 4,
           Hit: 4
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_jewelcrafting_nobletopaz_03"
   },
@@ -262,7 +262,7 @@ const GEMS = {
           Int: 4,
           MP5: 2
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_jewelcrafting_talasite_03"
   },
@@ -276,7 +276,7 @@ const GEMS = {
           Stam: 6,
           Crit: 4
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_jewelcrafting_talasite_03"
   },
@@ -295,7 +295,7 @@ const GEMS = {
 
         return { bonus, active }
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_misc_gem_diamond_07",
       desc: "1 Red, 2 Yellow"
@@ -312,7 +312,7 @@ const GEMS = {
         }
         return { bonus, active }
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_misc_gem_diamond_07",
       desc: "More Red than Yellow"
@@ -329,7 +329,7 @@ const GEMS = {
         }
         return { bonus, active }
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_misc_gem_diamond_06",
       desc: "3 Blue"
@@ -346,7 +346,7 @@ const GEMS = {
         }
         return { bonus, active }
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_misc_gem_diamond_06",
       desc: "2 Red, 2 Yellow, 2 Blue"
@@ -359,7 +359,7 @@ const GEMS = {
       stats: {
           Resil: 10
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Epic",
       unique: true,
       icon: "inv_misc_gem_topaz_01"
@@ -374,7 +374,7 @@ const GEMS = {
           Stam: 3,
           Crit: 4
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       unique: true,
       icon: "inv_misc_gem_deepperidot_01"
@@ -387,7 +387,7 @@ const GEMS = {
       stats: {
           Crit: 6
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Uncommon",
       icon: "inv_misc_gem_goldendraenite_02"
   },
@@ -400,7 +400,7 @@ const GEMS = {
           MAP: 14,
           RAP: 14
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       unique: true,
       icon: "inv_misc_gem_bloodstone_02"
@@ -419,7 +419,7 @@ const GEMS = {
 
         return { bonus, active }
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_misc_gem_diamond_07",
       desc: "2 Yellow, 1 Red"
@@ -433,7 +433,7 @@ const GEMS = {
           MAP: 12,
           RAP: 12
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Uncommon",
       icon: "inv_misc_gem_bloodgem_02"
   },
@@ -447,7 +447,7 @@ const GEMS = {
           Agi: 5,
           Stam: 6
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Epic",
       unique: true,
       icon: "inv_jewelcrafting_nightseye_03"
@@ -462,7 +462,7 @@ const GEMS = {
           Crit: 5,
           MP5: 2
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Epic",
       unique: true,
       icon: "inv_jewelcrafting_talasite_03"
@@ -478,7 +478,7 @@ const GEMS = {
           RAP: 10,
           Hit: 4
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Epic",
       unique: true,
       icon: "inv_jewelcrafting_nobletopaz_03"
@@ -493,7 +493,7 @@ const GEMS = {
           Agi: 5,
           Hit: 4
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Epic",
       unique: true,
       icon: "inv_jewelcrafting_nobletopaz_03"
@@ -509,7 +509,7 @@ const GEMS = {
           MAP: 10,
           RAP: 10
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Epic",
       unique: true,
       icon: "inv_jewelcrafting_nightseye_03"
@@ -525,7 +525,7 @@ const GEMS = {
           RAP: 8,
           Crit: 5
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Epic",
       unique: true,
       icon: "inv_jewelcrafting_nobletopaz_03"
@@ -540,7 +540,7 @@ const GEMS = {
           Stam: 6,
           Int: 5
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Epic",
       unique: true,
       icon: "inv_jewelcrafting_talasite_03"
@@ -555,7 +555,7 @@ const GEMS = {
           Int: 5,
           MP5: 2
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Epic",
       unique: true,
       icon: "inv_jewelcrafting_talasite_03"
@@ -571,7 +571,7 @@ const GEMS = {
           RAP: 8,
           Resil: 5
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Epic",
       unique: true,
       icon: "inv_jewelcrafting_nobletopaz_03"
@@ -586,7 +586,7 @@ const GEMS = {
           Stam: 6,
           Resil: 5
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Epic",
       unique: true,
       icon: "inv_jewelcrafting_talasite_03"
@@ -601,7 +601,7 @@ const GEMS = {
           Stam: 6,
           Crit: 5
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Epic",
       unique: true,
       icon: "inv_jewelcrafting_talasite_03"
@@ -617,7 +617,7 @@ const GEMS = {
           MAP: 10,
           RAP: 10
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Epic",
       unique: true,
       icon: "inv_jewelcrafting_nightseye_03"
@@ -633,7 +633,7 @@ const GEMS = {
           MAP: 6,
           RAP: 6
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Uncommon",
       icon: "inv_misc_gem_ebondraenite_02"
   },
@@ -648,7 +648,7 @@ const GEMS = {
           MAP: 8,
           RAP: 8
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_jewelcrafting_nightseye_03"
   },
@@ -663,7 +663,7 @@ const GEMS = {
           RAP: 6,
           MP5: 1
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Uncommon",
       icon: "inv_misc_gem_ebondraenite_02"
   },
@@ -678,7 +678,7 @@ const GEMS = {
           RAP: 8,
           MP5: 2
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_jewelcrafting_nightseye_03"
   },
@@ -693,7 +693,7 @@ const GEMS = {
           RAP: 8,
           Crit: 4
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_jewelcrafting_nobletopaz_03"
   },
@@ -708,7 +708,7 @@ const GEMS = {
           RAP: 6,
           Crit: 3
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Uncommon",
       icon: "inv_misc_gem_flamespessarite_02"
   },
@@ -720,7 +720,7 @@ const GEMS = {
       stats: {
           Agi: 10
       },
-      Phase: 3,
+      Phase: 0,
       quality: "Epic",
       icon: "inv_jewelcrafting_crimsonspinel_02"
   },
@@ -732,7 +732,7 @@ const GEMS = {
       stats: {
           Stam: 15
       },
-      Phase: 3,
+      Phase: 0,
       quality: "Epic",
       icon: "inv_jewelcrafting_empyreansapphire_02"
   },
@@ -744,7 +744,7 @@ const GEMS = {
       stats: {
           MP5: 4
       },
-      Phase: 3,
+      Phase: 0,
       quality: "Epic",
       icon: "inv_jewelcrafting_empyreansapphire_02"
   },
@@ -756,7 +756,7 @@ const GEMS = {
       stats: {
           Int: 10
       },
-      Phase: 3,
+      Phase: 0,
       quality: "Epic",
       icon: "inv_jewelcrafting_lionseye_02"
   },
@@ -768,7 +768,7 @@ const GEMS = {
       stats: {
           Crit: 10
       },
-      Phase: 3,
+      Phase: 0,
       quality: "Epic",
       icon: "inv_jewelcrafting_lionseye_02"
   },
@@ -780,7 +780,7 @@ const GEMS = {
       stats: {
           Hit: 10
       },
-      Phase: 3,
+      Phase: 0,
       quality: "Epic",
       icon: "inv_jewelcrafting_lionseye_02"
   },
@@ -792,7 +792,7 @@ const GEMS = {
       stats: {
           Resil: 10
       },
-      Phase: 3,
+      Phase: 0,
       quality: "Epic",
       icon: "inv_jewelcrafting_lionseye_02"
   },
@@ -806,7 +806,7 @@ const GEMS = {
           Agi: 5,
           Stam: 7
       },
-      Phase: 3,
+      Phase: 0,
       quality: "Epic",
       icon: "inv_jewelcrafting_shadowsongamethyst_02"
   },
@@ -821,7 +821,7 @@ const GEMS = {
           MAP: 10,
           RAP: 10
       },
-      Phase: 3,
+      Phase: 0,
       quality: "Epic",
       icon: "inv_jewelcrafting_shadowsongamethyst_02"
   },
@@ -836,7 +836,7 @@ const GEMS = {
           RAP: 10,
           MP5: 2
       },
-      Phase: 3,
+      Phase: 0,
       quality: "Epic",
       icon: "inv_jewelcrafting_shadowsongamethyst_02"
   },
@@ -850,7 +850,7 @@ const GEMS = {
           Agi: 5,
           Hit: 5
       },
-      Phase: 3,
+      Phase: 0,
       quality: "Epic",
       icon: "inv_jewelcrafting_pyrestone_02"
   },
@@ -865,7 +865,7 @@ const GEMS = {
           RAP: 10,
           Crit: 5
       },
-      Phase: 3,
+      Phase: 0,
       quality: "Epic",
       icon: "inv_jewelcrafting_pyrestone_02"
   },
@@ -879,7 +879,7 @@ const GEMS = {
           Int: 5,
           MP5: 2
       },
-      Phase: 3,
+      Phase: 0,
       quality: "Epic",
       icon: "inv_jewelcrafting_seasprayemerald_02"
   },
@@ -893,7 +893,7 @@ const GEMS = {
           Stam: 7,
           Crit: 5
       },
-      Phase: 3,
+      Phase: 0,
       quality: "Epic",
       icon: "inv_jewelcrafting_seasprayemerald_02"
   },
@@ -911,7 +911,7 @@ const GEMS = {
 
         return { bonus, active }
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_misc_gem_diamond_06",
       desc: "2 Red, 2 Yellow, 2 Blue"
@@ -935,7 +935,7 @@ const GEMS = {
         }
         return { bonus, active }
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_misc_gem_diamond_07",
       desc: "2 Red, 2 Yellow, 2 Blue"
@@ -951,7 +951,7 @@ const GEMS = {
           MAP: 8,
           RAP: 8
       },
-      Phase: 2,
+      Phase: 0,
       quality: "Rare",
       unique: true,
       icon: "inv_jewelcrafting_shadowsongamethyst_01"
@@ -966,7 +966,7 @@ const GEMS = {
           Stam: 6,
           Int: 4
       },
-      Phase: 2,
+      Phase: 0,
       quality: "Rare",
       unique: true,
       icon: "inv_misc_gem_deepperidot_03"
@@ -982,7 +982,7 @@ const GEMS = {
           RAP: 8,
           Crit: 4
       },
-      Phase: 2,
+      Phase: 0,
       quality: "Rare",
       unique: true,
       icon: "inv_misc_gem_opal_01"
@@ -1001,7 +1001,7 @@ const GEMS = {
         
         return { bonus, active }
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_misc_gem_diamond_07",
       desc: "More Blue than Yellow"
@@ -1015,7 +1015,7 @@ const GEMS = {
           MAP: 32,
           RAP: 32
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Epic",
       unique: true,
       icon: "inv_jewelcrafting_crimsonspinel_02"
@@ -1028,7 +1028,7 @@ const GEMS = {
       stats: {
           Stam: 18
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Epic",
       unique: true,
       icon: "inv_jewelcrafting_empyreansapphire_02"
@@ -1041,7 +1041,7 @@ const GEMS = {
       stats: {
           Crit: 12
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Epic",
       unique: true,
       icon: "inv_jewelcrafting_lionseye_02"
@@ -1056,7 +1056,7 @@ const GEMS = {
           Stam: 6,
           Resil: 4
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Rare",
       icon: "inv_jewelcrafting_talasite_03"
   },
@@ -1068,7 +1068,7 @@ const GEMS = {
       stats: {
           Stam: 15
       },
-      Phase: 4,
+      Phase: 0,
       quality: "Epic",
       unique: true,
       icon: "inv_misc_gem_pearl_07"
@@ -1082,7 +1082,7 @@ const GEMS = {
         MAP: 20,
         RAP: 20
     },
-    Phase: 3,
+    Phase: 0,
     quality: "Epic",
     icon: "inv_jewelcrafting_crimsonspinel_02"
   },
@@ -1095,7 +1095,7 @@ const GEMS = {
           MAP: 20,
           RAP: 20
       },
-      Phase: 5,
+      Phase: 0,
       quality: "Epic",
       icon: "inv_jewelcrafting_crimsonspinel_02"
   },
@@ -1108,7 +1108,7 @@ const GEMS = {
           MAP: 20,
           RAP: 20
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Epic",
       unique: true,
       icon: "inv_misc_gem_ruby_02"
@@ -1124,7 +1124,7 @@ const GEMS = {
           RAP: 10,
           Crit: 5
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Epic",
       unique: true,
       icon: "inv_misc_gem_opal_01"
@@ -1137,7 +1137,7 @@ const GEMS = {
       stats: {
           Crit: 10
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Epic",
       unique: true,
       icon: "inv_misc_gem_topaz_01"
@@ -1151,7 +1151,7 @@ const GEMS = {
       stats: {
           Crit: 6
       },
-      Phase: 1,
+      Phase: 0,
       quality: "Epic",
       unique: true,
       icon: "inv_jewelcrafting_nobletopaz_03"

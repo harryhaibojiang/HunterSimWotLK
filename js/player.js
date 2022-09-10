@@ -595,6 +595,15 @@ function updateAP() {
    if (target.type === 'Demon'){
       targetAP += (playerconsumes.battle_elixir === 9224) ? 105 : 0;
    }
+   // demonslaying AP
+   if (target.type === 'Undead'){
+      targetAP += (!!gear.mainhand.enchant && gear.mainhand.attachment === 44595) ? 140 : 0;
+   }
+   // demonslaying AP
+   if (target.type === 'Undead'){
+      targetAP += (!!gear.mainhand.attachment && gear.mainhand.attachment === 23122) ? 170 : 0;
+      targetAP += (!!gear.offhand?.attachment && gear.offhand.attachment === 23122) ? 170 : 0;
+   }
    // Hunter's mark
    
    let HM_rap = (debuffs.hm.timer > 0 && !debuffs.hm.inactive) ? debuffs.hm.rap : 0;
@@ -629,7 +638,7 @@ function updateAP() {
    combatRAP += bonusBaseRAP + (bonusAP + targetAP + HM_rap) * rapmod * combat_apmod;
    combatMAP += bonusBaseMAP + (bonusAP + targetAP) * mapmod * combat_apmod;
 
-   //console.log("rap: " + combatRAP);
+   //console.log("rap: " + targetAP);
    // returns AP used in the pet function call
    return bonusBaseRAP + bonusAP * rapmod * combat_apmod;
 }
