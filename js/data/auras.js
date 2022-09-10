@@ -1420,20 +1420,27 @@ function updateUsableCDs() {
     let profession_1 = 'Tailoring';
     let profession_2 = 'Leatherworking';
 
+    let rapidcheck = document.getElementById("rapidcheck").checked;
+    let lustcheck = document.getElementById("lustcheck").checked;
+    let runecheck = document.getElementById("runecheck").checked;
+    let beastwithincheck = document.getElementById("beastcheck").checked;
+    let racialcheck = document.getElementById("racialcheck").checked;
+    let potioncheck = document.getElementById("potioncheck").checked;
+
     if (selectedRace == 3) { // orc
-        usable_CDs.bloodfury.enable = true; // fixme
+        usable_CDs.bloodfury.enable = racialcheck; // fixme
         usable_CDs.berserking.enable = false;
         usable_CDs.arcanetorrent.enable = false;
 
     } else if (selectedRace == 4){ // troll
-        usable_CDs.berserking.enable = true;
+        usable_CDs.berserking.enable = racialcheck;
         usable_CDs.bloodfury.enable = false;
         usable_CDs.arcanetorrent.enable = false;
 
     } else if (selectedRace == 6){ // blood elf
         usable_CDs.berserking.enable = false;
         usable_CDs.bloodfury.enable = false;
-        usable_CDs.arcanetorrent.enable = true;
+        usable_CDs.arcanetorrent.enable = racialcheck;
 
     } else {
         usable_CDs.berserking.enable = false;
@@ -1460,15 +1467,16 @@ function updateUsableCDs() {
         usable_CDs.furious_howl.enable = false;
         usable_CDs.serenitydust.enable = false;
     }
-
+    
     usable_CDs.readiness.enable = (talents.readiness > 0) ? true : false;
     usable_CDs.recovery.enable = (pet_talents.roar_recovery > 0) ? true : false;
     usable_CDs.callofwild.enable = (pet_talents.call_of_wild > 0) ? true : false;
     usable_CDs.rabid.enable = (pet_talents.rabid > 0) ? true : false;
-    usable_CDs.rune.enable = true;
-    usable_CDs.rapid.enable = true;
-    usable_CDs.lust.enable = true;
-    usable_CDs.beastwithin.enable = (talents.beast_within > 0) ? true : false;
+    usable_CDs.rune.enable = runecheck;
+    usable_CDs.rapid.enable = rapidcheck;
+    usable_CDs.lust.enable = lustcheck;
+    usable_CDs.beastwithin.enable = (talents.beast_within > 0) ? beastwithincheck : false;
+    usable_CDs.potion.enable = potioncheck;
     usable_CDs.potion.potion_type = 'Crit'
     
 }
@@ -1580,8 +1588,9 @@ function buildAurasObj(){
         let slot = ENCHANT_AURAS[aura_].slot;
         let checkitem = false;
         if (slot === 'attachment') {
-            if ((gear.offhand === undefined) && (gear.mainhand.attachment > 1)) 
+            if ((gear.offhand === undefined) || !(gear.offhand.attachment) && (gear.mainhand.attachment > 1)) {
                 checkitem = (gear.mainhand.attachment === req);
+            }
             else if(mainhandcheck && offhandcheck){
                 checkitem = (gear.mainhand.attachment === req || gear.offhand.attachment === req);
             } else {
@@ -1713,6 +1722,39 @@ function buildAurasObj(){
     return;
 }
 
+function buildAurasAP(auras) {
+    const conds = Object.keys(auras).map(k =>
+       `if(auras.${k}.timer == 0) {
+           if (!!auras.${k}.stacks) bonusAP += auras.${k}.stacks * auras.${k}.effect.stats.RAP
+           else bonusAP += auras.${k}.effect.stats.RAP
+        }`) 
+    return eval(`(function(auras, bonusAP) {${conds.join(';\n')}})`)
+}
+
+function buildAurasHaste(auras) {
+    const conds = Object.keys(auras).map(k =>
+      `if(auras.${k}.timer > 0) auras.${k}.timer = Math.max(auras.${k}.timer - steptime,0)`)
+    return eval(`(function(auras) {${conds.join(';\n')}})`)
+}
+
+function buildAurasCrit(auras) {
+    const conds = Object.keys(auras).map(k =>
+      `if(auras.${k}.timer > 0) auras.${k}.timer = Math.max(auras.${k}.timer - steptime,0)`)
+    return eval(`(function(auras) {${conds.join(';\n')}})`)
+}
+
+function buildAurasArP(auras) {
+    const conds = Object.keys(auras).map(k =>
+      `if(auras.${k}.timer > 0) auras.${k}.timer = Math.max(auras.${k}.timer - steptime,0)`)
+    return eval(`(function(auras) {${conds.join(';\n')}})`)
+}
+
+function buildAurasAgi(auras) {
+    const conds = Object.keys(auras).map(k =>
+      `if(auras.${k}.timer > 0) auras.${k}.timer = Math.max(auras.${k}.timer - steptime,0)`)
+    return eval(`(function(auras) {${conds.join(';\n')}})`)
+}
+
 function buildAuraTimerSteps(auras) {
     const conds = Object.keys(auras).map(k =>
       `if(auras.${k}.timer > 0) auras.${k}.timer = Math.max(auras.${k}.timer - steptime,0)`)
@@ -1748,3 +1790,4 @@ var auracds = buildAuraCdSteps(auras)
 var aurauptimes = buildAuraUptimeSteps(auras)
 var aura_timer_resets = buildAuraTimerResets(auras)
 var aura_cd_resets = buildAuraCdResets(auras)
+var aura_sum_ap = buildAurasAP(ap_auras)

@@ -443,35 +443,77 @@ function selectTalents(talent){
     }
     
     switch (talent) {
-        case "6":
-            talents = BM_ImpHM_Track;
-            document.getElementById("currtalent").innerHTML = "BM Imp HM Tracking";
+        case "bm70":
+            talents = BM_70;
+            //document.getElementById("talentlink").innerHTML = "https://www.wowhead.com/wotlk/talent-calc/hunter/" + talent_presets[0];
+            document.getElementById("currtalent").innerHTML = "BM 70 no Hit";
             document.getElementById("specimg").src = "images/Ability_Hunter_BeastTaming.png";
         break;
-        case "5":
-            talents = MM_ImpHM_FA_Track;
-            document.getElementById("currtalent").innerHTML = "MM ImpHM Focused Aim";
+        case "bm70hit":
+            talents = BM_70_Hit;
+            //document.getElementById("talentlink").innerHTML = "https://www.wowhead.com/wotlk/talent-calc/hunter/" + talent_presets[1];
+            document.getElementById("currtalent").innerHTML = "BM 70 3% Hit";
+            document.getElementById("specimg").src = "images/Ability_Hunter_BeastTaming.png";
+        break;
+        case "mm70":
+            talents = MM_70;
+            //document.getElementById("talentlink").innerHTML = "https://www.wowhead.com/wotlk/talent-calc/hunter/" + talent_presets[2];
+            document.getElementById("currtalent").innerHTML = "MM 70 no Hit";
             document.getElementById("specimg").src = "images/Ability_Marksmanship.png";
         break;
-        case "4":
-            talents = MM_ImpAS_FA_Track;
-            document.getElementById("currtalent").innerHTML = "MM ImpArcane Focused Aim";
+        case "mm70hit":
+            talents = MM_70_Hit;
+            //document.getElementById("talentlink").innerHTML = "https://www.wowhead.com/wotlk/talent-calc/hunter/" + talent_presets[3];
+            document.getElementById("currtalent").innerHTML = "MM 70 3% Hit";
+            document.getElementById("specimg").src = "images/Ability_Marksmanship.png";
+        break;
+        case "sv70":
+            talents = SV_70;
+            //document.getElementById("talentlink").innerHTML = "https://www.wowhead.com/wotlk/talent-calc/hunter/" + talent_presets[4];
+            document.getElementById("currtalent").innerHTML = "SV 70 no Hit";
             document.getElementById("specimg").src = "images/Ability_Hunter_Camoflauge.png";
         break;
-        case "3":
-            talents = SV_FA_Resrc_Aimed;
-            document.getElementById("currtalent").innerHTML = "SV Focused Aim Resrc Aimed Shot";
+        case "sv70hit":
+            talents = SV_70_Hit;
+            //document.getElementById("talentlink").innerHTML = "https://www.wowhead.com/wotlk/talent-calc/hunter/" + talent_presets[5];
+            document.getElementById("currtalent").innerHTML = "SV 70 3% Hit";
             document.getElementById("specimg").src = "images/Ability_Hunter_Camoflauge.png";
         break;
-        case "2":
-            talents = BM_FA_Track;
-            document.getElementById("currtalent").innerHTML = "BM Focused Aim Tracking";
+        case "bm80":
+            talents = BM_80;
+            //document.getElementById("talentlink").innerHTML = "https://www.wowhead.com/wotlk/talent-calc/hunter/" + talent_presets[6];
+            document.getElementById("currtalent").innerHTML = "BM 80 no Hit";
             document.getElementById("specimg").src = "images/Ability_Hunter_BeastTaming.png";
         break;
-        case "1":
-            talents = BM_FA_Track;
-            document.getElementById("currtalent").innerHTML = "BM Focused Aim Tracking";
+        case "bm80hit":
+            talents = BM_80_Hit;
+            //document.getElementById("talentlink").innerHTML = "https://www.wowhead.com/wotlk/talent-calc/hunter/" + talent_presets[7];
+            document.getElementById("currtalent").innerHTML = "BM 80 3% Hit";
             document.getElementById("specimg").src = "images/Ability_Hunter_BeastTaming.png";
+        break;
+        case "mm80":
+            talents = MM_80;
+            //document.getElementById("talentlink").innerHTML = "https://www.wowhead.com/wotlk/talent-calc/hunter/" + talent_presets[8];
+            document.getElementById("currtalent").innerHTML = "MM 80 no Hit";
+            document.getElementById("specimg").src = "images/Ability_Marksmanship.png";
+        break;
+        case "mm80hit":
+            talents = MM_80_Hit;
+            //document.getElementById("talentlink").innerHTML = "https://www.wowhead.com/wotlk/talent-calc/hunter/" + talent_presets[9];
+            document.getElementById("currtalent").innerHTML = "MM 80 3% Hit";
+            document.getElementById("specimg").src = "images/Ability_Marksmanship.png";
+        break;
+        case "sv80":
+            talents = SV_80;
+            //document.getElementById("talentlink").innerHTML = "https://www.wowhead.com/wotlk/talent-calc/hunter/" + talent_presets[10];
+            document.getElementById("currtalent").innerHTML = "SV 80 no Hit";
+            document.getElementById("specimg").src = "images/Ability_Hunter_Camoflauge.png";
+        break;
+        case "sv80hit":
+            talents = SV_80_Hit;
+            //document.getElementById("talentlink").innerHTML = "https://www.wowhead.com/wotlk/talent-calc/hunter/" + talent_presets[11];
+            document.getElementById("currtalent").innerHTML = "SV 80 3% Hit";
+            document.getElementById("specimg").src = "images/Ability_Hunter_Camoflauge.png";
         break;
         case "0":
             if (customtalentlink !== "") {
@@ -494,13 +536,16 @@ function initializeglyphsDropdown() {
 
         initial_glyph = savedglyphs;
     } else {
-        initial_glyph = '0';
+        initial_glyph = '';
     }
     
     var glyphOptions = "";
     for (let id in GLYPHS_DATA) {
-        glyphOptions += "<option value= "+id+" >" + GLYPHS_DATA[id].name + "</option>";
-      }   
+        if(GLYPHS_DATA[id].phase <= phase){
+            console.log(GLYPHS_DATA[id].phase)
+            glyphOptions += "<option value= "+id+" >" + GLYPHS_DATA[id].name + "</option>";
+        }
+    }
     
     document.getElementById("glyphSelect1").innerHTML = glyphOptions;
     document.getElementById('glyphSelect1').value = initial_glyph[0];
@@ -545,10 +590,17 @@ function spellEnableCheck(){
     let rapidcheck = document.getElementById("rapidcheck").checked;
     let lustcheck = document.getElementById("lustcheck").checked;
     let runecheck = document.getElementById("runecheck").checked;
+    let beastwithincheck = document.getElementById("beastcheck").checked;
+    let racialcheck = document.getElementById("racialcheck").checked;
+    let potioncheck = document.getElementById("potioncheck").checked;
 
     usable_CDs.rapid.enable = rapidcheck;
     usable_CDs.lust.enable = lustcheck;
     usable_CDs.rune.enable = runecheck;
+    usable_CDs.beastwithin.enable = beastwithincheck;
+    usable_CDs.berserking.enable = racialcheck;
+    usable_CDs.bloodfury.enable = racialcheck;
+    usable_CDs.potion.enable = potioncheck;
     
     storeData();
 
@@ -563,7 +615,7 @@ function spellOffsets(){
 
     usable_CDs.rapid.offset = parseInt(rapidoffset);
     usable_CDs.beastwithin.offset = parseInt(beastoffset);
-    usable_CDs.berserk.offset = parseInt(racialoffset);
+    usable_CDs.berserking.offset = parseInt(racialoffset);
     usable_CDs.bloodfury.offset = parseInt(racialoffset);
     usable_CDs.lust.offset = parseInt(lustoffset);
     usable_CDs.potion.offset = parseInt(startpotoffset);

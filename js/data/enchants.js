@@ -5,7 +5,7 @@ const HEAD_ENCHANTS = {
     stats: {
         Haste: 10
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Uncommon",
     icon: 'inv_misc_gem_02',
     desc: '+10 Haste'
@@ -18,7 +18,7 @@ const HEAD_ENCHANTS = {
       Hit: 10,
       RAP: 24
     },
-    Phase: 1,
+    Phase: 0,
     icon: 'spell_nature_forceofnature',
     quality: "Rare",
     desc: '+10 Stam, +10 Hit, +24 RAP'
@@ -31,7 +31,7 @@ const HEAD_ENCHANTS = {
         RAP: 34,
         Hit: 16
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Uncommon",
     icon: 'classic_ability_druid_demoralizingroar',
     desc: '+34 AP, +16 Hit'
@@ -43,7 +43,7 @@ const HEAD_ENCHANTS = {
         Stam: 18,
         Resil: 20
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Uncommon",
     icon: 'inv_misc_statue_04',
     desc: '+18 Stam, +20 Resil'
@@ -108,7 +108,7 @@ const SHOULDER_ENCHANTS = {
       RAP: 20,
       Crit: 15
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Rare",
     icon: 'spell_holy_weaponmastery',
     desc: '+20 AP, +15 Crit'
@@ -121,7 +121,7 @@ const SHOULDER_ENCHANTS = {
       RAP: 30,
       Crit: 10
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Rare",
     icon: 'spell_holy_greaterblessingofkings',
     desc: '+30 AP, +10 Crit'
@@ -170,7 +170,7 @@ const SHOULDER_ENCHANTS = {
       RAP: 26,
       Crit: 14
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Epic",
     icon: 'spell_shadow_deathpact',
     desc: '+26 AP, +14 Crit'
@@ -210,7 +210,7 @@ const BACK_ENCHANTS = {
     stats: {
       Agi: 12
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Common",
     icon: 'trade_engraving',
     desc: '+12 Agi'
@@ -300,7 +300,7 @@ const CHEST_ENCHANTS = {
     stats: {
       Health: 150
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Common",
     icon: 'trade_engraving',
     desc: '+150 HP'
@@ -309,12 +309,12 @@ const CHEST_ENCHANTS = {
     name: 'Exceptional Mana',
     effectId: 2660,
     stats: {
-      Mana: 150
+      Mana: 250
     },
     Phase: 1,
     quality: "Common",
     icon: 'trade_engraving',
-    desc: '+150 Mana'
+    desc: '+250 Mana'
   },
   27960: {
     name: 'Exceptional Stats',
@@ -326,7 +326,7 @@ const CHEST_ENCHANTS = {
       Spi: 6,
       Int: 6
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Common",
     icon: 'trade_engraving',
     desc: '+6 All Stats'
@@ -396,10 +396,10 @@ const CHEST_ENCHANTS = {
     stats: {
       MP5: 7
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Common",
     icon: 'trade_engraving',
-    desc: '+6 Mp5'
+    desc: '+7 Mp5'
   },
   60692: {
     name: 'Powerful Stats',
@@ -438,7 +438,7 @@ const WRIST_ENCHANTS = {
       MAP: 24,
       RAP: 24
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Common",
     icon: 'trade_engraving',
     desc: '+24 AP'
@@ -601,7 +601,7 @@ const HAND_ENCHANTS = {
     stats: {
       Agi: 15
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Common",
     icon: 'trade_engraving',
     desc: '+15 Agi'
@@ -661,7 +661,7 @@ const LEG_ENCHANTS = {
       Agi: 10,
       Stam: 30
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Rare",
     icon: 'inv_misc_armorkit_23',
     desc: '+10 Agi, +30 Stam'
@@ -674,7 +674,7 @@ const LEG_ENCHANTS = {
       RAP: 40,
       Crit: 10
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Rare",
     icon: 'inv_misc_armorkit_21',
     desc: '+40 AP, +10 Crit'
@@ -697,7 +697,7 @@ const LEG_ENCHANTS = {
       Agi: 12,
       Stam: 40
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Epic",
     icon: 'inv_misc_armorkit_25',
     desc: '+12 Agi, +40 Stam'
@@ -710,7 +710,7 @@ const LEG_ENCHANTS = {
       RAP: 50,
       Crit: 12
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Epic",
     icon: 'inv_misc_armorkit_25',
     desc: '+50 AP, +12 Crit'
@@ -805,16 +805,74 @@ const LEG_ENCHANTS = {
 }
 
 const FEET_ENCHANTS = {
-  13935: {
-    name: 'Agility',
-    effectId: 904,
+  47901: {
+    name: "Tuskarr's Vitality",
+    effectId: 3232,
     stats: {
-      Agi: 5
+      Stam: 15
     },
     Phase: 1,
     quality: "Common",
     icon: 'trade_engraving',
-    desc: '+5 Agi'
+    desc: '+15 Stam, 8% Speed'
+  },
+  60763: {
+    name: "Greater Assault",
+    effectId: 1597,
+    stats: {
+      MAP: 32,
+      RAP: 32
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'trade_engraving',
+    desc: '+32 AP'
+  },
+  44589: {
+    name: "Superior Agility",
+    effectId: 983,
+    stats: {
+      Agi: 16
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'trade_engraving',
+    desc: '+16 Agi'
+  },
+  60623: {
+    name: "Icewalker",
+    effectId: 3826,
+    stats: {
+      Hit: 12,
+      Crit: 12
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'trade_engraving',
+    desc: '+12 Hit, +12 Crit'
+  },
+  44528: {
+    name: "Greater Fortitude",
+    effectId: 1075,
+    stats: {
+      Stam: 22
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'trade_engraving',
+    desc: '+22 Stam'
+  },
+  60606: {
+    name: "Assault",
+    effectId: 3824,
+    stats: {
+      MAP: 24,
+      RAP: 24
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'trade_engraving',
+    desc: '+24 AP'
   },
   34008: {
     name: "Boar's Speed",
@@ -823,7 +881,7 @@ const FEET_ENCHANTS = {
     stats: {
       Stam: 9,
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Common",
     icon: 'trade_engraving',
     desc: '+9 Stam, +8% Speed'
@@ -835,7 +893,7 @@ const FEET_ENCHANTS = {
     stats: {
       Agi: 6,
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Common",
     icon: 'trade_engraving',
     desc: '+6 Agi, +8% Speed'
@@ -846,7 +904,7 @@ const FEET_ENCHANTS = {
     stats: {
       Agi: 12
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Common",
     icon: 'trade_engraving',
     desc: '+12 Agi'
@@ -857,7 +915,7 @@ const FEET_ENCHANTS = {
     stats: {
       Stam: 12
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Common",
     icon: 'trade_engraving',
     desc: '+12 Stam'
@@ -868,7 +926,7 @@ const FEET_ENCHANTS = {
     stats: {
       Agi: 7
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Common",
     icon: 'trade_engraving',
     desc: '+7 Agi'
@@ -888,28 +946,40 @@ const FEET_ENCHANTS = {
     name: 'Surefooted',
     effectId: 2658,
     stats: {
-      Hit: 10
+      Hit: 10,
+      Crit: 10
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Common",
     icon: 'trade_engraving',
-    desc: '+10 Hit'
-  },
-  27948: {
-    name: 'Vitality',
-    effectId: 2656,
-    stats: {
-      MP5: 4,
-      HP5: 4
-    },
-    Phase: 1,
-    quality: "Common",
-    icon: 'trade_engraving',
-    desc: '+4 Mp5, 4 Hp5'
+    desc: '+10 Hit, +10 Crit'
   }
 }
 
 const RING_ENCHANTS = {
+  44645: {
+    name: 'Assault',
+    effectId: 3839,
+    stats: {
+      MAP: 40,
+      RAP: 40
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'inv_misc_note_01',
+    desc: '+40 AP'
+  },
+  59636: {
+    name: 'Stamina',
+    effectId: 3791,
+    stats: {
+      Stam: 30
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'inv_misc_note_01',
+    desc: '+30 Stam'
+  },
   27927: {
     name: 'Stats',
     effectId: 2931,
@@ -920,31 +990,105 @@ const RING_ENCHANTS = {
       Spi: 4,
       Int: 4
     },
-    Phase: 3,
+    Phase: 0,
     quality: "Common",
     icon: 'inv_misc_note_01',
     desc: '+4 All Stats'
-  },
-  27920: {
-    name: 'Striking',
-    effectId: 2929,
-    special: { dmgbonus: 2 },
-    stats: {},
-    Phase: 1,
-    quality: "Common",
-    icon: 'inv_misc_note_01',
-    desc: '+2 Damage'
   }
 }
 
 const MELEE_ENCHANTS = {
+  59619: {
+    name: 'Accuracy',
+    effectId: 3788,
+    stats: {
+      Hit: 25,
+      Crit: 25
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'inv_misc_note_01',
+    desc: '+25 Hit, +25 Crit'
+  },
+  60707: {
+    name: 'Superior Potency',
+    effectId: 3833,
+    stats: {
+      MAP: 65,
+      RAP: 65
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'inv_misc_note_01',
+    desc: '+65 AP'
+  },
+  60691: {
+    name: 'Massacre (2H)',
+    effectId: 3827,
+    for_two_handed: true,
+    stats: {
+      MAP: 110,
+      RAP: 110
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'inv_misc_note_01',
+    desc: '+110 AP'
+  },
+  44595: {
+    name: 'Scourgebane (2H)',
+    effectId: 3247,
+    for_two_handed: true,
+    stats: {
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'inv_misc_note_01',
+    desc: '+140 AP to Undead' 
+  },
+  44633: {
+    name: 'Exceptional Agility',
+    effectId: 1103,
+    stats: {
+      Agi: 26
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'inv_misc_note_01',
+    desc: '+26 Agi'
+  },
+  44630: {
+    name: 'Greater Savagery (2H)',
+    effectId: 3828,
+    for_two_handed: true,
+    stats: {
+      MAP: 85,
+      RAP: 85
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'inv_misc_note_01',
+    desc: '+85 AP'
+  },
+  60621: {
+    name: 'Superior Potency',
+    effectId: 1606,
+    stats: {
+      MAP: 50,
+      RAP: 50
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'inv_misc_note_01',
+    desc: '+50 AP'
+  },
   23800: {
     name: 'Agility',
     effectId: 2564,
     stats: {
       Agi: 15,
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Common",
     icon: 'inv_misc_note_01',
     desc: '+15 Agi'
@@ -956,7 +1100,7 @@ const MELEE_ENCHANTS = {
     stats: {
       Agi: 25,
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Common",
     icon: 'inv_misc_note_01',
     desc: '+25 Agi (2H)'
@@ -967,7 +1111,7 @@ const MELEE_ENCHANTS = {
     stats: {
       Agi: 20
     },
-    Phase: 3,
+    Phase: 0,
     quality: "Common",
     icon: 'inv_misc_note_01',
     desc: '+20 Agi'
@@ -979,7 +1123,7 @@ const MELEE_ENCHANTS = {
     stats: {
       Agi: 35
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Common",
     icon: 'trade_engraving',
     desc: '+35 Agi (2H)'
@@ -990,7 +1134,7 @@ const MELEE_ENCHANTS = {
     stats: {
       Int: 30
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Common",
     icon: 'trade_engraving',
     desc: '+30 Int'
@@ -1001,21 +1145,10 @@ const MELEE_ENCHANTS = {
     stats: {
       Int: 22
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Common",
     icon: 'inv_misc_note_01',
     desc: '+22 Int'
-  },
-  27972: {
-    name: 'Potency',
-    effectId: 2668,
-    stats: {
-      Str: 20
-    },
-    Phase: 1,
-    quality: "Common",
-    icon: 'trade_engraving',
-    desc: '+20 Str'
   },
   27971: {
     name: 'Savagery (2H)',
@@ -1025,79 +1158,46 @@ const MELEE_ENCHANTS = {
       MAP: 70,
       RAP: 70
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Common",
     icon: 'trade_engraving',
     desc: '+70 AP (2H)'
-  },
-  23799: {
-    name: 'Strength',
-    effectId: 2563,
-    stats: {
-      Str: 15
-    },
-    Phase: 1,
-    quality: "Common",
-    icon: 'inv_misc_note_01',
-    desc: '+15 Str'
-  },
-  27984: {
-    name: 'Mongoose',
-    effectId: 2673,
-    aura: {
-      stats: {
-        Agi: 120,
-        Haste: 30
-      },
-      duration: 15,
-      PPM: 1,
-      proc_type: 4
-    },
-    Phase: 1,
-    quality: "Common",
-    icon: 'trade_engraving',
-    desc: 'Proc +120 Agi for 15s'
-  },
-  42974: {
-    name: 'Executioner',
-    effectId: 3225,
-    aura: {
-      stats: {
-        ArP: 840,
-      },
-      duration: 15,
-      PPM: 1,
-      proc_type: 4
-    },
-    Phase: 4,
-    quality: "Common",
-    icon: 'trade_engraving',
-    desc: 'Proc +840 ArP for 15s'
   }
 }
 
 const RANGE_ENCHANTS = {
-  3976: {
-    name: 'Accurate Scope',
-    effectId: 33,
-    special: {
-      rangedmgbonus: 3
+  55135: {
+    name: 'Heartseeker Scope',
+    effectId: 3608,
+    stats: {
+      RangeCrit: 28
     },
     Phase: 1,
     quality: "Common",
     icon: 'trade_engineering',
-    desc: '+3 Ranged Weapon Damage'
+    desc: '+40 Ranged Crit'
   },
-  12459: {
-    name: 'Deadly Scope',
-    effectId: 663,
-    special: {
-      rangedmgbonus: 5
+  55076: {
+    name: 'Sun Scope',
+    effectId: 3607,
+    stats: {
+      Haste: 40
     },
     Phase: 1,
     quality: "Common",
     icon: 'trade_engineering',
-    desc: '+5 Ranged Weapon Damage'
+    desc: '+40 Ranged Haste'
+  },
+  61468: {
+    name: 'Diamond Cut Refractor Scope',
+    effectId: 3843,
+    special: {
+      rangedmgbonus: 15
+    },
+    Phase: 1,
+    quality: "Rare",
+    icon: 'trade_engineering',
+    desc: '+15 Ranged Weapon Damage'
   },
   22779: {
     name: 'Biznicks 247x128 Accurascope',
@@ -1105,7 +1205,7 @@ const RANGE_ENCHANTS = {
     stats: {
       RangeHit: 30
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Rare",
     icon: 'trade_engineering',
     desc: '+30 Ranged Hit'
@@ -1116,21 +1216,10 @@ const RANGE_ENCHANTS = {
     special: {
       rangedmgbonus: 12
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Rare",
     icon: 'trade_engineering',
     desc: '+12 Ranged Weapon Damage'
-  },
-  12460: {
-    name: 'Sniper Scope',
-    effectId: 664,
-    special: {
-      rangedmgbonus: 7
-    },
-    Phase: 1,
-    quality: "Common",
-    icon: 'trade_engineering',
-    desc: '+7 Ranged Weapon Damage'
   },
   30260: {
     name: 'Stabilitzed Eternium Scope',
@@ -1138,7 +1227,7 @@ const RANGE_ENCHANTS = {
     stats: {
       RangeCrit: 28
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Rare",
     icon: 'trade_engineering',
     desc: '+28 Ranged Crit'
@@ -1148,6 +1237,15 @@ const RANGE_ENCHANTS = {
 const ATTACHMENTS = {
   1:{
     name: 'None',
+  },
+  23122: {
+    name: 'Consecrated Weapon (ilvl 165)',
+    effectId: 2955,
+    stats: {
+    },
+    Phase: 0,
+    quality: "Uncommon",
+    icon: 'inv_stone_sharpeningstone_02'
   },
   28421: {
     name: 'Adamantite Weightstone',
@@ -1161,12 +1259,12 @@ const ATTACHMENTS = {
       dmgbonus: 12,
     },
     type: 'blunt',
-    Phase: 1,
+    Phase: 0,
     quality: "Uncommon",
     icon: 'inv_stone_weightstone_07'
   },
   23529: {
-    name: 'Adamantite Sharpening Stone',
+    name: 'Adamantite Sharpening Stone (ilvl 165)',
     effectId: 2713,
     stats: {
       MeleeCrit: 14
@@ -1176,24 +1274,24 @@ const ATTACHMENTS = {
       dmgbonus: 12,
     },
     type: 'sharp',
-    Phase: 1,
+    Phase: 0,
     quality: "Uncommon",
     icon: 'inv_stone_sharpeningstone_07'
   },
   22521: {
-    name: 'Superior Mana Oil',
+    name: 'Superior Mana Oil (ilvl 165)',
     effectId: 2677,
     stats: {
       MP5: 14
     },
-    Phase: 1,
+    Phase: 0,
     quality: "Common",
     icon: 'inv_potion_101'
   },
   34539: {
-    name: 'Righteous Weapon Coating',
+    name: 'Righteous Weapon Coating (ilvl 165)',
     effectId: 3266,
-    Phase: 1,
+    Phase: 0,
     quality: "Common",
     icon: 'inv_potion_101'
   },

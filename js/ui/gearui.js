@@ -485,22 +485,29 @@ function updateGearLists(){
 
     onehandfilter = document.getElementById("1hfilter").checked;
     twohandfilter = document.getElementById("2hfilter").checked;
-    if (phase >= 3) {
+    if (phase >= 3 && level == 80) {
+        preferredGems = {
+            Red: 40112,
+            Blue: 40130,
+            Yellow: 40147,
+            Meta: 41398
+        }
+    } else if (level == 80) {
+        preferredGems = {
+            Red: 39997,
+            Blue: 40023,
+            Yellow: 40043,
+            Meta: 41398
+        }
+    } else {
         preferredGems = {
             Red: 32194,
             Blue: 32212,
             Yellow: 32222,
             Meta: 32409
         }
-    } else {
-        preferredGems = {
-            Red: 24028,
-            Blue: 24055,
-            Yellow: 31868,
-            Meta: 32409
-        }
     }
-
+    initializeglyphsDropdown();
     storeData();
 
     gearModalDisplay(activeslot);

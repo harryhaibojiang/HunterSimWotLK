@@ -157,6 +157,8 @@ function fetchData(){
     repcheck = (localStorage.getItem("repcheck") != null) ? JSON.parse(localStorage.getItem("repcheck")) : repcheck;
     bosscheck = (localStorage.getItem("bosscheck") != null) ? JSON.parse(localStorage.getItem("bosscheck")) : bosscheck;
     craftcheck = (localStorage.getItem("craftcheck") != null) ? JSON.parse(localStorage.getItem("craftcheck")) : craftcheck;
+
+    SavedSets = (localStorage.getItem('sets') != null) ? JSON.parse(localStorage.getItem('sets')) : SavedSets;
     
     /* Display initialization for fetched values */
     // fight settings initialization
@@ -210,7 +212,7 @@ function fetchData(){
 
     document.getElementById("talentselect").value = talentindex;
     document.getElementById("customtalent").value = whtalentlink;
-    selectTalents(talentindex);
+    
     if (selected_glyphs.length >= 1) {
         document.getElementById('glyphSelect1').value = selected_glyphs[0];
     }
@@ -257,9 +259,8 @@ function fetchData(){
     document.getElementById("leathercheck").checked = leathercheck;
     document.getElementById("craftcheck").checked = craftcheck;
     document.getElementById("repcheck").checked = repcheck;
-
-    SavedSets = (localStorage.getItem('sets') != null) ? JSON.parse(localStorage.getItem('sets')) : SavedSets;
-
+    
+    selectTalents(talentindex);
     // initialize the settings after loading
     selectedOptionsResults();
 }

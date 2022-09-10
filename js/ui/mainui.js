@@ -12,7 +12,6 @@ var dpscompare = document.getElementById("dpscompare");
 // disable input for player and pet uptimes
 document.getElementById("playeruptime").disabled = true;
 document.getElementById("petuptime").disabled = true;
-document.getElementById("weavepercent").disabled = true;
 
 // show the stats on the HTML
 function displayStats(){
@@ -453,8 +452,8 @@ initializePetFoodDropdown();
 initializeFlaskDropdown()
 initializeBattleDropdown();
 initializeGuardDropdown();
-initializeglyphsDropdown();
 fetchData();
+initializeglyphsDropdown();
 initializeTargetDropdown('start');
 initializeImportSets();
 initializeSavedSets();
