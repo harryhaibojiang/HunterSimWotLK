@@ -26,6 +26,10 @@ var petconsumes = {
 
 };
 
+var replenishment = false;
+var two_min_cds = 120;
+var three_min_cds = 180;
+
 // filters out ids with 0s for the getStatsFromBuffs formula
 function removeZeros(){
     
@@ -542,7 +546,7 @@ function initializeglyphsDropdown() {
     var glyphOptions = "";
     for (let id in GLYPHS_DATA) {
         if(GLYPHS_DATA[id].phase <= phase){
-            console.log(GLYPHS_DATA[id].phase)
+            //console.log(GLYPHS_DATA[id].phase)
             glyphOptions += "<option value= "+id+" >" + GLYPHS_DATA[id].name + "</option>";
         }
     }
@@ -602,6 +606,7 @@ function spellEnableCheck(){
     usable_CDs.bloodfury.enable = racialcheck;
     usable_CDs.potion.enable = potioncheck;
     
+    buildAurasObj();
     storeData();
 
 }
@@ -629,17 +634,14 @@ function spellOptions(){
         case "2min":
             two_min_cds = 180;
             three_min_cds = 180;
-            setSpellCDs();
         break;
         case "3min":
             two_min_cds = 120;
             three_min_cds = 240;
-            setSpellCDs();
         break;
         case "CD":
             two_min_cds = 120;
             three_min_cds = 180;
-            setSpellCDs();
         break;
     }
     

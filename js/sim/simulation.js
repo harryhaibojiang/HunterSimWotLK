@@ -52,35 +52,14 @@ var nextpetattack = 1;
 var nextpetspell = 1;
 var playerattackready = false;
 var sumpetdmg = 0;
+var petdmgdone = 0;
+var petduration = 0;
+var petsteptime = 0;
 var fightduration = 0;
-var combatlogarray = [];
-var combatlogindex = 0;
 var manalogarray = [];
 var manalogindex = 0;
 var filteredcombatlogarray = [];
 var combatlogRun = false;
-
-var statweights = { // accurate weights with 50k iterations at 7700 boss in default gear, p4 bis
-    Agi: 0.9605143836014804,
-    ArP: 0.16027539728151396,
-    Crit: 0.8845501877480455,
-    Expertise: 0.0017802250089289373,
-    Haste: 0.6429055024228614,
-    Hit: 1.0169360463006343,
-    Int: 0.008956822203713273,
-    MAP: 0.005536456701213411,
-    MP5: 0.001402849113087541,
-    MeleeCrit: 0.00013105937968703075,
-    MeleeHit: 0.005894374426353958,
-    RAP: 0.38799250528608353,
-    RangeCrit: 0.8844191283683585,
-    RangeHit: 1.0110416718742803,
-    Str: 0,
-    relentless:20.35, 
-    beasttamer: 22.11, 
-    dmgbonus: 0.75, 
-    rangedmgbonus: 0.75
-}
 
 const RESULTARRAY = ["Hit","Miss","Dodge","Crit","Glance", "Partial Resist"];
 
@@ -105,6 +84,7 @@ function loopSim() {
         sumpetdmg = 0;
         resultCountInitialize();
         initializeAuras();
+        setSpellCDs();
         // loop through iterations, run example combat log as the last iteration
         currentiteration = 0;
         loopcheck = 0;
@@ -244,7 +224,6 @@ function runSim() {
         onUseSpellCheck();
 
         updateAuras(steptime);
-        petAuras(steptime);
 
         /******* decide spell selection ******/
         //console.log("current spell: "+spell)
@@ -256,7 +235,7 @@ function runSim() {
             else { spell = playerSpellChoice(); }
             //console.log("next spell: " + spell)
             if (spell !== 'autoshot'){
-                playertimestart = startTime(spell);
+                playertimestart = startTime(spell, playertimestart);
             } else if (spell === 'autoshot' && steptimeend > 5 * Math.ceil(prevtimeend / 5)) {
                 
                 playertimestart = steptimeend+5;
@@ -313,8 +292,7 @@ function startStepInitialize(){
     nextpetattack = 1;
     nextpetspell = 1;
     nextauto = 0;
-    petspell = 'pet_focus_dump'; // decision pet primary/secondary - random or based on CD?
-    debuffs.hm.improved = false
+
 }
 /** This is used to step through a fight rather than do a while loop. Useful for debugging. */
 function startStepOnly(){
@@ -323,12 +301,11 @@ function startStepOnly(){
     // choices
     onUseSpellCheck();
 
-    petAuras(steptime);
+    updateAuras(steptime);
 
     /******* decide spell selection ******/
     //console.log("current spell: "+spell)
-    
-    if (spell === '') {
+    {if (spell === '') {
 
         if (queueReadiness) {
             spell = 'readiness';
@@ -336,40 +313,44 @@ function startStepOnly(){
         else { spell = playerSpellChoice(); }
         //console.log("next spell: " + spell)
         if (spell !== 'autoshot'){
-            playertimestart = startTime(spell);
+            playertimestart = startTime(spell, playertimestart);
         } else if (spell === 'autoshot' && steptimeend > 5 * Math.ceil(prevtimeend / 5)) {
             
-            playertimestart = steptimeend + 5;
+            playertimestart = steptimeend+5;
             playertimeend = playertimestart;
-            spell = '';
+            spell = 'wait';
+            playerattackready = false;
         } else {
-            playertimestart = steptimeend + 2;
+            playertimestart = steptimeend+2;
             playertimeend = playertimestart;
-            spell = '';
+            spell = 'wait';
+            playerattackready = false;
         }
-        //console.log("spell picked => "+spell)
     }
     if (petspell === '') {
         petspell = petSpellChoice();
         //console.log("next petspell: " + petspell)
     }
-    
+
     if (dotCheckActive()) {
         dotspell = dotNextTick();
         if (dotspell != ''){
             next_dot_time = auras[dotspell].next_tick;
         }
     }
+    //console.log("current dot: "+dotspell)
 
     nextEvent(playertimestart);
     
     //console.log("time end => "+(Math.round(steptimeend * 1000) / 1000));
     petUpdateFocus();
     updateMana();
-    //console.log("step "+ steptime);
-    prevtimeend = (steptimeend);
-    totalduration = Math.min(maxfighttimer, steptimeend);
-    updateAuras(steptime);
+    if((combatlogRun) && (playertimeend != prevtimeend)) {
+        manalogarray[manalogindex] = [playertimeend, currentMana];
+        manalogindex++;
+    }
+    prevtimeend = steptimeend;
+    totalduration = steptimeend;}
     avgDPS = totaldmgdone / totalduration;
     //console.log("steadys => "+ steadycount);
     //console.log("autos => " + autocount);
@@ -388,7 +369,7 @@ function startStepOnly(){
     console.log("*****************");
 }
 /**Sets the start time for the next player event based on remaining cd's and selected spell. */
-function startTime(spell){
+function startTime(spell, playertimestart){
     
     let remaininggcd = currentgcd - steptimeend;
     playertimestart = playertimeend;

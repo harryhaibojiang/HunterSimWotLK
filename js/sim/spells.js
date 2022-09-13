@@ -1,8 +1,6 @@
 const DmgAPRatio = 14;
 const avgConst = 0.5;
 
-var USED_SPELLS = {};
-
 function initializeSpells(){
     // set spell CDs to 0
     if(!!USED_SPELLS.autoshot) USED_SPELLS.autoshot.cd = 0;

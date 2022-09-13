@@ -294,9 +294,7 @@ var SPELLS = {
 function generateSpellData(){
 
     SPELLS = {
-    
         autoshot: { cast:0, cd:0 },
-
     }
     
     for (let spell in SPELL_DATA_MAPPER) {
@@ -311,7 +309,10 @@ function generateSpellData(){
 
 }
 
-settings = {
+var USED_SPELLS = {};
+
+var settings = {
+
     autoshot: true,
     multishot: true,
     aimedshot: true,
@@ -324,9 +325,10 @@ settings = {
     blackarrow: true,
     killshot: true,
     explosivetrap: true,
-
 }
+
 var weaving_enabled = true;
+
 function updateSpellSettings() {
     settings.chimerashot = (talents.chimera_shot === 1) ? true : false;
     settings.aimedshot = (talents.aimed_shot === 1) ? true : false;

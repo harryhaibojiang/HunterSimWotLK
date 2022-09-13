@@ -9,6 +9,31 @@ var dpserr = document.getElementById("dpserr");
 var executetime = document.getElementById("executetime");
 var dpscompare = document.getElementById("dpscompare");
 
+var statweights = { // accurate weights with 50k iterations at 7700 boss in default gear, p4 bis
+    Agi: 0.9605143836014804,
+    ArP: 0.16027539728151396,
+    Crit: 0.8845501877480455,
+    Expertise: 0.0017802250089289373,
+    Haste: 0.6429055024228614,
+    Hit: 1.0169360463006343,
+    Int: 0.008956822203713273,
+    MAP: 0.005536456701213411,
+    MP5: 0.001402849113087541,
+    MeleeCrit: 0.00013105937968703075,
+    MeleeHit: 0.005894374426353958,
+    RAP: 0.38799250528608353,
+    RangeCrit: 0.8844191283683585,
+    RangeHit: 1.0110416718742803,
+    Str: 0,
+    relentless:20.35, 
+    beasttamer: 22.11, 
+    dmgbonus: 0.75, 
+    rangedmgbonus: 0.75
+}
+
+var combatlogarray = [];
+var combatlogindex = 0;
+
 // disable input for player and pet uptimes
 document.getElementById("playeruptime").disabled = true;
 document.getElementById("petuptime").disabled = true;
