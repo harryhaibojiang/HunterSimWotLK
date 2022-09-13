@@ -133,17 +133,14 @@ function fetchData(){
             case "2min":
                 two_min_cds = 180;
                 three_min_cds = 180;
-                setSpellCDs();
             break;
             case "3min":
                 two_min_cds = 120;
                 three_min_cds = 240;
-                setSpellCDs();
             break;
             case "CD":
                 two_min_cds = 120;
                 three_min_cds = 180;
-                setSpellCDs();
             break;
         }
     } else { spellcdoption = "CD"; }
