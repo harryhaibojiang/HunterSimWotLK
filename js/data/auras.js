@@ -1724,35 +1724,43 @@ function buildAurasObj(){
 
 function buildAurasAP(auras) {
     const conds = Object.keys(auras).map(k =>
-       `if(auras.${k}.timer == 0) {
+       `if(auras.${k}.timer > 0) {
            if (!!auras.${k}.stacks) bonusAP += auras.${k}.stacks * auras.${k}.effect.stats.RAP
            else bonusAP += auras.${k}.effect.stats.RAP
         }`) 
-    return eval(`(function(auras, bonusAP) {${conds.join(';\n')}})`)
+    return eval(`(function(auras, bonusAP) {${conds.join(';\n')}; return bonusAP})`)
 }
 
 function buildAurasHaste(auras) {
     const conds = Object.keys(auras).map(k =>
-      `if(auras.${k}.timer > 0) auras.${k}.timer = Math.max(auras.${k}.timer - steptime,0)`)
-    return eval(`(function(auras) {${conds.join(';\n')}})`)
+       `if(auras.${k}.timer > 0) {
+           hasterating += auras.${k}.effect.stats.Haste
+        }`) 
+    return eval(`(function(auras, hasterating) {${conds.join(';\n')}; return hasterating})`)
 }
 
 function buildAurasCrit(auras) {
     const conds = Object.keys(auras).map(k =>
-      `if(auras.${k}.timer > 0) auras.${k}.timer = Math.max(auras.${k}.timer - steptime,0)`)
-    return eval(`(function(auras) {${conds.join(';\n')}})`)
+       `if(auras.${k}.timer > 0) {
+           critrating += auras.${k}.effect.stats.Crit
+        }`) 
+    return eval(`(function(auras, critrating) {${conds.join(';\n')}; return critrating})`)
 }
 
 function buildAurasArP(auras) {
     const conds = Object.keys(auras).map(k =>
-      `if(auras.${k}.timer > 0) auras.${k}.timer = Math.max(auras.${k}.timer - steptime,0)`)
-    return eval(`(function(auras) {${conds.join(';\n')}})`)
+       `if(auras.${k}.timer > 0) {
+           arp += auras.${k}.effect.stats.ArP
+        }`) 
+    return eval(`(function(auras, arp) {${conds.join(';\n')}; return arp})`)
 }
 
 function buildAurasAgi(auras) {
     const conds = Object.keys(auras).map(k =>
-      `if(auras.${k}.timer > 0) auras.${k}.timer = Math.max(auras.${k}.timer - steptime,0)`)
-    return eval(`(function(auras) {${conds.join(';\n')}})`)
+       `if(auras.${k}.timer > 0) {
+           combatAgi += auras.${k}.effect.stats.Agi
+        }`) 
+    return eval(`(function(auras, combatAgi) {${conds.join(';\n')}; return combatAgi})`)
 }
 
 function buildAuraTimerSteps(auras) {
