@@ -58,6 +58,15 @@ var petsteptime = 0;
 var fightduration = 0;
 var manalogarray = [];
 var manalogindex = 0;
+var mana_result = {
+    mp5: 0,
+    replenish: 0,
+    rapid_recup: 0,
+    spirit: 0,
+    jow: 0,
+    conquest: 0,
+    blackbow: 0
+}
 var filteredcombatlogarray = [];
 var combatlogRun = false;
 
@@ -82,6 +91,15 @@ function loopSim() {
         sumdmg = 0;
         sumduration = 0;
         sumpetdmg = 0;
+        mana_result = {
+            mp5: 0,
+            replenish: 0,
+            rapid_recup: 0,
+            spirit: 0,
+            jow: 0,
+            conquest: 0,
+            blackbow: 0
+        }
         resultCountInitialize();
         initializeAuras();
         setSpellCDs();
@@ -181,6 +199,10 @@ function finalResults() {
     buildManaData();
     buildData(newspread);
     createHistogram();
+    
+    for (let type in mana_result) {
+        mana_result[type] = mana_result[type] / iterations;
+    }
     //console.log("Time =>" + sumduration/iterations);
     //console.log("*****************");
 }

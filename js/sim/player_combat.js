@@ -14,6 +14,9 @@ function update() {
 
     updateHaste();
     updateArmorReduction();
+    updateAgi();
+    updateAP();
+
     return;
  }
  
@@ -26,10 +29,11 @@ function update() {
     if(debuffs.judgewisdom.timer > 0 && !debuffs.judgewisdom.inactive) {
        if ((result === RESULT.CRIT) || (result === RESULT.HIT) || (result === RESULT.GLANCE)) {
           if (!useAverages) {
-             tmp = 5000; // 50% chance
+             tmp = 3000; // 50% chance
              roll = rng10k();
              if (tmp < roll) {
                 let gain = Math.floor(2 / 100 * BasePlayer.BaseMana)
+                mana_result.jow += gain;
                 currentMana += gain;
                 if(combatlogRun) {
                    combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player gains " + gain + " Mana from Judgement of Wisdom";
@@ -52,6 +56,7 @@ function update() {
        roll = rng10k();
        if (tmp < roll) {
           let gain = rng(128,172);
+          mana_result.conquest += gain;
           currentMana += gain;
           if(combatlogRun) {
              combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player gains " + gain + " Mana from Mark of Conquest";
@@ -62,6 +67,7 @@ function update() {
     // black bow
     if (gear.range.id === 32336 && attack === 'ranged'){
        if ((result === RESULT.CRIT) || (result === RESULT.HIT)) {
+          mana_result.blackbow += 8;
           currentMana += 8;
        }
     } // black grasp of the destroyer 
@@ -74,7 +80,7 @@ function update() {
  
     return;
  }
- var manatotal = 0
+
  function updateMana() {
     // spirit tick gain (if no casting condition)
     let spiregen = 0;
@@ -85,11 +91,13 @@ function update() {
     }
  
     // mp5 tick gain
-    let replenish_mana = (replenishment) ? Mana * 0.01 : 0;
-    let managain = (ManaPer5 + spiregen + replenish_mana) / 5 * steptime;
+    let replenish_mana = (replenishment) ? (Mana * 0.01) / 5 * steptime : 0;
+    
+    mana_result.replenish += replenish_mana;
+    mana_result.mp5 += ManaPer5 / 5 * steptime;
+    let managain = (ManaPer5 / 5 * steptime + spiregen + replenish_mana) ;
     currentMana += managain;
-    manatotal += managain;
-    //console.log(manatotal)
+    
     if(combatlogRun) {
        //combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player regens " + (managain) + " Mana";
        //combatlogindex++;
@@ -97,7 +105,8 @@ function update() {
  
     if (auras.rapid?.timer > 0){
        if (steptimeend > 3 * Math.ceil(prevtimeend / 3)) {
-          currentMana += Mana * talents.rapid_recup;
+         mana_result.rapid_recup += Mana * talents.rapid_recup;
+         currentMana += Mana * talents.rapid_recup;
           //console.log('rapid recup '+ Mana * talents.rapid_recup)
        }
        
@@ -110,24 +119,16 @@ function update() {
  }
  // handling for dynamic armor reduction 
  function updateArmorReduction() {
-    let arp = ArPRating;
+    let arp = 0;
     let BasePlayer = BASE_PLAYER[level];
     let debuffarp = 1;
     let armorPenReduc = 0;
     // formula consts for level 60 or higher
     let attacker_const = 400 + 85 * level + 4.5 * 85 * (level-59);
     
-    if (Object.values(arp_auras).length !== 0) {
-       arp += Object.entries(arp_auras).reduce((acc, [stat, value]) => {
-          let arpval = 0
-          if(value.timer > 0) {
-             if (!!value.stacks){
-                arpval = value.stacks * value.effect.stats.ArP} 
-             else {arpval = value.effect.stats.ArP}
-          }
-          return acc + arpval
-       }, 0)
-    }
+    arp = ArPsumStat(arp_auras, arp);
+    arp += ArPRating;
+
     arp = Math.min(ArPRatingCap, arp);
     armorPenReduc = arp / BasePlayer.ArPRatingRatio / 100;
  
@@ -158,19 +159,8 @@ function update() {
     combatRAP = BaseRAP;
     combatMAP = BaseMAP;
     let bonusAP = 0;
-    if (Object.values(ap_auras).length !== 0) {
-       bonusAP = Object.entries(ap_auras).reduce((acc, [stat, value]) => {
-          let apval = 0
-          if(value.timer > 0) {
-             if (!!value.stacks){
-                apval = value.stacks * value.effect.stats.RAP} // they all use RAP + MAP on auras, so no need to separate MAP
-             else {apval = value.effect.stats.RAP}
-          }
-          return acc + apval
-       }, 0)
-       
-       //console.log(bonusAP)
-    }
+   
+    bonusAP = APsumStat(ap_auras, bonusAP);
      // AP from combat agi
     bonusAP += combatAgi;
     // target AP - expose weakness
@@ -181,14 +171,14 @@ function update() {
     if (target.type === 'Demon'){
        targetAP += (playerconsumes.battle_elixir === 9224) ? 105 : 0;
     }
-    // demonslaying AP
+    // scourgebane AP
     if (target.type === 'Undead'){
        targetAP += (!!gear.mainhand.enchant && gear.mainhand.attachment === 44595) ? 140 : 0;
     }
-    // demonslaying AP
+    // consecrated stones AP
     if (target.type === 'Undead'){
-       targetAP += (!!gear.mainhand.attachment && gear.mainhand.attachment === 23122) ? 170 : 0;
-       targetAP += (!!gear.offhand?.attachment && gear.offhand.attachment === 23122) ? 170 : 0;
+       targetAP += (!!gear.mainhand.attachment && gear.mainhand.attachment === 23122) ? 108 : 0;
+       targetAP += (!!gear.offhand?.attachment && gear.offhand.attachment === 23122) ? 108 : 0;
     }
     // Hunter's mark
     
@@ -232,15 +222,7 @@ function update() {
  // handling for Agi changes
  function updateAgi() {
     combatAgi = 0;
-    if (Object.values(agi_auras).length !== 0) {
-       combatAgi += Object.entries(agi_auras).reduce((acc, [stat, value]) => {
-          let agival = 0
-          if(value.timer > 0) {
-             agival = value.effect.stats.Agi
-          }  
-          return acc + agival
-       }, 0)
-    }
+    combatAgi = AgisumStat(agi_auras, combatAgi);
     combatAgi = Math.floor(combatAgi * agimod);
     //console.log("agi bonus: " + combatAgi);
     // updating crit and AP from the gained agi - in AP and crit funct
@@ -253,19 +235,12 @@ function update() {
     let hasted_speed = 1;
     rangespeed = BaseRangeSpeed;
     meleespeed = BaseMeleeSpeed;
-    let hasterating = HasteRating;
+    let hasterating = 0;
     
-    if (Object.values(haste_auras).length !== 0) {
-       hasterating += Object.entries(haste_auras).reduce((acc, [stat, value]) => {
-          let hasteval = 0
-          if(value.timer > 0) {
-             hasteval = value.effect.stats.Haste
-          }  
-          return acc + hasteval
-       }, 0)
-       //console.log(hasterating)
-    }
-    hasted_speed = (auras.berserk?.timer > 0) ? hasted_speed * 1.2 : hasted_speed;  // troll berserking (20% in wotlk)
+    hasterating = HastesumStat(haste_auras, hasterating);
+    hasterating += HasteRating;
+    
+    hasted_speed = (auras.berserking?.timer > 0) ? hasted_speed * 1.2 : hasted_speed;  // troll berserking (20% in wotlk)
     hasted_speed = (auras.lust?.timer > 0) ? hasted_speed * 1.3 : hasted_speed; // lust
  
     let hasteRatingSpeed = (hasterating / BasePlayer.HasteRatingRatio / 100) + 1;
@@ -322,18 +297,8 @@ function update() {
     let combatCrit = attackcrit + critsuppression;
     let critrating = 0;
  
-    if (Object.values(crit_auras).length !== 0){
-       critrating += Object.entries(crit_auras).reduce((acc, [stat, value]) => {
-          let critval = 0
-          if(value.timer > 0) {
-             if (!!value.stacks){
-                critval = value.stacks * value.effect.stats.Crit} 
-             else {critval = value.effect.stats.Crit}
-          }
-          return acc + critval
-       }, 0)
-       combatCrit += (critrating / BasePlayer.CritRatingRatio);
-    }
+    critrating = CritsumStat(crit_auras, critrating);
+
     if(auras.master_tact?.timer > 0) { combatCrit += talents.master_tact; } // master tactician
     
     // from agi changes
@@ -392,7 +357,7 @@ function update() {
        return RESULT.HIT;
     }
     else if (attack === 'ranged'){
-       let partial = (!!spell && (spell === 'arcaneshot' || spell === 'chimera_serpent' || spell === 'explosiveshot' || spell === 'wild_quiver')) ? PartialResistRate : 0;
+       let partial = (!!spell && (spell === 'arcaneshot' || spell === 'chimera_serpent' || spell === 'explosiveshot' || spell === 'wild_quiver' || spell === 'chimerashot')) ? PartialResistRate : 0;
        let temp_miss = (!!spell && spell === 'chimera_serpent') ? 0 : rangemiss;
        tmp += temp_miss * 100;
        if (roll < tmp) return RESULT.MISS;
@@ -481,8 +446,6 @@ function update() {
  /** attack with auto shot */
  function attackRange(shot) {
  
-    updateAgi();
-    updateAP();
     if (shot === undefined) shot = 'autoshot';
     updateDmgMod(shot);
     let attack = 'ranged';
@@ -778,7 +741,7 @@ function update() {
          currentMana -= cost;
  
          combatCrit = updateCritChance(attack);
-         result = rollSpell(attack, combatCrit, specialcrit); // check attack table
+         result = rollSpell(attack, combatCrit, specialcrit, spell); // check attack table
          spellResultSum(result, spell);
          if (result === RESULT.HIT) {
              dmg = chimeraShotCalc(range_wep,combatRAP); // calc damage
@@ -787,6 +750,10 @@ function update() {
              dmg = chimeraShotCalc(range_wep,combatRAP);
              dmg *= SpecialCritDamage;
              proccrit(cost, attack, spell, dmg);
+         }
+         if (result === RESULT.PARTIAL) {
+             dmg = chimeraShotCalc(range_wep,combatRAP);
+             dmg *= PartialResistDmg;
          }
          if (impsteadyreduc !== 1) auras.imp_steady_shot.timer = 0;
  
@@ -886,8 +853,7 @@ function update() {
  function cast(spell) {
      let BasePlayer = BASE_PLAYER[level];
      let spellcost = 0;
-     updateAgi();
-     updateAP();
+     
      updateDmgMod(spell);
      let dot_check = (spell === 'immolatetrap' || spell === 'serpentsting' || spell === 'blackarrow' || spell === 'explosivetrap' || spell === 'explosiveshot');
  

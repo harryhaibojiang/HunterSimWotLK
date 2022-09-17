@@ -46,6 +46,12 @@ function initializeAuras() {
     aura_timer_resets = buildAuraTimerResets(auras)
     aura_cd_resets = buildAuraCdResets(auras)
 
+    APsumStat = buildAurasAP(ap_auras)
+    HastesumStat = buildAurasHaste(haste_auras)
+    CritsumStat = buildAurasCrit(crit_auras)
+    ArPsumStat = buildAurasArP(arp_auras)
+    AgisumStat = buildAurasAgi(agi_auras)
+
     buff_uptimes = {} // reset buff uptimes to empty obj, then builds the obj based on auras and sets to 0
     for (let prop in auras) {
         buff_uptimes[prop] = 0
