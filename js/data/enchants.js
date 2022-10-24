@@ -953,7 +953,18 @@ const FEET_ENCHANTS = {
     quality: "Common",
     icon: 'trade_engraving',
     desc: '+10 Hit, +10 Crit'
-  }
+  },
+  55016: {
+    name: 'Nitro Boosts',
+    effectId: 3606,
+    stats: {
+      Crit: 24
+    },
+    Phase: 1,
+    quality: "Common",
+    icon: 'trade_engraving',
+    desc: '+24 Crit, 150% Speed Boost'
+  },
 }
 
 const RING_ENCHANTS = {
@@ -1170,7 +1181,7 @@ const RANGE_ENCHANTS = {
     name: 'Heartseeker Scope',
     effectId: 3608,
     stats: {
-      RangeCrit: 28
+      RangeCrit: 40
     },
     Phase: 1,
     quality: "Common",

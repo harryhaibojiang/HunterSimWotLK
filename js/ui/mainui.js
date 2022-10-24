@@ -9,26 +9,26 @@ var dpserr = document.getElementById("dpserr");
 var executetime = document.getElementById("executetime");
 var dpscompare = document.getElementById("dpscompare");
 
-var statweights = { // accurate weights with 50k iterations at 7700 boss in default gear, p4 bis
-    Agi: 0.9605143836014804,
-    ArP: 0.16027539728151396,
-    Crit: 0.8845501877480455,
-    Expertise: 0.0017802250089289373,
-    Haste: 0.6429055024228614,
-    Hit: 1.0169360463006343,
-    Int: 0.008956822203713273,
-    MAP: 0.005536456701213411,
-    MP5: 0.001402849113087541,
-    MeleeCrit: 0.00013105937968703075,
-    MeleeHit: 0.005894374426353958,
-    RAP: 0.38799250528608353,
-    RangeCrit: 0.8844191283683585,
-    RangeHit: 1.0110416718742803,
-    Str: 0,
-    relentless:20.35, 
-    beasttamer: 22.11, 
-    dmgbonus: 0.75, 
-    rangedmgbonus: 0.75
+var statweights = { // p1 bis wrath
+    Str:0,
+    Agi:1.2479535591736202,
+    Int:0.6846065494644336,
+    RAP:0.5438987497924108,
+    RangeHit:1.3005347107447962,
+    RangeCrit:1.024214879499732,
+    Haste:0.6743163262972348,
+    ArP:0.9281886439304935,
+    MAP:0.0009671388649076107,
+    MeleeHit:0.041587644543884986,
+    MeleeCrit:0.0065932987516589495,
+    Expertise:0.02009245261997421,
+    MP5:0.040080222721808244,
+    Hit:1.3421223552886812,
+    Crit:1.030808178251391,
+    relentless:0,
+    beasttamer:0,
+    dmgbonus:0,
+    rangedmgbonus:0
 }
 
 var combatlogarray = [];
@@ -247,7 +247,7 @@ function submitImportData(type) {
         if (type == '70U') {
             throw new Error("Failed to import: " + newgear.gear.errors)
         } else if (type == 'WA') {
-            throw new Error("Failed to import: " + newgear.errors)
+            throw new Error("Failed to import: " + err)
         }
     }
     
@@ -455,7 +455,7 @@ function initializeImportSets(){
     let length = DEFAULT_GEAR_SETS.length;
     var importOptions = "";
     let i = 0;
-    for (i=0; i <= 9; i++) {
+    for (i=0; i < length; i++) {
         importOptions += "<option value= "+i+" >" + imports[i].description + "</option>";
     }
     //console.log(importOptions);

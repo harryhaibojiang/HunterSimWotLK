@@ -109,9 +109,9 @@ var range_wep = {};
 var mainhand_wep = {};
 var consumestats = {};
 var target = {
-   armor: 10463,
+   armor: 10643,
    level: 83,
-   name: "Level 83 10463",
+   name: "Level 83 10643",
    phase: 1,
    resilience: 0,
    type: "Humanoid"
@@ -139,25 +139,24 @@ const EnchantStats = {Str:0, Agi:0, Stam:0, Int:0, Spi:0, RAP:0, MAP:0, Crit:0, 
 
 // initial variables for itemid's (like a profile)
 var gear = {
-   head:{id:32235,gems:[32409,32194],enchant:35452},
-   neck:{id:32260,gems:[]},
-   shoulder:{id:31006,gems:[32222,32212],enchant:29483},
-   back:{id:32323,gems:[],enchant:34004},
-   chest:{id:31004,gems:[32194,32222,32226],enchant:27960},
-   wrist:{id:32324,gems:[32222],enchant:34002},
-   mainhand:{id:33389,gems:[],enchant:42620,attachment:23529},
-   offhand:{id:33389,gems:[],enchant:42620,attachment:23529},
-   hand:{id:31001,gems:[32194],enchant:25080},
-   waist:{id:32346,gems:[]},
-   leg:{id:31005,gems:[32194],enchant:35490},
-   feet:{id:32366,gems:[32194,32222],enchant:27951},
-   ring1:{id:29301},
-   ring2:{id:33496,gems:[],enchant:0},
-   trinket1:{id:28830},
-   trinket2:{id:33831},
-   range:{id:15808}, // 15808 for fine light crossbow for testing
-   ammo:{id:31737},
-   quiver:{id:34105},
+   head:{id:42551,gems:[41398,42143],enchant:59954},
+   neck:{id:40678,gems:[]},
+   shoulder:{id:37373,gems:[],enchant:59934},
+   chest:{id:39579,gems:[42143,42702],enchant:60692},
+   waist:{id:37407,gems:[],enchant:0},
+   leg:{id:37669,gems:[],enchant:60582},
+   feet:{id:37167,gems:[39997,42143],enchant:55016},
+   wrist:{id:37170,gems:[],enchant:44575},
+   hand:{id:39582,gems:[40014],enchant:54999},
+   ring1:{id:42642,gems:[40044],enchant:0},
+   ring2:{id:37685,gems:[],enchant:0},
+   trinket1:{id:44253},
+   trinket2:{id:40684},
+   back:{id:43566,gems:[],enchant:55002},
+   mainhand:{id:44249,gems:[],enchant:60691,attachment:0},
+   range:{id:37191,gems:[],enchant:55135},
+   quiver:{id:18714},
+   ammo:{id:41165},
 };
 
 // initialize variables for use

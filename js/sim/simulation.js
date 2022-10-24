@@ -245,8 +245,6 @@ function runSim() {
         // choices
         onUseSpellCheck();
 
-        updateAuras(steptime);
-
         /******* decide spell selection ******/
         //console.log("current spell: "+spell)
         if (spell === '') {
@@ -285,7 +283,7 @@ function runSim() {
         //console.log("current dot: "+dotspell)
 
         nextEvent(playertimestart);
-        
+        updateAuras(steptime);
         //console.log("time end => "+(Math.round(steptimeend * 1000) / 1000));
         petUpdateFocus();
         updateMana();
@@ -322,8 +320,6 @@ function startStepOnly(){
     combatlogRun = true;
     // choices
     onUseSpellCheck();
-
-    updateAuras(steptime);
 
     /******* decide spell selection ******/
     //console.log("current spell: "+spell)
@@ -364,6 +360,8 @@ function startStepOnly(){
 
     nextEvent(playertimestart);
     
+    updateAuras(steptime);
+
     //console.log("time end => "+(Math.round(steptimeend * 1000) / 1000));
     petUpdateFocus();
     updateMana();

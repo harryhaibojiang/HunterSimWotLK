@@ -12,8 +12,8 @@ const BASE_PET = {
         AgiToCrit: 30,
     },
     80: {
-        MinDmg: 59,
-        MaxDmg: 87,
+        MinDmg: 50,
+        MaxDmg: 78,
         BaseAgi: 113,
         BaseStr: 331,
         AgiToCrit: 62.77
@@ -32,6 +32,7 @@ var pet = {
     crit: 0,
     combatcrit:0,
     combatspellcrit: 0,
+    combatdmgmod: 1,
     dmgmod: 1,
     hit: 0,
     spellhit: 0,
@@ -148,7 +149,7 @@ function petStatsCalc(){
         beasttamers_crit = 2;
     };
     let group_dmg_mod = (talents.ferocious_insp > 0) ? talents.ferocious_insp : selectedbuffs.special.FerociousInsp;
-    pet.dmgmod = PetHappiness * talents.unleash_fury * racialmod * beasttamers_dmg * group_dmg_mod * pet_talents.spike_collar * talents.kindred_spirit * pet_talents.shark_attack;
+    pet.dmgmod = PetHappiness * talents.unleash_fury * racialmod * beasttamers_dmg * group_dmg_mod * pet_talents.spike_collar * talents.kindred_spirit * pet_talents.shark_attack * currentgear.special.t7_2p_pet_dmg;
 
     pet.str = Math.floor(Math.floor(BasePet.BaseStr + (selectedbuffs.stats.Str || 0) + (petconsumestats.Str || 0)) * selectedbuffs.special.kingsMod);
     pet.agi = Math.floor(Math.floor(BasePet.BaseAgi + (selectedbuffs.stats.Agi || 0) + (petconsumestats.Agi || 0)) * selectedbuffs.special.kingsMod);

@@ -2,7 +2,7 @@ var targetData = (function() {
 
   const CUSTOMER_TARGET_ID = 0;
 
- const Target_Types = Object.freeze({
+  const Target_Types = Object.freeze({
       HUMANOID: 'Humanoid',
       DEMON: "Demon",
       BEAST: "Beast",
@@ -25,8 +25,8 @@ var targetData = (function() {
         level: 83
       },
       1: {
-        name: 'Level 83 10463',
-        armor: 10463,
+        name: 'Level 83 10643',
+        armor: 10643,
         phase: 1,
         resilience: 0,
         type: Target_Types.HUMANOID,
