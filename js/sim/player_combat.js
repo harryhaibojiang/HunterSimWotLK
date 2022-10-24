@@ -1118,10 +1118,13 @@ function update() {
        
        auras[slot].timer = auras[slot].effect.duration;
        auras[slot].cd = (!!auras[slot].effect.base_cd) ? auras[slot].effect.base_cd : 0;
- 
-       if(procchance = 100) auras[slot].stacks = Math.min(auras[slot].stacks + 1, auras[slot].effect.stacks);
+
+       if(procchance == 100 && !!auras[slot].effect.stacks) {
+
+         auras[slot].stacks = Math.min(auras[slot].stacks + 1, auras[slot].effect.stacks);
+       }
        if(auras[slot].timer === auras[slot].effect.duration && combatlogRun) {
-          let stack_string = (auras[slot].stacks) ? " stacks: " + auras[slot].stacks : '';
+          let stack_string = (!!auras[slot].stacks) ? " stacks: " + auras[slot].stacks : '';
           combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player gains " + auras[slot].effect_name + stack_string;
           combatlogindex++;
        }

@@ -276,7 +276,7 @@ function petSpell(petspell){
         combatlogindex++;
     } 
     else if (combatlogRun) {
-        combatlogarray[combatlogindex] = petsteptime.toFixed(3) + " - Pet " + spellname + " " + RESULTARRAY[result] + " for " + done + ". AP => " + pet.combatap.toFixed(2) + ". Focus => " + pet.focus.toFixed(2);
+        combatlogarray[combatlogindex] = petsteptime.toFixed(3) + " - Pet " + spellname + " " + RESULTARRAY[result] + " for " + done + ". AP => " + pet.combatap.toFixed(2) + ". Focus => " + pet.focus.toFixed(2) + ". Dmg Mod => " + pet.dmgmod.toFixed(3) + ". Combat Mod => " + pet.combatdmgmod.toFixed(3);
         combatlogindex++;
         
     }

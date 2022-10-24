@@ -1151,8 +1151,8 @@ const ITEM_PROCS = {
 }
  // several todo
 const ENCHANT_AURAS = {
-    enghasteglove: { // todo
-        shares_cd: true,
+    enghasteglove: {
+        shares_cd: false,
         stat_type: 'Haste',
         slot: 'hand',
         requires: 54999,
@@ -1405,7 +1405,7 @@ var usable_CDs = {
     arcanetorrent: { enable: true, offset: 0, type: 'player' },
     engthermalsapper: { enable: true, offset: 0, type: 'player' },
     engsaronitebomb: { enable: false, offset: 0, type: 'player' },
-
+    enghasteglove: { enable: false, offset: 0, type: 'player' },
     killcommand: { enable: true, offset: 0, type: 'pet' },
     rabid: { enable: false, offset: 0, type: 'pet' },
     recovery: { enable: true, offset: 0, type: 'pet' },
@@ -1475,6 +1475,7 @@ function updateUsableCDs() {
     usable_CDs.rune.enable = runecheck;
     usable_CDs.rapid.enable = rapidcheck;
     usable_CDs.lust.enable = lustcheck;
+    usable_CDs.enghasteglove.enable = (gear.hand.enchant == 54999) ? true : false;
     usable_CDs.beastwithin.enable = (talents.beast_within > 0) ? beastwithincheck : false;
     usable_CDs.potion.enable = potioncheck;
     usable_CDs.potion.potion_type = 'Crit'

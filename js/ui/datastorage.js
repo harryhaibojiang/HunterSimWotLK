@@ -109,8 +109,13 @@ function fetchData(){
     talents = (localStorage.getItem('talents') != null) ? JSON.parse(localStorage.getItem('talents')):talents;
     // spell enables
     usable_CDs.rapid.enable = (localStorage.getItem('rapidcheck') != null) ? JSON.parse(localStorage.getItem('rapidcheck')):usable_CDs.rapid.enable;
+    usable_CDs.beastwithin.enable = (localStorage.getItem('beastcheck') != null) ? JSON.parse(localStorage.getItem('beastcheck')):usable_CDs.beastwithin.enable;
+    if (localStorage.getItem('racialcheck') != null) {
+        usable_CDs.berserking.enable = parseInt(localStorage.getItem('racialcheck'));
+        usable_CDs.bloodfury.enable = parseInt(localStorage.getItem('racialcheck'));
+        usable_CDs.arcanetorrent.enable = parseInt(localStorage.getItem('racialcheck'));
+    }
     usable_CDs.lust.enable = (localStorage.getItem('lustcheck') != null) ? JSON.parse(localStorage.getItem('lustcheck')):usable_CDs.lust.enable;
-
     usable_CDs.rune.enable = (localStorage.getItem('runecheck') != null) ? JSON.parse(localStorage.getItem('runecheck')):usable_CDs.rune.enable;
 
     // spell offsets
@@ -119,6 +124,7 @@ function fetchData(){
     if (localStorage.getItem('racialoffset') != null) {
         usable_CDs.berserking.offset = parseInt(localStorage.getItem('racialoffset'));
         usable_CDs.bloodfury.offset = parseInt(localStorage.getItem('racialoffset'));
+        usable_CDs.arcanetorrent.offset = parseInt(localStorage.getItem('racialcheck'));
     }
     usable_CDs.lust.offset = (localStorage.getItem('lustoffset') != null) ? parseInt(localStorage.getItem('lustoffset')):usable_CDs.lust.offset;
     usable_CDs.potion.offset = (localStorage.getItem('startpotoffset') != null) ? parseInt(localStorage.getItem('startpotoffset')):usable_CDs.potion.offset;
@@ -207,6 +213,8 @@ function fetchData(){
     document.getElementById("fort").checked = (buffslist[13].id == 25392) ? true : false;
     document.getElementById("fortmod").selected = (buffslist[13].talented) ? true : false;
 
+    let errorchk_talent = (talentindex == "bm70" || talentindex == "bm70hit" || talentindex == "bm80" || talentindex == "bm80hit" || talentindex == "mm70" || talentindex == "mm70hit" || talentindex == "mm80" || talentindex == "mm80hit" || talentindex == "sv70" || talentindex == "sv70hit" || talentindex == "sv80" || talentindex == "sv80hit" || talentindex == "0")
+    talentindex = (errorchk_talent) ? talentindex : "mm70";
     document.getElementById("talentselect").value = talentindex;
     document.getElementById("customtalent").value = whtalentlink;
     
@@ -235,6 +243,8 @@ function fetchData(){
 
     // spell enables
     document.getElementById("rapidcheck").checked = usable_CDs.rapid.enable;
+    document.getElementById("beastcheck").value = usable_CDs.beastwithin.enable;
+    document.getElementById("racialcheck").value = (usable_CDs.berserking.enable || usable_CDs.bloodfury.enable);
     document.getElementById("lustcheck").checked = usable_CDs.lust.enable;
     document.getElementById("runecheck").checked = usable_CDs.rune.enable;
 

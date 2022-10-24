@@ -77,6 +77,9 @@ function initializeAuras() {
     debuffs.curseofele.timer = 0;
     debuffs.mangle.timer = 0;
 
+    if (!!auras.trink1.stacks) auras.trink1.stacks = 0;
+    if (!!auras.trink2.stacks) auras.trink2.stacks = 0;
+
     sharedtrinketcd = 0;
 
     return;
@@ -88,8 +91,8 @@ function setSpellCDs(){
     if(!!auras.berserk) auras.berserk.effect.base_cd = three_min_cds;
 
     if(!!auras.bloodfury) auras.bloodfury.effect.base_cd = two_min_cds;
-    if(!!auras.trink1) auras.trink1.effect.base_cd = two_min_cds;
-    if(!!auras.trink2) auras.trink2.effect.base_cd = two_min_cds;
+    if(!!auras.trink1 && !auras.trink1.effect.is_proc) auras.trink1.effect.base_cd = two_min_cds;
+    if(!!auras.trink2 && !auras.trink2.effect.is_proc) auras.trink2.effect.base_cd = two_min_cds;
     if(!!auras.potion) auras.potion.effect.base_cd = two_min_cds;
     if(!!auras.beastwithin) auras.beastwithin.effect.base_cd = two_min_cds;
 
@@ -103,8 +106,8 @@ function updateAuras(steptime) {
     // set timer of on use AP trinkets
 
     IntervalAuraHandler();
-    stepauras(steptime);
     uptimeCalc();
+    stepauras(steptime);
 
     beastwithinreduc = (!!auras.beastwithin && (auras.beastwithin.timer > 0)) ? 0.5 : 1;
     auracds(auras);
@@ -431,6 +434,15 @@ function onUseSpellCheck(){
         auras.hysteria.cd = auras.hysteria.effect.base_cd; // set cd
         if(combatlogRun) {
             combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player gains " + auras.hysteria.effect_name;
+            combatlogindex++;
+        }
+    }
+    if (!!auras.enghasteglove && (auras.enghasteglove.cd === 0)) {
+
+        auras.enghasteglove.timer = auras.enghasteglove.effect.duration; // set timer
+        auras.enghasteglove.cd = auras.enghasteglove.effect.base_cd; // set cd
+        if(combatlogRun) {
+            combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player gains " + auras.enghasteglove.effect_name;
             combatlogindex++;
         }
     }

@@ -1,29 +1,30 @@
 // default buffs for settings go here
 var buffslist = [
     
-    { id: 0, talented: false, t2_3p: false }, // shout 2048
+    { id: 2048, talented: false, t2_3p: false }, // shout 2048
     0, // heroic presence
-    0, // lotp/rampage 17007
-    { id: 0, talented: false }, // SoE/Horn 25528
-    0, // tsa 27066
-    0, // swift ret 53648
-    0, // feroc insp 75447
-    { id: 0, talented: false }, // WF 25587
-    { id: 0, talented: false }, // GotW 26991
-    0, // bok 25898
-    { id: 0, talented: true }, // bow 27143
-    0, // AI 27127
+    17007, // lotp/rampage 17007
+    { id: 25528, talented: false }, // SoE/Horn 25528
+    27066, // tsa 27066
+    53648, // swift ret 53648
+    75447, // feroc insp 75447
+    25587, // WF 25587
+    { id: 26991, talented: false }, // GotW 26991
+    25898, // bok 25898
+    { id: 27143, talented: true }, // bow 27143
+    27127, // AI 27127
     0, // fel intel 57567
-    { id: 0, talented: true }, // PW:F 25392
+    { id: 25392, talented: true }, // PW:F 25392
     
 ];
 
 var filteredbuffs = [];
 var playerconsumes = {
-    
+    flask: 46377,
+    food: 42999
 };
 var petconsumes = {
-
+    pet_food: 43005
 };
 
 var replenishment = false;
