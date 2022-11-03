@@ -782,7 +782,7 @@
           <li><label class="label-2">Latency (ms)</label><input type="number" step="1" min="10" max="1000" class="number-input hover-grey fight-setting-input-3" id="latency" onchange=fightSettings() value="50"></li>
           <li><label class="label-2">Player Uptime (%)</label><input type="number" step="1" min="0" max="100" class="number-input hover-grey fight-setting-input-3" id="playeruptime" onchange=fightSettings() value="100"> %</li>
           <li><label class="label-2">Pet Uptime (%)</label><input type="number" step="1" min="0" max="100" class="number-input hover-grey fight-setting-input-3" id="petuptime" onchange=fightSettings() value="100"> %</li>
-          <li><label class="label-2">Trap Weave Time (s)</label><input type="number" step="0.1" min="0" max="2" class="number-input hover-grey fight-setting-input-3" id="weavetime" onchange=fightSettings() value="0.6"></li>
+          <li><label class="label-2">Trap Weave Time (s)</label><input type="number" step="0.1" min="0" max="10" class="number-input hover-grey fight-setting-input-3" id="weavetime" onchange=fightSettings() value="1.5"></li>
           <br>
           <li>
             <label class="label-2">Target</label>
@@ -1022,8 +1022,8 @@
         <option value="4">Phase 4</option>
         <option value="3">Phase 3</option>
         <option value="2">Phase 2</option>
-        <option value="1">Phase 1</option>
-        <option selected value="0">Phase 0</option>
+        <option selected value="1">Phase 1</option>
+        <option value="0">Phase 0</option>
       </select>
     </div>
     <ul class="item-selector">

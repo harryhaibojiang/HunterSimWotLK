@@ -140,6 +140,14 @@ function exp_dmgMod_Magic(critbonus) {
 
    return range_wep.basedmgmod*magdmgmod*combatdmgmod*rangehit*((RangeCritDamage-1)*rangecrit + 1);
 }
+function exp_dmgMod_Magic_Traps(critbonus) {
+
+   let rangemiss = Math.max(RangeMissChance,0)*0.01;
+   let rangehit = 1 - rangemiss;
+   let rangecrit = (_combatCritChance + critbonus)*0.01;
+
+   return range_wep.basedmgmod*magdmgmod*combatdmgmod*rangehit*((MeleeCritDamage-1)*rangecrit + 1);
+}
 function exp_dmgMod_SpecialMagic(critbonus) {
 
    let rangemiss = Math.max(RangeMissChance,0)*0.01;
@@ -256,7 +264,7 @@ function exp_dmg_ChimeraShot(range_wep, combatRAP) {
 function exp_dmg_ExplosiveShot(combatRAP) {
 
    let sniper_training = (auras.sniper_training?.timer > 0) ? talents.sniper_training * 2 : 0;
-   let dmg = (useAverages) ? (SPELLS.explosiveshot.mindmg + SPELLS.explosiveshot.maxdmg) * avgConst : rng(SPELLS.explosiveshot.mindmg,SPELLS.explosiveshot.maxdmg);
+   let dmg = (useAverages) ? (SPELLS.explosiveshot.ranks.mindmg + SPELLS.explosiveshot.ranks.maxdmg) * avgConst : rng(SPELLS.explosiveshot.mindmg,SPELLS.explosiveshot.maxdmg);
    let specials_mod = 1 + talents.t_n_t + sniper_training;
    let shotDmg = (combatRAP * 0.14 + dmg) * specials_mod;
    return shotDmg * exp_dmgMod_Magic(talents.surv_instincts) * 3;
@@ -273,15 +281,14 @@ function exp_dmg_SerpentSting(combatRAP) {
    // Explosive Trap
 function exp_dmg_ExplosiveTrap(combatRAP) {
 
-   let dot = dotcheck;
    let dmg = 0;
    let dotDmg = 0;
    let trapDmg = 0;
-   
-   dotDmg = SPELLS.explosivetrap.tickdmg * 10 + combatRAP;
-   dmg = (SPELLS.explosivetrap.mindmg + SPELLS.explosivetrap.maxdmg) * avgConst;
+   let specialmod = (1 + talents.t_n_t + talents.trap_mastery); 
+   dotDmg = (SPELLS.explosivetrap.ranks.dot_dmg * 10 + combatRAP) * specialmod;
+   dmg = (SPELLS.explosivetrap.ranks.mindmg + SPELLS.explosivetrap.ranks.maxdmg) * avgConst;
    trapDmg = (combatRAP * 0.10 + dmg) + dotDmg;
-   return trapDmg * exp_dmgMod_Magic(0);
+   return trapDmg * exp_dmgMod_Magic_Traps(0);
 }
    // Immolation Trap
 function exp_dmg_ImmolateTrap(combatRAP) {

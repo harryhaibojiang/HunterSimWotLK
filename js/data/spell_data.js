@@ -324,10 +324,10 @@ var settings = {
     explosiveshot: true,
     blackarrow: true,
     killshot: true,
-    explosivetrap: true,
+    explosivetrap: false,
 }
 
-var weaving_enabled = true;
+var weaving_enabled = false;
 
 function updateSpellSettings() {
     settings.chimerashot = (talents.chimera_shot === 1) ? true : false;
@@ -336,6 +336,7 @@ function updateSpellSettings() {
     settings.explosiveshot = (talents.exp_shot === 1) ? true : false;
     settings.blackarrow = (talents.black_arrow === 1) ? true : false;
     settings.killshot = (level === 80) ? true : false;
+    weaving_enabled = (weavetime != 0) ? true : false;
     settings.explosivetrap = weaving_enabled;
 }
 

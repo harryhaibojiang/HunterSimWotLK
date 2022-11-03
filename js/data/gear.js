@@ -27,7 +27,7 @@ const SETS = {
         name: 'Cryptstalker',
         abrv: 't7',
         bonuses: {
-         2: { pet_dmg: 1.05 },
+         2: { pet_dmg: 0.05 },
          4: { speed_viper: 20 }
         }
     },

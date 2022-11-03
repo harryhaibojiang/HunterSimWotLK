@@ -45,6 +45,7 @@ const GLYPHS_DATA = {
     45733:{
         name: 'Glyph of Explosive Trap',
         abrv:'explosive_trap',
+        bonus: 1,
         icon: 'inv_glyph_majorhunter',
         phase: 1
     },
@@ -140,9 +141,7 @@ const GLYPHS_DATA = {
     },
 }
 
-var selected_glyphs = [
-    
-]
+var selected_glyphs = [45733, 45732, 42912]
 
 function selectGlyphs(glyphs_array) {
     let glyphs = {}

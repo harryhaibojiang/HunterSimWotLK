@@ -101,7 +101,7 @@ var rangedmgmod = 1;
 var selectedRace = 3; 
 var offhandDisabled = false;
 
-var level = 70;
+var level = 80;
 
 var useAverages = false;
 
@@ -200,7 +200,7 @@ var talents = {
    mortal_shots: 1.3, //
    GftT: 50, // 
    imp_arc_shot: 1, // 
-   aimed_shot: 1,
+   aimed_shot: 1, //
    rapid_killing: 0, //
    imp_stings: 1, //
    efficiency: 1, // ---
@@ -209,7 +209,7 @@ var talents = {
    barrage: 1, //
    combat_exp: 0, //
    ranged_weap_spec: 1, //
-   pierce_shot: 0, 
+   pierce_shot: 0, //
    trueshot_aura: 1, //
    imp_barrage: 0, //
    master_marksman: 0, //
@@ -218,7 +218,7 @@ var talents = {
    silencing_shot: 0,
    imp_steady_shot: 0, //
    mark_death: 0, //
-   chimera_shot: 0,
+   chimera_shot: 0, // 
    imp_tracking: 1.02, //
    hawk_eye: 0,// -
    savage_strikes: 0, //
@@ -241,11 +241,11 @@ var talents = {
    wyvern_sting: 0,// -
    TotH: 0, //
    master_tact: 0, //
-   nox_stings: 0,
-   no_escape: 0,
-   sniper_training: 0, // except ks crit
+   nox_stings: 0, //
+   no_escape: 0, // -
+   sniper_training: 0, //
    hunt_party: 1, // no replenishment
-   exp_shot: 0 // coded but not in sim logic
+   exp_shot: 0 //
  }
 
 /********************/
@@ -322,7 +322,7 @@ function calcBaseStats() {
     let hawkAP = (level == 70) ? 155 * (1 + talents.aspect_mast * 3) : 300 * (1 + talents.aspect_mast * 3);
     let sharedAP = Agi + (Stam * talents.hunt_vs_wild);
     BaseMAP = (GearStats.MAP + BuffStats.MAP + EnchantStats.MAP + sharedAP + Str + races[selectedRace][level].mAP + custom.MAP) * mapmod;
-    BaseRAP = (hawkAP + GearStats.RAP + BuffStats.RAP + EnchantStats.RAP + sharedAP + races[selectedRace][level].rAP + (Int * talents.careful_aim) + custom.RAP) * rapmod;
+    BaseRAP = (hawkAP + GearStats.RAP + BuffStats.RAP + EnchantStats.RAP + sharedAP + races[selectedRace][level].rAP + Math.ceil(Int * talents.careful_aim) + custom.RAP) * rapmod;
     // Crit rating and crit chance
     let critrating = GearStats.Crit + BuffStats.Crit + EnchantStats.Crit;
     MeleeCritRating = critrating + (currentgear.stats.MeleeCrit || 0) + custom.meleecrit;
@@ -376,6 +376,41 @@ function calcBaseStats() {
     BaseRangeSpeed = RANGED_WEAPONS[gear.range.id].speed / QuiverSpeed / talents.serp_swift / selectedbuffs.special.swiftRetAura;
     BaseMeleeSpeed = MELEE_WEAPONS[gear.mainhand.id].speed / selectedbuffs.special.swiftRetAura / selectedbuffs.special.melee_haste;
 
+}
+// common debug funct for checking important stats
+function debugStats(){
+
+   console.log("Gear Agi: " + GearStats.Agi)
+   console.log("Buffs Agi: " + BuffStats.Agi)
+   console.log("Enchants Agi: " + EnchantStats.Agi)
+   console.log("Race Agi: " + races[selectedRace][level].agi)
+   console.log("Mod Agi: " + agimod)
+
+   console.log("Gear Int: " + GearStats.Int)
+   console.log("Buffs Int: " + BuffStats.Int)
+   console.log("Enchants Int: " + EnchantStats.Int)
+   console.log("Race Int: " + races[selectedRace][level].int)
+   console.log("Mod Int: " + intmod)
+
+   let hawkAP = (level == 70) ? 155 * (1 + talents.aspect_mast * 3) : 300 * (1 + talents.aspect_mast * 3);
+   let sharedAP = Agi + (Stam * talents.hunt_vs_wild);
+   console.log("Hawk RAP: " + hawkAP)
+   console.log("Gear RAP: " + GearStats.RAP)
+   console.log("Buff RAP: " + BuffStats.RAP)
+   console.log("Enchant RAP: " + EnchantStats.RAP)
+   console.log("Shared RAP: " + sharedAP)
+   console.log("Race RAP: " + races[selectedRace][level].rAP)
+   console.log("Careful Aim RAP: " + Math.ceil(Int * talents.careful_aim))
+   console.log("Mod RAP: " + rapmod)
+
+   console.log("Base Crit: " + BaseCritChance)
+   console.log("Agi Crit: " + Agi / BASE_PLAYER[level].AgiToCrit)
+   console.log("Buff Crit: " + BuffStats.CritChance)
+   console.log("Killer instinct Crit: " + talents.killer_instinct)
+   console.log("Master Marksman Crit: " + talents.master_marksman * 100)
+   console.log("Rating Crit: " + RangeCritRating / BASE_PLAYER[level].CritRatingRatio)
+   console.log("Lethal Shots Crit: " + talents.lethal_shots)
+   console.log("Race Crit: " + races[selectedRace][level].critchance)
 }
 
 function initializeWeps() {

@@ -396,17 +396,17 @@ function startTime(spell, playertimestart){
     playertimestart += (spell === "steadyshot") ? Math.max(USED_SPELLS.steadyshot.cd, remaininggcd,0) + latency : 0;
     playertimestart += (spell === "multishot") ? Math.max(USED_SPELLS.multishot.cd, remaininggcd,0) + latency : 0;
     playertimestart += (spell === "arcaneshot") ? Math.max(USED_SPELLS.arcaneshot.cd, remaininggcd,0) + latency : 0;
-    playertimestart += (spell === "raptorstrike") ? Math.max(USED_SPELLS.raptorstrike.cd,0) + latency + 0.5 * weavetime: 0;
+    playertimestart += (spell === "raptorstrike") ? Math.max(USED_SPELLS.raptorstrike.cd,0) + latency + weavetime: 0;
     playertimestart += (spell === "melee") ? Math.max(USED_SPELLS.melee.cd,0) + latency + 0.5 * weavetime : 0;
-    playertimestart += (spell === "mongoose") ? Math.max(USED_SPELLS.mongoose.cd, remaininggcd,0) + latency + 0.5 * weavetime : 0;
+    playertimestart += (spell === "mongoose") ? Math.max(USED_SPELLS.mongoose.cd, remaininggcd,0) + latency + weavetime : 0;
     playertimestart += (spell === "aimedshot") ? Math.max(USED_SPELLS.aimedshot.cd, remaininggcd,0) + latency: 0;
     playertimestart += (spell === "readiness") ? Math.max(currentgcd - playertimeend, remaininggcd,0) : 0;
     playertimestart += (spell === "serpentsting") ? Math.max(USED_SPELLS.serpentsting.cd, remaininggcd,0) + latency: 0;
     playertimestart += (spell === "chimerashot") ? Math.max(USED_SPELLS.chimerashot.cd, remaininggcd,0) + latency: 0;
     playertimestart += (spell === "explosiveshot") ? Math.max(USED_SPELLS.explosiveshot.cd, remaininggcd,0) + latency: 0;
-    playertimestart += (spell === "explosivetrap") ? Math.max(USED_SPELLS.explosivetrap.cd, remaininggcd,0) + latency + 0.5 * weavetime : 0;
-    playertimestart += (spell === "frosttrap") ? Math.max(USED_SPELLS.frosttrap.cd, remaininggcd,0) + latency + 0.5 * weavetime : 0;
-    playertimestart += (spell === "snaketrap") ? Math.max(USED_SPELLS.snaketrap.cd, remaininggcd,0) + latency + 0.5 * weavetime : 0;
+    playertimestart += (spell === "explosivetrap") ? Math.max(USED_SPELLS.explosivetrap.cd, remaininggcd,0) + latency : 0;
+    playertimestart += (spell === "frosttrap") ? Math.max(USED_SPELLS.frosttrap.cd, remaininggcd,0) + latency : 0;
+    playertimestart += (spell === "snaketrap") ? Math.max(USED_SPELLS.snaketrap.cd, remaininggcd,0) + latency : 0;
     playertimestart += (spell === "blackarrow") ? Math.max(USED_SPELLS.blackarrow.cd, remaininggcd,0) + latency : 0;
     playertimestart += (spell === "killshot") ? Math.max(USED_SPELLS.killshot.cd, remaininggcd,0) + latency: 0;
     playertimestart += (spell === "volley") ? Math.max(USED_SPELLS.volley.cd, remaininggcd,0) + latency: 0;
@@ -452,6 +452,7 @@ function nextEvent(playertimestart){
         //console.log("auto cd: "+USED_SPELLS.autoshot.cd)
         steptimeend = (nextauto);
         steptime = (steptimeend - prevtimeend);
+        if (steptime < 0) throw new Error(`invalid step time at nextauto`)
         updateSpellCDs();
         shootAutoShot();
     }
@@ -460,6 +461,7 @@ function nextEvent(playertimestart){
         let step = petAttack();
         steptimeend = step;
         steptime = steptimeend - prevtimeend;
+        if (steptime < 0) throw new Error(`invalid step time at nextpetattack`)
         updateSpellCDs();
     }
     else if (eventchecktime === nextpetspell){ // check for pet yellows
@@ -471,6 +473,7 @@ function nextEvent(playertimestart){
             let step = petSpell(petspell);
             steptimeend = step;
             steptime = steptimeend - prevtimeend;
+            if (steptime < 0) throw new Error(`invalid step time at nextpetspell with ${PET_SPELLS[petspell].spell_name}`)
             updateSpellCDs(petspell);
             petspell = '';
         }
@@ -478,6 +481,7 @@ function nextEvent(playertimestart){
             steptimeend = nextpetspell;
             
             steptime = steptimeend - prevtimeend;
+            if (steptime < 0) throw new Error(`invalid step time at nextpetspell pause`)
             updateSpellCDs(petspell);
             petspell = '';
             nextpetspell += 2;
@@ -489,25 +493,22 @@ function nextEvent(playertimestart){
         if (!playerattackready){
             spellNextCast(playertimestart); // sets player time end
             //console.log("start cast: "+spell)
+            if ((spell === 'explosivetrap') && (nextauto < playertimeend)) nextauto = playertimeend + 0.2;
         }
         if (spell === 'wait') {
 
             steptimeend = playertimeend;
             steptime = (steptimeend - prevtimeend);
+            if (steptime < 0) throw new Error(`invalid step time at wait`)
             updateSpellCDs(spell);
             playerattackready = false;
             spell = '';
         }
         else if (playertimeend === playercheck) { // do player hit
 
-            if (spell === 'melee' || spell === 'raptorstrike' || spell === 'explosivetrap' || spell === 'frosttrap' || spell === 'snaketrap'){
-                playertimeend += 0.5 * weavetime;
-                steptimeend = playertimeend;
-            }
-            else {
-                steptimeend = playertimeend;
-            }
+            steptimeend = playertimeend;
             steptime = (steptimeend - prevtimeend);
+            if (steptime < 0) throw new Error(`invalid step time at playertimeend with ${spell}`)
             //console.log("cast: "+spell)
             cast(spell);
             updateSpellCDs(spell);
@@ -517,6 +518,7 @@ function nextEvent(playertimestart){
         else if (playertimeend !== playercheck) {
             steptimeend = playercheck;
             steptime = (steptimeend - prevtimeend);
+            if (steptime < 0) throw new Error(`invalid step time at playercheck`)
             updateSpellCDs();
         }
     }
@@ -524,6 +526,7 @@ function nextEvent(playertimestart){
 
         steptimeend = (dotcheck);
         steptime = (steptimeend - prevtimeend);
+        if (steptime < 0) console.log(`invalid steptime at dotcheck ${steptimeend}`)
         let type = auras[dotspell].type;
         dotHandler(dotspell, '', false, type);
         updateSpellCDs();
@@ -633,6 +636,16 @@ function spellNextCast(playertimestart){
             combatlogindex++;
         }
     }
+    else if (spell === 'explosivetrap'){
+        let haste = (!!auras.lust && auras.lust.timer > 0) ? 1 / 1.3 : 1;
+        currentgcd = playertimestart + 0.5 * weavetime + 1.5 * haste; // gcd
+        //console.log("gcd => " + (Math.round(currentgcd * 1000) / 1000));
+        playertimeend = playertimestart + weavetime;
+        if(combatlogRun) {
+            combatlogarray[combatlogindex] = playertimestart.toFixed(3) + " - Player starts to move for " + USED_SPELLS[spell].spell_name + ". Next GCD => " + (Math.round(currentgcd * 1000) / 1000).toFixed(3) + "s";
+            combatlogindex++;
+        }
+    }
     else if (spell === 'raptorstrike'){
         playertimeend = playertimestart;
     }
@@ -739,6 +752,7 @@ function playerSpellChoice(){
     let t_ready_blackarrow = settings.blackarrow ? USED_SPELLS.blackarrow.cd : fightduration * 2;
     let t_ready_kill = settings.killshot ? USED_SPELLS.killshot.cd : fightduration * 2;
     let t_ready_serpent = settings.serpentsting ? (auras.serpentsting.timer) : fightduration * 2;
+    let t_ready_exptrap = settings.explosivetrap ? (Math.max(auras.explosivetrap.timer, USED_SPELLS.explosivetrap.cd)) : fightduration * 2;
 	
     let steadyuse = settings.steadyshot && (USED_SPELLS.steadyshot.cost / 100 * BasePlayer.BaseMana <= currentMana); // check if cost is usable or not
     let aimeduse = settings.aimedshot && (USED_SPELLS.aimedshot.cost / 100 * BasePlayer.BaseMana <= currentMana);
@@ -750,6 +764,7 @@ function playerSpellChoice(){
     let killuse = settings.killshot && (steptimeend > (fightduration * 0.8)) && (USED_SPELLS.killshot.cost / 100 * BasePlayer.BaseMana <= currentMana); // temp use greater than 80% duration
     let serpentuse = settings.serpentsting && (auras.serpentsting?.timer <= 1) && (USED_SPELLS.serpentsting.cost / 100 * BasePlayer.BaseMana <= currentMana);
     let silenceuse = settings.silencingshot && (USED_SPELLS.silencingshot.cd === 0) && (USED_SPELLS.silencingshot.cost / 100 * BasePlayer.BaseMana <= currentMana);
+    let exptrapuse = settings.explosivetrap && (USED_SPELLS.explosivetrap.cost / 100 * BasePlayer.BaseMana <= currentMana);
     //console.log(currentMana)
 	let h = rangespeed / range_wep.speed;
 
@@ -762,6 +777,7 @@ function playerSpellChoice(){
     let dmg_explosive = 0;
     let dmg_blackarrow = 0;
     let dmg_kill = 0;
+    let dmg_exptrap = 0;
 	
 	if(steadyuse){
 		dmg_steady = exp_dmg_SteadyShot(range_wep, combatRAP);
@@ -786,10 +802,14 @@ function playerSpellChoice(){
 		dmg_explosive = exp_dmg_ExplosiveShot(combatRAP);
 	}
 	if(blackarrowuse){
-		dmg_blackarrow = exp_dmg_BlackArrow(combatRAP) * 3; // doubled for estimating 6% buff and lnl
+		dmg_blackarrow = exp_dmg_BlackArrow(combatRAP) * 2.5; // doubled for estimating 6% buff and lnl
 	}
     if(killuse){
 		dmg_kill = exp_dmg_KillShot(range_wep, combatRAP);
+	}
+    if(exptrapuse){
+        let bonus = (settings.explosiveshot) ? 1.2 : 1;
+		dmg_exptrap = exp_dmg_ExplosiveTrap(combatRAP) * bonus;
 	}
  
 	let dmg_gain_arcane = (arcaneuse) ? dmg_arcane / Math.max(t_ready_arcane,1.5) : 0;
@@ -801,6 +821,8 @@ function playerSpellChoice(){
     let dmg_gain_explosive = (explosiveuse) ? dmg_explosive / Math.max(t_ready_explosive, 1.5) : 0;
     let dmg_gain_blackarrow = (blackarrowuse) ? dmg_blackarrow / Math.max(t_ready_blackarrow, 1.5) : 0;
     let dmg_gain_kill = (killuse) ? dmg_kill / Math.max(t_ready_kill, 1.5) : 0;
+    let dmg_gain_exptrap = (exptrapuse) ? dmg_exptrap / Math.max(t_ready_exptrap + weavetime, 1.5) : 0;
+
     //console.log("arcane: "+dmg_gain_arcane)
     //console.log("multi: "+dmg_gain_multi)
     //console.log("steady: "+dmg_gain_steady)
@@ -809,7 +831,9 @@ function playerSpellChoice(){
     //console.log("serpent: " + dmg_gain_serpent)
     //console.log("explosive: " + dmg_gain_explosive)
     //console.log("blackarrow: " + dmg_gain_blackarrow)
-    let maxresult = Math.max(1,dmg_gain_aimed,dmg_gain_multi,dmg_gain_arcane,dmg_gain_steady,dmg_gain_chimera,dmg_gain_serpent, dmg_gain_explosive, dmg_gain_blackarrow, dmg_gain_kill);
+    //console.log("exptrap: " + dmg_gain_exptrap)
+    
+    let maxresult = Math.max(1,dmg_gain_aimed,dmg_gain_multi,dmg_gain_arcane,dmg_gain_steady,dmg_gain_chimera,dmg_gain_serpent, dmg_gain_explosive, dmg_gain_blackarrow, dmg_gain_kill, dmg_gain_exptrap);
 
     let shot_gap = rotation_const;
     let t_check = shot_gap + (currentgcd - steptimeend); // gcd and shot gap check, added to improve gcd usage
@@ -822,8 +846,10 @@ function playerSpellChoice(){
     let blackarrow_t_check = maxresult == dmg_gain_blackarrow && t_ready_blackarrow > t_check;
     let serpent_t_check = maxresult == dmg_gain_serpent && t_ready_serpent > t_check;
     let kill_t_check = maxresult == dmg_gain_kill && t_ready_kill > t_check;
+    let exptrap_t_check = maxresult == dmg_gain_exptrap && t_ready_exptrap > t_check;
 
-    let t_use_steady = (multi_t_check || aimed_t_check || arcane_t_check || chimera_t_check || explosive_t_check || blackarrow_t_check || serpent_t_check || kill_t_check);
+    let t_use_steady = (multi_t_check || aimed_t_check || arcane_t_check || chimera_t_check || explosive_t_check || blackarrow_t_check || serpent_t_check || kill_t_check || exptrap_t_check);
+    
     //console.log("Blackarro time: "+t_ready_blackarrow)
     //console.log([dmg_gain_kill,maxresult,t_ready_kill,t_check])
     if(silenceuse) {
@@ -852,6 +878,9 @@ function playerSpellChoice(){
     else if(maxresult == dmg_gain_steady){
 		return "steadyshot";
 	}
+    if(maxresult == dmg_gain_exptrap && t_ready_exptrap <= t_check){
+        return "explosivetrap";
+    }
 	if(maxresult == dmg_gain_multi && t_ready_multi <= t_check){
 		return "multishot";
 	}

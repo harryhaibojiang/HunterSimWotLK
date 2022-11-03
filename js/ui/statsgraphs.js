@@ -10,6 +10,7 @@ var spellresult = {
 	chimerashot: { Hit: 0, Miss: 0, Crit: 0, Partial: 0, count: 0, dmg: 0 },
 	arcaneshot: { Hit: 0, Miss: 0, Crit: 0, Partial: 0, count: 0, dmg: 0 },
 	explosiveshot: { Hit: 0, Miss: 0, Crit: 0, Partial: 0, count: 0, dmg: 0 },
+	explosivetrap: { Hit: 0, Miss: 0, Crit: 0, Partial: 0, count: 0, dmg: 0 },
 	killshot: { Hit: 0, Miss: 0, Crit: 0, count: 0, dmg: 0 },
 	serpentsting: { Hit: 0, Miss: 0, Crit: 0, count: 0, dmg: 0 },
 	blackarrow: { Hit: 0, Miss: 0, count: 0, dmg: 0 },
@@ -444,6 +445,7 @@ function damageResults(){
 		chimerashot: {},
 		arcaneshot: {},
 		explosiveshot: {},
+		explosivetrap: {},
 		killshot: {},
 		serpentsting: {},
 		blackarrow: {},
@@ -561,7 +563,7 @@ function resultCountInitialize() {
 		spellresult[spellname].count = 0;
 		spellresult[spellname].dmg = 0;
 		
-		if (spellname === 'pet_special' || spellname === 'wild_quiver' || spellname === 'arcaneshot' || spellname === 'chimera_serpent' || spellname === 'explosiveshot' || spellname === 'chimerashot') {
+		if (spellname === 'pet_special' || spellname === 'wild_quiver' || spellname === 'arcaneshot' || spellname === 'chimera_serpent' || spellname === 'explosiveshot' || spellname === 'chimerashot' || spellname === 'explosivetrap') {
 			spellresult[spellname].Partial = 0;
 		}
 		if (spellname === 'pet_focus_dump' || spellname === 'petattack' || spellname === 'raptorstrike' || spellname === 'melee') {

@@ -15,7 +15,7 @@ function initializeSpells(){
     if(!!USED_SPELLS.chimerashot) USED_SPELLS.chimerashot.cd = 0;
     if(!!USED_SPELLS.explosiveshot) USED_SPELLS.explosiveshot.cd = 0;
     if(!!USED_SPELLS.serpentsting) USED_SPELLS.serpentsting.cd = 0;
-    if(!!USED_SPELLS.explosivetrap) USED_SPELLS.explosivetrap.cd = 0;
+    if(!!USED_SPELLS.explosivetrap) USED_SPELLS.explosivetrap.cd = 4;
     if(!!USED_SPELLS.immolatetrap) USED_SPELLS.immolatetrap.cd = 0;
     if(!!USED_SPELLS.frosttrap) USED_SPELLS.frosttrap.cd = 0;
     if(!!USED_SPELLS.snaketrap) USED_SPELLS.snaketrap.cd = 0;
@@ -274,7 +274,7 @@ function explosiveShotCalc(combatRAP) {
     // Serpent Sting
 function serpentStingCalc(combatRAP) {
 
-    let serpent_mod = (!!currentgear.special.t8_serpent_dmg_bonus) ? currentgear.special.t8_serpent_dmg_bonus : 0;
+    let serpent_mod = (!!currentgear.special.t8_2p_serpent_dmg) ? currentgear.special.t8_2p_serpent_dmg / 100 : 0;
     let specials_mod = (1 + talents.imp_stings + serpent_mod);
     let ticks = (auras.serpentsting.effect.duration + (glyphs.serpent_sting || 0)) / auras.serpentsting.effect.tick_rate;
     let shotDmg = (combatRAP * 0.04 + SPELLS.serpentsting.ranks.rankdmg) * ticks * dmgmod * specials_mod * combatdmgmod;
@@ -288,11 +288,11 @@ function explosiveTrapCalc(combatRAP, dotcheck) {
     let trapDmg = 0;
     let specialmod = (1 + talents.t_n_t + talents.trap_mastery);
     if(dotcheck) {
-        dotDmg = (SPELLS.explosivetrap.ranks.tickdmg * 10 + combatRAP) * combatdmgmod * specialmod;
+        dotDmg = (SPELLS.explosivetrap.ranks.dot_dmg + combatRAP * 0.10 ) * combatdmgmod * specialmod;
         return dotDmg;
     } else {
         dmg = (useAverages) ? (SPELLS.explosivetrap.ranks.mindmg + SPELLS.explosivetrap.ranks.maxdmg) * avgConst : rng(SPELLS.explosivetrap.ranks.mindmg,SPELLS.explosivetrap.ranks.maxdmg);
-        trapDmg = (combatRAP * 0.10 + dmg) * specialmod * combatdmgmod * magdmgmod;
+        trapDmg = (combatRAP * 0.10 + dmg) * (specialmod - talents.trap_mastery) * combatdmgmod * magdmgmod;
         return trapDmg;
     }
 }
