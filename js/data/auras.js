@@ -1062,7 +1062,7 @@ const SET_PROCS = {
         },
         effect_name: 'Stinger (T10 4pc)'
     },
-    t8_4pc_precision_shots: { // todo
+    t8_4p_precision_shots: {
         shares_cd: false,
         stat_type: 'AP',
         effect: {

@@ -40,6 +40,26 @@ const P1_25BIS = {
   quiver:{ id:18714 }
 }
 
+const P2_25BIS = {
+  head:{id:46143,gems:[41398,42153],enchant:59954},
+  neck:{id:45517,gems:[40002]},
+  shoulder:{id:46145,gems:[40002],enchant:59934},
+  chest:{id:45473,gems:[40014,42702,40002],enchant:60692},
+  waist:{id:45467,gems:[40002],enchant:0},
+  leg:{id:45536,gems:[40002,40002,40002],enchant:60582},
+  feet:{id:40549,gems:[],enchant:55016},
+  wrist:{id:45454,gems:[],enchant:44575},
+  hand:{id:45444,gems:[40002,40002],enchant:54999},
+  ring1:{id:46322,gems:[42153],enchant:0},
+  ring2:{id:45608,gems:[42153],enchant:0},
+  trinket1:{id:45931},
+  trinket2:{id:44253},
+  back:{id:46032,gems:[40002,40002],enchant:55002},
+  mainhand:{id:45613,gems:[40002,40002],enchant:60691,attachment:0},
+  range:{id:45570,gems:[],enchant:55135},
+  ammo:{id:41165},
+  quiver:{id:18714}
+}
 
 const DEFAULT_GEAR_SETS = [
   { description: 'P1 PreBiS 5% Hit', data: P1_PREBIS },

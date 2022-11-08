@@ -184,13 +184,21 @@ function fetchData(){
     document.getElementById("level").value = target.level;
 
     document.getElementById("replenish").checked = replenishment;
+    
+    let flask = !!playerconsumes.flask ? playerconsumes.flask : 0;
+    document.getElementById("flask").value = (localStorage.getItem("flask") != null) ?  localStorage.getItem('flask') : flask;
 
-    document.getElementById("flask").value = (localStorage.getItem("flask") != null) ?  localStorage.getItem('flask') : document.getElementById("flask").value;
-    document.getElementById("battle").value = (localStorage.getItem("battle") != null) ?  localStorage.getItem('battle') : document.getElementById("battle").value;
-    document.getElementById("guardian").value = (localStorage.getItem("guardian") != null) ?  localStorage.getItem('guardian') : document.getElementById("guardian").value;
-    document.getElementById("food").value = (localStorage.getItem("food") != null) ?  localStorage.getItem('food') : document.getElementById("food").value;
-    //console.log(localStorage.getItem("food"))
-    document.getElementById("petfood").value = (localStorage.getItem("petfood") != null) ?  localStorage.getItem('petfood') : document.getElementById("petfood").value;
+    let battle = !!playerconsumes.battle ? playerconsumes.battle : 0;
+    document.getElementById("battle").value = (localStorage.getItem("battle") != null) ?  localStorage.getItem('battle') : battle;
+
+    let guardian = !!playerconsumes.guardian ? playerconsumes.guardian : 0;
+    document.getElementById("guardian").value = (localStorage.getItem("guardian") != null) ?  localStorage.getItem('guardian') : guardian;
+
+    let food = !!playerconsumes.food ? playerconsumes.food : 0;
+    document.getElementById("food").value = (localStorage.getItem("food") != null) ?  localStorage.getItem('food') : food;
+
+    let pet_food = !!petconsumes.pet_food ? petconsumes.pet_food : 0;
+    document.getElementById("petfood").value = (localStorage.getItem("petfood") != null) ?  localStorage.getItem('petfood') : pet_food;
     
     // buffs visual initialization
     document.getElementById("apbuff").checked = (buffslist[0].id == 2048) ? true : false;
@@ -214,7 +222,7 @@ function fetchData(){
     document.getElementById("fortmod").selected = (buffslist[13].talented) ? true : false;
 
     let errorchk_talent = (talentindex == "bm70" || talentindex == "bm70hit" || talentindex == "bm80" || talentindex == "bm80hit" || talentindex == "mm70" || talentindex == "mm70hit" || talentindex == "mm80" || talentindex == "mm80hit" || talentindex == "sv70" || talentindex == "sv70hit" || talentindex == "sv80" || talentindex == "sv80hit" || talentindex == "0")
-    talentindex = (errorchk_talent) ? talentindex : "mm70";
+    talentindex = (errorchk_talent) ? talentindex : "mm80";
     document.getElementById("talentselect").value = talentindex;
     document.getElementById("customtalent").value = whtalentlink;
     

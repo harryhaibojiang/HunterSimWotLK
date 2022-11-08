@@ -131,53 +131,64 @@ function getMetagemBonuses(usedMeta, gemsUsed) {
 
 /** Given the gear object, calculates stats, auras and special values obtained from gems, socket bonuses and meta gem. */
 function getStatsFromGems(gear) {
-  let usedMeta
-  const gemCount = { red: 0, yellow: 0, blue: 0 }
-  const usedUniqueGems = []
+   let usedMeta
+   const gemCount = { red: 0, yellow: 0, blue: 0 }
+   const usedUniqueGems = []
 
-  const stats = Object.entries(gear).reduce((accStats, [type, gearData]) => {
-    if (!gearData.gems) return accStats
+   const stats = Object.entries(gear).reduce((accStats, [type, gearData]) => {
+      if (!gearData.gems) return accStats
 
-    const gearPiece = GEAR_MAP[type][gearData.id]
-    const numSockets = gearPiece.sockets?.length || 0
-    const numGems = gearData.gems.length
-    let isBonusFulfilled = numSockets === numGems
-    if (numGems > numSockets)
-      throw new Error(`Tried to put ${numGems} gems in "${gearPiece.name}", which only has ${numSockets} sockets.`)
-
-    gearData.gems.forEach((gemId, i) => {
-      if (!gemId) {
-        isBonusFulfilled = false
-        return;
+      const gearPiece = GEAR_MAP[type][gearData.id]
+      if (type == 'waist' || type == 'wrist' || type == 'hand') {
+         if (!!gearPiece.sockets) {
+            if (!gearPiece.sockets.includes('Meta')) {
+               gearPiece.sockets.push('Meta');
+            }
+         }
+         else {
+            gearPiece.sockets = ['Meta'];
+         }
       }
+    
+      const numSockets = gearPiece.sockets?.length || 0
+      const numGems = gearData.gems.length
+      let isBonusFulfilled = numSockets === numGems
+      if (numGems > numSockets)
+         throw new Error(`Tried to put ${numGems} gems in "${gearPiece.name}", which only has ${numSockets} sockets.`)
 
-      if (!GEMS[gemId]) throw new Error(`Detected invalid gem with id ${gemId}`)
-      const gem = GEMS[gemId]
-      const socket = gearPiece.sockets[i]
+      gearData.gems.forEach((gemId, i) => {
+         if (!gemId) {
+            isBonusFulfilled = false
+            return;
+         }
 
-      if (gem.unique) {
-          if (usedUniqueGems.includes(gemId)) throw new Error(`Tried to used unique gem "${gem.name}" more than once.`)
-          else usedUniqueGems.push(gemId)
-      }
+         if (!GEMS[gemId]) throw new Error(`Detected invalid gem with id ${gemId}`)
+         const gem = GEMS[gemId]
+         const socket = gearPiece.sockets[i]
 
-      if (gem.meta === 'Y') {
-        if (socket !== 'Meta') throw new Error(`Tried to fit non-meta gem in meta socket`)
-        usedMeta = gemId
-      } else {
-        sumStats(gem.stats, accStats)
-        gem.colors.forEach(color => ++gemCount[color])
-        if (!gem.colors.includes(socket.toLowerCase())) isBonusFulfilled = false
-      }
-    })
+         if (gem.unique) {
+            if (usedUniqueGems.includes(gemId)) throw new Error(`Tried to used unique gem "${gem.name}" more than once.`)
+            else usedUniqueGems.push(gemId)
+         }
 
-    if (isBonusFulfilled && gearPiece.socketBonus) sumStats(gearPiece.socketBonus, accStats)
-    return accStats
-  }, {})
-  gemsTotalsEquipped = gemCount
-  const result = getMetagemBonuses(usedMeta, gemCount)
-  sumStats(stats, result.stats)
+         if (gem.meta === 'Y') {
+            if (socket !== 'Meta') throw new Error(`Tried to fit non-meta gem in meta socket`)
+            usedMeta = gemId
+         } else {
+            sumStats(gem.stats, accStats)
+            gem.colors.forEach(color => ++gemCount[color])
+            if (!gem.colors.includes(socket.toLowerCase())) isBonusFulfilled = false
+         }
+      })
 
-  return result
+      if (isBonusFulfilled && gearPiece.socketBonus) sumStats(gearPiece.socketBonus, accStats)
+      return accStats
+   }, {})
+   gemsTotalsEquipped = gemCount
+   const result = getMetagemBonuses(usedMeta, gemCount)
+   sumStats(stats, result.stats)
+
+   return result
 }
 
 /** Given the gear object, calculates stats, auras and special values obtained from enchants */

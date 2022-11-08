@@ -437,6 +437,10 @@ function gemSelectorDisplay(slotarray){
     Object.filter = (obj, predicate) => Object.fromEntries(Object.entries(obj).filter(predicate));
 
     let skt = (slotarray[gear[activeslot].id].hasOwnProperty('sockets')) ? slotarray[gear[activeslot].id].sockets : [];
+    if (activeslot == 'waist' || activeslot == 'wrist' || activeslot == 'hand') {
+        if (!skt.includes('Meta')) skt.push('Meta');
+    }
+
     if (skt.length > 0){
         gem1 = gear[activeslot].gems[0] || 0;
         gem2 = gear[activeslot].gems[1] || 0;
@@ -446,7 +450,7 @@ function gemSelectorDisplay(slotarray){
         let NO_META = Object.filter(GEMS, ([key, obj]) => obj.meta !== 'Y');
         if(skt.length < 1){
         } else {
-            if (skt[0] === 'Meta') {
+            if (skt[0] === 'Meta' && activeslot === 'head') {
                 metaselectOptions = generateGearOptionsList(META,'gem1');
             } else {
                 gemselectOptions = generateGearOptionsList(NO_META,'gem1');
@@ -454,7 +458,7 @@ function gemSelectorDisplay(slotarray){
         }
         if(skt.length < 2){
         } else {
-            if (skt[1] === 'Meta') {
+            if (skt[1] === 'Meta' && activeslot === 'head') {
                 metaselectOptions = generateGearOptionsList(META,'gem2');
             } else {
                 gemselectOptions = generateGearOptionsList(NO_META,'gem2');
@@ -462,7 +466,7 @@ function gemSelectorDisplay(slotarray){
         }
         if(skt.length < 3){
         } else {
-            if (skt[2] === 'Meta') {
+            if (skt[2] === 'Meta' && activeslot === 'head') {
                 metaselectOptions = generateGearOptionsList(META,'gem3');
             } else {
                 gemselectOptions = generateGearOptionsList(NO_META,'gem3');
@@ -687,8 +691,8 @@ function getStatsCapData(){
 function estimateDps(item, weights) {
     let dps = 0;
     // check for meta gems
-    if (item.name == 'Relentless Earthstorm Diamond') {
-        dps += weights.relentless + weights.Agi * 12;
+    if (item.name == 'Relentless Earthsiege Diamond (+21 Agi, +3% Crit Dmg)') {
+        dps += weights.relentless + weights.Agi * 21;
         return dps;
     } 
     // check for weightstone/sharp stone for weps
@@ -741,7 +745,7 @@ function estimateDps(item, weights) {
         var allRed = 0;
         if(activeslot == 'head' && item.sockets.includes('Meta')){
             allRed = ((item.sockets.length - 1) > 0) ? (item.sockets.length - 1) * estimateDps(GEMS[preferredGems.Red], weights) : 0;
-            allRed += weights.relentless + weights.Agi * 12;
+            allRed += weights.relentless + weights.Agi * 21;
         } else {
             allRed = item.sockets.length * estimateDps(GEMS[preferredGems.Red], weights);
         }
@@ -955,6 +959,10 @@ function displayCurrentGearTabs(){
     let gearobj = GEAR_MAP[activeslot];
     let enchobj = ENCHANT_MAP[activeslot];
     let skt = (gearobj[currgear.id].hasOwnProperty('sockets')) ? gearobj[currgear.id].sockets : [];
+    if (activeslot == 'waist' || activeslot == 'wrist' || activeslot == 'hand') {
+        if (!skt.includes('Meta')) skt.push('Meta');
+    }
+
     let defaultench = "https://wow.zamimg.com/images/wow/icons/large/inv_misc_note_01.jpg"
     let defaultattach = "https://wow.zamimg.com/images/wow/icons/large/inv_stone_weightstone_07.jpg"
 
@@ -1317,6 +1325,7 @@ function gearSlotsDisplay(){
     let wristgem2 = 0;
 
     let wristskt = (WRISTS[gear.wrist.id].hasOwnProperty('sockets')) ? WRISTS[gear.wrist.id].sockets : [];
+    if (!wristskt.includes('Meta')) wristskt.push('Meta');
     if (wristskt.length >= 1) { 
         document.getElementsByClassName("itemsocket")[11].style.display = "block";
         document.getElementById("wristskt1").src = "images/" + wristskt[0] + "_empty.jfif";
@@ -1561,6 +1570,7 @@ function gearSlotsDisplay(){
     let handgem3 = 0;
 
     let handskt = (HANDS[gear.hand.id].hasOwnProperty('sockets')) ? HANDS[gear.hand.id].sockets : [];
+    if (!handskt.includes('Meta')) handskt.push('Meta');
     if (handskt.length >= 1) { 
         document.getElementsByClassName("itemsocket")[21].style.display = "block";
         document.getElementById("handskt1").src = "images/" + handskt[0] + "_empty.jfif";
@@ -1621,6 +1631,8 @@ function gearSlotsDisplay(){
     let waistgem3 = 0;
 
     let waistskt = (WAISTS[gear.waist.id].hasOwnProperty('sockets')) ? WAISTS[gear.waist.id].sockets : [];
+    if (!waistskt.includes('Meta')) waistskt.push('Meta');
+
     if (waistskt.length >= 1) { 
         document.getElementsByClassName("itemsocket")[24].style.display = "block";
         document.getElementById("waistskt1").src = "images/" + waistskt[0] + "_empty.jfif";

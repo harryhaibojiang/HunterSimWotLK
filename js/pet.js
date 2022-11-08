@@ -149,7 +149,8 @@ function petStatsCalc(){
         beasttamers_crit = 2;
     };
     let group_dmg_mod = (talents.ferocious_insp > 0) ? talents.ferocious_insp : selectedbuffs.special.FerociousInsp;
-    pet.dmgmod = PetHappiness * talents.unleash_fury * racialmod * beasttamers_dmg * group_dmg_mod * pet_talents.spike_collar * talents.kindred_spirit * pet_talents.shark_attack * currentgear.special.t7_2p_pet_dmg;
+    let pet_t7_bonus = !!currentgear.special.t7_2p_pet_dmg ? currentgear.special.t7_2p_pet_dmg : 0;
+    pet.dmgmod = PetHappiness * talents.unleash_fury * racialmod * beasttamers_dmg * group_dmg_mod * pet_talents.spike_collar * talents.kindred_spirit * pet_talents.shark_attack * (1 + pet_t7_bonus);
 
     pet.str = Math.floor(Math.floor(BasePet.BaseStr + (selectedbuffs.stats.Str || 0) + (petconsumestats.Str || 0)) * selectedbuffs.special.kingsMod);
     pet.agi = Math.floor(Math.floor(BasePet.BaseAgi + (selectedbuffs.stats.Agi || 0) + (petconsumestats.Agi || 0)) * selectedbuffs.special.kingsMod);

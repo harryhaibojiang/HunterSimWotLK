@@ -173,7 +173,7 @@ function update() {
     }
     // scourgebane AP
     if (target.type === 'Undead'){
-       targetAP += (!!gear.mainhand.enchant && gear.mainhand.attachment === 44595) ? 140 : 0;
+       targetAP += (!!gear.mainhand.enchant && gear.mainhand.enchant === 44595) ? 140 : 0;
     }
     // consecrated stones AP
     if (target.type === 'Undead'){
@@ -301,6 +301,7 @@ function update() {
 
     if(auras.master_tact?.timer > 0) { combatCrit += talents.master_tact; } // master tactician
     
+    combatCrit += critrating / BasePlayer.CritRatingRatio;
     // from agi changes
     combatCrit += combatAgi / BasePlayer.AgiToCrit;
     if(debuffs.judgecrusader.timer > 0 && !debuffs.judgecrusader.inactive) { 
@@ -396,7 +397,7 @@ function update() {
     let tmp = 0;
     let roll = rng10k();
     let crit = (crittable) ? RangeCritChance : 0; 
-    let partial = (!!dotname && (dotname === 'serpentsting' || dotname === 'blackarrow')) ? 0 : PartialResistRate;
+    let partial = PartialResistRate;
     tmp += partial * 100;
     if (roll < tmp) return RESULT.PARTIAL;
     tmp += crit * 100;
@@ -537,22 +538,22 @@ function update() {
      // rolls for hit first before dot application
      if(spell === 'explosivetrap'){
          attack = 'ranged'; // used for crit 
-         cost = Math.floor(spellcost * (1 - talents.efficiency) * beastwithinreduc * (1 - talents.resourcefulness));
+         cost = Math.floor(spellcost * beastwithinreduc * (1 - talents.resourcefulness));
          currentMana -= cost;
- 
+
          combatCrit = updateCritChance(attack);
          result = rollSpell(attack, combatCrit, specialcrit); // check attack table
          //spellResultSum(result, spell);
          if (result !== RESULT.MISS) {
-             dmg = explosiveTrapCalc(combatRAP, 'false'); // calc damage
-             auras.explosivetrap.damage = explosiveTrapCalc(combatRAP, 'true');
+             dmg = explosiveTrapCalc(combatRAP, false); // calc damage
+             auras.explosivetrap.damage = explosiveTrapCalc(combatRAP, true);
          }
          if (result === RESULT.CRIT) {
-             dmg *= RangeCritDamage;
+             dmg *= MeleeCritDamage;
              proccrit(cost, attack, spell);
          }
          attack = ''; // used again for checking procs, and traps don't proc melee or range hits
-         console.log(auras.explosivetrap.damage);
+         //console.log(auras.explosivetrap.damage);
      } 
      // rolls for hit first before dot application
      else if(spell === 'explosiveshot') {
@@ -587,7 +588,7 @@ function update() {
          
      } 
      else if(spell === 'immolatetrap') {
-         cost = Math.floor(spellcost * (1 - talents.efficiency) * beastwithinreduc * (1 - talents.resourcefulness));
+         cost = Math.floor(spellcost * beastwithinreduc * (1 - talents.resourcefulness));
          currentMana -= cost;
          auras.immolatetrap.damage = immolateTrapCalc(combatRAP);
      } 
@@ -1007,7 +1008,7 @@ function update() {
  
  }
  /** handling for chimera shot proc with a sting active */
- function procChimera() {
+function procChimera() {
  
      if (auras.serpentsting?.timer > 0) {
          let attack = 'ranged';
@@ -1048,9 +1049,9 @@ function update() {
          dotHandler('serpentsting', 'player', true, USED_SPELLS.serpentsting.type);
      }
  
- }
+}
  
- function procDoT() {
+function procDoT() {
  
      if (talents.lock_load > 0 && auras.lock_load.cd === 0) {
          let roll = rng10k(); 
@@ -1066,9 +1067,9 @@ function update() {
              }
          }
      }
- }
+}
  /** handling for procs by steady only */
- function procSteady(attack) {
+function procSteady(attack) {
  
     let trink1_has_aura = (Object.values(auras.trink1).length !== 0);
     let trink2_has_aura = (Object.values(auras.trink2).length !== 0);
@@ -1090,18 +1091,28 @@ function update() {
     }
  
        // imp steady shot
-    if (!!auras.imp_steady_shot){
-       let roll = rng10k(); 
-       auras.imp_steady_shot.timer = (roll <= talents.imp_steady_shot * 10000) ? auras.imp_steady_shot.effect.duration : auras.imp_steady_shot.timer;
-       if((auras.imp_steady_shot.timer === auras.imp_steady_shot.effect.duration) && combatlogRun) { 
+   if (!!auras.imp_steady_shot){
+      let roll = rng10k(); 
+      auras.imp_steady_shot.timer = (roll <= talents.imp_steady_shot * 10000) ? auras.imp_steady_shot.effect.duration : auras.imp_steady_shot.timer;
+         if((auras.imp_steady_shot.timer === auras.imp_steady_shot.effect.duration) && combatlogRun) { 
           
-          combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player gains " + auras.imp_steady_shot.effect_name;
-          combatlogindex++;
-       }
-    }
- }
+            combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player gains " + auras.imp_steady_shot.effect_name;
+            combatlogindex++;
+         }
+   }
+   // t8 4pc bonus
+   if (!!auras.t8_4p_precision_shots){
+      let roll = rng10k(); 
+      auras.t8_4p_precision_shots.timer = (roll <= auras.t8_4p_precision_shots.effect.proc_chance * 100) ? auras.t8_4p_precision_shots.effect.duration : auras.t8_4p_precision_shots.timer;
+
+      if((auras.t8_4p_precision_shots.timer === auras.t8_4p_precision_shots.effect.duration) && combatlogRun) { 
+         combatlogarray[combatlogindex] = steptimeend.toFixed(3) + " - Player gains " + auras.t8_4p_precision_shots.effect_name;
+         combatlogindex++;
+      }
+   }
+}
  
- function rollTrinkProc(slot,attack) {
+function rollTrinkProc(slot,attack) {
     let meleehit = (attack === "melee") ? true:false;
     let rangehit = (attack === "ranged") ? true:false;
     let meleePPM = BaseMeleeSpeed / 60 * 100;
@@ -1111,8 +1122,8 @@ function update() {
     if (!!auras[slot].effect.ppm) {
        if(rangehit) procchance = auras[slot].effect.ppm * rangePPM;
        if(meleehit) procchance = auras[slot].effect.ppm * meleePPM;
-    }
-    else procchance = (!!auras[slot].effect.proc_chance) ? auras[slot].effect.proc_chance: 100;
+    } // force proc chance to be 100% if no proc chance found
+    else procchance = (!!auras[slot].effect.proc_chance) ? auras[slot].effect.proc_chance : 100;
     
     if (roll <= procchance * 100) {
        
@@ -1120,7 +1131,7 @@ function update() {
        auras[slot].cd = (!!auras[slot].effect.base_cd) ? auras[slot].effect.base_cd : 0;
 
        if(procchance == 100 && !!auras[slot].effect.stacks) {
-
+         // increment stacks with auras that always apply stacks per hit
          auras[slot].stacks = Math.min(auras[slot].stacks + 1, auras[slot].effect.stacks);
        }
        if(auras[slot].timer === auras[slot].effect.duration && combatlogRun) {

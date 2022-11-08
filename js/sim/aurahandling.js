@@ -631,9 +631,24 @@ function dotHandler(dotname, source, apply, type, crit_dmg) {
             }
             spellresult[dotname].count++;
         }
+        else if (dotname === 'explosivetrap') { // tick RAP damage updated per tick
+            let crittable = (!!glyphs.explosive_trap && dotname === 'explosivetrap') ? true : false;
+
+            auras.explosivetrap.damage = explosiveTrapCalc(combatRAP, true);
+            result = rollDamageOverTime(crittable, dotname);
+            dmg = auras[dotname].damage * magdmgmod;
+            
+            if (result === RESULT.PARTIAL) {
+                dmg *= 0.65; // average reduction of 35% on partial resists
+            }
+            else if (result === RESULT.CRIT) {
+                dmg *= MeleeCritDamage;
+            }
+            procDoT();
+        }
         else if (dottype !== 'physical') {
             updateDmgMod(dotname);
-            let crittable = (!!glyphs.explosive_trap && dotname === 'explosivetrap') ? true : false; // todo future crits trap and serpent crit conditions
+            let crittable = (!!currentgear.special.t9_2p_serpent_crits && dotname === 'serpentsting') ? true : false; 
             let ticks = (auras[dotname].effect.duration + (glyphs.serpent_sting || 0)) / auras[dotname].effect.tick_rate;
             result = rollDamageOverTime(crittable, dotname);
             dmg = auras[dotname].damage / ticks * magdmgmod;
@@ -644,12 +659,12 @@ function dotHandler(dotname, source, apply, type, crit_dmg) {
                 dmg *= RangeCritDamage;
             }
 
-            if (dotname === 'blackarrow' || dotname === 'explosivetrap' || dotname === 'immolatetrap') {
+            if (dotname === 'blackarrow' || dotname === 'immolatetrap') {
                 procDoT();
             }
             //console.log(dmg + " " +result)
         } 
-
+        // removes 6% damage increase for black arrow itself, since it doesn't buff itself
         if (dotname === 'blackarrow') {
             dmg *= targetdmgmod / 1.06;
         }
@@ -661,8 +676,8 @@ function dotHandler(dotname, source, apply, type, crit_dmg) {
         spellresult[dotname].dmg += done;
 
         if(combatlogRun) {
-            let critstring = (result === RESULT.CRIT) ? " (Crit)" : "";
-            combatlogarray[combatlogindex] = next_dot_time.toFixed(3) + " - Target takes " + done + " damage from " + auras[dotname].effect_name + critstring;
+            let resultstring = " (" + RESULTARRAY[result] + ")";
+            combatlogarray[combatlogindex] = next_dot_time.toFixed(3) + " - Target takes " + done + " damage from " + auras[dotname].effect_name + resultstring;
             combatlogindex++;
         }
         auras[dotname].ticks -= 1;
