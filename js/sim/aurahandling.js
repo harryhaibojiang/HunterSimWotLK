@@ -91,8 +91,8 @@ function setSpellCDs(){
     if(!!auras.berserk) auras.berserk.effect.base_cd = three_min_cds;
 
     if(!!auras.bloodfury) auras.bloodfury.effect.base_cd = two_min_cds;
-    auras.trink1.effect = {}
-    auras.trink2.effect = {}
+    if(!auras.trink1.effect) auras.trink1.effect = {}
+    if(!auras.trink2.effect) auras.trink2.effect = {}
     if(!!auras.trink1 && !auras.trink1.effect.is_proc) auras.trink1.effect.base_cd = two_min_cds;
     if(!!auras.trink2 && !auras.trink2.effect.is_proc) auras.trink2.effect.base_cd = two_min_cds;
     if(!!auras.potion) auras.potion.effect.base_cd = two_min_cds;
